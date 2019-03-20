@@ -1,11 +1,20 @@
-/*
-    WebAPI.cpp - Library for networkcommunication.
-    Created by Glenn Huber, 26.04.2018
-    Basecode by Felix Nyffenegger
-*/
+/**
+ * @file WebAPI.cpp
+ * @brief Library for networkcommunication.
+ * 
+ * @author Glenn Huber (glenn.patrick.huber@hsr.ch)
+ * @author Felix Nyffenegger (felix.nyffenegger@hsr.ch)
+ * 
+ * @version 1.1 - Added Doxygen-Documentation  - Luca Mazzoleni (luca.mazzoleni@hsr.ch)  - 2019-03-20
+ * @version 1.0 - BA FTS FS 2018
+ * 
+ * @date 2019-03-20
+ * @copyright Copyright (c) 2019
+ * 
+ */
 
-#include "Arduino.h"
 #include "WebAPI.h"
+#include "Arduino.h"
 
 WebAPI::WebAPI() {
     if (DEBUGGER == true) Serial.println("Initializing webAPI...");
@@ -14,24 +23,25 @@ WebAPI::WebAPI() {
     server = new WiFiServer(LISTEN_PORT);
 
     //Configure pins for Adafruit ATWINC1500 Feather
-    WiFi.setPins(WIFI_CS,WIFI_IRQ,WIFI_RST,WIFI_EN);
+    WiFi.setPins(WIFI_CS, WIFI_IRQ, WIFI_RST, WIFI_EN);
 
     // check for the presence of the shield:
     if (WiFi.status() == WL_NO_SHIELD) {
-    if (DEBUGGER == true) Serial.println("WiFi shield not present");
-    // don't continue:
-    while (true);
+        if (DEBUGGER == true) Serial.println("WiFi shield not present");
+        // don't continue:
+        while (true)
+            ;
     }
 
     // attempt to connect to WiFi network:
     while (status != WL_CONNECTED) {
-    if (DEBUGGER == true) Serial.print("Attempting to connect to SSID: ");
-    if (DEBUGGER == true) Serial.println(ssid);
-    // Connect to WPA/WPA2 network. Change this line if using open or WEP network:
-    status = WiFi.begin(ssid, pass);
-  
-    // wait 10 seconds for connection:
-    delay(10000);
+        if (DEBUGGER == true) Serial.print("Attempting to connect to SSID: ");
+        if (DEBUGGER == true) Serial.println(ssid);
+        // Connect to WPA/WPA2 network. Change this line if using open or WEP network:
+        status = WiFi.begin(ssid, pass);
+
+        // wait 10 seconds for connection:
+        delay(10000);
     }
 
     if (DEBUGGER == true) Serial.println("Connectet to wifi");
@@ -59,8 +69,7 @@ void WebAPI::printWiFiStatus() {
 void WebAPI::loop() {
     if (!client) {
         client = server->available();
-    }
-    else {
+    } else {
         if (client.available()) {
             //read request
             String req = client.readString();
@@ -83,11 +92,9 @@ void WebAPI::sendRequest(String request, String requestType) {
             if (DEBUGGER == true) Serial.println("Detected GET-Request");
             sendGETRequest(request);
             if (DEBUGGER == true) Serial.println("Request sended");
-        }
-        else if (requestType == "PUT") {
+        } else if (requestType == "PUT") {
             sendPUTRequest(request);
-        }
-        else {
+        } else {
             sendPOSTRequest(request);
         }
         //Wait for incoming message
@@ -130,26 +137,24 @@ String WebAPI::handleRequest(String req) {
     if (DEBUGGER == true) Serial.print("New request: ");
     if (DEBUGGER == true) Serial.println(req);
     int sep = req.indexOf("/");
-    String method = req.substring(0,sep-1);
-    String fullUrl = req.substring(sep, req.indexOf("HTTP")-1);
-    String url = fullUrl.substring(req.indexOf("?")-1);
+    String method = req.substring(0, sep - 1);
+    String fullUrl = req.substring(sep, req.indexOf("HTTP") - 1);
+    String url = fullUrl.substring(req.indexOf("?") - 1);
     String params = fullUrl.substring(req.indexOf("?"));
     if (method == "POST") {
         if (DEBUGGER == true) Serial.println(req);
         String content = req.substring(req.indexOf("\r\n\r\n"));
         if (DEBUGGER == true) Serial.println(content);
         return handlePOST(url, content);
-    } 
-    else if (method == "GET") {
+    } else if (method == "GET") {
         return handleGET(url, params);
-    }
-    else {
+    } else {
         return handlePUT(url, params);
     }
 }
 
 String WebAPI::handlePOST(String url, String content) {
-    size_t bufferSize = 3*JSON_ARRAY_SIZE(4) + JSON_OBJECT_SIZE(4);
+    size_t bufferSize = 3 * JSON_ARRAY_SIZE(4) + JSON_OBJECT_SIZE(4);
     DynamicJsonBuffer jsonBuffer(bufferSize);
     JsonObject& root = jsonBuffer.parseObject(content);
     return "done";

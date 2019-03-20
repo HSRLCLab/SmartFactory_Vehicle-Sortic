@@ -1,14 +1,25 @@
-/*
-    Vision.cpp - Library for mechatronic component vision.
-    The vision module consists of a pixy-cam and a servo motor.
-    The cam searches for target-objects and adjusts its position to that direction.
-    Afterwarts it sends information for course adaption.
-    Created by Glenn Huber, 05.06.2018
-    Basecode by Robert Paly
-*/
+/**
+ * @file Vision.cpp
+ * 
+ * @brief Library for mechatronic component vision.
+ * 
+ * The vision module consists of a pixy-cam and a servo motor.
+ * The cam searches for target-objects and adjusts its position to that direction.
+ * Afterwarts it sends information for course adaption.
+ * 
+ * @author Glenn Huber (glenn.patrick.huber@hsr.ch)
+ * 
+ * @version 1.1 - Added Doxygen-Documentation  - Luca Mazzoleni (luca.mazzoleni@hsr.ch)  - 2019-03-05 
+ * @version 1.0 - BA FTS FS 2018
+ * 
+ * @date 2019-06-05
+ * 
+ * @copyright Copyright (c) 2019
+ * 
+ */
 
-#include "Arduino.h"
 #include "Vision.h"
+#include "Arduino.h"
 
 Vision::Vision(int startAngle, int visionPin, int dddelay, int toleranceL, int toleranceR) {
     if (DEBUGGER == true) Serial.print("Initializing vision...");
@@ -17,7 +28,7 @@ Vision::Vision(int startAngle, int visionPin, int dddelay, int toleranceL, int t
     ddelay = dddelay;
 
     toleranceLeft = toleranceL;
-    toleranceRight= toleranceR;
+    toleranceRight = toleranceR;
 
     visionState.servoAngle = startAngle;
     visionState.target = 0;
@@ -61,7 +72,7 @@ void Vision::loop(VisionState *state) {
     }
     visionServo.attach(_servoPin);
     if (DEBUGGER == true) Serial.println("Beginn visionloop");
-    static int ii = 0; //Cycle variable
+    static int ii = 0;  //Cycle variable
     if (DEBUGGER == true) Serial.print("I: ");
     if (DEBUGGER == true) Serial.println(ii);
     int j;
@@ -70,7 +81,7 @@ void Vision::loop(VisionState *state) {
     if (DEBUGGER == true) Serial.print("Target: ");
     visionState.target = state->target;
     if (DEBUGGER == true) Serial.println(visionState.target);
-    
+
     blocks = pixy.getBlocks();
     if (DEBUGGER == true) Serial.print("ServoAngle: ");
     if (DEBUGGER == true) Serial.print(visionState.servoAngle);
@@ -79,9 +90,9 @@ void Vision::loop(VisionState *state) {
     state->targetDetected = visionState.targetDetected;
     if (DEBUGGER == true) Serial.print("targetdetected");
     if (DEBUGGER == true) Serial.println(state->targetDetected);
-    delay(13); //Empirically testet value
+    delay(13);  //Empirically testet value
     if (DEBUGGER == true) Serial.println("before first if-case");
-    if(blocks) {
+    if (blocks) {
         if (DEBUGGER == true) Serial.println("inside first if-case");
         ii++;
         if ((ii % ddelay) == 0) {
@@ -127,8 +138,7 @@ void Vision::loop(VisionState *state) {
                 target1 = 1;
                 visionState.servoAngle--;
                 if (DEBUGGER == true) Serial.println("Target1 true");
-            }
-            else {
+            } else {
                 target1 = 0;
             }
 
@@ -136,8 +146,7 @@ void Vision::loop(VisionState *state) {
                 target2 = 1;
                 visionState.servoAngle++;
                 if (DEBUGGER == true) Serial.println("Target2 true");
-            }
-            else {
+            } else {
                 target2 = 0;
             }
 
@@ -145,8 +154,7 @@ void Vision::loop(VisionState *state) {
                 target3 = 1;
                 visionState.servoAngle--;
                 if (DEBUGGER == true) Serial.println("Target3 true");
-            }
-            else {
+            } else {
                 target3 = 0;
             }
 
@@ -154,8 +162,7 @@ void Vision::loop(VisionState *state) {
                 target4 = 1;
                 visionState.servoAngle++;
                 if (DEBUGGER == true) Serial.println("Target4 true");
-            }
-            else {
+            } else {
                 target4 = 0;
             }
 
@@ -163,8 +170,7 @@ void Vision::loop(VisionState *state) {
                 target5 = 1;
                 visionState.servoAngle--;
                 if (DEBUGGER == true) Serial.println("Target5 true");
-            }
-            else {
+            } else {
                 target5 = 0;
             }
 
@@ -172,8 +178,7 @@ void Vision::loop(VisionState *state) {
                 target6 = 1;
                 visionState.servoAngle++;
                 if (DEBUGGER == true) Serial.println("Target6 true");
-            }
-            else {
+            } else {
                 target6 = 0;  //Fehler im sourcecode!!!!!!!!!!!!!!
             }
 
@@ -181,8 +186,7 @@ void Vision::loop(VisionState *state) {
                 target7 = 1;
                 visionState.servoAngle--;
                 if (DEBUGGER == true) Serial.println("Target7 true");
-            }
-            else {
+            } else {
                 target7 = 0;
             }
 
@@ -190,36 +194,31 @@ void Vision::loop(VisionState *state) {
                 target8 = 1;
                 visionState.servoAngle++;
                 if (DEBUGGER == true) Serial.println("Target8 true");
-            }
-            else {
+            } else {
                 target8 = 0;
             }
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             if ((pixy.blocks[0].signature == visionState.target) && (pixy.blocks[0].x >= toleranceRight) && (pixy.blocks[0].x <= toleranceLeft)) {
                 targetFound1 = 1;
-            }
-            else {
+            } else {
                 targetFound1 = 0;
             }
 
             if ((pixy.blocks[1].signature == visionState.target) && (pixy.blocks[1].x >= toleranceRight) && (pixy.blocks[1].x <= toleranceLeft)) {
                 targetFound2 = 1;
-            }
-            else {
+            } else {
                 targetFound2 = 0;
             }
 
             if ((pixy.blocks[2].signature == visionState.target) && (pixy.blocks[2].x >= toleranceRight) && (pixy.blocks[2].x <= toleranceLeft)) {
                 targetFound3 = 1;
-            }
-            else {
+            } else {
                 targetFound3 = 0;
             }
 
             if ((pixy.blocks[3].signature == visionState.target) && (pixy.blocks[3].x >= toleranceRight) && (pixy.blocks[3].x <= toleranceLeft)) {
                 targetFound4 = 1;
-            }
-            else {
+            } else {
                 targetFound4 = 0;
             }
 
@@ -252,12 +251,11 @@ void Vision::loop(VisionState *state) {
             }
             if (DEBUGGER == true) Serial.println("------------------------END---------------------------");
         }
-    }
-    else {
+    } else {
         ii++;
         if (DEBUGGER == true) Serial.print("I:");
         if (DEBUGGER == true) Serial.println(ii);
-        if ( (ii % ddelay) == 0) {
+        if ((ii % ddelay) == 0) {
             failCounter++;
             if (failCounter > 8) {
                 targetFound = 0;
@@ -266,7 +264,7 @@ void Vision::loop(VisionState *state) {
                 targetFound3 = 0;
                 targetFound4 = 0;
                 if (DEBUGGER == true) Serial.println("Nothing found");
-                
+
                 if ((visionState.servoAngle > 179) && (targetFound == 0)) {
                     visionState.servoAngle = 0;
                     if (DEBUGGER == true) Serial.println("Adjust camera");
@@ -296,11 +294,10 @@ void Vision::loop(VisionState *state) {
     if ((targetFound1 == 1) || (targetFound2 == 1) || (targetFound3 == 1) || (targetFound4 == 1)) {
         if (DEBUGGER == true) Serial.println("targetdetected inside loop");
         state->targetDetected = true;
-    }
-    else {
+    } else {
         state->targetDetected = false;
     }
-visionServo.detach();
+    visionServo.detach();
 }
 
 void Vision::turnVision(int angle) {

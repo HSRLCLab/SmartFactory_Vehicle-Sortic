@@ -1,15 +1,29 @@
-/*
-    Main programm to run the transport vehicle
-    Created by Glenn Huber 05.05.2018
-*/
+/**
+ * @file main.cpp
+ * @brief Main programm to run the transport vehicle
+ * 
+ * @author Glenn Huber (glenn.patrick.huber@hsr.ch)
+ * 
+ * @version 1.1 - Added Doxygen-Documentation  - Luca Mazzoleni (luca.mazzoleni@hsr.ch)  - 2019-03-20
+ * @version 1.0 - BA FTS FS 2018
+ * 
+ * @date 2019-03-20
+ * @copyright Copyright (c) 2019
+ * 
+ */
+
 #include "Arduino.h"
-#include "VehicleWebAPI.h"
-#include "SPI.h"
-#include "Sonar.h"
 #include "Chassis.h"
 #include "Hoist.h"
+#include "SPI.h"
+#include "Sonar.h"
+#include "VehicleWebAPI.h"
 #include "Vision.h"
 
+/**
+ * @brief 
+ * 
+ */
 struct VehicleState {
     ChassisState chassis;
     SonarState sonar;
@@ -33,14 +47,25 @@ Hoist *vehicleHoist;
 Chassis *vehicleChassis;
 VehicleWebAPI *vehicleAPI;
 
+/**
+ * @brief 
+ * 
+ */
 void strategy() {
-    if (DEBUGGER == true) Serial.print("Sector begin strategy"); if (DEBUGGER == true) Serial.println(state.api.sector);
-    if (DEBUGGER == true) Serial.print("VehicleCount: "); if (DEBUGGER == true) Serial.println(state.api.vehicleCount);
-    if (DEBUGGER == true) Serial.print("JobCount: "); if (DEBUGGER == true) Serial.println(state.api.jobCount);
-    if (DEBUGGER == true) Serial.print("otherTask: "); if (DEBUGGER == true) Serial.println(state.api.otherTask);
-    if (DEBUGGER == true) Serial.print("othersector: "); if (DEBUGGER == true) Serial.println(state.api.otherSector);
-    if (DEBUGGER == true) Serial.print("Container: "); if (DEBUGGER == true) Serial.println(state.api.container);
-    if (DEBUGGER == true) Serial.print("port: "); if (DEBUGGER == true) Serial.println(state.api.unloadPort);
+    if (DEBUGGER == true) Serial.print("Sector begin strategy");
+    if (DEBUGGER == true) Serial.println(state.api.sector);
+    if (DEBUGGER == true) Serial.print("VehicleCount: ");
+    if (DEBUGGER == true) Serial.println(state.api.vehicleCount);
+    if (DEBUGGER == true) Serial.print("JobCount: ");
+    if (DEBUGGER == true) Serial.println(state.api.jobCount);
+    if (DEBUGGER == true) Serial.print("otherTask: ");
+    if (DEBUGGER == true) Serial.println(state.api.otherTask);
+    if (DEBUGGER == true) Serial.print("othersector: ");
+    if (DEBUGGER == true) Serial.println(state.api.otherSector);
+    if (DEBUGGER == true) Serial.print("Container: ");
+    if (DEBUGGER == true) Serial.println(state.api.container);
+    if (DEBUGGER == true) Serial.print("port: ");
+    if (DEBUGGER == true) Serial.println(state.api.unloadPort);
 
     //After Task is finished, change the task
     if ((state.api.state == "resting") && (state.api.task != "finished")) {
@@ -52,7 +77,7 @@ void strategy() {
         vehicleAPI->sendTask();
         if ((state.api.vehicleID == "Idefix") && (state.api.vehicleCount == 2)) {
             if (DEBUGGER == true) Serial.println("send obelix task");
-        vehicleAPI->sendTaskToObelix();
+            vehicleAPI->sendTaskToObelix();
         }
         if ((state.api.vehicleID == "Obelix") && (state.api.vehicleCount == 2)) {
             if (DEBUGGER == true) Serial.println("send idefix task");
@@ -65,7 +90,7 @@ void strategy() {
         vehicleAPI->sendSector();
         if ((state.api.vehicleID == "Idefix") && (state.api.vehicleCount == 2) && ((state.api.sector == "20") || (state.api.sector == "24") || (state.api.sector == "31") || (state.api.sector == "40"))) {
             if (DEBUGGER == true) Serial.println("send obelix sector");
-        vehicleAPI->sendSectorToObelix();
+            vehicleAPI->sendSectorToObelix();
         }
         if ((state.api.vehicleID == "Obelix") && (state.api.vehicleCount == 2) && ((state.api.sector == "20") || (state.api.sector == "24") || (state.api.sector == "31") || (state.api.sector == "40"))) {
             if (DEBUGGER == true) Serial.println("send idefix sector");
@@ -83,12 +108,10 @@ void strategy() {
     if (((state.api.sector == "10") || (state.api.sector == "11")) && (state.api.otherSector == "20")) {
         state.api.workState = false;
         state.api.workStateChange = true;
-    }
-    else if ((state.api.sector == "20") && (state.api.otherSector == "24")) {
+    } else if ((state.api.sector == "20") && (state.api.otherSector == "24")) {
         state.api.workState = false;
         state.api.workStateChange = true;
-    }
-    else if ((state.api.sector == "31") && (state.api.otherSector == "31")) {
+    } else if ((state.api.sector == "31") && (state.api.otherSector == "31")) {
         state.api.workState = false;
         state.api.workStateChange = true;
     }
@@ -107,12 +130,10 @@ void strategy() {
     else if (((state.api.sector == "10") || (state.api.sector == "11")) && (state.api.otherSector == "24")) {
         state.api.workState = true;
         state.api.workStateChange = true;
-    }
-    else if ((state.api.sector == "20") && (state.api.otherSector == "31")) {
+    } else if ((state.api.sector == "20") && (state.api.otherSector == "31")) {
         state.api.workState = true;
         state.api.workStateChange = true;
-    }
-    else if ((state.api.sector == "31") && (state.api.otherSector == "40")) {
+    } else if ((state.api.sector == "31") && (state.api.otherSector == "40")) {
         state.api.workState = true;
         state.api.workStateChange = true;
     }
@@ -135,43 +156,39 @@ void strategy() {
         state.api.workState = true;
         state.api.workStateChange = true;
         state.vision.target = 2;
-    }
-    else if ((state.api.container == "red") && (state.api.unloadPort == "1") && (state.api.task != "RED_TO_PORT1") && (state.api.task != "RED_TO_PORT2") && (state.api.task != "YELLOW_TO_PORT2") && (state.api.task != "YELLOW_TO_PORT1") && (state.api.otherTask != "RED_TO_PORT1")) {
+    } else if ((state.api.container == "red") && (state.api.unloadPort == "1") && (state.api.task != "RED_TO_PORT1") && (state.api.task != "RED_TO_PORT2") && (state.api.task != "YELLOW_TO_PORT2") && (state.api.task != "YELLOW_TO_PORT1") && (state.api.otherTask != "RED_TO_PORT1")) {
         state.api.task = "RED_TO_PORT1";
         state.api.state = "Starting_Task";
         state.api.workState = true;
         state.api.workStateChange = true;
         state.vision.target = 1;
-    }
-    else if ((state.api.container == "yellow") && (state.api.unloadPort == "2") && (state.api.task != "RED_TO_PORT1") && (state.api.task != "RED_TO_PORT2") && (state.api.task != "YELLOW_TO_PORT2") && (state.api.task != "YELLOW_TO_PORT1") && (state.api.otherTask != "YELLOW_TO_PORT2")) {
+    } else if ((state.api.container == "yellow") && (state.api.unloadPort == "2") && (state.api.task != "RED_TO_PORT1") && (state.api.task != "RED_TO_PORT2") && (state.api.task != "YELLOW_TO_PORT2") && (state.api.task != "YELLOW_TO_PORT1") && (state.api.otherTask != "YELLOW_TO_PORT2")) {
         state.api.task = "YELLOW_TO_PORT2";
         state.api.state = "Starting_Task";
         state.api.workState = true;
         state.api.workStateChange = true;
         state.vision.target = 2;
-    }
-    else if ((state.api.container == "red") && (state.api.unloadPort == "2") && (state.api.task != "RED_TO_PORT1") && (state.api.task != "RED_TO_PORT2") && (state.api.task != "YELLOW_TO_PORT2") && (state.api.task != "YELLOW_TO_PORT1") && (state.api.otherTask != "RED_TO_PORT2")) {
+    } else if ((state.api.container == "red") && (state.api.unloadPort == "2") && (state.api.task != "RED_TO_PORT1") && (state.api.task != "RED_TO_PORT2") && (state.api.task != "YELLOW_TO_PORT2") && (state.api.task != "YELLOW_TO_PORT1") && (state.api.otherTask != "RED_TO_PORT2")) {
         state.api.task = "RED_TO_PORT2";
         state.api.state = "Starting_Task";
         state.api.workState = true;
         state.api.workStateChange = true;
         state.vision.target = 1;
-    }
-    else {
+    } else {
         if (DEBUGGER == true) Serial.println("Container change in else");
         state.api.container = "";
-        state.api.containerChange =  true;
+        state.api.containerChange = true;
     }
 
-   //Drive strategy without an active workstate, there is no sectorhandling
+    //Drive strategy without an active workstate, there is no sectorhandling
     if (state.api.workState == true) {
-       
         //Navigation strategy
-        if (DEBUGGER == true) Serial.print("IR-status: "); if (DEBUGGER == true) Serial.println(state.chassis.IR);
+        if (DEBUGGER == true) Serial.print("IR-status: ");
+        if (DEBUGGER == true) Serial.println(state.chassis.IR);
         if (DEBUGGER == true) Serial.print("curveFactor before pid: ");
         if (DEBUGGER == true) Serial.println(state.curveFactor);
         state.curveFactor = state.chassis.PidValue;
-        
+
         //Sector 10 movement
         if ((state.api.sector == "10") && (state.api.task != "nothing") && (state.api.task != "finished")) {
             if (DEBUGGER == true) Serial.println("Sector 10");
@@ -181,31 +198,33 @@ void strategy() {
             state.chassis.direction = "right";
             vehicleChassis->motorControl(state.sonar.sonarFactor);
             if (state.chassis.actionDone == true) {
-                if (DEBUGGER == true) Serial.print("Sector 10 vehicleID"); if (DEBUGGER == true) Serial.println(state.api.vehicleID);
+                if (DEBUGGER == true) Serial.print("Sector 10 vehicleID");
+                if (DEBUGGER == true) Serial.println(state.api.vehicleID);
                 if (state.api.vehicleID == "Obelix") {
                     state.api.sector = "11";
                     if (DEBUGGER == true) Serial.println("Sector 10 order to Obelix");
                     state.chassis.direction = "straight";
-                }
-                else if (state.api.vehicleID == "Idefix") {
+                } else if (state.api.vehicleID == "Idefix") {
                     state.api.sector = "12";
                     if (DEBUGGER == true) Serial.println("Sector 10 order to Idefix");
                     state.chassis.direction = "stop";
                 }
-                if (DEBUGGER == true) Serial.println("end of scector10"); 
+                if (DEBUGGER == true) Serial.println("end of scector10");
                 state.chassis.actionDone = false;
-                if (DEBUGGER == true) Serial.print("Sector 10 next sector: "); if (DEBUGGER == true) Serial.println(state.api.sector);
+                if (DEBUGGER == true) Serial.print("Sector 10 next sector: ");
+                if (DEBUGGER == true) Serial.println(state.api.sector);
             }
         }
-        if (DEBUGGER == true) Serial.print("Between 10 and 11 sector: "); if (DEBUGGER == true) Serial.println(state.api.sector);
+        if (DEBUGGER == true) Serial.print("Between 10 and 11 sector: ");
+        if (DEBUGGER == true) Serial.println(state.api.sector);
         //Sector 11 movement
         if (state.api.sector == "11") {
             if (DEBUGGER == true) Serial.println("Sector 11");
             vehicleChassis->motorControl(state.sonar.sonarFactor);
             if (state.chassis.actionDone == true) {
-               state.api.sector = "12";
+                state.api.sector = "12";
                 state.chassis.direction = "stop";
-                if (DEBUGGER == true) Serial.println("end of sector11"); 
+                if (DEBUGGER == true) Serial.println("end of sector11");
                 state.chassis.actionDone = false;
             }
         }
@@ -226,7 +245,7 @@ void strategy() {
                 state.sonar.detachServo = true;
             }
         }
-        
+
         //Sector 20 movement
         if (state.api.sector == "20") {
             if (DEBUGGER == true) Serial.println("start of sector20");
@@ -237,22 +256,24 @@ void strategy() {
                     state.waitForTurn = true;
                 }
             }
-            if (DEBUGGER == true) Serial.print("Targetdetected: "); if (DEBUGGER == true) Serial.println(state.vision.targetDetected);
+            if (DEBUGGER == true) Serial.print("Targetdetected: ");
+            if (DEBUGGER == true) Serial.println(state.vision.targetDetected);
             if ((state.vision.targetDetected == true) && (state.turnCount < 4)) {
                 //First move dependend on which side the box is on
                 if (DEBUGGER == true) Serial.println("before first turn");
 
                 //Is the Box on the right side of the vehicle turn right
                 if (state.vision.servoAngle < 90) {
-                    if (DEBUGGER == true) Serial.print("waitForturn: "); if (DEBUGGER == true) Serial.println(state.waitForTurn);
-                    if (DEBUGGER == true) Serial.print("TurnCount: "); if (DEBUGGER == true) Serial.println(state.turnCount);
-                    if ((state.waitForTurn == true) && (state.turnCount ==1)) {
-
+                    if (DEBUGGER == true) Serial.print("waitForturn: ");
+                    if (DEBUGGER == true) Serial.println(state.waitForTurn);
+                    if (DEBUGGER == true) Serial.print("TurnCount: ");
+                    if (DEBUGGER == true) Serial.println(state.turnCount);
+                    if ((state.waitForTurn == true) && (state.turnCount == 1)) {
                         if (state.chassis.actionDone == true) {
                             state.turnCount++;
                             if (DEBUGGER == true) Serial.println("right turn accomplished");
                             state.chassis.actionDone = false;
-                        }   
+                        }
 
                         if (state.waitCount == 0) {
                             if (DEBUGGER == true) Serial.println("starting timer");
@@ -261,15 +282,15 @@ void strategy() {
                         }
 
                         if (state.turnCount == 1) {
-                        vehicleChassis->turnRightLimited(2800, state.timeStart);
-                        state.api.state = "Picking_up_right_box";
-                        state.side = "right";
-                        if (DEBUGGER == true) Serial.println("turnRightLimited");
-                        state.visual = false;
-                        state.turnSonar = true;
-                        //vehicleVision->turnVision(90);
-                        //if (DEBUGGER == true) Serial.println("after turnVision");
-                        }                        
+                            vehicleChassis->turnRightLimited(2800, state.timeStart);
+                            state.api.state = "Picking_up_right_box";
+                            state.side = "right";
+                            if (DEBUGGER == true) Serial.println("turnRightLimited");
+                            state.visual = false;
+                            state.turnSonar = true;
+                            //vehicleVision->turnVision(90);
+                            //if (DEBUGGER == true) Serial.println("after turnVision");
+                        }
                     }
 
                     //Second move is per default a drive straight for adjustment
@@ -289,13 +310,13 @@ void strategy() {
                         }
 
                         if (state.turnCount == 2) {
-                        vehicleChassis->driveStraightLimited(2800, state.timeStart);
-                        if (DEBUGGER == true) Serial.println("drivestraight");
+                            vehicleChassis->driveStraightLimited(2800, state.timeStart);
+                            if (DEBUGGER == true) Serial.println("drivestraight");
                         }
                     }
                     //Third move is a counterturn dependend on the first move
                     if (DEBUGGER == true) Serial.println("before third turn");
-                    if (state.turnCount == 3) { 
+                    if (state.turnCount == 3) {
                         if (DEBUGGER == true) Serial.println("turncount3");
                         if (state.chassis.actionDone == true) {
                             state.turnCount++;
@@ -313,23 +334,24 @@ void strategy() {
                         }
 
                         if (state.turnCount == 3) {
-                        vehicleChassis->turnLeftLimited(2600, state.timeStart);
-                        if (DEBUGGER == true) Serial.println("turnLeftLimited");
-                        state.waitForTurn = false;
+                            vehicleChassis->turnLeftLimited(2600, state.timeStart);
+                            if (DEBUGGER == true) Serial.println("turnLeftLimited");
+                            state.waitForTurn = false;
                         }
                     }
                 }
                 //Is the Box on the left side of the vehicle turn left
                 if (state.vision.servoAngle > 90) {
-                    if (DEBUGGER == true) Serial.print("waitForturn: "); if (DEBUGGER == true) Serial.println(state.waitForTurn);
-                    if (DEBUGGER == true) Serial.print("TurnCount: "); if (DEBUGGER == true) Serial.println(state.turnCount);
+                    if (DEBUGGER == true) Serial.print("waitForturn: ");
+                    if (DEBUGGER == true) Serial.println(state.waitForTurn);
+                    if (DEBUGGER == true) Serial.print("TurnCount: ");
+                    if (DEBUGGER == true) Serial.println(state.turnCount);
                     if ((state.waitForTurn == true) && (state.turnCount == 1)) {
-
                         if (state.chassis.actionDone == true) {
                             state.turnCount++;
                             if (DEBUGGER == true) Serial.println("left turn accomplished");
                             state.chassis.actionDone = false;
-                        }   
+                        }
 
                         if (state.waitCount == 0) {
                             if (DEBUGGER == true) Serial.println("starting timer");
@@ -338,14 +360,14 @@ void strategy() {
                         }
 
                         if (state.turnCount == 1) {
-                        vehicleChassis->turnLeftLimited(2600, state.timeStart);
-                        state.api.state = "Picking_up_left_box";
-                        state.side = "left";
-                        if (DEBUGGER == true) Serial.println("turnleftlimited");
-                        state.visual = false;
-                        state.turnSonar = true;
-                        if (DEBUGGER == true) Serial.println("after turnVision");
-                        }                        
+                            vehicleChassis->turnLeftLimited(2600, state.timeStart);
+                            state.api.state = "Picking_up_left_box";
+                            state.side = "left";
+                            if (DEBUGGER == true) Serial.println("turnleftlimited");
+                            state.visual = false;
+                            state.turnSonar = true;
+                            if (DEBUGGER == true) Serial.println("after turnVision");
+                        }
                     }
 
                     //Second move is per default a drive straight for adjustment
@@ -365,8 +387,8 @@ void strategy() {
                         }
 
                         if (state.turnCount == 2) {
-                                vehicleChassis->driveStraightLimited(2400, state.timeStart);
-                        if (DEBUGGER == true) Serial.println("drivestraight");
+                            vehicleChassis->driveStraightLimited(2400, state.timeStart);
+                            if (DEBUGGER == true) Serial.println("drivestraight");
                         }
                     }
                     //Third move is a counterturn dependend on the first move
@@ -390,9 +412,9 @@ void strategy() {
                         }
 
                         if (state.turnCount == 3) {
-                        vehicleChassis->turnRightLimited(3200, state.timeStart);
-                        if (DEBUGGER == true) Serial.println("turnright");
-                        state.waitForTurn = false;
+                            vehicleChassis->turnRightLimited(3200, state.timeStart);
+                            if (DEBUGGER == true) Serial.println("turnright");
+                            state.waitForTurn = false;
                         }
                     }
                 }
@@ -411,7 +433,8 @@ void strategy() {
             if (state.turnCount == 4) {
                 if (DEBUGGER == true) Serial.print("Turn4 with servoAngle: ");
                 if (DEBUGGER == true) Serial.println(state.vision.servoAngle);
-                if (DEBUGGER == true) Serial.print("Visual: "); if (DEBUGGER == true) Serial.println(state.visual);
+                if (DEBUGGER == true) Serial.print("Visual: ");
+                if (DEBUGGER == true) Serial.println(state.visual);
                 if (((state.vision.targetDetected == true) || (state.visual == false)) && (state.hoist.loaded == false)) {
                     if ((state.vision.servoAngle > 92) && (state.visual == true)) {
                         vehicleChassis->turnLeft();
@@ -425,7 +448,11 @@ void strategy() {
                         vehicleChassis->driveStraight();
                         if (DEBUGGER == true) Serial.println("after drivestraight");
                     }
-                    if (DEBUGGER == true) Serial.print(state.chassis.sensor[0]); if (DEBUGGER == true) Serial.print(state.chassis.sensor[1]); if (DEBUGGER == true) Serial.print(state.chassis.sensor[2]); if (DEBUGGER == true) Serial.print(state.chassis.sensor[3]); if (DEBUGGER == true) Serial.print(state.chassis.sensor[4]);
+                    if (DEBUGGER == true) Serial.print(state.chassis.sensor[0]);
+                    if (DEBUGGER == true) Serial.print(state.chassis.sensor[1]);
+                    if (DEBUGGER == true) Serial.print(state.chassis.sensor[2]);
+                    if (DEBUGGER == true) Serial.print(state.chassis.sensor[3]);
+                    if (DEBUGGER == true) Serial.print(state.chassis.sensor[4]);
                     if (((state.chassis.sensor[0] + state.chassis.sensor[1] + state.chassis.sensor[2] + state.chassis.sensor[3] + state.chassis.sensor[4]) != 0) && (state.visual == true)) {
                         if (DEBUGGER == true) Serial.println("detected line");
                         //state.chassis.IR = true;
@@ -433,35 +460,32 @@ void strategy() {
                         state.turnSonar = true;
                         state.api.sector = "21";
                     }
-                }
-                else if (state.visual == true) {
+                } else if (state.visual == true) {
                     vehicleChassis->stop();
                     if (DEBUGGER == true) Serial.println("stopping when no target available");
                 }
-            }            
-
-            
+            }
         }
 
         //Sector 21 movement
         if (state.api.sector == "21") {
-                if (DEBUGGER == true) Serial.println("following line again");
-                vehicleChassis->motorControl(state.sonar.sonarFactor);
-                if (state.chassis.actionDone == true) {
+            if (DEBUGGER == true) Serial.println("following line again");
+            vehicleChassis->motorControl(state.sonar.sonarFactor);
+            if (state.chassis.actionDone == true) {
                 state.api.sector = "22";
                 state.chassis.direction = "stop";
-                if (DEBUGGER == true) Serial.println("end of sector21"); 
+                if (DEBUGGER == true) Serial.println("end of sector21");
                 state.chassis.actionDone = false;
-                }
+            }
         }
-    
+
         //Sector 22 movement
         if (state.api.sector == "22") {
             vehicleChassis->motorControl(state.sonar.sonarFactor);
             if (state.chassis.actionDone == true) {
-            state.api.sector = "23";
-            if (DEBUGGER == true) Serial.println("end of sector22"); 
-            state.chassis.actionDone = false;
+                state.api.sector = "23";
+                if (DEBUGGER == true) Serial.println("end of sector22");
+                state.chassis.actionDone = false;
             }
         }
 
@@ -469,31 +493,34 @@ void strategy() {
         if (state.api.sector == "23") {
             state.vision.targetDetected = false;
             if (DEBUGGER == true) Serial.println("Arrived at loadingpoint");
-            if (DEBUGGER == true) Serial.print("ActionDone 23: "); if (DEBUGGER == true) Serial.println(state.chassis.actionDone);
+            if (DEBUGGER == true) Serial.print("ActionDone 23: ");
+            if (DEBUGGER == true) Serial.println(state.chassis.actionDone);
             if (state.hoist.loaded == false) {
                 vehicleHoist->load();
                 vehicleChassis->stop();
                 state.chassis.direction = "straight";
                 state.api.state = "Loading_box";
                 state.chassis.IR = false;
-                if (DEBUGGER == true) Serial.print("ActionDone 23 loading: "); if (DEBUGGER == true) Serial.println(state.chassis.actionDone);
+                if (DEBUGGER == true) Serial.print("ActionDone 23 loading: ");
+                if (DEBUGGER == true) Serial.println(state.chassis.actionDone);
             }
             //After loading process the system has to turn around
             if (state.hoist.loaded == true) {
                 state.hoist.detachServo = true;
                 state.api.state = "Bringing_box_to_port";
                 if (DEBUGGER == true) Serial.println("Loading complete");
-                    if (state.chassis.actionDone == false) {
-                        vehicleChassis->turnAround(2);
-                    }
-                    if (DEBUGGER == true) Serial.print("ActionDone: "); if (DEBUGGER == true) Serial.println(state.chassis.actionDone);
+                if (state.chassis.actionDone == false) {
+                    vehicleChassis->turnAround(2);
+                }
+                if (DEBUGGER == true) Serial.print("ActionDone: ");
+                if (DEBUGGER == true) Serial.println(state.chassis.actionDone);
                 if (state.chassis.actionDone == true) {
                     state.api.sector = "24";
                     state.chassis.direction = "right";
                     state.chassis.actionDone = false;
                     if (DEBUGGER == true) Serial.println("sector23 finished");
                 }
-            } 
+            }
         }
 
         //Start of sector 24 where the vehicle drives the container to the targeted port
@@ -511,8 +538,8 @@ void strategy() {
                     if (DEBUGGER == true) Serial.println("direction from box at beginning was left");
                 }
                 if (DEBUGGER == true) Serial.println("Sector24 actiondone");
-                state.chassis.actionDone = false;                
-            }  
+                state.chassis.actionDone = false;
+            }
         }
 
         //Start of sector 30 where the vehicle still drives the container to the targeted port
@@ -520,27 +547,24 @@ void strategy() {
             vehicleChassis->motorControl(state.sonar.sonarFactor);
             if (DEBUGGER == true) Serial.println("inside sector 30");
             if (state.chassis.actionDone == true) {
-                    
                 state.api.sector = "31";
                 if (state.api.unloadPort == "1") {
-                state.chassis.direction = "straight";
-                }
-                else if (state.api.unloadPort == "2") {
+                    state.chassis.direction = "straight";
+                } else if (state.api.unloadPort == "2") {
                     state.chassis.direction = "left";
                 }
                 state.chassis.actionDone = false;
             }
         }
-        
+
         //Sector 31 movement
         if (state.api.sector == "31") {
             vehicleChassis->motorControl(state.sonar.sonarFactor);
             if (DEBUGGER == true) Serial.println("Inside sector 31");
             if (state.chassis.actionDone == true) {
-                
                 if (state.api.unloadPort == "1") {
-                  state.chassis.direction = "stop";
-                  state.api.sector = "33";  
+                    state.chassis.direction = "stop";
+                    state.api.sector = "33";
                 }
                 if (state.api.unloadPort == "2") {
                     state.chassis.direction = "right";
@@ -572,7 +596,7 @@ void strategy() {
                 state.chassis.actionDone = false;
             }
         }
-        
+
         //Sector 34 movement
         if (state.api.sector == "34") {
             vehicleChassis->stop();
@@ -584,7 +608,7 @@ void strategy() {
                 state.api.sector = "35";
                 state.api.state = "Box_delivered";
                 state.timeStart = millis();
-                
+
                 if (DEBUGGER == true) Serial.println("starting fourth timer");
             }
         }
@@ -592,8 +616,8 @@ void strategy() {
         //Sector 35 movement
         if (state.api.sector == "35") {
             if (state.chassis.actionDone == false) {
-            vehicleChassis->driveBackLimited(2000, state.timeStart);
-            state.chassis.IR = false;
+                vehicleChassis->driveBackLimited(2000, state.timeStart);
+                state.chassis.IR = false;
             }
             if (state.chassis.actionDone == true) {
                 state.api.sector = "36";
@@ -601,15 +625,15 @@ void strategy() {
                 state.api.state = "driving_back_home";
                 state.chassis.actionDone = false;
             }
-            
         }
-        
+
         //Sector 36 movement
-        if (state.api.sector == "36") { 
-            if (DEBUGGER == true) Serial.print("Sector 36 Actiondone: "); if (DEBUGGER == true) Serial.println(state.chassis.actionDone);
+        if (state.api.sector == "36") {
+            if (DEBUGGER == true) Serial.print("Sector 36 Actiondone: ");
+            if (DEBUGGER == true) Serial.println(state.chassis.actionDone);
             if (state.chassis.actionDone == false) {
-            vehicleChassis->turnAround(2);
-            if (DEBUGGER == true) Serial.println("Sector 36 after turnaround");
+                vehicleChassis->turnAround(2);
+                if (DEBUGGER == true) Serial.println("Sector 36 after turnaround");
             }
             if (state.chassis.actionDone == true) {
                 state.api.sector = "37";
@@ -626,18 +650,16 @@ void strategy() {
                 if (state.api.unloadPort == "1") {
                     state.api.sector = "38";
                     state.chassis.direction = "straight";
-                }
-                else if (state.api.unloadPort == "2") {
+                } else if (state.api.unloadPort == "2") {
                     state.api.sector = "40";
                     if (state.api.vehicleID == "Idefix") {
-                    state.chassis.direction = "left";
-                    }
-                    else if (state.api.vehicleID == "Obelix") {
+                        state.chassis.direction = "left";
+                    } else if (state.api.vehicleID == "Obelix") {
                         state.chassis.direction = "straight";
                     }
                     state.chassis.actionDone = false;
                 }
-            state.chassis.actionDone = false;
+                state.chassis.actionDone = false;
             }
         }
 
@@ -649,8 +671,7 @@ void strategy() {
                 state.api.sector = "40";
                 if (state.api.vehicleID == "Idefix") {
                     state.chassis.direction = "left";
-                }
-                else if (state.api.vehicleID == "Obelix") {
+                } else if (state.api.vehicleID == "Obelix") {
                     state.chassis.direction = "straight";
                 }
                 state.chassis.actionDone = false;
@@ -666,8 +687,7 @@ void strategy() {
                     if (DEBUGGER == true) Serial.println("Sector 40 Obelix finished");
                     state.chassis.direction = "stop";
                     state.api.sector = "42";
-                }
-                else if (state.api.vehicleID == "Idefix") {
+                } else if (state.api.vehicleID == "Idefix") {
                     if (DEBUGGER == true) Serial.println("Sector 40 Idefix finished");
                     state.chassis.direction = "right";
                     state.api.sector = "41";
@@ -679,7 +699,8 @@ void strategy() {
         //Sector 41 movement
         if (state.api.sector == "41") {
             vehicleChassis->motorControl(state.sonar.sonarFactor);
-            if (DEBUGGER == true) Serial.print("Sector 41 Actiondone: "); if (DEBUGGER == true) Serial.println(state.chassis.actionDone);
+            if (DEBUGGER == true) Serial.print("Sector 41 Actiondone: ");
+            if (DEBUGGER == true) Serial.println(state.chassis.actionDone);
             if (state.chassis.actionDone == true) {
                 state.chassis.direction = "stop";
                 if (DEBUGGER == true) Serial.println("Sector 41 finished");
@@ -691,7 +712,8 @@ void strategy() {
         //Sector 42 movement
         if (state.api.sector == "42") {
             vehicleChassis->motorControl(state.sonar.sonarFactor);
-            if (DEBUGGER == true) Serial.print("Sector 42 Actiondone: "); if (DEBUGGER == true) Serial.println(state.chassis.actionDone);
+            if (DEBUGGER == true) Serial.print("Sector 42 Actiondone: ");
+            if (DEBUGGER == true) Serial.println(state.chassis.actionDone);
             if (state.chassis.actionDone == true) {
                 state.chassis.direction = "stop";
                 if (DEBUGGER == true) Serial.println("Sector 42 finished");
@@ -699,14 +721,15 @@ void strategy() {
                 state.api.sector = "43";
                 state.chassis.actionDone = false;
             }
-        }  
+        }
 
         //Sector 43 movement reset the variables once the task is finished
         if (state.api.sector == "43") {
-            if (DEBUGGER == true) Serial.print("Sector 43 Actiondone: "); if (DEBUGGER == true) Serial.println(state.chassis.actionDone);
+            if (DEBUGGER == true) Serial.print("Sector 43 Actiondone: ");
+            if (DEBUGGER == true) Serial.println(state.chassis.actionDone);
             if (state.chassis.actionDone == false) {
-            vehicleChassis->turnAround(2);
-            if (DEBUGGER == true) Serial.println("Sector 43 after turnaround");
+                vehicleChassis->turnAround(2);
+                if (DEBUGGER == true) Serial.println("Sector 43 after turnaround");
             }
             if (state.chassis.actionDone == true) {
                 if (DEBUGGER == true) Serial.println("Sector 43 finished");
@@ -723,19 +746,23 @@ void strategy() {
                 state.api.jobCount++;
                 state.vision.reset = true;
                 state.api.container = "";
-                state.api.unloadPort= "";
+                state.api.unloadPort = "";
                 state.api.containerChange = true;
                 state.api.unloadPortChange = true;
-            }    
-             
+            }
         }
-    }
-    else {
+    } else {
         vehicleChassis->stop();
     }
 }
 
-
+/**
+ * @brief For initialisation of the Board
+ * 
+ * Use it to initialize variables, pin modes, start using libraries, etc.
+ * The setup() function will only run once,
+ * after each powerup or reset of the board
+ */
 void setup() {
     //Initialize serial and wait for port to open:
     if (DEBUGGER == true) Serial.begin(9600);
@@ -757,10 +784,16 @@ void setup() {
     if (DEBUGGER == true) Serial.println("Booting complete!");
 }
 
-
-
-
-void loop() { 
+/**
+ * @brief 
+ * 
+ * After creating a setup() function, which initializes and sets the initial values,
+ * the loop() function does precisely what its name suggests,
+ * and loops consecutively, allowing your program to change and respond.
+ * Use it to actively control the board.
+ * 
+ */
+void loop() {
     vehicleAPI->loop(&state.api);
     if (state.api.workState == true) {
         state.sonarCount++;
@@ -772,7 +805,7 @@ void loop() {
             state.sonarCount = 0;
             vehicleSonar->loop(&state.sonar, state.chassis.directionError, state.turnSonar);
         }
-        vehicleHoist->loop(&state.hoist);   
+        vehicleHoist->loop(&state.hoist);
     }
     strategy();
     if (DEBUGGER == true) Serial.println("-----------------------------------------");
