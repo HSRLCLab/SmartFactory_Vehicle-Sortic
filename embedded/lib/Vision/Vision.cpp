@@ -22,7 +22,8 @@
 #include "Arduino.h"
 
 Vision::Vision(int startAngle, int visionPin, int dddelay, int toleranceL, int toleranceR) {
-    if (DEBUGGER == true) Serial.print("Initializing vision...");
+    DBFUNCCALLln("Vision::Vision(int startAngle, int visionPin, int dddelay, int toleranceL, int toleranceR)");
+    DBINFO1("Initializing vision...");
     pixy.init();
     _servoPin = visionPin;
     ddelay = dddelay;
@@ -47,7 +48,7 @@ Vision::Vision(int startAngle, int visionPin, int dddelay, int toleranceL, int t
     targetFound4 = 0;
     failCounter = 0;
 
-    if (DEBUGGER == true) Serial.println("compelete!");
+    DBINFO1ln("compelete!");
 }
 
 void Vision::loop(VisionState *state) {
@@ -305,4 +306,7 @@ void Vision::turnVision(int angle) {
     visionServo.write(angle);
     visionServo.detach();
     if (DEBUGGER == true) Serial.println("inside turnvision");
+}
+
+void Vision::Test(const int test) {
 }

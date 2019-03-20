@@ -11,10 +11,12 @@
  * @copyright Copyright (c) 2019
  * 
  */
+#define TESTING 4  //0=run, 1=hoist, 2=sonar, 3=chassis, 4=vision, 99= Motivation
 
 #include "Arduino.h"
 #include "Chassis.h"
 #include "Hoist.h"
+#include "LogConfiguration.h"
 #include "SPI.h"
 #include "Sonar.h"
 #include "VehicleWebAPI.h"
@@ -48,9 +50,97 @@ Chassis *vehicleChassis;
 VehicleWebAPI *vehicleAPI;
 
 /**
- * @brief 
+ * @brief This shit is fucked up
  * 
  */
+void strategy();
+
+/**
+ * @brief For initialisation of the Board
+ * 
+ * Use it to initialize variables, pin modes, start using libraries, etc.
+ * The setup() function will only run once,
+ * after each powerup or reset of the board
+ */
+void setup() {
+    //Initialize serial and wait for port to open:
+    if (DEBUGGER == true) Serial.begin(9600);
+    //while (!if (DEBUGGER == true) Serial) {
+    //; // wait for serial port to connect. Needed for native USB port only
+    //}
+    DBSTATUSln("Vehicle: booting...");
+#if TESTING == 3 || TESTING == 0
+    vehicleChassis = new Chassis(SPEED, K_P, K_I, K_D, RIGHT_MOTOR, LEFT_MOTOR, PIN_SENSOR_0, PIN_SENSOR_1, PIN_SENSOR_2, PIN_SENSOR_3, PIN_SENSOR_4);
+    state.chassis.speed = SPEED;
+    delay(100);
+#endif
+#if TESTING == 2 || TESTING == 0
+    vehicleSonar = new Sonar(SONAR_SERVO_PIN, SONAR_TRIGGER_PIN, SONAR_ECHO_PIN, SONAR_MAX_DISTANCE, MIN_ERROR, MAX_ERROR, MIN_TURN_ANGLE, MAX_TURN_ANGLE);
+    delay(100);
+#endif
+#if TESTING == 4 || TESTING == 0
+    vehicleVision = new Vision(VISION_START_ANGLE, VISION_SERVO_PIN, VISION_DELAY_FACTOR, VISION_TOLERANCE_LEFT, VISION_TOLERANCE_RIGHT);
+    delay(100);
+#endif
+#if TESTING == 1 || TESTING == 0
+    vehicleHoist = new Hoist(HOIST_SERVO_PIN, HOIST_SERVO_DELAY, HOIST_POISITION_MAX, HOIST_POSITION_MIN);
+    delay(100);
+#endif
+#if TESTING == 5 || TESTING == 0
+    vehicleAPI = new VehicleWebAPI(&state.api);
+    delay(100);
+#endif
+    DBSTATUSln("Booting complete!");
+}
+
+/**
+ * @brief 
+ * 
+ * After creating a setup() function, which initializes and sets the initial values,
+ * the loop() function does precisely what its name suggests,
+ * and loops consecutively, allowing your program to change and respond.
+ * Use it to actively control the board.
+ * 
+ */
+void loop() {
+#if TESTING == 1  //Test Hoist
+    DBSTATUSln("==Test Hoist==");
+    vehicleHoist->Hoist::Test(0);
+#elif TESTING == 2  //Test Sonar
+    DBSTATUSln("==Test Sonar==");
+    vehicleSonar->Sonar::Test(1);
+
+#elif TESTING == 3  //Test Chasis
+    DBSTATUSln("==Test Chasis==");
+    vehicleChassis->Chassis::Test();
+#elif TESTING == 4  //Test Vision
+    DBSTATUSln("==Test Vision==");
+    vehicleVision->Vision::Test(0);
+#elif TESTING == 99
+    DBSTATUSln("==Start motivation program==");
+    delay(500);
+    DBSTATUSln("YOU CAN DO IT!");
+#else
+    vehicleAPI->loop(&state.api);
+    if (state.api.workState == true) {
+        state.sonarCount++;
+        if ((state.api.sector == "20") && (state.visual == true)) {
+            vehicleVision->loop(&state.vision);
+        }
+        vehicleChassis->loop(&state.chassis);
+        if (state.sonarCount > 30) {
+            state.sonarCount = 0;
+            vehicleSonar->loop(&state.sonar, state.chassis.directionError, state.turnSonar);
+        }
+        vehicleHoist->loop(&state.hoist);
+    }
+    strategy();
+    if (DEBUGGER == true) Serial.println("-----------------------------------------");
+#endif
+    delay(10000);
+    DBSTATUSln("==END Test - LOOP again==");
+}
+
 void strategy() {
     if (DEBUGGER == true) Serial.print("Sector begin strategy");
     if (DEBUGGER == true) Serial.println(state.api.sector);
@@ -754,59 +844,4 @@ void strategy() {
     } else {
         vehicleChassis->stop();
     }
-}
-
-/**
- * @brief For initialisation of the Board
- * 
- * Use it to initialize variables, pin modes, start using libraries, etc.
- * The setup() function will only run once,
- * after each powerup or reset of the board
- */
-void setup() {
-    //Initialize serial and wait for port to open:
-    if (DEBUGGER == true) Serial.begin(9600);
-    //while (!if (DEBUGGER == true) Serial) {
-    //; // wait foserial port to connect. Needed for native USB port only
-    //}
-    if (DEBUGGER == true) Serial.println("Vehicle: booting...");
-    vehicleChassis = new Chassis(SPEED, K_P, K_I, K_D, RIGHT_MOTOR, LEFT_MOTOR, PIN_SENSOR_0, PIN_SENSOR_1, PIN_SENSOR_2, PIN_SENSOR_3, PIN_SENSOR_4);
-    state.chassis.speed = SPEED;
-    delay(1000);
-    vehicleSonar = new Sonar(SONAR_SERVO_PIN, SONAR_TRIGGER_PIN, SONAR_ECHO_PIN, SONAR_MAX_DISTANCE, MIN_ERROR, MAX_ERROR, MIN_TURN_ANGLE, MAX_TURN_ANGLE);
-    delay(1000);
-    vehicleVision = new Vision(VISION_START_ANGLE, VISION_SERVO_PIN, VISION_DELAY_FACTOR, VISION_TOLERANCE_LEFT, VISION_TOLERANCE_RIGHT);
-    delay(1000);
-    vehicleHoist = new Hoist(HOIST_SERVO_PIN, HOIST_SERVO_DELAY, HOIST_POISITION_MAX, HOIST_POSITION_MIN);
-    delay(1000);
-    vehicleAPI = new VehicleWebAPI(&state.api);
-    delay(1000);
-    if (DEBUGGER == true) Serial.println("Booting complete!");
-}
-
-/**
- * @brief 
- * 
- * After creating a setup() function, which initializes and sets the initial values,
- * the loop() function does precisely what its name suggests,
- * and loops consecutively, allowing your program to change and respond.
- * Use it to actively control the board.
- * 
- */
-void loop() {
-    vehicleAPI->loop(&state.api);
-    if (state.api.workState == true) {
-        state.sonarCount++;
-        if ((state.api.sector == "20") && (state.visual == true)) {
-            vehicleVision->loop(&state.vision);
-        }
-        vehicleChassis->loop(&state.chassis);
-        if (state.sonarCount > 30) {
-            state.sonarCount = 0;
-            vehicleSonar->loop(&state.sonar, state.chassis.directionError, state.turnSonar);
-        }
-        vehicleHoist->loop(&state.hoist);
-    }
-    strategy();
-    if (DEBUGGER == true) Serial.println("-----------------------------------------");
 }

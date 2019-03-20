@@ -6,6 +6,9 @@
  * Based on the deviation of the sonar to the focus point an error is
  * given to the loop to turn the sonar to the right direction.
  * 
+ * The HC-SR04 has a range from 2cm to 3mm with a resolution form 2mm. Max freq. is 50Hz
+ * Voltage 5V
+ * 
  * @author Glenn Huber (glenn.patrick.huber@hsr.ch)
  * @author Robert Paly (robert.paly@hsr.ch)
  * @author Felix Nyffenegger (felix.nyffenegger@hsr.ch)
@@ -23,6 +26,7 @@
 
 #include "Arduino.h"
 #include "Configuration.h"
+#include "LogConfiguration.h"
 #include "Modular.h"
 #include "NewPing.h"
 #include "Servo.h"
@@ -32,10 +36,10 @@
  * 
  */
 struct SonarState {
-    int obstacleDistance = 9999;  ///<
-    float sonarFactor = 1;        ///<
-    bool detachServo = false;     ///<
-    bool isAttached = false;      ///<
+    int obstacleDistance = SONAR_MAX_DISTANCE;  ///<
+    float sonarFactor = 1;                      ///<
+    bool detachServo = false;                   ///<
+    bool isAttached = false;                    ///<
 };
 
 /**
@@ -68,9 +72,21 @@ class Sonar : public Component {
     void loop(SonarState *state, int directionError, bool servoActive);
 
     /**
-     * @brief 
+     * @brief Gets distance to next obstacle in front of the vehicle
      * 
-     * @param directionError - 
+     * @return int - return distance in cm
+     */
+    int getDistanceToObstacle();
+
+    /**
+     * @brief Correct the sonar-orientation and turn it drivingdirection
+     * 
+     * Take the direction error and maps it into an turnangle (180 -0 degree).
+     * Afterwards realigne the sonar so it faces the path correctly
+     * 
+     * @param directionError - deviation from the path -5 - +5
+     * 
+     * @todo smoother position change
      */
     void turnSonar(int directionError);
 
@@ -78,51 +94,29 @@ class Sonar : public Component {
      * @brief 
      * 
      * @param state - 
+     * @todo for what?? ->motorControl
      */
     void calculateSonarFactor(SonarState *state);
 
+    /**
+     * @brief Testfunction for Sonar-Class
+     * 
+     * 0 - run all tests \n
+     * 1 - run test for servo \n
+     * 2 - run test for obstacle detection \n
+     * 
+     * @param test - Choose which test to run
+     */
+    void Test(const int test);
+
    protected:
-    /**
-    * @brief 
-    * 
-    */
-    NewPing *sonar;
-
-    /**
-     * @brief 
-     * 
-     */
-    Servo sonarServo;
-
-    /**
-     * @brief 
-     * 
-     */
-    int minError;
-
-    /**
-     * @brief 
-     * 
-     */
-    int maxError;
-
-    /**
-     * @brief 
-     * 
-     */
-    int minTurnAngle;
-
-    /**
-     * @brief 
-     * 
-     */
-    int maxTurnAngle;
-
-    /**
-     * @brief 
-     * 
-     */
-    int _servoPin;
+    NewPing *sonar;    ///<
+    Servo sonarServo;  ///<
+    int minError;      ///<
+    int maxError;      ///<
+    int minTurnAngle;  ///<
+    int maxTurnAngle;  ///<
+    int _servoPin;     ///<
 };
 
 #endif

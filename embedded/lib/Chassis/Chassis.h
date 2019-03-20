@@ -22,6 +22,7 @@
 #include "Adafruit_MotorShield.h"
 #include "Arduino.h"
 #include "Configuration.h"
+#include "LogConfiguration.h"
 #include "Modular.h"
 
 /**

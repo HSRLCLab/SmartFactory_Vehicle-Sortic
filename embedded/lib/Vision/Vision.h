@@ -21,6 +21,7 @@
 
 #include "Arduino.h"
 #include "Configuration.h"
+#include "LogConfiguration.h"
 #include "Modular.h"
 #include "PixyI2C.h"
 #include "Servo.h"
@@ -69,10 +70,16 @@ class Vision : public Component {
     void turnVision(int angle);
 
     /**
-     * @brief 
+     * @brief Testfunction for Vision-Class
      * 
+     * 0 - run all tests \n
+     * 1 - 
+     * 
+     * @param test - Choose which test to run
      */
-    VisionState visionState;
+    void Test(const int test);
+
+    VisionState visionState;  ///<
 
    protected:
     Servo visionServo;  ///<

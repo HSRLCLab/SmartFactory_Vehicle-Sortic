@@ -20,6 +20,7 @@
 #include "ArduinoJson.h"
 #include "Configuration.h"
 #include "IPAddress.h"
+#include "LogConfiguration.h"
 #include "Modular.h"
 #include "WiFi101.h"
 #include "WiFiClient.h"

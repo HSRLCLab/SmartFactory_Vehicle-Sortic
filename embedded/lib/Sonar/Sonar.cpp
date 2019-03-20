@@ -22,28 +22,28 @@
 #include "Arduino.h"
 
 Sonar::Sonar(int servoPin, int triggerPin, int echoPin, int maxDistance, int min_Error, int max_Error, int min_TurnAngle, int max_TurnAngle) {
-    if (DEBUGGER == true) Serial.print("Initializing sonar...");
+    DBFUNCCALLln("Sonar::Sonar(servoPin,triggerPin,echoPin,maxDistance,min_Error,max_Error,min_TurnAngle,max_TurnAngle)");
+    DBINFO1("Initializing sonar...");
     sonar = new NewPing(triggerPin, echoPin, maxDistance);
     minError = min_Error;
     maxError = max_Error;
     minTurnAngle = min_TurnAngle;
     maxTurnAngle = max_TurnAngle;
     _servoPin = servoPin;
-    if (DEBUGGER == true) Serial.println(" complete!");
+    DBINFO1ln(" complete!");
 }
 
 void Sonar::loop(SonarState *state, int directionError, bool servoActive) {
+    DBFUNCCALLln("Sonar::loop(*state,directionError,servoActive)");
     if ((servoActive == true) && (state->isAttached == false)) {
         sonarServo.attach(_servoPin);
         state->isAttached = true;
     }
-    int uSonar = sonar->ping_cm();
-    if (DEBUGGER == true) Serial.print("distance: ");
-    if (DEBUGGER == true) Serial.println(uSonar);
-    state->obstacleDistance = uSonar;
+
+    state->obstacleDistance = getDistanceToObstacle();
     if (servoActive == true) {
-        if (DEBUGGER == true) Serial.print("Turn sonar with directionError: ");
-        if (DEBUGGER == true) Serial.println(directionError);
+        DBSTATUS("Turn sonar with directionError: ");
+        DBSTATUSln(directionError);
         turnSonar(directionError);
     }
     calculateSonarFactor(state);
@@ -54,22 +54,58 @@ void Sonar::loop(SonarState *state, int directionError, bool servoActive) {
     }
 }
 
+int Sonar::getDistanceToObstacle() {
+    DBFUNCCALLln("Sonar::getDistanceToObstacle()");
+    int uSonar = sonar->ping_cm();
+    DBINFO1("Distance: ");
+    DBINFO1ln(uSonar);
+    return uSonar;
+}
+
 void Sonar::turnSonar(int directionError) {
-    int turnSonar = map(directionError, minError, maxError, minTurnAngle, maxTurnAngle);
-    if (DEBUGGER == true) Serial.print("turnanglesonar: ");
-    if (DEBUGGER == true) Serial.println(turnSonar);
+    DBFUNCCALLln("Sonar::turnSonar(int directionError)");
+    DBINFO1("directionError: ");
+    DBINFO1ln(directionError);
+    int turnSonar = map(directionError, minError, maxError, minTurnAngle, maxTurnAngle);  // map direction error (-5 to 5) to angle (180 to 0)
+    DBINFO1("Turn anglesonar: ");
+    DBINFO1ln(turnSonar);
     sonarServo.write(turnSonar);
 }
 
 void Sonar::calculateSonarFactor(SonarState *state) {
+    DBFUNCCALLln("Sonar::calculateSonarFactor(SonarState *state)");
     if ((state->obstacleDistance > 10) || (state->obstacleDistance == 0)) {
+        DBINFO1ln("Factor: 1");
         state->sonarFactor = 1;
-        if (DEBUGGER == true) Serial.println("Factor1");
     } else if ((state->obstacleDistance <= 10) && (state->obstacleDistance >= 5)) {
+        DBINFO1ln("Factor: 0.5");
         state->sonarFactor = 0.5;
-        if (DEBUGGER == true) Serial.println("Factor0.5");
     } else {
+        DBINFO1ln("Factor: 0");
         state->sonarFactor = 0;
-        if (DEBUGGER == true) Serial.println("Factor0");
+    }
+}
+
+void Sonar::Test(const int test) {
+    DBFUNCCALLln("Sonar::Test()");
+    if (test == 0 || test == 1) {
+        sonarServo.attach(_servoPin);
+        for (size_t i = 0; i < 6; i++) {
+            turnSonar(i);
+            delay(1000);
+        }
+        for (int i = -6; i < 6; i++) {
+            turnSonar(-i);
+            delay(1000);
+        }
+        turnSonar(0);
+        delay(1000);
+        sonarServo.detach();
+        delay(1000);
+    } else if (test == 0 || test == 2) {
+        for (size_t i = 0; i < 50; i++) {
+            getDistanceToObstacle();
+            delay(200);
+        }
     }
 }

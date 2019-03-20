@@ -19,47 +19,82 @@
 #include "Arduino.h"
 
 Hoist::Hoist(int hoistServoPin, int hoistServoDelay, int posMax, int posMin) {
-    if (DEBUGGER == true) Serial.print("Initializing hoist...");
+    DBFUNCCALLln("Hoist::Hoist(int hoistServoPin, int hoistServoDelay, int posMax, int posMin)");
+    DBINFO1("Initializing hoist...");
     servoPin = hoistServoPin;
     position = posMin;
     positionMin = posMin;
     positionMax = posMax;
     servoDelay = hoistServoDelay;
-    if (DEBUGGER == true) Serial.println("Initializing complete!");
+    DBINFO1ln("Initializing complete!");
 }
 
+//NEW FUNCTION DRAFT (LMA)
+// bool Hoist::setServoPosition(unsigned int pos) {
+//     hoistServo.attach(servoPin);
+//     if (pos <= positionMax && pos >= positionMin) {
+//         while (HoistServo.read(servoPin) != pos) {
+//             hoistServo.write(pos);
+//             delay(1);
+//         }
+//         if (position == positionMax) {
+//             currentState.loaded = true;
+//             else if (position == positionMin) {
+//                 currentState.loaded = false;
+//             }
+//             hoistServo.detach();
+//             state->detachServo = false;
+//             return true
+//         } else
+//             return false;
+//     }
+
 void Hoist::load() {
-    hoistServo.attach(servoPin);
+    DBFUNCCALLln("Hoist::load()");
+    hoistServo.attach(servoPin);  ///< Attach the Servo variable to a pin
     if (position > positionMax) {
-        if (DEBUGGER == true) Serial.println("Begin loading..");
+        DBSTATUSln("Begin loading..");
+        DBINFO1("Position: ");
+        DBINFO1ln(position);
         position--;
-        hoistServo.write(position);
+        hoistServo.write(position);  //< Update Servo-position
         delay(servoDelay);
     }
     if (position == positionMax) {
         currentState.loaded = true;
-        if (DEBUGGER == true) Serial.println("Target loaded!");
+        DBSTATUSln("Target loaded!");
     }
 }
 
 void Hoist::unload() {
+    DBFUNCCALLln("Hoist::unload()");
     hoistServo.attach(servoPin);
     if (position < positionMin) {
-        if (DEBUGGER == true) Serial.println("Begin unloading...");
+        DBSTATUSln("Begin unloading...");
         position++;
         hoistServo.write(position);
         delay(servoDelay);
     }
     if (position == positionMin) {
         currentState.loaded = false;
-        if (DEBUGGER == true) Serial.println("Target unloaded!");
+        DBSTATUSln("Target unloaded!");
     }
 }
 
-void Hoist::loop(HoistState *state) {
+void Hoist::loop(HoistState* state) {
+    DBFUNCCALLln("Hoist::loop(HoistState* state)");
     state->loaded = currentState.loaded;
     if (state->detachServo == true) {
         hoistServo.detach();
         state->detachServo = false;
+    }
+}
+
+void Hoist::Test(const int test) {
+    DBFUNCCALLln("Hoist::Test()");
+    if (test == 0 || test == 1) {
+        load();
+        delay(1000);
+        unload();
     }
 }
