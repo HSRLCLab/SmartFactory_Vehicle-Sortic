@@ -79,12 +79,12 @@ class Sonar : public Component {
     int getDistanceToObstacle();
 
     /**
-     * @brief Correct the sonar-orientation and turn it drivingdirection
+     * @brief Correct the sonar-orientation and turn it into the drivingdirection
      * 
-     * Take the direction error and maps it into an turnangle (180 -0 degree).
+     * Take the direction error and maps it into an turnangle (180 - 0 degree).
      * Afterwards realigne the sonar so it faces the path correctly
      * 
-     * @param directionError - deviation from the path -5 - +5
+     * @param directionError - deviation from the path -5(left) - +5(right)
      * 
      * @todo smoother position change
      */
@@ -102,7 +102,7 @@ class Sonar : public Component {
      * @brief Testfunction for Sonar-Class
      * 
      * 0 - run all tests \n
-     * 1 - run test for servo \n
+     * 1 - run test for servo right\n
      * 2 - run test for obstacle detection \n
      * 
      * @param test - Choose which test to run

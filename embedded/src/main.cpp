@@ -11,7 +11,7 @@
  * @copyright Copyright (c) 2019
  * 
  */
-#define TESTING 4  //0=run, 1=hoist, 2=sonar, 3=chassis, 4=vision, 99= Motivation
+#define TESTING 99  //0=run, 1=hoist, 2=sonar, 3=chassis, 4=vision, 99= Motivation
 
 #include "Arduino.h"
 #include "Chassis.h"
@@ -107,6 +107,11 @@ void loop() {
     DBSTATUSln("==Test Hoist==");
     vehicleHoist->Hoist::Test(0);
 #elif TESTING == 2  //Test Sonar
+    /*
+     * 0 - run all tests 
+     * 1 - run test for servo
+     * 2 - run test for obstacle detection
+     * */
     DBSTATUSln("==Test Sonar==");
     vehicleSonar->Sonar::Test(1);
 
@@ -114,8 +119,12 @@ void loop() {
     DBSTATUSln("==Test Chasis==");
     vehicleChassis->Chassis::Test();
 #elif TESTING == 4  //Test Vision
+    /*
+     * 0 - run all tests 
+     * 1 - run test for servo
+     * */
     DBSTATUSln("==Test Vision==");
-    vehicleVision->Vision::Test(0);
+    vehicleVision->Vision::Test(1);
 #elif TESTING == 99
     DBSTATUSln("==Start motivation program==");
     delay(500);

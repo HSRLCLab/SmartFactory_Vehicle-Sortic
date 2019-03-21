@@ -6,10 +6,12 @@
  * Based on the deviation of the sonar to the focus point an error is
  * given to the loop to turn the sonar to the right direction.
  * 
+ * @author Luca Mazzoleni (luca.mazzoleni@hsr.ch)
  * @author Glenn Huber (glenn.patrick.huber@hsr.ch)
  * @author Robert Paly (robert.paly@hsr.ch)
  * @author Felix Nyffenegger (felix.nyffenegger@hsr.ch)
  * 
+ * @version 1.2 - Added Test-case - Luca Mazzoleni (luca.mazzoleni@hsr.ch)  - 2019-03-20
  * @version 1.1 - Added Doxygen-Documentation  - Luca Mazzoleni (luca.mazzoleni@hsr.ch)  - 2019-03-20
  * @version 1.0 - BA FTS FS 2018
  * 
@@ -88,24 +90,30 @@ void Sonar::calculateSonarFactor(SonarState *state) {
 
 void Sonar::Test(const int test) {
     DBFUNCCALLln("Sonar::Test()");
-    if (test == 0 || test == 1) {
+    int testdelay = 1000;
+    if (test == 0 || test == 1) {  //Test Servo
+        int maxinc = 6;            //Chose max increment range for left/ritgh-turn
         sonarServo.attach(_servoPin);
-        for (size_t i = 0; i < 6; i++) {
+        for (size_t i = 0; i < maxinc; i++) {
             turnSonar(i);
-            delay(1000);
+            delay(testdelay);
         }
-        for (int i = -6; i < 6; i++) {
+        for (int i = -maxinc; i < maxinc; i++) {
             turnSonar(-i);
-            delay(1000);
+            delay(testdelay);
         }
         turnSonar(0);
-        delay(1000);
+        delay(testdelay);
         sonarServo.detach();
-        delay(1000);
-    } else if (test == 0 || test == 2) {
+        delay(testdelay);
+    } else if (test == 0 || test == 2) {  //Test Distance to Obstacle
         for (size_t i = 0; i < 50; i++) {
             getDistanceToObstacle();
-            delay(200);
+            delay(testdelay / 5);
         }
+    } else {
+        DBERROR("No vailid Test selected.");
+        DBINFO1("Your Input: ");
+        DBINFO1(test);
     }
 }

@@ -7,8 +7,10 @@
  * The cam searches for target-objects and adjusts its position to that direction.
  * Afterwarts it sends information for course adaption.
  * 
+ * @author Luca Mazzoleni (luca.mazzoleni@hsr.ch)
  * @author Glenn Huber (glenn.patrick.huber@hsr.ch)
  * 
+ * @version 1.2 - Added Test-case - Luca Mazzoleni (luca.mazzoleni@hsr.ch)  - 2019-03-20
  * @version 1.1 - Added Doxygen-Documentation  - Luca Mazzoleni (luca.mazzoleni@hsr.ch)  - 2019-03-05 
  * @version 1.0 - BA FTS FS 2018
  * 
@@ -53,79 +55,63 @@ Vision::Vision(int startAngle, int visionPin, int dddelay, int toleranceL, int t
 
 void Vision::loop(VisionState *state) {
     if (state->reset == true) {
-        failCounter = 0;
-        targetFound4 = 0;
-        targetFound3 = 0;
-        targetFound2 = 0;
-        targetFound1 = 0;
-        targetFound = 0;
-        target8 = 0;
-        target7 = 0;
-        target6 = 0;
-        target5 = 0;
-        target4 = 0;
-        target3 = 0;
-        target2 = 0;
-        target1 = 0;
-        visionState.target = 0;
-        visionState.servoAngle = 90;
-        state->reset = false;
+        reset(state);
     }
     visionServo.attach(_servoPin);
-    if (DEBUGGER == true) Serial.println("Beginn visionloop");
+    DBINFO1ln("Beginn visionloop");
     static int ii = 0;  //Cycle variable
-    if (DEBUGGER == true) Serial.print("I: ");
-    if (DEBUGGER == true) Serial.println(ii);
+    DBINFO1("I: ");
+    DBINFO1ln(ii);
     int j;
     uint16_t blocks;
     char buf[32];
-    if (DEBUGGER == true) Serial.print("Target: ");
+    DBINFO1("Target: ");
     visionState.target = state->target;
-    if (DEBUGGER == true) Serial.println(visionState.target);
+    DBINFO1ln(visionState.target);
 
     blocks = pixy.getBlocks();
-    if (DEBUGGER == true) Serial.print("ServoAngle: ");
-    if (DEBUGGER == true) Serial.print(visionState.servoAngle);
+    DBINFO1("ServoAngle: ");
+    DBINFO1(visionState.servoAngle);
     visionServo.write(visionState.servoAngle);
     state->servoAngle = visionState.servoAngle;
     state->targetDetected = visionState.targetDetected;
-    if (DEBUGGER == true) Serial.print("targetdetected");
-    if (DEBUGGER == true) Serial.println(state->targetDetected);
+    DBINFO1("targetdetected");
+    DBINFO1ln(state->targetDetected);
     delay(13);  //Empirically testet value
-    if (DEBUGGER == true) Serial.println("before first if-case");
+    DBINFO1ln("before first if-case");
     if (blocks) {
-        if (DEBUGGER == true) Serial.println("inside first if-case");
+        DBINFO1ln("inside first if-case");
         ii++;
         if ((ii % ddelay) == 0) {
             failCounter = 0;
-            if (DEBUGGER == true) Serial.print("Current angle: ");
-            if (DEBUGGER == true) Serial.println(visionState.servoAngle);
+            DBINFO1("Current angle: ");
+            DBINFO1ln(visionState.servoAngle);
 
             sprintf(buf, "Detected %d:\n", blocks);
-            if (DEBUGGER == true) Serial.print(buf);
+            DBINFO1(buf);
             for (j = 0; j < blocks; j++) {
                 sprintf(buf, " block %d: ", j);
-                if (DEBUGGER == true) Serial.print(buf);
+                DBINFO1(buf);
                 pixy.blocks[j].print();
             }
-            if (DEBUGGER == true) Serial.print("The Target is = ");
-            if (DEBUGGER == true) Serial.println(visionState.target);
-            if (DEBUGGER == true) Serial.print("signature= ");
-            if (DEBUGGER == true) Serial.print(pixy.blocks[0].signature);
-            if (DEBUGGER == true) Serial.print(" | ");
-            if (DEBUGGER == true) Serial.print(pixy.blocks[1].signature);
-            if (DEBUGGER == true) Serial.print(" | ");
-            if (DEBUGGER == true) Serial.print(pixy.blocks[2].signature);
-            if (DEBUGGER == true) Serial.print(" | ");
-            if (DEBUGGER == true) Serial.print(pixy.blocks[3].signature);
-            if (DEBUGGER == true) Serial.print(" | ");
-            if (DEBUGGER == true) Serial.print(pixy.blocks[4].signature);
-            if (DEBUGGER == true) Serial.print(" | ");
-            if (DEBUGGER == true) Serial.print(pixy.blocks[5].signature);
-            if (DEBUGGER == true) Serial.print(" | ");
-            if (DEBUGGER == true) Serial.print(pixy.blocks[6].signature);
-            if (DEBUGGER == true) Serial.print(" | ");
-            if (DEBUGGER == true) Serial.println(pixy.blocks[7].signature);
+            DBINFO1("The Target is = ");
+            DBINFO1ln(visionState.target);
+            DBINFO1("signature= ");
+            DBINFO1(pixy.blocks[0].signature);
+            DBINFO1(" | ");
+            DBINFO1(pixy.blocks[1].signature);
+            DBINFO1(" | ");
+            DBINFO1(pixy.blocks[2].signature);
+            DBINFO1(" | ");
+            DBINFO1(pixy.blocks[3].signature);
+            DBINFO1(" | ");
+            DBINFO1(pixy.blocks[4].signature);
+            DBINFO1(" | ");
+            DBINFO1(pixy.blocks[5].signature);
+            DBINFO1(" | ");
+            DBINFO1(pixy.blocks[6].signature);
+            DBINFO1(" | ");
+            DBINFO1ln(pixy.blocks[7].signature);
             target1 = 0;
             target2 = 0;
             target3 = 0;
@@ -138,7 +124,7 @@ void Vision::loop(VisionState *state) {
             if ((pixy.blocks[0].signature == visionState.target) && (pixy.blocks[0].x > toleranceRight) && (targetFound1 == 0)) {
                 target1 = 1;
                 visionState.servoAngle--;
-                if (DEBUGGER == true) Serial.println("Target1 true");
+                DBINFO1ln("Target1 true");
             } else {
                 target1 = 0;
             }
@@ -146,7 +132,7 @@ void Vision::loop(VisionState *state) {
             if ((pixy.blocks[0].signature == visionState.target) && (pixy.blocks[0].x < toleranceLeft) && (targetFound1 == 0) && (target1 == 0)) {
                 target2 = 1;
                 visionState.servoAngle++;
-                if (DEBUGGER == true) Serial.println("Target2 true");
+                DBINFO1ln("Target2 true");
             } else {
                 target2 = 0;
             }
@@ -154,7 +140,7 @@ void Vision::loop(VisionState *state) {
             if ((pixy.blocks[1].signature == visionState.target) && (pixy.blocks[1].x > toleranceRight) && (targetFound2 == 0) && (target1 == 0) && (target2 == 0)) {
                 target3 = 1;
                 visionState.servoAngle--;
-                if (DEBUGGER == true) Serial.println("Target3 true");
+                DBINFO1ln("Target3 true");
             } else {
                 target3 = 0;
             }
@@ -162,7 +148,7 @@ void Vision::loop(VisionState *state) {
             if ((pixy.blocks[1].signature == visionState.target) && (pixy.blocks[1].x < toleranceLeft) && (targetFound2 == 0) && (target1 == 0) && (target2 == 0) && (target3 == 0)) {
                 target4 = 1;
                 visionState.servoAngle++;
-                if (DEBUGGER == true) Serial.println("Target4 true");
+                DBINFO1ln("Target4 true");
             } else {
                 target4 = 0;
             }
@@ -170,7 +156,7 @@ void Vision::loop(VisionState *state) {
             if ((pixy.blocks[2].signature == visionState.target) && (pixy.blocks[2].x > toleranceRight) && (targetFound3 == 0) && (target1 == 0) && (target2 == 0) && (target3 == 0) && (target4 == 0)) {
                 target5 = 1;
                 visionState.servoAngle--;
-                if (DEBUGGER == true) Serial.println("Target5 true");
+                DBINFO1ln("Target5 true");
             } else {
                 target5 = 0;
             }
@@ -178,15 +164,15 @@ void Vision::loop(VisionState *state) {
             if ((pixy.blocks[2].signature == visionState.target) && (pixy.blocks[2].x < toleranceLeft) && (targetFound3 == 0) && (target1 == 0) && (target2 == 0) && (target3 == 0) && (target4 == 0) && (target5 == 0)) {
                 target6 = 1;
                 visionState.servoAngle++;
-                if (DEBUGGER == true) Serial.println("Target6 true");
+                DBINFO1ln("Target6 true");
             } else {
-                target6 = 0;  //Fehler im sourcecode!!!!!!!!!!!!!!
+                target6 = 0;  ///<@todo Fehler im sourcecode!?
             }
 
             if ((pixy.blocks[3].signature == visionState.target) && (pixy.blocks[3].x > toleranceRight) && (targetFound4 == 0) && (target1 == 0) && (target2 == 0) && (target3 == 0) && (target4 == 0) && (target5 == 0) && (target6 == 0)) {
                 target7 = 1;
                 visionState.servoAngle--;
-                if (DEBUGGER == true) Serial.println("Target7 true");
+                DBINFO1ln("Target7 true");
             } else {
                 target7 = 0;
             }
@@ -194,7 +180,7 @@ void Vision::loop(VisionState *state) {
             if ((pixy.blocks[3].signature == visionState.target) && (pixy.blocks[3].x < toleranceLeft) && (targetFound4 == 0) && (target1 == 0) && (target2 == 0) && (target3 == 0) && (target4 == 0) && (target5 == 0) && (target6 == 0) && (target7 == 0)) {
                 target8 = 1;
                 visionState.servoAngle++;
-                if (DEBUGGER == true) Serial.println("Target8 true");
+                DBINFO1ln("Target8 true");
             } else {
                 target8 = 0;
             }
@@ -225,37 +211,37 @@ void Vision::loop(VisionState *state) {
 
             targetFound = target1 + target2 + target3 + target4 + target5 + target6 + target7 + target8 + targetFound1 + targetFound2 + targetFound3 + targetFound4;
 
-            if (DEBUGGER == true) Serial.println();
-            if (DEBUGGER == true) Serial.println("All targets: ");
-            if (DEBUGGER == true) Serial.print(target1);
-            if (DEBUGGER == true) Serial.print(target2);
-            if (DEBUGGER == true) Serial.print(target2);
-            if (DEBUGGER == true) Serial.print(target3);
-            if (DEBUGGER == true) Serial.print(target4);
-            if (DEBUGGER == true) Serial.print(target5);
-            if (DEBUGGER == true) Serial.print(target6);
-            if (DEBUGGER == true) Serial.print(target7);
-            if (DEBUGGER == true) Serial.println(target8);
-            if (DEBUGGER == true) Serial.println("Found targets: ");
-            if (DEBUGGER == true) Serial.print(targetFound1);
-            if (DEBUGGER == true) Serial.print(targetFound2);
-            if (DEBUGGER == true) Serial.print(targetFound3);
-            if (DEBUGGER == true) Serial.println(targetFound4);
+            DBINFO1ln();
+            DBINFO1ln("All targets: ");
+            DBINFO1(target1);
+            DBINFO1(target2);
+            DBINFO1(target2);
+            DBINFO1(target3);
+            DBINFO1(target4);
+            DBINFO1(target5);
+            DBINFO1(target6);
+            DBINFO1(target7);
+            DBINFO1ln(target8);
+            DBINFO1ln("Found targets: ");
+            DBINFO1(targetFound1);
+            DBINFO1(targetFound2);
+            DBINFO1(targetFound3);
+            DBINFO1ln(targetFound4);
 
             if ((visionState.servoAngle > 179) && (targetFound == 0)) {
                 visionState.servoAngle = 0;
-                if (DEBUGGER == true) Serial.println("Wrong object detected!!");
+                DBWARNINGln("Wrong object detected!!");
             }
             if ((visionState.servoAngle <= 179) && (targetFound == 0)) {
                 visionState.servoAngle++;
-                if (DEBUGGER == true) Serial.println("Wrong object detected!!");
+                DBWARNINGln("Wrong object detected!!");
             }
-            if (DEBUGGER == true) Serial.println("------------------------END---------------------------");
+            DBINFO1ln("------------------------END---------------------------");
         }
     } else {
         ii++;
-        if (DEBUGGER == true) Serial.print("I:");
-        if (DEBUGGER == true) Serial.println(ii);
+        DBINFO1("I:");
+        DBINFO1ln(ii);
         if ((ii % ddelay) == 0) {
             failCounter++;
             if (failCounter > 8) {
@@ -264,22 +250,22 @@ void Vision::loop(VisionState *state) {
                 targetFound2 = 0;
                 targetFound3 = 0;
                 targetFound4 = 0;
-                if (DEBUGGER == true) Serial.println("Nothing found");
+                DBINFO1ln("Nothing found");
 
                 if ((visionState.servoAngle > 179) && (targetFound == 0)) {
                     visionState.servoAngle = 0;
-                    if (DEBUGGER == true) Serial.println("Adjust camera");
+                    DBINFO1ln("Adjust camera");
                 }
                 if ((visionState.servoAngle <= 179) && (targetFound == 0)) {
                     visionState.servoAngle = visionState.servoAngle + 1;
-                    if (DEBUGGER == true) Serial.println("Adjust camera");
+                    DBINFO1ln("Adjust camera");
                 }
 
-                if (DEBUGGER == true) Serial.println("----------------------END-------------------------------");
+                DBINFO1ln("----------------------END-------------------------------");
             }
         }
     }
-    //if (DEBUGGER == true) Serial.println("before signaturechange");
+    // DBINFO1ln("before signaturechange");
     pixy.blocks[0].signature = 10;
     pixy.blocks[1].signature = 10;
     pixy.blocks[2].signature = 10;
@@ -292,8 +278,9 @@ void Vision::loop(VisionState *state) {
     if (ii == 200) {
         ii = 0;
     }
+
     if ((targetFound1 == 1) || (targetFound2 == 1) || (targetFound3 == 1) || (targetFound4 == 1)) {
-        if (DEBUGGER == true) Serial.println("targetdetected inside loop");
+        DBINFO1ln("targetdetected inside loop");
         state->targetDetected = true;
     } else {
         state->targetDetected = false;
@@ -302,11 +289,61 @@ void Vision::loop(VisionState *state) {
 }
 
 void Vision::turnVision(int angle) {
-    visionServo.attach(5);
+    DBFUNCCALLln("Vision::turnVision(int angle)");
+    DBINFO1("Angle: ");
+    DBINFO1ln(angle);
+    visionServo.attach(_servoPin);
     visionServo.write(angle);
     visionServo.detach();
-    if (DEBUGGER == true) Serial.println("inside turnvision");
 }
 
+void Vision::reset(VisionState *state) {
+    DBFUNCCALLln("Vision::reset()");
+    failCounter = 0;
+    targetFound4 = 0;
+    targetFound3 = 0;
+    targetFound2 = 0;
+    targetFound1 = 0;
+    targetFound = 0;
+    target8 = 0;
+    target7 = 0;
+    target6 = 0;
+    target5 = 0;
+    target4 = 0;
+    target3 = 0;
+    target2 = 0;
+    target1 = 0;
+    visionState.target = 0;
+    visionState.servoAngle = 90;
+    state->reset = false;
+}
 void Vision::Test(const int test) {
+    DBFUNCCALLln("Vision::Test(const int test)");
+    int testdelay = 10;
+    if (test == 0 || test == 1) {  //Test Servo turnVision
+        visionServo.attach(_servoPin);
+        int maxinc = 90;  //Chose max increment range for left/ritgh-turn
+        for (size_t i = 0; i < maxinc; i++) {
+            turnVision(i + 90);
+            delay(testdelay);
+        }
+        for (int i = -maxinc; i < maxinc; i++) {
+            turnVision(-i + 90);
+            delay(testdelay);
+        }
+        for (size_t i = 0; i < maxinc; i++) {
+            turnVision(i);
+            delay(testdelay);
+        }
+        turnVision(90);
+        delay(testdelay);
+        visionServo.detach();
+        delay(testdelay);
+    } else if (test == 0 || test == 2) {
+        /*func*/
+    } else {
+        DBERROR("No vailid Test selected.");
+        DBINFO1("Your Input: ");
+        DBINFO1ln(test);
+    }
 }

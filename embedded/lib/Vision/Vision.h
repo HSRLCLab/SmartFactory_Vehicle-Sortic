@@ -65,7 +65,10 @@ class Vision : public Component {
     /**
      * @brief 
      * 
-     * @param angle - 
+     * @param angle - right(0 degree)-staight(90 degree)-left(180 degree)
+     * 
+     * @todo this is the same servo as in Sonar.. but somehow with other parameter?
+     * 
      */
     void turnVision(int angle);
 
@@ -73,11 +76,17 @@ class Vision : public Component {
      * @brief Testfunction for Vision-Class
      * 
      * 0 - run all tests \n
-     * 1 - 
+     * 1 - run turnVision-Servo test right(0 degree)-staight(90 degree)-left(180 degree)-turn \n
      * 
      * @param test - Choose which test to run
      */
     void Test(const int test);
+
+    /**
+     * @brief reset Vision
+     * 
+     */
+    void reset(VisionState *state);
 
     VisionState visionState;  ///<
 
