@@ -44,10 +44,10 @@ myMQTT::myMQTT(String hostname,
                                                  BrokerIP3,
                                                  BrokerIP4),
                                        pBrokerPort(BrokerPort) {
-// myMQTTclient.PubSubClient(pBrokerIP, pBrokerPort, pToCallback, *myClient);
+    // myMQTTclient.PubSubClient(pBrokerIP, pBrokerPort, pToCallback, *myClient);
 }
 
-void myMQTT::init(WiFiClient *myClient,void(*pToCallback)(char*, unsigned char*, unsigned int)) {
+void myMQTT::init(WiFiClient *myClient, void (*pToCallback)(char *, unsigned char *, unsigned int)) {
     DBFUNCCALLln("myMQTT::init()");
     myMQTTclient.setClient(*myClient);
     myMQTTclient.setServer(pBrokerIP, pBrokerPort);
@@ -55,23 +55,106 @@ void myMQTT::init(WiFiClient *myClient,void(*pToCallback)(char*, unsigned char*,
     connectToMQTT();  // connecting to MQTT-Broker
 }
 
+bool myMQTT::subscribe(const String topic) {  // subscribes to a new MQTT topic
+    DBFUNCCALLln("myMQTT::subscribe(const String topic) ");
+    // if (WiFi.status() != WL_CONNECTED)
+    //     connectToWiFi();
+    // //connectToMQTT();
+    // if (!myMQTTclient.connected()) {
+    //     DBINFO1ln("MQTT not connected. Try to reestablish connection");
+    //     connectToMQTT();
+    // }
+    connectToMQTT();
+    if (myMQTTclient.connected()) {
+        DBINFO1("Subscribing to: " + topic);
+        DBINFO1ln(" Client ID: " + pHostname);
+        if (myMQTTclient.subscribe(topic.c_str())) {
+            DBINFO1ln("suscription succesful");
+            return true;
+        } else {
+            DBINFO1ln("suscription failed");
+            return false;
+        }
+        // myMQTTclient.loop();  // This should be called regularly to allow the client to process incoming messages and maintain its connection to the server.
+    }
+    return false;
+}
+
+bool myMQTT::unsubscribe(const String topic) {
+    DBFUNCCALLln("myMQTT::unsubscribe(const String topic)");
+    // if (WiFi.status() != WL_CONNECTED)
+    //     connectToWiFi();
+    // if (!myMQTTclient.connected()) {
+    //     DBINFO1ln("MQTT not connected. Try to reestablish connection");
+    //     connectToMQTT();
+    // }
+    connectToMQTT();
+    if (myMQTTclient.connected()) {
+        DBINFO1("Unsubscribe from " + topic);
+        DBINFO1ln(" Client ID: " + pHostname);
+        if (myMQTTclient.unsubscribe(topic.c_str())) {
+            DBINFO1ln("unsubscribed successfully");
+            return true;
+        } else {
+            DBINFO1ln("unsubscribe failed");
+            return false;
+        }
+    }
+    return false;
+}
+
+bool myMQTT::publishMessage(const String topic, const String msg) {  // publishes a message to the server
+    DBFUNCCALLln("myMQTT::publishMessage(const String topic, const String msg)");
+    DBINFO1ln("try to publish to[" + topic + "] message: " + msg);
+    // if (WiFi.status() != WL_CONNECTED)
+    //     connectToWiFi();
+    // //connectToMQTT();
+    connectToMQTT();
+    if (myMQTTclient.connected()) {
+        if (myMQTTclient.publish(topic.c_str(), msg.c_str())) {
+            DBINFO1ln("message published");
+            DBINFO1ln("Publish to topic [" + topic + "] message:" + msg);
+            return true;
+        } else {
+            DBINFO1ln("publish failed");
+            return false;
+        }
+        // myMQTTclient->loop();  // This should be called regularly to allow the client to process incoming messages and maintain its connection to the server.
+    }
+    return false;
+}
+
+//=====PRIVATE====================================================================================
+
 void myMQTT::connectToMQTT() {
     DBFUNCCALLln("myMQTT::connectToMQTT()");
+    /*
+    * loop() should be called regularly to allow
+    * the client to process incoming messages and
+    * maintain its connection to the server.
+    * https://pubsubclient.knolleary.net/api.html#loop 
+    */
+    myMQTTclient.loop();
     while (!myMQTTclient.connected()) {
+        DBINFO1ln("Status:  " + decodeMQTTstate(myMQTTclient.state()));
         DBINFO1ln("Attempting MQTT connection...");
         DBINFO1ln("MQTT Client ID: " + pHostname);
         if (myMQTTclient.connect(pHostname.c_str())) {
             DBINFO1ln("MQTT connected");
             DBINFO1ln("Variable myMQTT has successfully connected with hostname: " + pHostname);
         } else {
-            // MQTTConnectionFailed();
+            MQTTConnectionFailed();
             DBINFO1ln("trying again in 3 seconds");
             delay(3000);
         }
     }
 }
 
-//=====PRIVATE====================================================================================
+void myMQTT::MQTTConnectionFailed() {
+    DBFUNCCALLln("NetworkManager::MQTTConnectionFailed()");
+    DBERROR("MQTT connection failed: " + decodeMQTTstate(myMQTTclient.state()));
+    DBINFO1ln("client status: " + decodeMQTTstate(myMQTTclient.state()));
+}
 
 String myMQTT::decodeMQTTstate(int errorcode) {
     DBFUNCCALLln("myMQTT::decodeMQTTstate(int errorcode)");

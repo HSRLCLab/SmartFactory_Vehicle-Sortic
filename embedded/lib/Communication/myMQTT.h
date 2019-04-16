@@ -25,11 +25,10 @@
 // #include <WiFi101.h>
 #include <PubSubClient.h>
 
-
 class myMQTT {
     //=====PUBLIC====================================================================================
    public:
-   /**
+    /**
     * @brief Construct a new my M Q T T object
     * 
     * Sets hostname, BrokerIP and BrokerPort from Communication-Config file
@@ -63,8 +62,43 @@ class myMQTT {
      * @param myClient - pointer to WiFiClient object
      * @param pToCallback - pointer to Callback-Function
      */
-    void init(WiFiClient *myClient,void(*pToCallback)(char*, unsigned char*, unsigned int));
+    void init(WiFiClient *myClient, void (*pToCallback)(char *, unsigned char *, unsigned int));
 
+    /**
+     * @brief subsribes to MQTT topic on Server
+     * 
+     *  Check if the client is connected to the server
+     *  if not call \link connectToMQTT() \endlink
+     * 
+     * @param topic - the topic to subscribe to (const char[])
+     * @return true -  sending the subscribe succeeded. The request completes asynchronously.
+     * @return false - sending the subscribe failed, either connection lost, or message too large.
+     */
+    bool subscribe(const String topic);
+
+    /**
+     * @brief unsubsribes from MQTT topic on Server
+     * 
+     *  Check if the client is connected to the server
+     * 
+     * @param topic - the topic to unsubscribe from (const char[])
+     * @return true - sending the unsubscribe succeeded. The request completes asynchronously.
+     * @return false - sending the unsubscribe failed, either connection lost, or message too large.
+     */
+    bool unsubscribe(const String topic);
+
+    /**
+     * @brief handles outgoing MQTT messages to Server
+     * 
+     * @param topic - the topic to publish to (const char[])
+     * @param msg - the message to publish (const char[])
+     * @return true - publish succed
+     * @return false - publish failes
+     */
+    bool publishMessage(const String topic, const String msg);
+
+    //=====PRIVATE====================================================================================
+   private:
     /**
      * @brief Connects to the MQTT-server
      * 
@@ -73,9 +107,6 @@ class myMQTT {
      */
     void connectToMQTT();
 
-
-//=====PRIVATE====================================================================================
-   private:
     /**
      * @brief Decodes the Error Values from MQTT state() and returns a description
      * 
@@ -83,6 +114,12 @@ class myMQTT {
      * @return String - Errordescription
      */
     String decodeMQTTstate(int errorcode);
+
+    /**
+     * @brief Writes Error-Message about MQTT connection
+     * 
+     */
+    void MQTTConnectionFailed();
 
     String pHostname;           ///< Contains Hostname/Client ID
     IPAddress pBrokerIP;        ///< the IP-address of the server/broker
