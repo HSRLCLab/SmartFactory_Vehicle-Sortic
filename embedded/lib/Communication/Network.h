@@ -1,10 +1,12 @@
 /**
  * @file Network.h
- * @brief 
+ * @brief The Network class establishes a WLAN-Connection
+ * 
+ * https://www.arduino.cc/en/Reference/WiFi101
  * 
  * @author Luca Mazzoleni (luca.mazzoleni@hsr.ch)
  * 
- * @version 1.1 - Description - {author} - {date}
+ * @version 1.0 - added Network-Connection - Luca Mazzoleni (luca.mazzoleni@hsr.ch) - 2019-04-13
  * 
  * @date 2019-04-13
  * @copyright Copyright (c) 2019
@@ -22,12 +24,6 @@
 #include <SPI.h>
 #include <WiFi101.h>
 
-/**
- * @brief 
- * 
- * <https://www.arduino.cc/en/Reference/WiFi101
- * 
- */
 class Network {  // : public WiFiClass {
                  //=====PUBLIC====================================================================================
    public:
@@ -112,7 +108,13 @@ class Network {  // : public WiFiClass {
      * 
      * https://www.arduino.cc/en/Reference/WiFi101EncryptionType
      * 
-     * @param errorcode - 
+     * 2 = TKIP (WPA) \n
+     * 5 = WEP  \n
+     * 4 = CCMP (WPA)\n
+     * 7 = NONE \n
+     * 8 = AUTO \n
+     * 
+     * @param errorcode - errorvalue from wifi101
      * @return String - Errordescription
      */
     String decodeEncryptionType(int errorcode);
@@ -138,16 +140,7 @@ class Network {  // : public WiFiClass {
      */
     long pRssi;
 
-    /**
-     * @brief value represents the type of encryption
-     * 
-     * 2 = TKIP (WPA) \n
-     * 5 = WEP  \n
-     * 4 = CCMP (WPA)\n
-     * 7 = NONE \n
-     * 8 = AUTO \n
-     */
-    byte pEncryption;
+    byte pEncryption;  ///< value represents the type of encryption
 
     // WiFiServer *myServer;  ///<
     // WiFiClient myClient;   ///<
