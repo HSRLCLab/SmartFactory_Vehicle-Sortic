@@ -1,19 +1,19 @@
 /**
  * @file myMQTT.cpp
- * @brief 
+ * @brief Implementation of the myMQTT class
+ * 
+ * https://pubsubclient.knolleary.net
  * 
  * @author Luca Mazzoleni (luca.mazzoleni@hsr.ch)
  * 
- * @version 1.1 - Description - {author} - {date}
+ * @version 1.0 - added MQTT-Connection - Luca Mazzoleni (luca.mazzoleni@hsr.ch) - 2019-04-16
  * 
- * @date 2019-04-13
+ * @date 2019-04-16
  * @copyright Copyright (c) 2019
  * 
  */
 
 #include "myMQTT.h"
-// void callback(const char[] topic, byte* payload, unsigned int length) {
-// }
 
 //=====PUBLIC====================================================================================
 
@@ -44,38 +44,37 @@ myMQTT::myMQTT(String hostname,
                                                  BrokerIP3,
                                                  BrokerIP4),
                                        pBrokerPort(BrokerPort) {
+// myMQTTclient.PubSubClient(pBrokerIP, pBrokerPort, pToCallback, *myClient);
 }
 
-void myMQTT::init() {
+void myMQTT::init(WiFiClient *myClient,void(*pToCallback)(char*, unsigned char*, unsigned int)) {
     DBFUNCCALLln("myMQTT::init()");
-    // myMQTTclient = new PubSubClient(myClient);
-    // myMQTTclient->setServer(brokerIP, pBrokerPort);
-    // myMQTTclient->setCallback(callback2);
-    // myMQTTclient = new PubSubClient(pBrokerIP, pBrokerPort, callback, pWiFiClient);
-    // connectToMQTT();  // connecting to MQTT-Broker
+    myMQTTclient.setClient(*myClient);
+    myMQTTclient.setServer(pBrokerIP, pBrokerPort);
+    myMQTTclient.setCallback(pToCallback);
+    connectToMQTT();  // connecting to MQTT-Broker
 }
 
 void myMQTT::connectToMQTT() {
     DBFUNCCALLln("myMQTT::connectToMQTT()");
-    // while (!myMQTTclient->connected()) {
-    //     DBINFO1ln("Attempting MQTT connection...");
-    //     DBINFO1ln("MQTT Client ID: " + pHostname);
-    //     if (myMQTTclient->connect(pHostname.c_str())) {
-    //         DBINFO1ln("MQTT connected");
-    //         DBINFO1ln("Variable myMQTT has successfully connected with hostname: " + pHostname);
-    //     } else {
-    //         // MQTTConnectionFailed();
-    //         DBINFO1ln("trying again in 3 seconds");
-    //         delay(3000);
-    //     }
-    // }
+    while (!myMQTTclient.connected()) {
+        DBINFO1ln("Attempting MQTT connection...");
+        DBINFO1ln("MQTT Client ID: " + pHostname);
+        if (myMQTTclient.connect(pHostname.c_str())) {
+            DBINFO1ln("MQTT connected");
+            DBINFO1ln("Variable myMQTT has successfully connected with hostname: " + pHostname);
+        } else {
+            // MQTTConnectionFailed();
+            DBINFO1ln("trying again in 3 seconds");
+            delay(3000);
+        }
+    }
 }
 
 //=====PRIVATE====================================================================================
 
 String myMQTT::decodeMQTTstate(int errorcode) {
     DBFUNCCALLln("myMQTT::decodeMQTTstate(int errorcode)");
-    // LOG4("NetworkManager::decodeMQTTstate(int errorcode)");
     switch (errorcode) {
         case -4:
             return "MQTT_CONNECTION_TIMEOUT";
