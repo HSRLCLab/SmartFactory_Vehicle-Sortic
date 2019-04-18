@@ -19,7 +19,7 @@ myJSON::myJSON() {
 //Parsing program ===================================================
 myJSONStr myJSON::parsingJSONToStruct(const char* json) {
     DBFUNCCALLln("myJSON::parsingJSONToStruct(const char* json)");
-    DBINFO1(json);
+    DBINFO1ln(json);
     // myJSONStr tempStr;
 
     // DynamicJsonDocument doc(pParsCapacity);
@@ -35,13 +35,6 @@ myJSONStr myJSON::parsingJSONToStruct(const char* json) {
     // //                             2424.2,     \
     // //                             535.2,      \
     // //                             355.2]}";
-
-    // DeserializationError error = deserializeJson(doc, json);
-    // if (error) {
-    //     Serial.print(F("deserializeJson() failed: "));
-    //     Serial.println(error.c_str());
-    //     return;
-    // }
 
     // tempStr.urgent = doc["urgent"];      // false
     // tempStr.topic = doc["topic"];        // "default"
@@ -63,13 +56,20 @@ myJSONStr myJSON::parsingJSONToStruct(const char* json) {
 
     // const char* json = "{\"sensor\":\"gps\",\"time\":1351824120,\"data\":[48.75608,2.302038]}";
 
-    deserializeJson(doc, json);
-
-    tempStr.sensor = doc["sensor"];    // "gps"
-    tempStr.time = doc["time"];        // 1351824120
-    tempStr.data[0] = doc["data"][0];  // 48.75608
-    tempStr.data[1] = doc["data"][1];  // 2.302038
-    return tempStr;
+    DeserializationError error = deserializeJson(doc, json);
+    if (error) {
+        DBINFO1("deserializeJson() failed: ");
+        DBINFO1ln(error.c_str());
+        tempStr.sensor = "failed: ";
+        return tempStr;
+    } else {
+        // DBINFO1("deserializeJson() failed: ");
+        tempStr.sensor = doc["sensor"];    // "gps"
+        tempStr.time = doc["time"];        // 1351824120
+        tempStr.data[0] = doc["data"][0];  // 48.75608
+        tempStr.data[1] = doc["data"][1];  // 2.302038
+        return tempStr;
+    }
 }
 
 //Serializing program ===================================================
