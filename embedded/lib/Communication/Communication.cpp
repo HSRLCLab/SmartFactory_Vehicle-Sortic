@@ -20,23 +20,16 @@ https://assetwolf.com/learn/sending-data-from-arduino-to-cloud
 */
 
 #include "Communication.h"
-
-Communication::Communication() {
-}
-
-// void Communication::init() {
-//     DBFUNCCALLln("Communication::init()");
-//     pNetwork.init();
-//     pMymqtt.init(&pClient, funcPointer);
-// }
-
 /**
  * @todo String is very inefficient
  * @todo Change way how pMyjson is generated...
  */
-void Communication::MQTTcallback(char* topic, byte* payload, unsigned int length) {
-    DBFUNCCALLln("Communication::callback(const char[] topic, byte* payload, unsigned int length)");
-    myJSON pMyjson;
+
+myJSON _myjson;  ///< instance of myJSON
+CircularBuffer<myJSONStr, MAX_JSON_MESSAGES_SAVED> _buffer;
+
+void MQTTcallback(char* topic, byte* payload, unsigned int length) {
+    DBFUNCCALLln("callback(const char[] topic, byte* payload, unsigned int length)");
     String topic_str = String((char*)topic);
     // for (int i = 0; topic[i] != '\0'; i++) {// iterate topic to topic_str
     //     topic_str += topic[i];
@@ -49,14 +42,21 @@ void Communication::MQTTcallback(char* topic, byte* payload, unsigned int length
     DBINFO1ln(msg + payload_str);
 
     //https://stackoverflow.com/questions/1360183/how-do-i-call-a-non-static-method-from-a-static-method-in-c
-    myJSONStr newMessage = pMyjson.parsingJSONToStruct((const char*)payload);
-    DBINFO1("Sensor: ");
-    DBINFO1ln(newMessage.sensor);
-    DBINFO1("Time: ");
-    DBINFO1ln(newMessage.time);
-    DBINFO1("data_0: ");
-    DBINFO1ln(newMessage.data[0]);
-    DBINFO1("data_1: ");
-    DBINFO1ln(newMessage.data[1]);
-    // myJSON::stack.push(newMessage);
+    myJSONStr newMessage = _myjson.parsingJSONToStruct((const char*)payload);
+    newMessage.topic = topic;
+    DBINFO1("Topic: ");
+    DBINFO1ln(newMessage.topic);
+    // DBINFO1("Sensor: ");
+    // DBINFO1ln(newMessage.sensor);
+    // DBINFO1("Time: ");
+    // DBINFO1ln(newMessage.time);
+    // DBINFO1("data_0: ");
+    // DBINFO1ln(newMessage.data[0]);
+    // DBINFO1("data_1: ");
+    // DBINFO1ln(newMessage.data[1]);
+    // DBINFO1ln(_buffer.size());
+    _buffer.push(newMessage);
+}
+
+Communication::Communication() {
 }

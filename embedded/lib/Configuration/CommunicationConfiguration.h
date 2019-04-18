@@ -43,6 +43,43 @@
 #define DEFAULT_HOSTNAME_VEHICLE "Vehicle"    ///< for Vehicles, used for MQTT and WiFi, must be unique in Network
 
 //=============JSON==================================
-#define MAX_JSON_PARSE_SIZE 300  ///< max buffer size to parse JSON objects, size of the pool in bytes, can be calculated in https://arduinojson.org/v5/assistant/
+#define MAX_JSON_PARSE_SIZE 300     ///< max buffer size to parse JSON objects, size of the pool in bytes, can be calculated in https://arduinojson.org/v5/assistant/
+#define MAX_JSON_MESSAGES_SAVED 20  ///< max num of saved JSON items, must be smaller than num of vehicles!
+#define MAX_MQTT_TOPIC_DEPTH 5      ///< how many topics can be in row, e.g. SmartBox/SB1/level are 3 topic levels
+
+struct myJSONStr {
+    String topic = "default";
+    const char* sensor = "default";
+    long time = 0;
+    float data[2];
+};
+
+/*
+{
+    "urgent":   false,
+    "topic":    "default",
+    "hostname": "default",
+    "request":  "default",
+    "level":    -5,
+    "vehicleparams" :[0.1,1.1,2.2,3.3,4.4]
+}
+*/
+
+// struct myJSONStr {
+//     bool urgent = false;
+//     String topic = "default";
+//     String hostname = "default";
+//     String request = "default";
+//     int level = -5;  ///< describes Smart Box level states, -5 is default if not set!
+//     /**
+//      * @brief vehilce Params
+//      *
+//      * [0]: velocity v \n
+//      * [1]: movingdirection vd \n
+//      * [2]: distance d \n
+//      * [3]: open tasks t \n
+//      */
+//     double vehicleParams[5];
+// };
 
 #endif

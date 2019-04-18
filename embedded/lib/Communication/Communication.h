@@ -19,19 +19,12 @@
 // #include "CommunicationConfiguration.h"
 // #include "LogConfiguration.h"
 
+#include "CircularBuffer.h"
 #include "Network.h"
 #include "myJSON.h"
 #include "myMQTT.h"
 
-class Communication {
-   public:
-    /**
-    * @brief Construct a new Communication object
-    * 
-    */
-    Communication();
-
-    /**
+/**
     * @brief If the client is used to subscribe to topics,
     * a callback function must be provided in the constructor. 
     * his function is called when new messages arrive at the client.
@@ -49,7 +42,17 @@ class Communication {
     * @param payload - the message payload (byte array)
     * @param length - the length of the message payload (unsigned int)
     */
-    static void MQTTcallback(char* topic, byte* payload, unsigned int length);
+void MQTTcallback(char* topic, byte* payload, unsigned int length);
+extern myJSON _myjson;
+extern CircularBuffer<myJSONStr, MAX_JSON_MESSAGES_SAVED> _buffer;
+
+class Communication {
+   public:
+    /**
+    * @brief Construct a new Communication object
+    * 
+    */
+    Communication();
 
     //==INTERFACE===================================
     /**
@@ -59,6 +62,10 @@ class Communication {
     inline void init() {
         pNetwork.init();
         pMymqtt.init(&pClient, funcPointer);
+    };
+
+    inline bool loop() {
+        return pMymqtt.loop();
     };
 
     //=======NETWORK============
@@ -72,24 +79,38 @@ class Communication {
 
     //=======myMQTT============
     inline bool subscribe(const String topic) {
-        pMymqtt.subscribe(topic);
+        return pMymqtt.subscribe(topic);
     }
 
     inline bool unsubscribe(const String topic) {
-        pMymqtt.unsubscribe(topic);
+        return pMymqtt.unsubscribe(topic);
     }
 
     inline bool publishMessage(const String topic, const String msg) {
-        pMymqtt.publishMessage(topic, msg);
+        return pMymqtt.publishMessage(topic, msg);
     }
 
     //=======myJSON============
+    inline myJSONStr shift() {
+        return _buffer.shift();
+    }
+
+    inline myJSONStr pop() {
+        return _buffer.pop();
+    }
+
+    inline bool isEmpty() {
+        return _buffer.isEmpty();
+    }
+
+    inline bool size() {
+        return _buffer.size();
+    }
+
    private:
     WiFiClient pClient;  ///< instance of WiFiClient
     Network pNetwork;    ///< instance of Network
     myMQTT pMymqtt;      ///< instance of myMQTT
-    myJSON pMyjson;      ///< instance of myJSON
-
-    void (*funcPointer)(char*, unsigned char*, unsigned int) = Communication::MQTTcallback;
+    void (*funcPointer)(char*, unsigned char*, unsigned int) = MQTTcallback;
 };
 #endif
