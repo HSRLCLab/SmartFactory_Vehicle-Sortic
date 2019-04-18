@@ -102,6 +102,10 @@ class myMQTT {
      */
     bool publishMessage(const String topic, const String msg);
 
+    inline bool loop() {
+        return myMQTTclient.loop();
+    };
+
     //=====PRIVATE====================================================================================
    private:
     /**
