@@ -119,12 +119,12 @@ class Network {  // : public WiFiClass {
      */
     String decodeEncryptionType(int errorcode);
 
-    String pSsid;      ///< Contains the SSID the WiFi shield is currently connected to.
-    String pPassword;  ///< Contains WiFi Password
-    // String pHostname;    ///< Contains Hostname
+    String pSsid;        ///< Contains the SSID the WiFi shield is currently connected to.
+    String pPassword;    ///< Contains WiFi Password
     IPAddress pIPLocal;  ///< Contains own IP-Adress
     byte pMacRouter[6];  ///< Contains MAC Adress of the Router BSSID
     byte pMac[6];        ///< Contains own MAC Adress
+    byte pEncryption;    ///< value represents the type of encryption
 
     /**
      * @brief The current RSSI /Received Signal Strength in dBm
@@ -139,10 +139,5 @@ class Network {  // : public WiFiClass {
      * Source https://eyesaas.com/wi-fi-signal-strength/
      */
     long pRssi;
-
-    byte pEncryption;  ///< value represents the type of encryption
-
-    // WiFiServer *myServer;  ///<
-    // WiFiClient myClient;   ///<
 };
 #endif

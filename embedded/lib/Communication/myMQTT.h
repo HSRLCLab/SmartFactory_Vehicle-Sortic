@@ -90,6 +90,11 @@ class myMQTT {
     /**
      * @brief handles outgoing MQTT messages to Server
      * 
+     * Beware though that the default packet size
+     * supported by the PubSub client is 128 bytes.
+     * You can increase this limit by editing the value
+     * lof MQTT_MAX_PACKET_SIZE in PubSubClient.h
+     * 
      * @param topic - the topic to publish to (const char[])
      * @param msg - the message to publish (const char[])
      * @return true - publish succed

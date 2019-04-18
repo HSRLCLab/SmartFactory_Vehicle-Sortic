@@ -57,13 +57,6 @@ void myMQTT::init(WiFiClient *myClient, void (*pToCallback)(char *, unsigned cha
 
 bool myMQTT::subscribe(const String topic) {  // subscribes to a new MQTT topic
     DBFUNCCALLln("myMQTT::subscribe(const String topic) ");
-    // if (WiFi.status() != WL_CONNECTED)
-    //     connectToWiFi();
-    // //connectToMQTT();
-    // if (!myMQTTclient.connected()) {
-    //     DBINFO1ln("MQTT not connected. Try to reestablish connection");
-    //     connectToMQTT();
-    // }
     connectToMQTT();
     if (myMQTTclient.connected()) {
         DBINFO1("Subscribing to: " + topic);
@@ -75,19 +68,12 @@ bool myMQTT::subscribe(const String topic) {  // subscribes to a new MQTT topic
             DBINFO1ln("suscription failed");
             return false;
         }
-        // myMQTTclient.loop();  // This should be called regularly to allow the client to process incoming messages and maintain its connection to the server.
     }
     return false;
 }
 
 bool myMQTT::unsubscribe(const String topic) {
     DBFUNCCALLln("myMQTT::unsubscribe(const String topic)");
-    // if (WiFi.status() != WL_CONNECTED)
-    //     connectToWiFi();
-    // if (!myMQTTclient.connected()) {
-    //     DBINFO1ln("MQTT not connected. Try to reestablish connection");
-    //     connectToMQTT();
-    // }
     connectToMQTT();
     if (myMQTTclient.connected()) {
         DBINFO1("Unsubscribe from " + topic);
@@ -106,9 +92,6 @@ bool myMQTT::unsubscribe(const String topic) {
 bool myMQTT::publishMessage(const String topic, const String msg) {  // publishes a message to the server
     DBFUNCCALLln("myMQTT::publishMessage(const String topic, const String msg)");
     DBINFO1ln("try to publish to[" + topic + "] message: " + msg);
-    // if (WiFi.status() != WL_CONNECTED)
-    //     connectToWiFi();
-    // //connectToMQTT();
     connectToMQTT();
     if (myMQTTclient.connected()) {
         if (myMQTTclient.publish(topic.c_str(), msg.c_str())) {
@@ -119,7 +102,6 @@ bool myMQTT::publishMessage(const String topic, const String msg) {  // publishe
             DBINFO1ln("publish failed");
             return false;
         }
-        // myMQTTclient->loop();  // This should be called regularly to allow the client to process incoming messages and maintain its connection to the server.
     }
     return false;
 }

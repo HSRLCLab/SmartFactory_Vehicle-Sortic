@@ -15,10 +15,15 @@
 #define COMMUNICATION_H__
 
 #include "Arduino.h"
+
+// #include "CommunicationConfiguration.h"
+// #include "LogConfiguration.h"
+
 #include "Network.h"
+#include "myJSON.h"
 #include "myMQTT.h"
 
-class Communication : public myMQTT, public Network {
+class Communication {
    public:
     /**
     * @brief Construct a new Communication object
@@ -46,14 +51,45 @@ class Communication : public myMQTT, public Network {
     */
     static void MQTTcallback(char* topic, byte* payload, unsigned int length);
 
+    //==INTERFACE===================================
     /**
      * @brief 
      * 
      */
-    void init();
+    inline void init() {
+        pNetwork.init();
+        pMymqtt.init(&pClient, funcPointer);
+    };
 
+    //=======NETWORK============
+    inline void connectToWiFi() {
+        pNetwork.connectToWiFi();
+    }
+
+    inline void printNetworkInfo() {
+        pNetwork.printNetworkInfo();
+    }
+
+    //=======myMQTT============
+    inline bool subscribe(const String topic) {
+        pMymqtt.subscribe(topic);
+    }
+
+    inline bool unsubscribe(const String topic) {
+        pMymqtt.unsubscribe(topic);
+    }
+
+    inline bool publishMessage(const String topic, const String msg) {
+        pMymqtt.publishMessage(topic, msg);
+    }
+
+    //=======myJSON============
    private:
-    WiFiClient pClient;
+    WiFiClient pClient;  ///< instance of WiFiClient
+    Network pNetwork;    ///< instance of Network
+    myMQTT pMymqtt;      ///< instance of myMQTT
+    myJSON pMyjson;      ///< instance of myJSON
+
     void (*funcPointer)(char*, unsigned char*, unsigned int) = Communication::MQTTcallback;
 };
 #endif
