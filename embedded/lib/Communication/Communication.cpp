@@ -20,23 +20,25 @@ https://assetwolf.com/learn/sending-data-from-arduino-to-cloud
 */
 
 #include "Communication.h"
-/**
- * @todo String is very inefficient
- * @todo Change way how pMyjson is generated...
- */
 
+//==Global Vairable====
 myJSON _myjson;  ///< instance of myJSON
 CircularBuffer<myJSONStr, MAX_JSON_MESSAGES_SAVED> _buffer;
 
-void MQTTcallback(char* topic, byte* payload, unsigned int length) {
+//======Func====
+/**
+ * @todo String is very inefficient
+ * @todo Change global implementation
+ */
+void callback(char* topic, byte* payload, unsigned int length) {
     DBFUNCCALLln("callback(const char[] topic, byte* payload, unsigned int length)");
     String topic_str = String((char*)topic);
     // for (int i = 0; topic[i] != '\0'; i++) {// iterate topic to topic_str
     //     topic_str += topic[i];
     // }
     String msg = "Message arrived [" + topic_str + "]: \t message:";
-    String payload_str;                          //= String((char*)payload); //need \0 termination
-    for (unsigned int i = 0; i < length; i++) {  // iterate message till lentgh caus it's not 0-terminated
+    String payload_str;                                   //= String((char*)payload); //need \0 termination
+    for (unsigned int i = 0; i < sizeof(payload); i++) {  // iterate message till lentgh caus it's not 0-terminated
         payload_str += (char)payload[i];
     }
     DBINFO1ln(msg + payload_str);

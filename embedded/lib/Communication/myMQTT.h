@@ -2,8 +2,6 @@
  * @file myMQTT.h
  * @brief This class handels the MQTT connection
  * 
- * https://pubsubclient.knolleary.net
- * 
  * @author Luca Mazzoleni (luca.mazzoleni@hsr.ch)
  * 
  * @version 1.0 - added MQTT-Connection - Luca Mazzoleni (luca.mazzoleni@hsr.ch) - 2019-04-16
@@ -25,6 +23,11 @@
 // #include <WiFi101.h>
 #include <PubSubClient.h>
 
+/**
+ * @brief Handels the MQTT connection
+ * 
+ * https://pubsubclient.knolleary.net
+ */
 class myMQTT {
     //=====PUBLIC====================================================================================
    public:
@@ -102,6 +105,14 @@ class myMQTT {
      */
     bool publishMessage(const String topic, const String msg);
 
+    /**
+     * @brief This should be called regularly
+     * to allow the client to process incoming messages
+     * and maintain its connection to the server.
+     * 
+     * @return true - he client is still connected
+     * @return false - the client is no longer connected
+     */
     inline bool loop() {
         return myMQTTclient.loop();
     };

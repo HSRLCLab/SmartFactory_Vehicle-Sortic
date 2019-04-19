@@ -24,8 +24,12 @@
 #include <SPI.h>
 #include <WiFi101.h>
 
-class Network {  // : public WiFiClass {
-                 //=====PUBLIC====================================================================================
+/**
+ * @brief Handels the WLAN-Connection
+ * 
+ */
+class Network {
+    //=====PUBLIC====================================================================================
    public:
     /**
     * @brief Construct a new Network object
@@ -55,7 +59,7 @@ class Network {  // : public WiFiClass {
     /**
      * @brief Connects to a WiFi with the given Credential
      * 
-     * If the Shield isn't already connectet a new connection will be established
+     * If the Shield isn't already connected a new connection will be established
      * If the Connection fails then there will be a 3 Sec dealy.
      * https://www.arduino.cc/en/Tutorial/Wifi101ConnectWithWPA 
      */

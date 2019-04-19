@@ -42,7 +42,7 @@ void Network::connectToWiFi() {
         DBINFO1ln("Status:  " + decodeWiFistate(WiFi.status()));
         DBINFO1ln("Attempting WLAN connection (WEP)...");
         DBINFO1ln("SSID: " + pSsid);
-        DBINFO1ln("PW: " + pPassword);
+        // DBINFO1ln("PW: " + pPassword);
         if (WiFi.begin(pSsid, pPassword) != WL_CONNECTED) {
             DBERROR("WLAN connection failed");
             DBINFO1ln("trying again in 3 seconds");
