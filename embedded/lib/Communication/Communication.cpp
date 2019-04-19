@@ -27,37 +27,46 @@ CircularBuffer<myJSONStr, MAX_JSON_MESSAGES_SAVED> _buffer;
 
 //======Func====
 /**
- * @todo String is very inefficient
+ * @todo String is inefficient -> change to char array and handle pointer
  * @todo Change global implementation
  */
 void callback(char* topic, byte* payload, unsigned int length) {
     DBFUNCCALLln("callback(const char[] topic, byte* payload, unsigned int length)");
-    String topic_str = String((char*)topic);
-    // for (int i = 0; topic[i] != '\0'; i++) {// iterate topic to topic_str
-    //     topic_str += topic[i];
-    // }
-    String msg = "Message arrived [" + topic_str + "]: \t message:";
-    String payload_str;                                   //= String((char*)payload); //need \0 termination
-    for (unsigned int i = 0; i < sizeof(payload); i++) {  // iterate message till lentgh caus it's not 0-terminated
-        payload_str += (char)payload[i];
+    char payload_str[length];
+    for (unsigned int i = 0; i < length; i++) {  // iterate message till lentgh caus it's not 0-terminated
+        payload_str[i] = (char)payload[i];
     }
-    DBINFO1ln(msg + payload_str);
+    payload_str[length] = '\0';
 
-    //https://stackoverflow.com/questions/1360183/how-do-i-call-a-non-static-method-from-a-static-method-in-c
-    myJSONStr newMessage = _myjson.parsingJSONToStruct((const char*)payload);
-    newMessage.topic = topic;
-    DBINFO1("Topic: ");
-    DBINFO1ln(newMessage.topic);
-    // DBINFO1("Sensor: ");
-    // DBINFO1ln(newMessage.sensor);
-    // DBINFO1("Time: ");
-    // DBINFO1ln(newMessage.time);
-    // DBINFO1("data_0: ");
-    // DBINFO1ln(newMessage.data[0]);
-    // DBINFO1("data_1: ");
-    // DBINFO1ln(newMessage.data[1]);
-    // DBINFO1ln(_buffer.size());
-    _buffer.push(newMessage);
+    String topic_str = String((char*)topic);
+    String currentMessage = topic_str + " " + payload_str;
+    DBINFO1("CurrMessage: ");
+    DBINFO1ln(currentMessage);
+    DBINFO1("LastMessage: ");
+    DBINFO1ln(_myjson.lastMessage);
+
+    if ((_myjson.lastMessage == currentMessage) && (_buffer.size() != 0)) {
+        DBINFO1ln("Duplicated Message");
+    } else {
+        DBINFO1ln("Add to Buffer");
+        //https://stackoverflow.com/questions/1360183/how-do-i-call-a-non-static-method-from-a-static-method-in-c
+        myJSONStr newMessage = _myjson.parsingJSONToStruct((char*)payload_str);
+        newMessage.topic = topic_str;
+        // DBINFO1("Topic: ");
+        // DBINFO1ln(newMessage.topic);
+        // DBINFO1("Sensor: ");
+        // DBINFO1ln(newMessage.sensor);
+        // DBINFO1("Time: ");
+        // DBINFO1ln(newMessage.time);
+        // DBINFO1("data_0: ");
+        // DBINFO1ln(newMessage.data[0]);
+        // DBINFO1("data_1: ");
+        // DBINFO1ln(newMessage.data[1]);
+        // DBINFO1ln(_buffer.size());
+        // _myjson.StructIsEqual(newMessage, _buffer.first()); //bug this calls changes the message chars somehow?
+        _buffer.unshift(newMessage);
+        _myjson.lastMessage = currentMessage;
+    }
 }
 
 Communication::Communication() {

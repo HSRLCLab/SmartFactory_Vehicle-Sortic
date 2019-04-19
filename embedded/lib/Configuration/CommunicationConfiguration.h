@@ -49,9 +49,9 @@
 
 struct myJSONStr {
     String topic = "default";
-    const char* sensor = "default";
-    long time = 0;
-    float data[2];
+    String sensor = "default";
+    long time = -1;
+    float data[2] = {-1, -1};
 };
 
 /*
