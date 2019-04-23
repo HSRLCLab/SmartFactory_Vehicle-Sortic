@@ -79,10 +79,10 @@ bool myMQTT::unsubscribe(const String topic) {
         DBINFO1("Unsubscribe from " + topic);
         DBINFO1ln(" Client ID: " + pHostname);
         if (myMQTTclient.unsubscribe(topic.c_str())) {
-            DBINFO1ln("unsubscribed successfully");
+            DBINFO2ln("unsubscribed successfully");
             return true;
         } else {
-            DBINFO1ln("unsubscribe failed");
+            DBWARNINGln("unsubscribe failed");
             return false;
         }
     }
@@ -91,15 +91,15 @@ bool myMQTT::unsubscribe(const String topic) {
 
 bool myMQTT::publishMessage(const String topic, const String msg) {  // publishes a message to the server
     DBFUNCCALLln("myMQTT::publishMessage(const String topic, const String msg)");
-    DBINFO1ln("try to publish to[" + topic + "] message: " + msg);
+    DBINFO3ln("try to publish to[" + topic + "] message: " + msg);
     connectToMQTT();
     if (myMQTTclient.connected()) {
         if (myMQTTclient.publish(topic.c_str(), msg.c_str())) {
             DBINFO1ln("message published");
-            DBINFO1ln("Publish to topic [" + topic + "] message:" + msg);
+            DBINFO2ln("Publish to topic [" + topic + "] message:" + msg);
             return true;
         } else {
-            DBINFO1ln("publish failed");
+            DBWARNINGln("publish failed");
             return false;
         }
     }
@@ -119,14 +119,14 @@ void myMQTT::connectToMQTT() {
     myMQTTclient.loop();
     while (!myMQTTclient.connected()) {
         DBINFO1ln("Status:  " + decodeMQTTstate(myMQTTclient.state()));
-        DBINFO1ln("Attempting MQTT connection...");
-        DBINFO1ln("MQTT Client ID: " + pHostname);
+        DBINFO2ln("Attempting MQTT connection...");
+        DBINFO3ln("MQTT Client ID: " + pHostname);
         if (myMQTTclient.connect(pHostname.c_str())) {
-            DBINFO1ln("MQTT connected");
-            DBINFO1ln("Variable myMQTT has successfully connected with hostname: " + pHostname);
+            DBINFO2ln("MQTT connected");
+            DBINFO2ln("Variable myMQTT has successfully connected with hostname: " + pHostname);
         } else {
             MQTTConnectionFailed();
-            DBINFO1ln("trying again in 3 seconds");
+            DBINFO3ln("trying again in 3 seconds");
             delay(3000);
         }
     }

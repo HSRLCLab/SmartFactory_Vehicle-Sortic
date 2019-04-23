@@ -40,15 +40,15 @@ void callback(char* topic, byte* payload, unsigned int length) {
 
     String topic_str = String((char*)topic);
     String currentMessage = topic_str + " " + payload_str;
-    DBINFO1("CurrMessage: ");
-    DBINFO1ln(currentMessage);
-    DBINFO1("LastMessage: ");
-    DBINFO1ln(_myjson.lastMessage);
+    DBINFO3("CurrMessage: ");
+    DBINFO3ln(currentMessage);
+    DBINFO3("LastMessage: ");
+    DBINFO3ln(_myjson.lastMessage);
 
     if ((_myjson.lastMessage == currentMessage) && (_buffer.size() != 0)) {
-        DBINFO1ln("Duplicated Message");
+        DBINFO2ln("Duplicated Message");
     } else {
-        DBINFO1ln("Add to Buffer");
+        DBINFO2ln("Add to Buffer");
         //https://stackoverflow.com/questions/1360183/how-do-i-call-a-non-static-method-from-a-static-method-in-c
         myJSONStr newMessage = _myjson.parsingJSONToStruct((char*)payload_str);
         newMessage.topic = topic_str;
