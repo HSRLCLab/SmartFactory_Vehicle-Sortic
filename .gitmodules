@@ -1,0 +1,3 @@
+[submodule "embedded/lib/MQTTCommunication"]
+	path = embedded/lib/MQTTCommunication
+	url = https://github.com/LMazzole/MQTTCommunication.git
