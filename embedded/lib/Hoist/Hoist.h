@@ -21,26 +21,28 @@
 #include "Arduino.h"
 #include "Configuration.h"
 #include "LogConfiguration.h"
-#include "Modular.h"
+// #include "Modular.h"
 #include "Servo.h"
 
-/**
- * @brief The HoistState stucts contains the state of the hoist
- * 
- */
-struct HoistState {
-    bool loaded = false;       ///<
-    bool loading = false;      ///<
-    bool detachServo = false;  ///<
-    int targetAngle = 110;     ///<
-};
+// /**
+//  * @brief The HoistState stucts contains the state of the hoist
+//  *
+//  */
+// struct HoistState {
+//     bool loaded = false;       ///<
+//     bool loading = false;      ///<
+//     bool detachServo = false;  ///<
+//     int targetAngle = 110;     ///<
+// };
 
 /**
  * @brief 
  * 
  */
-class Hoist : public Component {
+// class Hoist : public Component {
+class Hoist {
    public:
+    Hoist();
     /**
     * @brief Construct a new Hoist object
     * 
@@ -51,43 +53,43 @@ class Hoist : public Component {
     */
     Hoist(int hoistServoPin, int hoistServoDelay, int posMax, int posMin);
 
-    /**
-     * @brief 
-     * 
-     * @param state - 
-     */
-    void loop(HoistState *state);
+    // /**
+    //  * @brief
+    //  *
+    //  * @param state -
+    //  */
+    // void loop(HoistState *state);
 
     /**
      * @brief Lower the Hoist 1° per call until it's at positionMax
      * 
      */
-    void load();
+    bool load();
 
     /**
      * @brief Raise the Hoist 1° per call until it's at positionMin
      * 
      */
-    void unload();
+    bool unload();
 
-        /**
-     * @brief Testfunction for Hoist-Class
-     * 
-     * 0 - run all tests \n
-     * 1 - run test for load and unload \n
-     * 
-     * @param test - Choose which test to run
-     */
-    void Test(const int test);
+    // /**
+    //  * @brief Testfunction for Hoist-Class
+    //  *
+    //  * 0 - run all tests \n
+    //  * 1 - run test for load and unload \n
+    //  *
+    //  * @param test - Choose which test to run
+    //  */
+    // void Test(const int test);
 
-   protected:                 ///< @todo why protected and not private?
-    HoistState currentState;  ///<
-    Servo hoistServo;         ///<
-    int servoPin;             ///<
-    int position;             ///<
-    int servoDelay;           ///<
-    int positionMin;          ///< minimal Position (Hardware)
-    int positionMax;          ///< maximal Position (Hardware)
+   protected:  ///< @todo why protected and not private?
+    // HoistState currentState;  ///<
+    Servo hoistServo;  ///<
+    int servoPin;      ///<
+    int position;      ///<
+    int positionMin;   ///< minimal Position (Hardware)
+    int positionMax;   ///< maximal Position (Hardware)
+    int servoDelay;    ///<
 };
 
 #endif

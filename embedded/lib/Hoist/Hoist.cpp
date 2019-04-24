@@ -17,16 +17,20 @@
 
 #include "Hoist.h"
 #include "Arduino.h"
+Hoist::Hoist() : servoPin(HOIST_SERVO_PIN),
+                 position(HOIST_POSITION_MIN),
+                 positionMin(HOIST_POSITION_MIN),
+                 positionMax(HOIST_POISITION_MAX),
+                 servoDelay(HOIST_SERVO_DELAY) {
+    DBFUNCCALLln("Hoist::Hoist()");
+}
 
-Hoist::Hoist(int hoistServoPin, int hoistServoDelay, int posMax, int posMin) {
+Hoist::Hoist(int hoistServoPin, int hoistServoDelay, int posMax, int posMin) : servoPin(hoistServoPin),
+                                                                               position(posMin),
+                                                                               positionMin(posMin),
+                                                                               positionMax(posMax),
+                                                                               servoDelay(hoistServoDelay) {
     DBFUNCCALLln("Hoist::Hoist(int hoistServoPin, int hoistServoDelay, int posMax, int posMin)");
-    DBINFO1("Initializing hoist...");
-    servoPin = hoistServoPin;
-    position = posMin;
-    positionMin = posMin;
-    positionMax = posMax;
-    servoDelay = hoistServoDelay;
-    DBINFO1ln("Initializing complete!");
 }
 
 //NEW FUNCTION DRAFT (LMA)
@@ -49,7 +53,10 @@ Hoist::Hoist(int hoistServoPin, int hoistServoDelay, int posMax, int posMin) {
 //             return false;
 //     }
 
-void Hoist::load() {
+/**
+ * @todo non blocking delay 
+ */
+bool Hoist::load() {
     DBFUNCCALLln("Hoist::load()");
     hoistServo.attach(servoPin);  ///< Attach the Servo variable to a pin
     if (position > positionMax) {
@@ -61,12 +68,18 @@ void Hoist::load() {
         delay(servoDelay);
     }
     if (position == positionMax) {
-        currentState.loaded = true;
+        // currentState.loaded = true;
         DBSTATUSln("Target loaded!");
+        hoistServo.detach();
+        return true;
     }
+    return false;
 }
 
-void Hoist::unload() {
+/**
+ * @todo non blocking delay 
+ */
+bool Hoist::unload() {
     DBFUNCCALLln("Hoist::unload()");
     hoistServo.attach(servoPin);
     if (position < positionMin) {
@@ -76,25 +89,28 @@ void Hoist::unload() {
         delay(servoDelay);
     }
     if (position == positionMin) {
-        currentState.loaded = false;
+        // currentState.loaded = false;
         DBSTATUSln("Target unloaded!");
-    }
-}
-
-void Hoist::loop(HoistState* state) {
-    DBFUNCCALLln("Hoist::loop(HoistState* state)");
-    state->loaded = currentState.loaded;
-    if (state->detachServo == true) {
         hoistServo.detach();
-        state->detachServo = false;
+        return true;
     }
+    return false;
 }
 
-void Hoist::Test(const int test) {
-    DBFUNCCALLln("Hoist::Test()");
-    if (test == 0 || test == 1) {
-        load();
-        delay(1000);
-        unload();
-    }
-}
+// void Hoist::loop(HoistState* state) {
+//     DBFUNCCALLln("Hoist::loop(HoistState* state)");
+//     state->loaded = currentState.loaded;
+//     if (state->detachServo == true) {
+//         hoistServo.detach();
+//         state->detachServo = false;
+//     }
+// }
+
+// void Hoist::Test(const int test) {
+//     DBFUNCCALLln("Hoist::Test()");
+//     if (test == 0 || test == 1) {
+//         load();
+//         delay(1000);
+//         unload();
+//     }
+// }
