@@ -18,42 +18,46 @@
 #include "Chassis.h"
 #include "Hoist.h"
 #include "LogConfiguration.h"
-#include "SPI.h"
+// #include "SPI.h"
 #include "Sonar.h"
-#include "VehicleWebAPI.h"
+// #include "VehicleWebAPI.h"
 #include "Vision.h"
 
 #include "Communication.h"
+#include "HoistCtrl.h"
 
-enum class Testing {
-    RUN = 0,
-    HOIST = 1,
-    CHASSIS = 2,
-    VISION = 3,
-    NETWORK = 4,
+enum class TestCase {
+    RUN,
+    HOIST,
+    HOISTCTRL,
+    CHASSIS,
+    CHASSISCTRL,
+    VISION,
+    NETWORK,
+    SONAR,
     MOTIVATION = 99
-} Test = Testing::NETWORK;
+} Test = TestCase::HOISTCTRL;
 
-/**
- * @brief 
- * 
- */
-struct VehicleState {
-    ChassisState chassis;
-    SonarState sonar;
-    VisionState vision;
-    HoistState hoist;
-    // ApiState api;
-    float curveFactor = 0;
-    int turnCount = 1;
-    int waitCount = 0;
-    int sonarCount = 0;
-    unsigned long timeStart = 0;
-    bool turnSonar = true;
-    bool waitForTurn = false;
-    bool visual = false;
-    String side = "";
-} state;
+// /**
+//  * @brief
+//  *
+//  */
+// struct VehicleState {
+//     ChassisState chassis;
+//     SonarState sonar;
+//     VisionState vision;
+//     // HoistState hoist;
+//     // ApiState api;
+//     float curveFactor = 0;
+//     int turnCount = 1;
+//     int waitCount = 0;
+//     int sonarCount = 0;
+//     unsigned long timeStart = 0;
+//     bool turnSonar = true;
+//     bool waitForTurn = false;
+//     bool visual = false;
+//     String side = "";
+// } state;
 
 Sonar *vehicleSonar;
 Vision *vehicleVision;
@@ -64,13 +68,21 @@ Chassis *vehicleChassis;
 // Network *network;
 Communication comm;
 myJSONStr tmp_mess;
+HoistCtrl *hoistctrl;
+
 unsigned long currentMillis = 0;   ///< will store current time
 unsigned long previousMillis = 0;  ///< will store last time
-/**
- * @brief This shit is fucked up
- * 
- */
-void strategy();
+// /**
+//  * @brief This shit is fucked up
+//  *
+//  */
+// void strategy();
+
+void (*FuncFPtr)(void) = &loop;
+void run();
+void test_communication();
+void test_hardware();
+void test_ctrl();
 
 /**
  * @brief For initialisation of the Board
@@ -87,39 +99,41 @@ void setup() {
             ;  // wait for serial port to connect. Needed for native USB port only
         }
     }
-    //while (!if (DEBUGGER == true) Serial) {
-    //; // wait for serial port to connect. Needed for native USB port only
-    //}
+
     DBFUNCCALLln("==setup()==");
     DBSTATUSln("Vehicle: booting...");
-    // #if TESTING == 3 || TESTING == 0
-    //     vehicleChassis = new Chassis(SPEED, K_P, K_I, K_D, RIGHT_MOTOR, LEFT_MOTOR, PIN_SENSOR_0, PIN_SENSOR_1, PIN_SENSOR_2, PIN_SENSOR_3, PIN_SENSOR_4);
-    //     state.chassis.speed = SPEED;
-    //     delay(100);
-    // #endif
-    // #if TESTING == 2 || TESTING == 0
-    //     vehicleSonar = new Sonar(SONAR_SERVO_PIN, SONAR_TRIGGER_PIN, SONAR_ECHO_PIN, SONAR_MAX_DISTANCE, MIN_ERROR, MAX_ERROR, MIN_TURN_ANGLE, MAX_TURN_ANGLE);
-    //     delay(100);
-    // #endif
-    // #if TESTING == 4 || TESTING == 0
-    //     vehicleVision = new Vision(VISION_START_ANGLE, VISION_SERVO_PIN, VISION_DELAY_FACTOR, VISION_TOLERANCE_LEFT, VISION_TOLERANCE_RIGHT);
-    //     delay(100);
-    // #endif
-    // #if TESTING == 1 || TESTING == 0
-    //     vehicleHoist = new Hoist(HOIST_SERVO_PIN, HOIST_SERVO_DELAY, HOIST_POISITION_MAX, HOIST_POSITION_MIN);
-    //     delay(100);
-    // #endif
-    // #if TESTING == 5 || TESTING == 0
-    //     vehicleAPI = new VehicleWebAPI(&state.api);
-    //     delay(100);
-    // #endif
-    //     DBSTATUSln("Booting complete!");
-    // comm = new Communication();
-    comm.init();
-    comm.printNetworkInfo();
-    comm.subscribe("Test");
-    // }
+    switch (Test) {
+        case TestCase::HOIST:
+            vehicleHoist = new Hoist(HOIST_SERVO_PIN, HOIST_SERVO_DELAY, HOIST_POISITION_MAX, HOIST_POSITION_MIN);
+            break;
+        case TestCase::HOISTCTRL:
+            hoistctrl = new HoistCtrl();
+            break;
+        case TestCase::CHASSIS:
+            //     vehicleChassis = new Chassis(SPEED, K_P, K_I, K_D, RIGHT_MOTOR, LEFT_MOTOR, PIN_SENSOR_0, PIN_SENSOR_1, PIN_SENSOR_2, PIN_SENSOR_3, PIN_SENSOR_4);
+            //     state.chassis.speed = SPEED;
+            break;
+        case TestCase::CHASSISCTRL:
+            break;
+        case TestCase::VISION:
+            //     vehicleVision = new Vision(VISION_START_ANGLE, VISION_SERVO_PIN, VISION_DELAY_FACTOR, VISION_TOLERANCE_LEFT, VISION_TOLERANCE_RIGHT);
+            break;
+        case TestCase::NETWORK:
+            //     vehicleAPI = new VehicleWebAPI(&state.api);
 
+            // comm = new Communication();
+            // comm.init();
+            // comm.printNetworkInfo();
+            // comm.subscribe("Test");
+            break;
+        case TestCase::SONAR:
+            // vehicleSonar = new Sonar(SONAR_SERVO_PIN, SONAR_TRIGGER_PIN, SONAR_ECHO_PIN, SONAR_MAX_DISTANCE, MIN_ERROR, MAX_ERROR, MIN_TURN_ANGLE, MAX_TURN_ANGLE);
+            break;
+
+        default:
+            break;
+    }
+    DBSTATUSln("Booting complete!");
     // // you're connected now, so print out the data:
     // Serial.print("You're connected to the network");
 }
@@ -135,6 +149,54 @@ void setup() {
  */
 void loop() {
     DBINFO1ln("==loop()==");
+    switch (Test) {
+        case TestCase::RUN:
+            FuncFPtr = &run;
+            break;
+        case TestCase::HOIST:
+            FuncFPtr = &test_hardware;
+            break;
+        case TestCase::HOISTCTRL:
+            FuncFPtr = &test_ctrl;
+            break;
+        case TestCase::CHASSIS:
+            FuncFPtr = &test_hardware;
+            break;
+        case TestCase::CHASSISCTRL:
+            FuncFPtr = &test_ctrl;
+            break;
+        case TestCase::VISION:
+            FuncFPtr = &test_hardware;
+            break;
+        case TestCase::NETWORK:
+            FuncFPtr = &test_communication;
+            break;
+        case TestCase::SONAR:
+            break;
+        default:
+            break;
+    }
+    FuncFPtr();
+}
+
+void run() {
+    //     vehicleAPI->loop(&state.api);
+    //     if (state.api.workState == true) {
+    //         state.sonarCount++;
+    //         if ((state.api.sector == "20") && (state.visual == true)) {
+    //             vehicleVision->loop(&state.vision);
+    //         }
+    //         vehicleChassis->loop(&state.chassis);
+    //         if (state.sonarCount > 30) {
+    //             state.sonarCount = 0;
+    //             vehicleSonar->loop(&state.sonar, state.chassis.directionError, state.turnSonar);
+    //         }
+    //         vehicleHoist->loop(&state.hoist);
+    //     }
+    //     strategy();
+    //     if (DEBUGGER == true) Serial.println("-----------------------------------------");
+}
+void test_communication() {
     // comm.publishMessage("Lizzy", "{Friend: Luca}");
     // delay(1000);
     previousMillis = millis();
@@ -168,52 +230,103 @@ void loop() {
     }
 
     delay(1000);
+}
 
-    // #if TESTING == 1  //Test Hoist
-    //     DBSTATUSln("==Test Hoist==");
-    //     vehicleHoist->Hoist::Test(0);
-    // #elif TESTING == 2  //Test Sonar
-    //     /*
-    //      * 0 - run all tests
-    //      * 1 - run test for servo
-    //      * 2 - run test for obstacle detection
-    //      * */
-    //     DBSTATUSln("==Test Sonar==");
-    //     vehicleSonar->Sonar::Test(1);
+void test_hardware() {
+    switch (Test) {
+        case TestCase::HOIST:
+            DBSTATUSln("==Test Hoist==");
+            //     vehicleHoist->Hoist::Test(0);
+            while (!vehicleHoist->raise()) {
+            };
+            delay(1000);
+            while (!vehicleHoist->lower()) {
+            };
+            delay(1000);
+            break;
+        case TestCase::CHASSIS:
+            DBSTATUSln("==Test Chasis==");
+            //     vehicleChassis->Chassis::Test();
+            break;
+        case TestCase::VISION:
+            DBSTATUSln("==Test Vision==");
+            //     vehicleVision->Vision::Test(1);
+            break;
+        // case TestCase::NETWORK:
+        //     /* code */
+        //     break;
+        case TestCase::SONAR:
+            DBSTATUSln("==Test Sonar==");
+            /*
+             * 0 - run all tests
+             * 1 - run test for servo
+             * 2 - run test for obstacle detection
+             * */
+            vehicleSonar->Sonar::Test(1);
+            break;
 
-    // #elif TESTING == 3  //Test Chasis
-    //     DBSTATUSln("==Test Chasis==");
-    //     vehicleChassis->Chassis::Test();
-    // #elif TESTING == 4  //Test Vision
-    //     /*
-    //      * 0 - run all tests
-    //      * 1 - run test for servo
-    //      * */
-    //     DBSTATUSln("==Test Vision==");
-    //     vehicleVision->Vision::Test(1);
-    // #elif TESTING == 99
-    //     DBSTATUSln("==Start motivation program==");
-    //     delay(500);
-    //     DBSTATUSln("YOU CAN DO IT!");
-    // #else
-    //     vehicleAPI->loop(&state.api);
-    //     if (state.api.workState == true) {
-    //         state.sonarCount++;
-    //         if ((state.api.sector == "20") && (state.visual == true)) {
-    //             vehicleVision->loop(&state.vision);
-    //         }
-    //         vehicleChassis->loop(&state.chassis);
-    //         if (state.sonarCount > 30) {
-    //             state.sonarCount = 0;
-    //             vehicleSonar->loop(&state.sonar, state.chassis.directionError, state.turnSonar);
-    //         }
-    //         vehicleHoist->loop(&state.hoist);
-    //     }
-    //     strategy();
-    //     if (DEBUGGER == true) Serial.println("-----------------------------------------");
-    // #endif
-    //     delay(10000);
-    //     DBSTATUSln("==END Test - LOOP again==");
+        default:
+            break;
+    }
+}
+
+void test_ctrl() {
+    //https://www.arduino.cc/en/Tutorial/SwitchCase2
+    int inByte;
+    switch (Test) {
+        case TestCase::HOISTCTRL:
+            DBSTATUSln("==Test Hoist CTRL==");
+            //read Serial in and generate events
+            Serial.println("Possible Events are:");
+            Serial.println("R - Raise");
+            Serial.println("L - Lower");
+            Serial.println("E - Error");
+            Serial.println("r - Resume");
+            Serial.println("N - No Event");
+            Serial.println("p - Position Reached");
+            Serial.print("Choose Event: ");
+            while (Serial.available() <= 0) {
+            }
+            inByte = Serial.read();
+            Serial.print((char)inByte);
+            Serial.println();
+            switch (inByte) {
+                case 'R':
+                    DBINFO1ln("Event: Raise");
+                    hoistctrl->loop(HoistCtrl::Event::Raise);
+                    break;
+                case 'L':
+                    DBINFO1ln("Event: Lower");
+                    hoistctrl->loop(HoistCtrl::Event::Lower);
+                    break;
+                case 'E':
+                    DBINFO1ln("Event: Error");
+                    hoistctrl->loop(HoistCtrl::Event::Error);
+                    break;
+                case 'r':
+                    DBINFO1ln("Event: Resume");
+                    hoistctrl->loop(HoistCtrl::Event::Resume);
+                    break;
+                case 'N':
+                    DBINFO1ln("Event: No Event");
+                    hoistctrl->loop(HoistCtrl::Event::NoEvent);
+                    break;
+                case 'p':
+                    DBINFO1ln("Event: posPeached");
+                    hoistctrl->loop(HoistCtrl::Event::PosReached);
+                    break;
+                default:
+                    DBINFO1ln("Error: Unknown value entered");
+                    break;
+            }
+            break;
+        case TestCase::CHASSISCTRL:
+            DBSTATUSln("==Test Chasis CTRL==");
+            //     vehicleChassis->Chassis::Test();
+            break;
+        default:
+            break;
+    }
 }
 
 // void strategy() {

@@ -14,7 +14,6 @@
 #include "HoistCtrl.h"
 //=====PUBLIC====================================================================================
 HoistCtrl::HoistCtrl() : currentState(State::low) {
-    //call hoist.init() ?
 }
 
 void HoistCtrl::loop() {

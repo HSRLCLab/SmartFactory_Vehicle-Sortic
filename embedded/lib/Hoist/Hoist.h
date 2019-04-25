@@ -28,7 +28,7 @@
 #include "Servo.h"
 
 /**
- * @brief 
+ * @brief Hoist class controlls the Hoist
  * 
  */
 // class Hoist : public Component {
@@ -45,13 +45,10 @@ class Hoist {
     */
     Hoist(int hoistServoPin, int hoistServoDelay, int posMax, int posMin);
 
-    // /**
-    //  * @brief
-    //  *
-    //  * @param state -
-    //  */
-    // void loop(HoistState *state);
-
+    /**
+     * @brief Initialise the Hoist in the low possition
+     * 
+     */
     void init();
 
     /**
@@ -66,30 +63,28 @@ class Hoist {
      */
     bool lower();
 
+    /**
+     * @brief attache Servo to Servopin
+     * 
+     */
     inline void attach() {
         DBFUNCCALLln("Hoist::attach()");
         hoistServo.attach(servoPin);
     }
 
+    /**
+     * @brief detach servo from servopin
+     * 
+     */
     inline void detach() {
         DBFUNCCALLln("Hoist::detach()");
         hoistServo.detach();
     }
 
-    // /**
-    //  * @brief Testfunction for Hoist-Class
-    //  *
-    //  * 0 - run all tests \n
-    //  * 1 - run test for load and unload \n
-    //  *
-    //  * @param test - Choose which test to run
-    //  */
-    // void Test(const int test);
-
    private:
-    Servo hoistServo;  ///<
-    int servoPin;      ///<
-    int position;      ///<
+    Servo hoistServo;  ///< instance of servo object
+    int servoPin;      ///< servopin
+    int position;      ///< actual position
     int positionMin;   ///< minimal Position (Hardware)
     int positionMax;   ///< maximal Position (Hardware)
     int servoDelay;    ///<
