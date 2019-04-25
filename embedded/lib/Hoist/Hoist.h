@@ -7,11 +7,14 @@
  * @author Glenn Huber (glenn.patrick.huber@hsr.ch)
  * @author Robert Paly (robert.paly@hsr.ch)
  * 
+ * @version 2.0 - Refactored to match FSM Funccall  - Luca Mazzoleni (luca.mazzoleni@hsr.ch)  - 2019-04-23
  * @version 1.1 - Added Doxygen-Documentation  - Luca Mazzoleni (luca.mazzoleni@hsr.ch)  - 2019-03-20
  * @version 1.0 - BA FTS FS 2018
  * 
  * @date 2019-03-20
  * @copyright Copyright (c) 2019
+ * 
+ * @todo add const and private
  * 
  */
 
@@ -23,17 +26,6 @@
 #include "LogConfiguration.h"
 // #include "Modular.h"
 #include "Servo.h"
-
-// /**
-//  * @brief The HoistState stucts contains the state of the hoist
-//  *
-//  */
-// struct HoistState {
-//     bool loaded = false;       ///<
-//     bool loading = false;      ///<
-//     bool detachServo = false;  ///<
-//     int targetAngle = 110;     ///<
-// };
 
 /**
  * @brief 
@@ -60,17 +52,29 @@ class Hoist {
     //  */
     // void loop(HoistState *state);
 
-    /**
-     * @brief Lower the Hoist 1° per call until it's at positionMax
-     * 
-     */
-    bool load();
+    void init();
 
     /**
-     * @brief Raise the Hoist 1° per call until it's at positionMin
+     * @brief Raise the Hoist 1° per call until it's at positionMax
      * 
      */
-    bool unload();
+    bool raise();
+
+    /**
+     * @brief Lower the Hoist 1° per call until it's at positionMin
+     * 
+     */
+    bool lower();
+
+    inline void attach() {
+        DBFUNCCALLln("Hoist::attach()");
+        hoistServo.attach(servoPin);
+    }
+
+    inline void detach() {
+        DBFUNCCALLln("Hoist::detach()");
+        hoistServo.detach();
+    }
 
     // /**
     //  * @brief Testfunction for Hoist-Class
@@ -82,8 +86,7 @@ class Hoist {
     //  */
     // void Test(const int test);
 
-   protected:  ///< @todo why protected and not private?
-    // HoistState currentState;  ///<
+   private:
     Servo hoistServo;  ///<
     int servoPin;      ///<
     int position;      ///<

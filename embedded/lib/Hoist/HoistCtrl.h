@@ -27,8 +27,8 @@ class HoistCtrl {
     * @brief Enum holds all possible events
     * 
     */
-    enum class Event { Loading,     ///< Start Loading
-                       Unloading,   ///< Start Unloading
+    enum class Event { Raise,       ///< Start Raise
+                       Lower,       ///< Start Lower
                        PosReached,  ///< Position reached
                        Error,       ///< Error occured
                        Resume,      ///< Resume after Error occured
