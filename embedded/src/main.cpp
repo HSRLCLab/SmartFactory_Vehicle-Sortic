@@ -10,6 +10,7 @@
  * @date 2019-03-20
  * @copyright Copyright (c) 2019
  * 
+ * @todo entkoppelung von configfiles
  */
 #define TESTING 5  //0=run, 1=hoist, 2=sonar, 3=chassis, 4=vision, 5=network ,99= Motivation
 
@@ -24,19 +25,22 @@
 #include "Vision.h"
 
 #include "Communication.h"
+#include "DriveCtrl.h"
+#include "EnvironmentDetection.h"
 #include "HoistCtrl.h"
 
 enum class TestCase {
     RUN,
     HOIST,
     HOISTCTRL,
-    CHASSIS,
-    CHASSISCTRL,
+    DRIVE,
+    DRIVECTRL,
+    ENVDETEC,
     VISION,
     NETWORK,
     SONAR,
     MOTIVATION = 99
-} Test = TestCase::HOISTCTRL;
+} Test = TestCase::ENVDETEC;
 
 // /**
 //  * @brief
@@ -66,9 +70,13 @@ Chassis *vehicleChassis;
 // VehicleWebAPI *vehicleAPI;
 
 // Network *network;
-Communication comm;
+Communication *comm;
 myJSONStr tmp_mess;
 HoistCtrl *hoistctrl;
+DriveCtrl *drivectrl;
+
+Drive *drive;
+EnvironmentDetection *envdetect;
 
 unsigned long currentMillis = 0;   ///< will store current time
 unsigned long previousMillis = 0;  ///< will store last time
@@ -109,11 +117,15 @@ void setup() {
         case TestCase::HOISTCTRL:
             hoistctrl = new HoistCtrl();
             break;
-        case TestCase::CHASSIS:
+        case TestCase::DRIVE:
+            drive = new Drive(RIGHT_MOTOR, LEFT_MOTOR);
             //     vehicleChassis = new Chassis(SPEED, K_P, K_I, K_D, RIGHT_MOTOR, LEFT_MOTOR, PIN_SENSOR_0, PIN_SENSOR_1, PIN_SENSOR_2, PIN_SENSOR_3, PIN_SENSOR_4);
             //     state.chassis.speed = SPEED;
             break;
-        case TestCase::CHASSISCTRL:
+        case TestCase::DRIVECTRL:
+            break;
+        case TestCase::ENVDETEC:
+            envdetect = new EnvironmentDetection();
             break;
         case TestCase::VISION:
             //     vehicleVision = new Vision(VISION_START_ANGLE, VISION_SERVO_PIN, VISION_DELAY_FACTOR, VISION_TOLERANCE_LEFT, VISION_TOLERANCE_RIGHT);
@@ -121,10 +133,10 @@ void setup() {
         case TestCase::NETWORK:
             //     vehicleAPI = new VehicleWebAPI(&state.api);
 
-            // comm = new Communication();
-            // comm.init();
-            // comm.printNetworkInfo();
-            // comm.subscribe("Test");
+            comm = new Communication();
+            comm->init();
+            comm->printNetworkInfo();
+            comm->subscribe("Test");
             break;
         case TestCase::SONAR:
             // vehicleSonar = new Sonar(SONAR_SERVO_PIN, SONAR_TRIGGER_PIN, SONAR_ECHO_PIN, SONAR_MAX_DISTANCE, MIN_ERROR, MAX_ERROR, MIN_TURN_ANGLE, MAX_TURN_ANGLE);
@@ -159,11 +171,14 @@ void loop() {
         case TestCase::HOISTCTRL:
             FuncFPtr = &test_ctrl;
             break;
-        case TestCase::CHASSIS:
+        case TestCase::DRIVE:
             FuncFPtr = &test_hardware;
             break;
-        case TestCase::CHASSISCTRL:
+        case TestCase::DRIVECTRL:
             FuncFPtr = &test_ctrl;
+            break;
+        case TestCase::ENVDETEC:
+            FuncFPtr = &test_hardware;
             break;
         case TestCase::VISION:
             FuncFPtr = &test_hardware;
@@ -203,19 +218,19 @@ void test_communication() {
     currentMillis = millis();
     while (((currentMillis - previousMillis) / 1000 < 10)) {
         currentMillis = millis();
-        comm.loop();
+        comm->loop();
     }
 
     DBINFO1ln("=====PRINT LAST MESSAGE=====");
-    DBINFO1ln(comm.size());
-    if (comm.isEmpty()) {
+    DBINFO1ln(comm->size());
+    if (comm->isEmpty()) {
         DBINFO1ln("Buff empty ");
     } else {
         DBINFO1ln("Buff NOT empty ");
         myJSONStr newMessage1;
-        while (!comm.isEmpty()) {
-            DBINFO1ln(comm.size());
-            tmp_mess = comm.pop();
+        while (!comm->isEmpty()) {
+            DBINFO1ln(comm->size());
+            tmp_mess = comm->pop();
             DBINFO1("Topic: ");
             DBINFO1ln(tmp_mess.topic);
             DBINFO1("Sensor: ");
@@ -235,7 +250,7 @@ void test_communication() {
 void test_hardware() {
     switch (Test) {
         case TestCase::HOIST:
-            DBSTATUSln("==Test Hoist==");
+            DBSTATUSln("==Test HOIST==");
             //     vehicleHoist->Hoist::Test(0);
             while (!vehicleHoist->raise()) {
             };
@@ -244,17 +259,25 @@ void test_hardware() {
             };
             delay(1000);
             break;
-        case TestCase::CHASSIS:
-            DBSTATUSln("==Test Chasis==");
+        case TestCase::DRIVE:
+            DBSTATUSln("==Test DRIVE==");
+            drive->drive(Drive::Direction::Forward, 250);
+            delay(1000);
+            drive->stop();
+            delay(1000);
+            drive->drive(Drive::Direction::Backward, 250);
+            delay(1000);
+            drive->stop();
+            delay(5000);
             //     vehicleChassis->Chassis::Test();
             break;
         case TestCase::VISION:
             DBSTATUSln("==Test Vision==");
             //     vehicleVision->Vision::Test(1);
             break;
-        // case TestCase::NETWORK:
-        //     /* code */
-        //     break;
+        case TestCase::ENVDETEC:
+            envdetect->deviation();
+            break;
         case TestCase::SONAR:
             DBSTATUSln("==Test Sonar==");
             /*
@@ -320,7 +343,7 @@ void test_ctrl() {
                     break;
             }
             break;
-        case TestCase::CHASSISCTRL:
+        case TestCase::DRIVECTRL:
             DBSTATUSln("==Test Chasis CTRL==");
             //     vehicleChassis->Chassis::Test();
             break;
