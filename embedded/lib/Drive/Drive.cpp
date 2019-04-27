@@ -24,12 +24,13 @@ Drive::Drive(const int MotorPortRight, const int MotorPortLeft) {
     pMotorRight = pAFMS.getMotor(MotorPortRight);
     pMotorLeft = pAFMS.getMotor(MotorPortLeft);
     pAFMS.begin();  // create with the default frequency 1.6KHz
+    stop();
 }
 
 void Drive::drive(Direction direction, unsigned int speed) {
     DBFUNCCALLln("Drive::drive(Direction direction, unsigned int speed)");
     speed = constrain(speed, 0, 255);
-    pWay = direction;
+    pWayVehicle = direction;
     pSpeedLeft = speed;
     pSpeedRight = speed;
     pMotorLeft->setSpeed(pSpeedLeft);
@@ -39,7 +40,7 @@ void Drive::drive(Direction direction, unsigned int speed) {
     DBINFO3(pSpeedLeft);
     DBINFO3(" / ");
     DBINFO3ln(pSpeedRight);
-    switch (direction) {
+    switch (pWayVehicle) {
         case Direction::Forward:
             pMotorLeft->run(FORWARD);
             pMotorRight->run(FORWARD);
@@ -57,6 +58,9 @@ bool Drive::drive(Direction direction, unsigned int speed, unsigned int time) {
     DBFUNCCALLln("");
 }
 
+/**
+ * @todo change direction if vehicle is moving forward or backward so the turndirectiomn still matches direction
+ */
 void Drive::turn(Direction direction, unsigned int speed) {
     DBFUNCCALLln("Drive::turn(Direction direction, unsigned int speed)");
     switch (direction) {
@@ -80,29 +84,48 @@ void Drive::turn(Direction direction, unsigned int speed) {
     DBINFO3ln(pSpeedRight);
     pMotorLeft->setSpeed(pSpeedLeft);
     pMotorRight->setSpeed(pSpeedRight);
+    switch (pWayVehicle) {
+        case Direction::Forward:
+            pMotorLeft->run(FORWARD);
+            pMotorRight->run(FORWARD);
+            break;
+        case Direction::Backward:
+            pMotorLeft->run(BACKWARD);
+            pMotorRight->run(BACKWARD);
+            break;
+        default:
+            break;
+    }
 }
 
 bool Drive::turn(Direction direction, unsigned int speed, unsigned int time) {
     DBFUNCCALLln("");
 }
 
-/**
- * @todo change direction if vehicle is moving forward or backward so the turndirectiomn still matches direction
- */
 void Drive::turnonpoint(Direction direction, unsigned int speed) {
     DBFUNCCALLln("Drive::turn(Direction direction, unsigned int speed)");
-    pSpeedLeft = constrain(pSpeedLeft, 0, 255);
-    pSpeedRight = constrain(pSpeedRight, 0, 255);
+    speed = constrain(speed, 0, 255);
+    pSpeedLeft = speed;
+    pSpeedRight = speed;
     pMotorLeft->setSpeed(pSpeedLeft);
     pMotorRight->setSpeed(pSpeedRight);
+    DBINFO3("Speed L/R: ");
     switch (direction) {
         case Direction::Left:
             pMotorLeft->run(BACKWARD);
             pMotorRight->run(FORWARD);
+            DBINFO3("-");
+            DBINFO3(pSpeedLeft);
+            DBINFO3(" / ");
+            DBINFO3ln(pSpeedRight);
             break;
         case Direction::Right:
             pMotorLeft->run(FORWARD);
             pMotorRight->run(BACKWARD);
+            DBINFO3(pSpeedLeft);
+            DBINFO3(" / ");
+            DBINFO3("-")
+            DBINFO3ln(pSpeedRight);
             break;
         default:
             break;

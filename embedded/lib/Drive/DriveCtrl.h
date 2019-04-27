@@ -30,15 +30,15 @@ class DriveCtrl {
     * @brief Enum holds all possible events
     * 
     */
-    enum class Event { TurnLeft,         ///< Ext.:
-                       TurnRight,        ///< Ext.:
-                       TurnAround,       ///< Ext.:
-                       FollowLine,       ///< Ext.:
-                       FullLineReached,  ///< Signal:
-                       LineAligned,      ///< Signal:
-                       Error,            ///< Ext.: Error occured
-                       Resume,           ///< Ext.: Resume after Error occured
-                       NoEvent           ///< No event generated
+    enum class Event { TurnLeft,          ///< Ext.:
+                       TurnRight,         ///< Ext.:
+                       TurnAround,        ///< Ext.:
+                       FollowLine,        ///< Ext.:
+                       FullLineDetected,  ///< Signal:
+                       LineAligned,       ///< Signal:
+                       Error,             ///< Ext.: Error occured
+                       Resume,            ///< Ext.: Resume after Error occured
+                       NoEvent            ///< No event generated
     };
 
     /**
@@ -98,6 +98,7 @@ class DriveCtrl {
      * https://stackoverflow.com/questions/1485983/calling-c-class-methods-via-a-function-pointer
      */
     Event (DriveCtrl::*doActionFPtr)(void) = &DriveCtrl::doAction_idle;
+    unsigned int loopcount;
 
     Drive pDrive = Drive(RIGHT_MOTOR, LEFT_MOTOR);  ///< Drive Object
     EnvironmentDetection pEnvdetect;                ///< EnviromentDetection Object

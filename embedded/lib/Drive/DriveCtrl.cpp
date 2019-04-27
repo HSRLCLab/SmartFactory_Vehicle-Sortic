@@ -84,7 +84,7 @@ void DriveCtrl::process(Event e) {
             }
             break;
         case State::followingLine:
-            if (Event::FullLineReached == e) {
+            if (Event::FullLineDetected == e) {
                 exitAction_followingLine();  // Exit-action current state
                 entryAction_idle();          // Entry-actions next state
             } else if (Event::Error == e) {
@@ -107,6 +107,9 @@ void DriveCtrl::process(Event e) {
                         break;
                     case State::turningAround:
                         entryAction_turningAround();  // Entry-actions next state
+                        break;
+                    case State::followingLine:
+                        entryAction_followingLine();  // Entry-actions next state
                         break;
                     default:
                         break;
@@ -139,17 +142,25 @@ void DriveCtrl::entryAction_turningLeft() {
     DBINFO2ln("Drive Entering State: turningLeft");
     currentState = State::turningLeft;  // state transition
     doActionFPtr = &DriveCtrl::doAction_turningLeft;
+    loopcount = 0;
     //Entry-Action
+    pDrive.turn(Drive::Direction::Left, TURNING_SPEED);
 }
 
 DriveCtrl::Event DriveCtrl::doAction_turningLeft() {
     DBINFO2ln("Drive State: turningLeft");
     //Generate the Event
+
+    if ((abs(pEnvdetect.Linedeviation()) < 1) && (loopcount > 5)) {
+        return Event::LineAligned;
+    }
+    loopcount += 1;
     return Event::NoEvent;
 }
 
 void DriveCtrl::exitAction_turningLeft() {
     DBINFO2ln("Drive Leaving State: turningLeft");
+    pDrive.stop();
 }
 
 //==turningRight==========================================================
@@ -157,17 +168,24 @@ void DriveCtrl::entryAction_turningRight() {
     DBINFO2ln("Drive Entering State: turningRight");
     currentState = State::turningRight;  // state transition
     doActionFPtr = &DriveCtrl::doAction_turningRight;
+    loopcount = 0;
     //Entry-Action
+    pDrive.turn(Drive::Direction::Right, TURNING_SPEED);
 }
 
 DriveCtrl::Event DriveCtrl::doAction_turningRight() {
     DBINFO2ln("Drive State: turningRight");
     //Generate Event
+    if ((abs(pEnvdetect.Linedeviation()) < 1) && (loopcount > 5)) {
+        return Event::LineAligned;
+    }
+    loopcount += 1;
     return Event::NoEvent;
 }
 
 void DriveCtrl::exitAction_turningRight() {
     DBINFO2ln("Drive Leaving State: turningRight");
+    pDrive.stop();
 }
 
 //==turningAround==========================================================
@@ -175,17 +193,25 @@ void DriveCtrl::entryAction_turningAround() {
     DBINFO2ln("Drive Entering State: turningAround");
     currentState = State::turningAround;  // state transition
     doActionFPtr = &DriveCtrl::doAction_turningAround;
+    loopcount = 0;
     //Entry-Action
+    pDrive.turnonpoint(Drive::Direction::Right, TURNING_SPEED);
 }
 
 DriveCtrl::Event DriveCtrl::doAction_turningAround() {
     DBINFO2ln("Drive State: turningAround");
     //Generate the Event
+    DBINFO2ln(loopcount);
+    if ((abs(pEnvdetect.Linedeviation()) < 1) && (loopcount > 5)) {
+        return Event::LineAligned;
+    }
+    loopcount += 1;
     return Event::NoEvent;
 }
 
 void DriveCtrl::exitAction_turningAround() {
     DBINFO2ln("Drive Leaving State: turningAround");
+    pDrive.stop();
 }
 
 //==followingLine==========================================================
@@ -193,17 +219,25 @@ void DriveCtrl::entryAction_followingLine() {
     DBINFO2ln("Drive Entering State: followingLine");
     currentState = State::followingLine;  // state transition
     doActionFPtr = &DriveCtrl::doAction_followingLine;
+    loopcount = 0;
     //Entry-Action
+    pDrive.drive(Drive::Direction::Forward, SPEED);
 }
 
 DriveCtrl::Event DriveCtrl::doAction_followingLine() {
     DBINFO2ln("Drive State: followingLine");
     //Generate the Event
+    // DBINFO3ln(pEnvdetect.Linedeviation());
+    if ((abs(pEnvdetect.Linedeviation()) == 180) && (loopcount > 5)) {
+        return Event::FullLineDetected;
+    }
+    loopcount += 1;
     return Event::NoEvent;
 }
 
 void DriveCtrl::exitAction_followingLine() {
     DBINFO2ln("Drive Leaving State: followingLine");
+    pDrive.stop();
 }
 
 //==errorState========================================================
@@ -213,6 +247,7 @@ void DriveCtrl::entryAction_errorState() {
     currentState = State::errorState;  // state transition
     doActionFPtr = &DriveCtrl::doAction_errorState;
     //Entry-Action
+    pDrive.stop();
 }
 
 DriveCtrl::Event DriveCtrl::doAction_errorState() {
@@ -265,6 +300,9 @@ String DriveCtrl::decodeEvent(Event event) {
             break;
         case Event::LineAligned:
             return "Event::LineAligned";
+            break;
+        case Event::FullLineDetected:
+            return "Event::FullLineDetected";
             break;
         case Event::Error:
             return "Event::Error";

@@ -16,22 +16,22 @@
 
 #ifndef DRIVE_H
 #define DRIVE_H
-/* https://learn.adafruit.com/adafruit-motor-shield-v2-for-arduino/library-reference
- * https://github.com/adafruit/Adafruit_Motor_Shield_V2_Library
- */
-#include <Adafruit_MotorShield.h>
+
+#include <Adafruit_MotorShield.h>  ///<https://github.com/adafruit/Adafruit_Motor_Shield_V2_Library
 #include <Arduino.h>
 
 #include "Configuration.h"
 #include "LogConfiguration.h"
 
-/*void run(uint8_t)
+/* https://learn.adafruit.com/adafruit-motor-shield-v2-for-arduino/library-reference
+
+void run(uint8_t)
 FORWARD - Rotate in a forward direction
 BACKWARD - Rotate in the reverse direction
 RELEASE - Stop rotation
 Also note that "RELEASE" simply cuts power to the motor. It does not apply any braking.
- */
-/*void setSpeed(uint8_t);
+
+void setSpeed(uint8_t);
 The setSpeed() function controls the power level delivered to the motor.
 The speed parameter is a value between 0 and 255.
 */
@@ -116,7 +116,7 @@ class Drive {
      * @brief 
      * 
      * @return true - 
-     * @return false - 
+     * @return false -
      */
     void stop();
 
@@ -125,9 +125,9 @@ class Drive {
     Adafruit_MotorShield pAFMS = Adafruit_MotorShield();  // Create the motor shield object with the default I2C address
     Adafruit_DCMotor *pMotorRight;                        ///<Pointer to right Motor Obj
     Adafruit_DCMotor *pMotorLeft;                         ///<Pointer to left Motor Obj
-    unsigned int pSpeedLeft;                              ///< actual Speed of left Motor
-    unsigned int pSpeedRight;                             ///< actual Speed of right Motor
-    Direction pWay;                                       ///< Actual movingdirection Forward or Backward
+    int pSpeedLeft;                                       ///< actual Speed of left Motor
+    int pSpeedRight;                                      ///< actual Speed of right Motor
+    Direction pWayVehicle = Direction::Forward;           ///< Actual movingdirection Forward or Backward
     //============================================================================
     //==Aux-Function==============================================================
     /**

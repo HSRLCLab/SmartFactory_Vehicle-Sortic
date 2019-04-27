@@ -40,7 +40,7 @@ enum class TestCase {
     NETWORK,
     SONAR,
     MOTIVATION = 99
-} Test = TestCase::ENVDETEC;
+} Test = TestCase::DRIVECTRL;
 
 // /**
 //  * @brief
@@ -123,6 +123,7 @@ void setup() {
             //     state.chassis.speed = SPEED;
             break;
         case TestCase::DRIVECTRL:
+            drivectrl = new DriveCtrl();
             break;
         case TestCase::ENVDETEC:
             envdetect = new EnvironmentDetection();
@@ -276,7 +277,7 @@ void test_hardware() {
             //     vehicleVision->Vision::Test(1);
             break;
         case TestCase::ENVDETEC:
-            envdetect->deviation();
+            envdetect->Linedeviation();
             break;
         case TestCase::SONAR:
             DBSTATUSln("==Test Sonar==");
@@ -344,9 +345,79 @@ void test_ctrl() {
             }
             break;
         case TestCase::DRIVECTRL:
-            DBSTATUSln("==Test Chasis CTRL==");
-            //     vehicleChassis->Chassis::Test();
+            DBSTATUSln("==Test Drive CTRL==");
+            //read Serial in and generate events
+            Serial.println("Possible Events are:");
+            Serial.println("L - TurnLeft");
+            Serial.println("R - TurnRight");
+            Serial.println("A - TurnAround");
+            Serial.println("F - FollowLine");
+            Serial.println("E - Error");
+            Serial.println("r - Resume");
+            Serial.println("N - No Event");
+            Serial.println("l - LineAligned");
+            Serial.println("f - FullLineDetected");
+            Serial.print("Choose Event: ");
+            while (Serial.available() <= 0) {
+            }
+            inByte = Serial.read();
+            Serial.print((char)inByte);
+            Serial.println();
+            switch (inByte) {
+                case 'L':
+                    DBINFO1ln("Event: TurnLeft");
+                    drivectrl->loop(DriveCtrl::Event::TurnLeft);
+                    while ((drivectrl->getcurrentState() == DriveCtrl::State::turningLeft) && (Serial.read() != 'E')) {
+                        drivectrl->loop();
+                    }
+                    break;
+                case 'R':
+                    DBINFO1ln("Event: TurnRight");
+                    drivectrl->loop(DriveCtrl::Event::TurnRight);
+                    while ((drivectrl->getcurrentState() == DriveCtrl::State::turningRight) && (Serial.read() != 'E')) {
+                        drivectrl->loop();
+                    }
+                    break;
+                case 'A':
+                    DBINFO1ln("Event: TurnAround");
+                    drivectrl->loop(DriveCtrl::Event::TurnAround);
+                    while ((drivectrl->getcurrentState() == DriveCtrl::State::turningAround) && (Serial.read() != 'E')) {
+                        drivectrl->loop();
+                    }
+                    break;
+                case 'F':
+                    DBINFO1ln("Event: FollowLine");
+                    drivectrl->loop(DriveCtrl::Event::FollowLine);
+                    while ((drivectrl->getcurrentState() == DriveCtrl::State::followingLine) && (Serial.read() != 'E')) {
+                        drivectrl->loop();
+                    }
+                    break;
+                case 'E':
+                    DBINFO1ln("Event: Error");
+                    drivectrl->loop(DriveCtrl::Event::Error);
+                    break;
+                case 'r':
+                    DBINFO1ln("Event: Resume");
+                    drivectrl->loop(DriveCtrl::Event::Resume);
+                    break;
+                case 'N':
+                    DBINFO1ln("Event: No Event");
+                    drivectrl->loop(DriveCtrl::Event::NoEvent);
+                    break;
+                case 'l':
+                    DBINFO1ln("Event: LineAligned");
+                    drivectrl->loop(DriveCtrl::Event::LineAligned);
+                    break;
+                case 'f':
+                    DBINFO1ln("Event: FullLineDetected");
+                    drivectrl->loop(DriveCtrl::Event::FullLineDetected);
+                    break;
+                default:
+                    DBINFO1ln("Error: Unknown value entered");
+                    break;
+            }
             break;
+
         default:
             break;
     }
