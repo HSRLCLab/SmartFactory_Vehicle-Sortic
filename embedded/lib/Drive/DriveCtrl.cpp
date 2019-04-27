@@ -9,11 +9,23 @@
  * @date 2019-04-23
  * @copyright Copyright (c) 2019
  * 
+ * @todo solve linedetection with something like first position and not with loopcount
  */
 
 #include "DriveCtrl.h"
 //=====PUBLIC====================================================================================
 DriveCtrl::DriveCtrl() : currentState(State::idle) {
+    pRegler.SetTunings(pVal_p, pVal_i, pVal_d);
+    pRegler.SetOutputLimits(-255, 255);
+    pRegler.SetSampleTime(pSampleTime);  // Sampletime in milliseconds
+    pRegler.SetMode(AUTOMATIC);
+    pRegler.SetControllerDirection(DIRECT);
+    DBINFO3("Kp: ");
+    DBINFO3ln(pRegler.GetKp());
+    DBINFO3("Ki: ");
+    DBINFO3ln(pRegler.GetKi());
+    DBINFO3("Kd: ");
+    DBINFO3ln(pRegler.GetKd());
 }
 
 void DriveCtrl::loop() {
@@ -220,6 +232,7 @@ void DriveCtrl::entryAction_followingLine() {
     currentState = State::followingLine;  // state transition
     doActionFPtr = &DriveCtrl::doAction_followingLine;
     loopcount = 0;
+    pRegler_Input = 0;
     //Entry-Action
     pDrive.drive(Drive::Direction::Forward, SPEED);
 }
@@ -228,9 +241,27 @@ DriveCtrl::Event DriveCtrl::doAction_followingLine() {
     DBINFO2ln("Drive State: followingLine");
     //Generate the Event
     // DBINFO3ln(pEnvdetect.Linedeviation());
-    if ((abs(pEnvdetect.Linedeviation()) == 180) && (loopcount > 5)) {
+    int linedeviation = pEnvdetect.Linedeviation();
+    if ((abs(linedeviation) == 180) && (loopcount > 5)) {
         return Event::FullLineDetected;
+    } else if ((abs(linedeviation) == 200)) {
+        //Line lost
+        // return Event::FullLineDetected;
     }
+    if ((linedeviation != 180) && (linedeviation != 200)) {
+        pRegler_Input = linedeviation;
+    }
+    DBINFO3("Regler-Input: ");
+    DBINFO3ln(pRegler_Input);
+    pRegler.Compute();
+    DBINFO3("Reglerkorr: ");
+    DBINFO3ln(pRegler_Output);
+    if (pRegler_Output > 0) {
+        pDrive.turn(Drive::Direction::Left, abs(pRegler_Output));
+    } else if (pRegler_Output < 0) {
+        pDrive.turn(Drive::Direction::Right, abs(pRegler_Output));
+    }
+
     loopcount += 1;
     return Event::NoEvent;
 }

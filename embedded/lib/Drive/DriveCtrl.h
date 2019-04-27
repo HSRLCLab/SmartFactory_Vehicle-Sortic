@@ -16,6 +16,8 @@
 
 #include "Configuration.h"
 
+#include <PID_v1.h>
+
 #include "Drive.h"
 #include "EnvironmentDetection.h"
 
@@ -102,6 +104,25 @@ class DriveCtrl {
 
     Drive pDrive = Drive(RIGHT_MOTOR, LEFT_MOTOR);  ///< Drive Object
     EnvironmentDetection pEnvdetect;                ///< EnviromentDetection Object
+
+    double pRegler_Input = 0;
+    double pRegler_Output = 0;
+    double pRegler_Setpoint = 0;
+    int pSampleTime = 50;
+
+    double pVal_p = PID_KP;
+    double pVal_i = PID_KI / pSampleTime;
+    double pVal_d = PID_KD * pSampleTime;
+    PID pRegler = PID(&pRegler_Input, &pRegler_Output, &pRegler_Setpoint, pVal_p, pVal_i, pVal_d, DIRECT);
+
+    /*https://www.quora.com/What-would-be-appropriate-tuning-factors-for-PID-line-follower-robot
+       1. Set all the gains to zero
+       2. Increase only Kp (Proportional gain) to get an ultimate oscillating value Kp(max)
+       3. Increase Kd (Derivative gain) until the oscillations disappear.
+       4. Repeat steps 2 and 3 until increasing Kd does not dampen the oscillations
+       5. Now increase Ki (Integral gain) to get a good system with desired number of oscillations (Ideally zero)
+    */
+
     //=====StateFunctions=====
     //=====idle==========================================================
     /**

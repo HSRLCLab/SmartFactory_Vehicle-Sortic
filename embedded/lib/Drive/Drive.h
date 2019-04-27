@@ -83,32 +83,10 @@ class Drive {
      * 
      * @param direction - 
      * @param speed - 
-     * @param time - 
-     * @return true - 
-     * @return false - 
-     */
-    bool drive(Direction direction, unsigned int speed, unsigned int time);
-
-    /**
-     * @brief 
-     * 
-     * @param direction - 
-     * @param speed - 
      * @return true - 
      * @return false - 
      */
     void turn(Direction direction, unsigned int speed);
-
-    /**
-     * @brief 
-     * 
-     * @param direction - 
-     * @param speed - 
-     * @param time - 
-     * @return true - 
-     * @return false - 
-     */
-    bool turn(Direction direction, unsigned int speed, unsigned int time);
 
     void turnonpoint(Direction direction, unsigned int speed);
 
@@ -127,7 +105,9 @@ class Drive {
     Adafruit_DCMotor *pMotorLeft;                         ///<Pointer to left Motor Obj
     int pSpeedLeft;                                       ///< actual Speed of left Motor
     int pSpeedRight;                                      ///< actual Speed of right Motor
-    Direction pWayVehicle = Direction::Forward;           ///< Actual movingdirection Forward or Backward
+    int pTurnSpeedLeft;
+    int pTurnSpeedRight;
+    Direction pWayVehicle = Direction::Forward;  ///< Actual movingdirection Forward or Backward
     //============================================================================
     //==Aux-Function==============================================================
     /**

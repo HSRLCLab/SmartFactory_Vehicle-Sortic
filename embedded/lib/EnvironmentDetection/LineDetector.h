@@ -31,22 +31,25 @@ class LineDetector {
      * @brief 
      * 
      * -90 90 Degree turn left
-     * 90 90 Degree turn right
+     *  90 90 Degree turn right
      * 180 full Line detected
      * 
+     *  4 Line is on the right side
+     *  0 Line is in the middle
+     * -4 Line is on the left side
      * @return const int - error
      */
     const int deviation();
     //=====PRIVATE===================================================================================
    private:
     //Use an Array?
-    const int pSensorPinLL;
+    const int pSensorPinLL;  ///< Pin
     const int pSensorPinL;
     const int pSensorPinM;
     const int pSensorPinR;
     const int pSensorPinRR;
 
-    int pSensorLL;
+    int pSensorLL;  ///< Value
     int pSensorL;
     int pSensorM;
     int pSensorR;

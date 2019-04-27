@@ -26,6 +26,11 @@ LineDetector::LineDetector(const int sensorPin_0, const int sensorPin_1,
     pinMode(pSensorPinRR, INPUT);
 }
 
+/**
+ * @todo use some Matrix Bit Magic
+ * 
+ * @todo line lost case
+ */
 const int LineDetector::deviation() {
     pSensorLL = digitalRead(pSensorPinLL);
     pSensorL = digitalRead(pSensorPinL);
@@ -60,6 +65,10 @@ const int LineDetector::deviation() {
     } else if ((pSensorLL == 1) && (pSensorL == 1) && (pSensorM == 1) && (pSensorR == 1) && (pSensorRR == 1)) {
         DBINFO3ln("Volle Linie");
         return 180;
+    } else if ((pSensorLL == 0) && (pSensorL == 0) && (pSensorM == 0) && (pSensorR == 0) && (pSensorRR == 0)) {
+        return 200;  ///@todo line lost
+    } else {
+        return 200;  ///@todo wired results
     }
 }
 

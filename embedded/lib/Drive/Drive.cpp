@@ -54,10 +54,6 @@ void Drive::drive(Direction direction, unsigned int speed) {
     }
 }
 
-bool Drive::drive(Direction direction, unsigned int speed, unsigned int time) {
-    DBFUNCCALLln("");
-}
-
 /**
  * @todo change direction if vehicle is moving forward or backward so the turndirectiomn still matches direction
  */
@@ -65,25 +61,25 @@ void Drive::turn(Direction direction, unsigned int speed) {
     DBFUNCCALLln("Drive::turn(Direction direction, unsigned int speed)");
     switch (direction) {
         case Direction::Left:
-            pSpeedLeft -= speed;
-            pSpeedRight += speed;
+            pTurnSpeedLeft = pSpeedLeft - speed;
+            pTurnSpeedRight = pSpeedRight + speed;
             break;
         case Direction::Right:
-            pSpeedLeft += speed;
-            pSpeedRight -= speed;
+            pTurnSpeedLeft = pSpeedLeft + speed;
+            pTurnSpeedRight = pSpeedRight - speed;
             break;
         default:
             break;
     }
-    pSpeedLeft = constrain(pSpeedLeft, 0, 255);
-    pSpeedRight = constrain(pSpeedRight, 0, 255);
+    pTurnSpeedLeft = constrain(pTurnSpeedLeft, 0, 255);
+    pTurnSpeedRight = constrain(pTurnSpeedRight, 0, 255);
     DBINFO3ln(decodeDirection(direction));
     DBINFO3("Speed L/R: ");
-    DBINFO3(pSpeedLeft);
+    DBINFO3(pTurnSpeedLeft);
     DBINFO3(" / ");
-    DBINFO3ln(pSpeedRight);
-    pMotorLeft->setSpeed(pSpeedLeft);
-    pMotorRight->setSpeed(pSpeedRight);
+    DBINFO3ln(pTurnSpeedRight);
+    pMotorLeft->setSpeed(pTurnSpeedLeft);
+    pMotorRight->setSpeed(pTurnSpeedRight);
     switch (pWayVehicle) {
         case Direction::Forward:
             pMotorLeft->run(FORWARD);
@@ -98,17 +94,13 @@ void Drive::turn(Direction direction, unsigned int speed) {
     }
 }
 
-bool Drive::turn(Direction direction, unsigned int speed, unsigned int time) {
-    DBFUNCCALLln("");
-}
-
 void Drive::turnonpoint(Direction direction, unsigned int speed) {
     DBFUNCCALLln("Drive::turn(Direction direction, unsigned int speed)");
     speed = constrain(speed, 0, 255);
-    pSpeedLeft = speed;
-    pSpeedRight = speed;
-    pMotorLeft->setSpeed(pSpeedLeft);
-    pMotorRight->setSpeed(pSpeedRight);
+    pTurnSpeedLeft = speed;
+    pTurnSpeedRight = speed;
+    pMotorLeft->setSpeed(pTurnSpeedLeft);
+    pMotorRight->setSpeed(pTurnSpeedRight);
     DBINFO3("Speed L/R: ");
     switch (direction) {
         case Direction::Left:

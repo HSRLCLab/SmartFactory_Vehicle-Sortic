@@ -1,5 +1,5 @@
 /**
- * @file EnviromentDetection.h
+ * @file EnvirnomentDetection.h
  * @brief 
  * 
  * @author Luca Mazzoleni (luca.mazzoleni@hsr.ch)
@@ -29,7 +29,7 @@ class EnvironmentDetection {
    public:
     EnvironmentDetection(){};
 
-    inline const int deviation() {
+    inline const int Linedeviation() {
         return pLinedetector.deviation();
     }
     //=====PRIVATE===================================================================================

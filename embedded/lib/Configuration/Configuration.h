@@ -12,23 +12,35 @@
  * 
  */
 
-//Setup for chassis /////////////////
-#define RIGHT_MOTOR 1     ///<
-#define LEFT_MOTOR 2      ///<
-#define PIN_SENSOR_0 13   ///<
-#define PIN_SENSOR_1 12   ///<
-#define PIN_SENSOR_2 11   ///<
-#define PIN_SENSOR_3 10   ///<
-#define PIN_SENSOR_4 9    ///<
-#define SPEED 70          ///<
-#define REDUCED_SPEED 60  ///<
-#define PUSH_SPEED 80     ///<
+#ifndef CONFIGURATION_H
+#define CONFIGURATION_H
+
+//Setup for Drive /////////////////
+const double SPEEDFACTOR = 1;
+const unsigned int RIGHT_MOTOR = 1;                   ///<
+const unsigned int LEFT_MOTOR = 2;                    ///<
+const unsigned int SPEED = 70 * SPEEDFACTOR;          ///<
+const unsigned int REDUCED_SPEED = 60 * SPEEDFACTOR;  ///<
+const unsigned int TURNING_SPEED = 70 * SPEEDFACTOR;  ///<
+const unsigned int PUSH_SPEED = 80 * SPEEDFACTOR;     ///<
+
+const unsigned int PIN_SENSOR_0 = 13;  ///<
+const unsigned int PIN_SENSOR_1 = 12;  ///<
+const unsigned int PIN_SENSOR_2 = 11;  ///<
+const unsigned int PIN_SENSOR_3 = 10;  ///<
+const unsigned int PIN_SENSOR_4 = 9;   ///<
 /////////////////////////////////////
 
 //Setup for PID /////////////////////
-#define K_P 11   ///<
-#define K_I 0.3  ///<
-#define K_D 0    ///<
+#if SPEEDFACTOR < 2
+const double PID_KP = 5;      ///<
+const double PID_KI = 10;     ///<
+const double PID_KD = 0.002;  ///<
+#else                         //use an more agressiv PID
+const double K_P = 30;    ///<
+const double K_I = 20;    ///<
+const double K_D = 0.05;  ///<
+#endif
 /////////////////////////////////////
 
 //Setup for sonar ///////////////////
@@ -76,3 +88,5 @@
 //Ports //////////////////////////
 #define LISTEN_PORT 80     ///<
 #define SENDING_PORT 1880  ///<
+
+#endif
