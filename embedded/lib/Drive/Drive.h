@@ -1,13 +1,13 @@
 /**
  * @file Drive.h
- * @brief 
+ * @brief The Drive Class handles the activation of the dc-motors for the drive
  * 
  * DC MOTOR + STEPPER FEATHERWING ADD-ON FOR ALL FEATHER BOARDS
  * https://www.adafruit.com/product/2927 
  * 
  * @author Luca Mazzoleni (luca.mazzoleni@hsr.ch)
  * 
- * @version 1.0 - Description - {author} - {date}
+ * @version 1.0 - Implementation Drive  - Luca Mazzoleni (luca.mazzoleni@hsr.ch) - 2019-04-26
  * 
  * @date 2019-04-26
  * @copyright Copyright (c) 2019
@@ -17,7 +17,7 @@
 #ifndef DRIVE_H
 #define DRIVE_H
 
-#include <Adafruit_MotorShield.h>  ///<https://github.com/adafruit/Adafruit_Motor_Shield_V2_Library
+#include <Adafruit_MotorShield.h>  //https://github.com/adafruit/Adafruit_Motor_Shield_V2_Library
 #include <Arduino.h>
 
 #include "Configuration.h"
@@ -44,14 +44,14 @@ class Drive {
     //=====PUBLIC====================================================================================
    public:
     /**
-    * @brief 
+    * @brief Direction holds all possible directions
     * 
     */
     enum class Direction {
-        Left,
-        Right,
-        Forward,
-        Backward
+        Left,     ///< Left
+        Right,    ///< Right
+        Forward,  ///< Forward
+        Backward  ///< Backward
     };
 
     /**
@@ -62,39 +62,39 @@ class Drive {
 
     /**
      * @brief Construct a new Drive object
-     * 
-     * @param MotorPinRight - 
-     * @param MotorPinLeft - 
-     * @param speed - 
+     * https://www.adafruit.com/product/2927 
+     * @param MotorPortRight - Port where the right Motor is connected on the MotorShield
+     * @param MotorPortLeft - Port where the left Motor is connected on the MotorShield
      */
     Drive(const int MotorPortRight, const int MotorPortLeft);
     /**
-     * @brief 
+     * @brief Drive straight Forwards or Backwards
      * 
-     * @param direction - 
-     * @param speed - 0 and 255
-     * @return true - 
-     * @return false - 
+     * @param direction - Movingdirection Forward or Backward
+     * @param speed - Speed between 0 and 255
      */
     void drive(Direction direction, unsigned int speed);
 
     /**
-     * @brief 
+     * @brief Turn left or right.
+     * Speed will add to one Motor's actual speed and substract from the others depenig on wich side it turns
      * 
-     * @param direction - 
-     * @param speed - 
-     * @return true - 
-     * @return false - 
+     * @param direction - left  or right
+     * @param speed - Speed between 0 and 255
      */
     void turn(Direction direction, unsigned int speed);
 
+    /**
+     * @brief Turn on Point
+     * Drive on Motor Forward and the other Backward with the given speed
+     * 
+     * @param direction - left or right
+     * @param speed - Speed between 0 and 255
+     */
     void turnonpoint(Direction direction, unsigned int speed);
 
     /**
-     * @brief 
-     * 
-     * @return true - 
-     * @return false -
+     * @brief Power of the Motor. Does not apply breaking.
      */
     void stop();
 

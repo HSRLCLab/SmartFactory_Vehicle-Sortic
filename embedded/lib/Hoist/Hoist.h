@@ -14,25 +14,24 @@
  * @date 2019-03-20
  * @copyright Copyright (c) 2019
  * 
- * @todo add const and private
- * 
+ * @Todo Delet Default Constructor and don't include configuration.. Pass max Values into function
  */
 
 #ifndef Hoist_h
 #define Hoist_h
 
-#include "Arduino.h"
 #include "Configuration.h"
 #include "LogConfiguration.h"
-// #include "Modular.h"
-#include "Servo.h"
+
+#include <Servo.h>
+#include "Arduino.h"
 
 /**
- * @brief Hoist class controlls the Hoist
+ * @brief Provides the basic Functions to Controll the Hoist
  * 
  */
-// class Hoist : public Component {
 class Hoist {
+    //=====PUBLIC====================================================================================
    public:
     Hoist();
     /**
@@ -64,7 +63,7 @@ class Hoist {
     bool lower();
 
     /**
-     * @brief attache Servo to Servopin
+     * @brief attache servo to servopin
      * 
      */
     inline void attach() {
@@ -80,10 +79,12 @@ class Hoist {
         DBFUNCCALLln("Hoist::detach()");
         hoistServo.detach();
     }
-
+    //=====PRIVATE====================================================================================
    private:
-    Servo hoistServo;  ///< instance of servo object
-    int servoPin;      ///< servopin
+    ///< @todo add const and private
+    ///< @todo refactor private name -> pHoistServo
+    Servo hoistServo;  ///< Instance of servo object
+    int servoPin;      ///< Servopin
     int position;      ///< actual position
     int positionMin;   ///< minimal Position (Hardware)
     int positionMax;   ///< maximal Position (Hardware)

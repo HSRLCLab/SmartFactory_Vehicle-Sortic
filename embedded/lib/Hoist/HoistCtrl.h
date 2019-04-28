@@ -14,10 +14,13 @@
 #ifndef HOISTCTRL_H__
 #define HOISTCTRL_H__
 
+#include "Configuration.h"
+#include "LogConfiguration.h"
+
 #include "Hoist.h"
 
 /**
- * @brief The Hoist Controll class contains the FSM for the Hoist
+ * @brief Contains the FSM for the Hoist
  * 
  */
 class HoistCtrl {
@@ -27,23 +30,23 @@ class HoistCtrl {
     * @brief Enum holds all possible events
     * 
     */
-    enum class Event { Raise,       ///< Start Raise
-                       Lower,       ///< Start Lower
-                       PosReached,  ///< Position reached
+    enum class Event { Raise,       ///< Ext: Start Raise
+                       Lower,       ///< Ext: Start Lower
+                       PosReached,  ///< Signal: Position reached
                        Error,       ///< Error occured
-                       Resume,      ///< Resume after Error occured
+                       Resume,      ///< Ext: Resume after Error occured
                        NoEvent      ///< No event generated
     };
 
     /**
-    * @brief Enum holds all possible states
+    * @brief Enum holds all possible states for the Hoist
     * 
     */
-    enum class State { low,        ///< Low State
-                       raising,    ///< Raising State
-                       high,       ///< High State
-                       lowering,   ///< Lowering State
-                       errorState  ///< Error State
+    enum class State { low,        ///< low State
+                       raising,    ///< raising State
+                       high,       ///< high State
+                       lowering,   ///< lowering State
+                       errorState  ///< error State
     };
     /**
      * @brief Construct a new Hoist Ctrl object
@@ -59,7 +62,7 @@ class HoistCtrl {
     void loop();
 
     /**
-     * @brief procceses the current Event and calls the do-function of the active state
+     * @brief Procceses the current Event and calls the do-function of the active state
      * 
      * @param currentEvent - Event
      */
@@ -74,13 +77,6 @@ class HoistCtrl {
 
     //=====PRIVATE====================================================================================
    private:
-    /**
-     * @brief changes the state of the FSM based on the event
-     * 
-     * @param e - Event
-     */
-    void process(Event e);
-
     State lastStateBevorError;  ///< holds the last state of the FSM so it's possible to resume after error
     State currentState;         ///< holds the current state of the FSM
     Event currentEvent;         ///< holds the current event of the FSM
@@ -92,109 +88,127 @@ class HoistCtrl {
      */
     Event (HoistCtrl::*doActionFPtr)(void) = &HoistCtrl::doAction_low;
 
-    Hoist pHoist;  ///< SensorArray Object
+    Hoist pHoist;  ///< Hoist Object
 
+    //=====PrivateFunctions=========================================================================
+    /**
+     * @brief changes the state of the FSM based on the event
+     * 
+     * @param e - Event
+     */
+    void process(Event e);
     //=====StateFunctions=====
     //=====low==========================================================
     /**
-     * @brief executes the entry action of the low
-     * 
-     * Turns on the Loadindicator-LED
+     * @brief executes the entry action of the low state.
      * 
      */
     void entryAction_low();
 
     /**
-     * @brief executes the main action of the low
+     * @brief executes the main action of the low state.
      * 
+     * This is an idle-state.
+     * Return NoEvent.
+     * 
+     * @return HoistCtrl::Event - generated Event
      */
     HoistCtrl::Event doAction_low();
 
     /**
-     * @brief executes the exit action of the low
+     * @brief executes the exit action of the low state.
      * 
      */
     void exitAction_low();
 
     //=====raising==========================================================
     /**
-     * @brief executes the entry action of the raising 
+     * @brief executes the entry action of the raising state.
      * 
+     * Attach Servo.
      */
     void entryAction_raising();
 
     /**
-     * @brief executes the main action of the raising
+     * @brief executes the main action of the raising state.
+     * 
+     * Raise the Hoist till the Endposition is reached and generate an PosReached Event.
+     * Else return NoEvent.
      * 
      * @return HoistCtrl::Event - generated Event
      */
     HoistCtrl::Event doAction_raising();
 
     /**
-     * @brief executes the exit action of the raising
+     * @brief executes the exit action of the raising state.
      * 
+     * Detach Servo.
      */
     void exitAction_raising();
 
     //=====high==========================================================
     /**
-     * @brief executes the entry action of the high 
+     * @brief executes the entry action of the high state.
      * 
-     * Turns off the Loadindicator-LED
      */
     void entryAction_high();
 
     /**
-     * @brief executes the main action of the high
+     * @brief executes the main action of the high state.
+     * 
+     * This is an idle-state.
+     * Return NoEvent.
      * 
      * @return HoistCtrl::Event - generated Event
      */
     HoistCtrl::Event doAction_high();
 
     /**
-     * @brief executes the exit action of the high
+     * @brief executes the exit action of the high state.
      * 
      */
     void exitAction_high();
 
     //=====lowering==========================================================
     /**
-     * @brief executes the entry action of the lowering 
+     * @brief executes the entry action of the lowering  state.
      * 
-     * Turns off the Loadindicator-LED
+     * Attach Servo.
      */
     void entryAction_lowering();
 
     /**
-     * @brief executes the main action of the lowering
+     * @brief executes the main action of the lowering state.
      * 
-     * 
+     * Lower the hoist till the lowposition is reached and then generate the event PosReached.
+     * else return NoEvent.
      * @return HoistCtrl::Event - generated Event
      */
     HoistCtrl::Event doAction_lowering();
 
     /**
-     * @brief executes the exit action of the lowering
+     * @brief executes the exit action of the lowering state.
      * 
+     * Detache the Servo.
      */
     void exitAction_lowering();
 
     //==errorState==========================================================
     /**
-     * @brief entry action of the errorState
+     * @brief entry action of the errorState state.
      * 
      */
     void entryAction_errorState();
 
     /**
-     * @brief main action of the errorState
+     * @brief main action of the errorState state.
      * 
      *  @return HoistCtrl::Event - generated Event
      */
     HoistCtrl::Event doAction_errorState();
 
     /**
-     * @brief exit action of the errorState
+     * @brief exit action of the errorState state.
      * 
      */
     void exitAction_errorState();

@@ -1,10 +1,10 @@
 /**
  * @file Drive.cpp
- * @brief 
+ * @brief The Drive Class handles the activation of the dc-motors for the drive
  * 
  * @author Luca Mazzoleni (luca.mazzoleni@hsr.ch)
  * 
- * @version 1.0 - Description - {author} - {date}
+ * @version 1.0 - Implementation Drive  - Luca Mazzoleni (luca.mazzoleni@hsr.ch) - 2019-04-26
  * 
  * @date 2019-04-26
  * @copyright Copyright (c) 2019

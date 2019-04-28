@@ -15,17 +15,17 @@
 #include "DriveCtrl.h"
 //=====PUBLIC====================================================================================
 DriveCtrl::DriveCtrl() : currentState(State::idle) {
-    pRegler.SetTunings(pVal_p, pVal_i, pVal_d);
-    pRegler.SetOutputLimits(-255, 255);
-    pRegler.SetSampleTime(pSampleTime);  // Sampletime in milliseconds
-    pRegler.SetMode(AUTOMATIC);
-    pRegler.SetControllerDirection(DIRECT);
+    pController.SetTunings(pVal_p, pVal_i, pVal_d);
+    pController.SetOutputLimits(-255, 255);
+    pController.SetSampleTime(pSampleTime);  // Sampletime in milliseconds
+    pController.SetMode(AUTOMATIC);
+    pController.SetControllerDirection(DIRECT);
     DBINFO3("Kp: ");
-    DBINFO3ln(pRegler.GetKp());
+    DBINFO3ln(pController.GetKp());
     DBINFO3("Ki: ");
-    DBINFO3ln(pRegler.GetKi());
+    DBINFO3ln(pController.GetKi());
     DBINFO3("Kd: ");
-    DBINFO3ln(pRegler.GetKd());
+    DBINFO3ln(pController.GetKd());
 }
 
 void DriveCtrl::loop() {
@@ -232,7 +232,7 @@ void DriveCtrl::entryAction_followingLine() {
     currentState = State::followingLine;  // state transition
     doActionFPtr = &DriveCtrl::doAction_followingLine;
     loopcount = 0;
-    pRegler_Input = 0;
+    pController_Input = 0;
     //Entry-Action
     pDrive.drive(Drive::Direction::Forward, SPEED);
 }
@@ -249,17 +249,17 @@ DriveCtrl::Event DriveCtrl::doAction_followingLine() {
         // return Event::FullLineDetected;
     }
     if ((linedeviation != 180) && (linedeviation != 200)) {
-        pRegler_Input = linedeviation;
+        pController_Input = linedeviation;
     }
     DBINFO3("Regler-Input: ");
-    DBINFO3ln(pRegler_Input);
-    pRegler.Compute();
+    DBINFO3ln(pController_Input);
+    pController.Compute();
     DBINFO3("Reglerkorr: ");
-    DBINFO3ln(pRegler_Output);
-    if (pRegler_Output > 0) {
-        pDrive.turn(Drive::Direction::Left, abs(pRegler_Output));
-    } else if (pRegler_Output < 0) {
-        pDrive.turn(Drive::Direction::Right, abs(pRegler_Output));
+    DBINFO3ln(pController_Output);
+    if (pController_Output > 0) {
+        pDrive.turn(Drive::Direction::Left, abs(pController_Output));
+    } else if (pController_Output < 0) {
+        pDrive.turn(Drive::Direction::Right, abs(pController_Output));
     }
 
     loopcount += 1;

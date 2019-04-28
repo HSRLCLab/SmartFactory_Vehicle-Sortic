@@ -1,10 +1,10 @@
 /**
  * @file EnvirnomentDetection.h
- * @brief 
+ * @brief Class EnvirnomentDetection provides an Interface for all Enviroment detection Systems of the Vehilce. 
  * 
  * @author Luca Mazzoleni (luca.mazzoleni@hsr.ch)
  * 
- * @version 1.0 - Description - {author} - {date}
+ * @version 1.0 - Implementation Interface  - Luca Mazzoleni (luca.mazzoleni@hsr.ch) - 2019-04-26
  * 
  * @date 2019-04-26
  * @copyright Copyright (c) 2019
@@ -21,7 +21,7 @@
 #include "LineDetector.h"
 
 /**
- * @brief 
+ * @brief Provides an Interface for all Enviroment detection Systems of the Vehilce. 
  * 
  */
 class EnvironmentDetection {

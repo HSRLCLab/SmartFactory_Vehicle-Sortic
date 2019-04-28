@@ -15,6 +15,7 @@
 #define DRIVECTRL_H__
 
 #include "Configuration.h"
+#include "LogConfiguration.h"
 
 #include <PID_v1.h>
 
@@ -22,7 +23,7 @@
 #include "EnvironmentDetection.h"
 
 /**
- * @brief The Drive Controll class contains the FSM for the Drive
+ * @brief Contains the FSM to controll the Drive
  * 
  */
 class DriveCtrl {
@@ -32,12 +33,12 @@ class DriveCtrl {
     * @brief Enum holds all possible events
     * 
     */
-    enum class Event { TurnLeft,          ///< Ext.:
-                       TurnRight,         ///< Ext.:
-                       TurnAround,        ///< Ext.:
-                       FollowLine,        ///< Ext.:
-                       FullLineDetected,  ///< Signal:
-                       LineAligned,       ///< Signal:
+    enum class Event { TurnLeft,          ///< Ext.: Turn Left
+                       TurnRight,         ///< Ext.: Turn Right
+                       TurnAround,        ///< Ext.: Turn Around on Position
+                       FollowLine,        ///< Ext.: Follow the Line
+                       FullLineDetected,  ///< Signal: Full Line detected
+                       LineAligned,       ///< Signal: Line is alligned in the middle of the Vehicle
                        Error,             ///< Ext.: Error occured
                        Resume,            ///< Ext.: Resume after Error occured
                        NoEvent            ///< No event generated
@@ -47,16 +48,17 @@ class DriveCtrl {
     * @brief Enum holds all possible states
     * 
     */
-    enum class State { idle,           ///<  State
-                       turningLeft,    ///<  State
-                       turningRight,   ///<  State
-                       turningAround,  ///<  State
-                       followingLine,  ///<  State
+    enum class State { idle,           ///< idle State
+                       turningLeft,    ///< turning left State
+                       turningRight,   ///< turning right State
+                       turningAround,  ///< turning around State
+                       followingLine,  ///<  follow the Line State
                        errorState      ///< Error State
     };
+
     /**
      * @brief Construct a new Drive Ctrl object
-     * and initailize the currentState with idle state
+     * and initailize the currentState with idle state and the PID-Controller
      * 
      */
     DriveCtrl();
@@ -83,13 +85,6 @@ class DriveCtrl {
 
     //=====PRIVATE====================================================================================
    private:
-    /**
-     * @brief changes the state of the FSM based on the event
-     * 
-     * @param e - Event
-     */
-    void process(Event e);
-
     State lastStateBevorError;  ///< holds the last state of the FSM so it's possible to resume after error
     State currentState;         ///< holds the current state of the FSM
     Event currentEvent;         ///< holds the current event of the FSM
@@ -100,28 +95,39 @@ class DriveCtrl {
      * https://stackoverflow.com/questions/1485983/calling-c-class-methods-via-a-function-pointer
      */
     Event (DriveCtrl::*doActionFPtr)(void) = &DriveCtrl::doAction_idle;
-    unsigned int loopcount;
 
+    unsigned int loopcount;                ///< Var counts how often a do-function is called
+    double pController_Input = 0;          ///< Controller Input
+    double pController_Output = 0;         ///< Controller Output
+    double pController_Setpoint = 0;       ///< Controller Setpoint
+    int pSampleTime = 50;                  ///< Controler SampleTime in ms
+    double pVal_p = PID_KP;                ///< P-Value
+    double pVal_i = PID_KI / pSampleTime;  ///< I-Value (independet of SamplingTime)
+    double pVal_d = PID_KD * pSampleTime;  ///< D-Value (independet of SamplingTime)
+
+    /**
+     * @brief PID-Controller Object
+     * 
+     *   https://www.quora.com/What-would-be-appropriate-tuning-factors-for-PID-line-follower-robot
+     *  1. Set all the gains to zero
+     *  2. Increase only Kp (Proportional gain) to get an ultimate oscillating value Kp(max)
+     *  3. Increase Kd (Derivative gain) until the oscillations disappear.
+     *  4. Repeat steps 2 and 3 until increasing Kd does not dampen the oscillations
+     *  5. Now increase Ki (Integral gain) to get a good system with desired number of oscillations (Ideally zero)
+     * 
+     * @todo improve controller and make it adaptive to speedchanges
+     */
+    PID pController = PID(&pController_Input, &pController_Output, &pController_Setpoint, pVal_p, pVal_i, pVal_d, DIRECT);
     Drive pDrive = Drive(RIGHT_MOTOR, LEFT_MOTOR);  ///< Drive Object
     EnvironmentDetection pEnvdetect;                ///< EnviromentDetection Object
 
-    double pRegler_Input = 0;
-    double pRegler_Output = 0;
-    double pRegler_Setpoint = 0;
-    int pSampleTime = 50;
-
-    double pVal_p = PID_KP;
-    double pVal_i = PID_KI / pSampleTime;
-    double pVal_d = PID_KD * pSampleTime;
-    PID pRegler = PID(&pRegler_Input, &pRegler_Output, &pRegler_Setpoint, pVal_p, pVal_i, pVal_d, DIRECT);
-
-    /*https://www.quora.com/What-would-be-appropriate-tuning-factors-for-PID-line-follower-robot
-       1. Set all the gains to zero
-       2. Increase only Kp (Proportional gain) to get an ultimate oscillating value Kp(max)
-       3. Increase Kd (Derivative gain) until the oscillations disappear.
-       4. Repeat steps 2 and 3 until increasing Kd does not dampen the oscillations
-       5. Now increase Ki (Integral gain) to get a good system with desired number of oscillations (Ideally zero)
-    */
+    //=====PrivateFunctions=========================================================================
+    /**
+     * @brief changes the state of the FSM based on the event
+     * 
+     * @param e - Event
+     */
+    void process(Event e);
 
     //=====StateFunctions=====
     //=====idle==========================================================
@@ -135,6 +141,10 @@ class DriveCtrl {
     /**
      * @brief executes the main action of the idle
      * 
+     * This is an idle-state.
+     * Return NoEvent.
+     * 
+     * @return DriveCtrl::Event - generated Event
      */
     DriveCtrl::Event doAction_idle();
 
@@ -148,11 +158,16 @@ class DriveCtrl {
     /**
      * @brief executes the entry action of the turningLeft 
      * 
+     * Start Turning Left.
+     * 
      */
     void entryAction_turningLeft();
 
     /**
      * @brief executes the main action of the turningLeft
+     * 
+     * Turn Left until the line is aligned again. Return LineAligned
+     * else return no Event.
      * 
      * @return DriveCtrl::Event - generated Event
      */
@@ -161,6 +176,7 @@ class DriveCtrl {
     /**
      * @brief executes the exit action of the turningLeft
      * 
+     * Stop Driving.
      */
     void exitAction_turningLeft();
 
@@ -168,11 +184,15 @@ class DriveCtrl {
     /**
      * @brief executes the entry action of the turningRight 
      * 
+     * Start Turning Right.
      */
     void entryAction_turningRight();
 
     /**
      * @brief executes the main action of the turningRight
+     * 
+     * Turn Right until the line is aligned again. Return LineAligned
+     * else return no Event.
      * 
      * @return DriveCtrl::Event - generated Event
      */
@@ -181,6 +201,7 @@ class DriveCtrl {
     /**
      * @brief executes the exit action of the turningRight
      * 
+     * Stop Driving.
      */
     void exitAction_turningRight();
 
@@ -188,12 +209,15 @@ class DriveCtrl {
     /**
      * @brief executes the entry action of the turningAround 
      * 
+     * Start Turning Right.
      */
     void entryAction_turningAround();
 
     /**
      * @brief executes the main action of the turningAround
      * 
+     * Turn Right until the line is aligned again. Return LineAligned
+     * else return no Event.
      * 
      * @return DriveCtrl::Event - generated Event
      */
@@ -202,6 +226,7 @@ class DriveCtrl {
     /**
      * @brief executes the exit action of the turningAround
      * 
+     * Stop Driving.
      */
     void exitAction_turningAround();
 
@@ -209,12 +234,15 @@ class DriveCtrl {
     /**
      * @brief executes the entry action of the followingLine 
      * 
+     * Start Driving Straight
      */
     void entryAction_followingLine();
 
     /**
      * @brief executes the main action of the followingLine
      * 
+     * Check Line-deviation adn correct accordingly via PID-Controller
+     * and drive until a FullLine is Detected. Return Event FullLine else reutrn NoEvent.
      * 
      * @return DriveCtrl::Event - generated Event
      */
@@ -223,6 +251,7 @@ class DriveCtrl {
     /**
      * @brief executes the exit action of the followingLine
      * 
+     * Stop driving.
      */
     void exitAction_followingLine();
     //==errorState==========================================================

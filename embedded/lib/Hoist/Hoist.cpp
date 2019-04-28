@@ -17,7 +17,8 @@
  */
 
 #include "Hoist.h"
-#include "Arduino.h"
+
+//=====PUBLIC====================================================================================
 Hoist::Hoist() : Hoist(HOIST_SERVO_PIN,
                        HOIST_SERVO_DELAY,
                        HOIST_POISITION_MAX,
@@ -40,6 +41,7 @@ void Hoist::init() {
     };
     detach();
 }
+
 /**
  * @todo non blocking delay 
  * @todo reale pos abfragen
@@ -81,3 +83,5 @@ bool Hoist::lower() {
     }
     return false;
 }
+
+//=====PRIVATE====================================================================================

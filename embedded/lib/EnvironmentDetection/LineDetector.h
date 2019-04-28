@@ -1,10 +1,10 @@
 /**
  * @file LineDetector.h
- * @brief 
+ * @brief The Class LineDetector handels the Line detection-System 
  * 
  * @author Luca Mazzoleni (luca.mazzoleni@hsr.ch)
  * 
- * @version 1.0 - Description - {author} - {date}
+ * @version 1.0 - Implementation LineDetectiion System  - Luca Mazzoleni (luca.mazzoleni@hsr.ch) - 2019-04-26
  * 
  * @date 2019-04-26
  * @copyright Copyright (c) 2019
@@ -19,40 +19,51 @@
 #include "LogConfiguration.h"
 
 /**
- * @brief Class LineDetector handels the Line detection
+ * @brief Class LineDetector handels the Line detection-System 
  * 
  */
 class LineDetector {
     //=====PUBLIC====================================================================================
    public:
+    /**
+    * @brief Construct a new Line Detector object
+    * 
+    * @param sensorPin_0 - Pin Sensor Far Left
+    * @param sensorPin_1 - Pin Sensor  Left
+    * @param sensorPin_2 - Pin Sensor Middle
+    * @param sensorPin_3 - Pin Sensor  Right
+    * @param sensorPin_4 - Pin Sensor Far Right
+    */
     LineDetector(const int sensorPin_0, const int sensorPin_1, const int sensorPin_2, const int sensorPin_3, const int sensorPin_4);
 
     /**
      * @brief 
      * 
-     * -90 90 Degree turn left
-     *  90 90 Degree turn right
-     * 180 full Line detected
+     * -90 Degree turn left \n
+     *  90 Degree turn right \n
+     * 180 full Line detected \n
+     * 200 Line Lost or ErrorValues \n
+     *  \n
+     *  4 Line is on the right side \n
+     *  0 Line is in the middle \n
+     * -4 Line is on the left side \n
      * 
-     *  4 Line is on the right side
-     *  0 Line is in the middle
-     * -4 Line is on the left side
-     * @return const int - error
+     * @return const int - deviation from middle sensor
      */
     const int deviation();
     //=====PRIVATE===================================================================================
    private:
     //Use an Array?
-    const int pSensorPinLL;  ///< Pin
-    const int pSensorPinL;
-    const int pSensorPinM;
-    const int pSensorPinR;
-    const int pSensorPinRR;
+    const int pSensorPinLL;  ///< Pin Sensor Far Left
+    const int pSensorPinL;   ///< Pin Sensor  Left
+    const int pSensorPinM;   ///< Pin Sensor Middle
+    const int pSensorPinR;   ///< Pin Sensor  Right
+    const int pSensorPinRR;  ///< Pin Sensor Far Right
 
-    int pSensorLL;  ///< Value
-    int pSensorL;
-    int pSensorM;
-    int pSensorR;
-    int pSensorRR;
+    int pSensorLL;  ///< Value Sensor Far Left
+    int pSensorL;   ///< Value Sensor  Left
+    int pSensorM;   ///< Value Sensor Middle
+    int pSensorR;   ///< Value Sensor  Right
+    int pSensorRR;  ///< Value Sensor Far Right
 };
 #endif
