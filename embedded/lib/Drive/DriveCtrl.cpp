@@ -20,12 +20,7 @@ DriveCtrl::DriveCtrl() : currentState(State::idle) {
     pController.SetSampleTime(pSampleTime);  // Sampletime in milliseconds
     pController.SetMode(AUTOMATIC);
     pController.SetControllerDirection(DIRECT);
-    DBINFO3("Kp: ");
-    DBINFO3ln(pController.GetKp());
-    DBINFO3("Ki: ");
-    DBINFO3ln(pController.GetKi());
-    DBINFO3("Kd: ");
-    DBINFO3ln(pController.GetKd());
+    DBINFO2ln(String("Kp: ") + String(pController.GetKp()) + String(" Ki: ") + String(pController.GetKi()) + String(" Kd: ") + String(pController.GetKd()));
 }
 
 void DriveCtrl::loop() {
@@ -44,8 +39,8 @@ const DriveCtrl::State DriveCtrl::getcurrentState() {
 }
 //=====PRIVATE====================================================================================
 void DriveCtrl::process(Event e) {
-    DBFUNCCALL("DriveCtrl::process ")
-    DBFUNCCALLln(decodeEvent(e));
+    DBFUNCCALL("DriveCtrl::process ");
+    DBEVENTln(String("DriveCtrl ") + String(decodeEvent(e)));
     switch (currentState) {
         case State::idle:
             if (Event::TurnLeft == e) {
@@ -133,25 +128,25 @@ void DriveCtrl::process(Event e) {
 }
 //==idle==========================================================
 void DriveCtrl::entryAction_idle() {
-    DBINFO2ln("Drive Entering State: idle");
+    DBSTATUSln("Drive Entering State: idle");
     currentState = State::idle;  // state transition
     doActionFPtr = &DriveCtrl::doAction_idle;
     //Entry-Action
 }
 
 DriveCtrl::Event DriveCtrl::doAction_idle() {
-    DBINFO2ln("Drive State: idle");
+    DBINFO1ln("Drive State: idle");
     //Generate the Event
     return Event::NoEvent;
 }
 
 void DriveCtrl::exitAction_idle() {
-    DBINFO2ln("Drive Leaving State: idle");
+    DBSTATUSln("Drive Leaving State:  idle");
 }
 
 //==turningLeft==========================================================
 void DriveCtrl::entryAction_turningLeft() {
-    DBINFO2ln("Drive Entering State: turningLeft");
+    DBSTATUSln("Drive Entering State: turningLeft");
     currentState = State::turningLeft;  // state transition
     doActionFPtr = &DriveCtrl::doAction_turningLeft;
     loopcount = 0;
@@ -160,7 +155,7 @@ void DriveCtrl::entryAction_turningLeft() {
 }
 
 DriveCtrl::Event DriveCtrl::doAction_turningLeft() {
-    DBINFO2ln("Drive State: turningLeft");
+    DBINFO1ln("Drive State: turningLeft");
     //Generate the Event
 
     if ((abs(pEnvdetect.Linedeviation()) < 1) && (loopcount > 5)) {
@@ -171,13 +166,13 @@ DriveCtrl::Event DriveCtrl::doAction_turningLeft() {
 }
 
 void DriveCtrl::exitAction_turningLeft() {
-    DBINFO2ln("Drive Leaving State: turningLeft");
+    DBSTATUSln("Drive Leaving State:  turningLeft");
     pDrive.stop();
 }
 
 //==turningRight==========================================================
 void DriveCtrl::entryAction_turningRight() {
-    DBINFO2ln("Drive Entering State: turningRight");
+    DBSTATUSln("Drive Entering State: turningRight");
     currentState = State::turningRight;  // state transition
     doActionFPtr = &DriveCtrl::doAction_turningRight;
     loopcount = 0;
@@ -186,7 +181,7 @@ void DriveCtrl::entryAction_turningRight() {
 }
 
 DriveCtrl::Event DriveCtrl::doAction_turningRight() {
-    DBINFO2ln("Drive State: turningRight");
+    DBINFO1ln("Drive State: turningRight");
     //Generate Event
     if ((abs(pEnvdetect.Linedeviation()) < 1) && (loopcount > 5)) {
         return Event::LineAligned;
@@ -196,13 +191,13 @@ DriveCtrl::Event DriveCtrl::doAction_turningRight() {
 }
 
 void DriveCtrl::exitAction_turningRight() {
-    DBINFO2ln("Drive Leaving State: turningRight");
+    DBSTATUSln("Drive Leaving State:  turningRight");
     pDrive.stop();
 }
 
 //==turningAround==========================================================
 void DriveCtrl::entryAction_turningAround() {
-    DBINFO2ln("Drive Entering State: turningAround");
+    DBSTATUSln("Drive Entering State: turningAround");
     currentState = State::turningAround;  // state transition
     doActionFPtr = &DriveCtrl::doAction_turningAround;
     loopcount = 0;
@@ -211,7 +206,7 @@ void DriveCtrl::entryAction_turningAround() {
 }
 
 DriveCtrl::Event DriveCtrl::doAction_turningAround() {
-    DBINFO2ln("Drive State: turningAround");
+    DBINFO1ln("Drive State: turningAround");
     //Generate the Event
     DBINFO2ln(loopcount);
     if ((abs(pEnvdetect.Linedeviation()) < 1) && (loopcount > 5)) {
@@ -222,13 +217,13 @@ DriveCtrl::Event DriveCtrl::doAction_turningAround() {
 }
 
 void DriveCtrl::exitAction_turningAround() {
-    DBINFO2ln("Drive Leaving State: turningAround");
+    DBSTATUSln("Drive Leaving State:  turningAround");
     pDrive.stop();
 }
 
 //==followingLine==========================================================
 void DriveCtrl::entryAction_followingLine() {
-    DBINFO2ln("Drive Entering State: followingLine");
+    DBSTATUSln("Drive Entering State: followingLine");
     currentState = State::followingLine;  // state transition
     doActionFPtr = &DriveCtrl::doAction_followingLine;
     loopcount = 0;
@@ -238,7 +233,7 @@ void DriveCtrl::entryAction_followingLine() {
 }
 
 DriveCtrl::Event DriveCtrl::doAction_followingLine() {
-    DBINFO2ln("Drive State: followingLine");
+    DBINFO1ln("Drive State: followingLine");
     //Generate the Event
     // DBINFO3ln(pEnvdetect.Linedeviation());
     int linedeviation = pEnvdetect.Linedeviation();
@@ -251,11 +246,9 @@ DriveCtrl::Event DriveCtrl::doAction_followingLine() {
     if ((linedeviation != 180) && (linedeviation != 200)) {
         pController_Input = linedeviation;
     }
-    DBINFO3("Regler-Input: ");
-    DBINFO3ln(pController_Input);
+    DBINFO2ln(String("Controll-Input: ") + String(pController_Input));
     pController.Compute();
-    DBINFO3("Reglerkorr: ");
-    DBINFO3ln(pController_Output);
+    DBINFO2ln(String("Controll-Correction: ") + String(pController_Output));
     if (pController_Output > 0) {
         pDrive.turn(Drive::Direction::Left, abs(pController_Output));
     } else if (pController_Output < 0) {
@@ -267,13 +260,13 @@ DriveCtrl::Event DriveCtrl::doAction_followingLine() {
 }
 
 void DriveCtrl::exitAction_followingLine() {
-    DBINFO2ln("Drive Leaving State: followingLine");
+    DBSTATUSln("Drive Leaving State:  followingLine");
     pDrive.stop();
 }
 
 //==errorState========================================================
 void DriveCtrl::entryAction_errorState() {
-    DBINFO2ln("Drive Entering State: errorState");
+    DBERROR("Drive Entering State: errorState");
     lastStateBevorError = currentState;
     currentState = State::errorState;  // state transition
     doActionFPtr = &DriveCtrl::doAction_errorState;
@@ -282,13 +275,13 @@ void DriveCtrl::entryAction_errorState() {
 }
 
 DriveCtrl::Event DriveCtrl::doAction_errorState() {
-    DBINFO2ln("Drive State: errorState");
+    DBSTATUSln("Drive State: errorState");
     //Generate the Event
     return Event::NoEvent;
 }
 
 void DriveCtrl::exitAction_errorState() {
-    DBINFO2ln("Drive Leaving State: errorState");
+    DBSTATUSln("Drive Leaving State:  errorState");
 }
 
 //============================================================================

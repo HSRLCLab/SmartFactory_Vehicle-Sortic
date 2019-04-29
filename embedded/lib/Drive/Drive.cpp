@@ -35,11 +35,8 @@ void Drive::drive(Direction direction, unsigned int speed) {
     pSpeedRight = speed;
     pMotorLeft->setSpeed(pSpeedLeft);
     pMotorRight->setSpeed(pSpeedRight);
-    DBINFO3ln(decodeDirection(direction));
-    DBINFO3("Speed L/R: ");
-    DBINFO3(pSpeedLeft);
-    DBINFO3(" / ");
-    DBINFO3ln(pSpeedRight);
+    DBINFO3(decodeDirection(direction));
+    DBINFO3ln(String(" Speed L/R: ") + String(pSpeedLeft) + String(" / ") + String(pSpeedRight));
     switch (pWayVehicle) {
         case Direction::Forward:
             pMotorLeft->run(FORWARD);
@@ -73,11 +70,8 @@ void Drive::turn(Direction direction, unsigned int speed) {
     }
     pTurnSpeedLeft = constrain(pTurnSpeedLeft, 0, 255);
     pTurnSpeedRight = constrain(pTurnSpeedRight, 0, 255);
-    DBINFO3ln(decodeDirection(direction));
-    DBINFO3("Speed L/R: ");
-    DBINFO3(pTurnSpeedLeft);
-    DBINFO3(" / ");
-    DBINFO3ln(pTurnSpeedRight);
+    DBINFO3(decodeDirection(direction));
+    DBINFO3ln(String(" Speed L/R: ") + String(pTurnSpeedLeft) + String(" / ") + String(pTurnSpeedRight));
     pMotorLeft->setSpeed(pTurnSpeedLeft);
     pMotorRight->setSpeed(pTurnSpeedRight);
     switch (pWayVehicle) {
@@ -101,23 +95,16 @@ void Drive::turnonpoint(Direction direction, unsigned int speed) {
     pTurnSpeedRight = speed;
     pMotorLeft->setSpeed(pTurnSpeedLeft);
     pMotorRight->setSpeed(pTurnSpeedRight);
-    DBINFO3("Speed L/R: ");
     switch (direction) {
         case Direction::Left:
             pMotorLeft->run(BACKWARD);
             pMotorRight->run(FORWARD);
-            DBINFO3("-");
-            DBINFO3(pSpeedLeft);
-            DBINFO3(" / ");
-            DBINFO3ln(pSpeedRight);
+            DBINFO3ln(String("Speed L/R: ") + String("-") + String(pTurnSpeedLeft) + String(" / ") + String(pTurnSpeedRight));
             break;
         case Direction::Right:
             pMotorLeft->run(FORWARD);
             pMotorRight->run(BACKWARD);
-            DBINFO3(pSpeedLeft);
-            DBINFO3(" / ");
-            DBINFO3("-")
-            DBINFO3ln(pSpeedRight);
+            DBINFO3ln(String("Speed L/R: ") + String(pTurnSpeedLeft) + String(" / ") + String("-") + String(pTurnSpeedRight));
             break;
         default:
             break;
@@ -126,6 +113,7 @@ void Drive::turnonpoint(Direction direction, unsigned int speed) {
 
 void Drive::stop() {
     DBFUNCCALLln("Drive::stop()");
+    DBINFO3ln("Drive Stop!");
     pSpeedLeft = 0;
     pSpeedRight = 0;
     pMotorLeft->setSpeed(pSpeedLeft);
@@ -138,6 +126,7 @@ void Drive::stop() {
 //============================================================================
 //==Aux-Function==============================================================
 String Drive::decodeDirection(Direction direction) {
+    DBFUNCCALLln("Drive::decodeDirection(Direction direction)");
     switch (direction) {
         case Direction::Left:
             return "Direction::Left";

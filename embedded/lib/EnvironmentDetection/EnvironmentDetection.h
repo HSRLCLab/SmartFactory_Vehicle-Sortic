@@ -1,6 +1,6 @@
 /**
- * @file EnvirnomentDetection.h
- * @brief Class EnvirnomentDetection provides an Interface for all Enviroment detection Systems of the Vehilce. 
+ * @file EnvironmentDetection.h
+ * @brief Class EnvironmentDetection provides an Interface for all Enviroment detection Systems of the Vehilce. 
  * 
  * @author Luca Mazzoleni (luca.mazzoleni@hsr.ch)
  * 
@@ -29,6 +29,11 @@ class EnvironmentDetection {
    public:
     EnvironmentDetection(){};
 
+    /**
+     * @brief 
+     * 
+     * @return const int - 
+     */
     inline const int Linedeviation() {
         return pLinedetector.deviation();
     }
