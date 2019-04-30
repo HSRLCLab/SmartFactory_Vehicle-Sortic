@@ -33,7 +33,7 @@ const HoistCtrl::State HoistCtrl::getcurrentState() {
 //=====PRIVATE====================================================================================
 void HoistCtrl::process(Event e) {
     DBFUNCCALL("HoistCtrl::process ")
-    DBFUNCCALLln(decodeEvent(e));
+    DBEVENTln(decodeEvent(e));
     switch (currentState) {
         case State::low:
             if (Event::Raise == e) {
@@ -97,25 +97,25 @@ void HoistCtrl::process(Event e) {
 }
 //==low==========================================================
 void HoistCtrl::entryAction_low() {
-    DBINFO2ln("Hoist Entering State: low");
+    DBSTATUSln("Hoist Entering State: low");
     currentState = State::low;  // state transition
     doActionFPtr = &HoistCtrl::doAction_low;
     //Entry-Action
 }
 
 HoistCtrl::Event HoistCtrl::doAction_low() {
-    DBINFO2ln("Hoist State: low");
+    DBINFO1ln("Hoist State: low");
     //Generate the Event
     return Event::NoEvent;
 }
 
 void HoistCtrl::exitAction_low() {
-    DBINFO2ln("Hoist Leaving State: low");
+    DBSTATUSln("Hoist Leaving State: low");
 }
 
 //==raising==========================================================
 void HoistCtrl::entryAction_raising() {
-    DBINFO2ln("Hoist Entering State: raising");
+    DBSTATUSln("Hoist Entering State: raising");
     currentState = State::raising;  // state transition
     doActionFPtr = &HoistCtrl::doAction_raising;
     //Entry-Action
@@ -123,7 +123,7 @@ void HoistCtrl::entryAction_raising() {
 }
 
 HoistCtrl::Event HoistCtrl::doAction_raising() {
-    DBINFO2ln("Hoist State: raising");
+    DBINFO1ln("Hoist State: raising");
     //Generate the Event
     if (pHoist.raise()) {
         return Event::PosReached;
@@ -132,32 +132,32 @@ HoistCtrl::Event HoistCtrl::doAction_raising() {
 }
 
 void HoistCtrl::exitAction_raising() {
-    DBINFO2ln("Hoist Leaving State: raising");
+    DBSTATUSln("Hoist Leaving State: raising");
     pHoist.detach();
 }
 
 //==high==========================================================
 void HoistCtrl::entryAction_high() {
-    DBINFO2ln("Hoist Entering State: high");
+    DBSTATUSln("Hoist Entering State: high");
     currentState = State::high;  // state transition
     doActionFPtr = &HoistCtrl::doAction_high;
     //Entry-Action
 }
 
 HoistCtrl::Event HoistCtrl::doAction_high() {
-    DBINFO2ln("Hoist State: high");
+    DBINFO1ln("Hoist State: high");
     //Generate Event
 
     return Event::NoEvent;
 }
 
 void HoistCtrl::exitAction_high() {
-    DBINFO2ln("Hoist Leaving State: high");
+    DBSTATUSln("Hoist Leaving State: high");
 }
 
 //==lowering==========================================================
 void HoistCtrl::entryAction_lowering() {
-    DBINFO2ln("Hoist Entering State: lowering");
+    DBSTATUSln("Hoist Entering State: lowering");
     currentState = State::lowering;  // state transition
     doActionFPtr = &HoistCtrl::doAction_lowering;
     //Entry-Action
@@ -165,7 +165,7 @@ void HoistCtrl::entryAction_lowering() {
 }
 
 HoistCtrl::Event HoistCtrl::doAction_lowering() {
-    DBINFO2ln("Hoist State: lowering");
+    DBINFO1ln("Hoist State: lowering");
     //Generate the Event
     if (pHoist.lower()) {
         return Event::PosReached;
@@ -174,13 +174,13 @@ HoistCtrl::Event HoistCtrl::doAction_lowering() {
 }
 
 void HoistCtrl::exitAction_lowering() {
-    DBINFO2ln("Hoist Leaving State: lowering");
+    DBSTATUSln("Hoist Leaving State: lowering");
     pHoist.detach();
 }
 
 //==errorState========================================================
 void HoistCtrl::entryAction_errorState() {
-    DBINFO2ln("Hoist Entering State: errorState");
+    DBSTATUSln("Hoist Entering State: errorState");
     lastStateBevorError = currentState;
     currentState = State::errorState;  // state transition
     doActionFPtr = &HoistCtrl::doAction_errorState;
@@ -188,14 +188,14 @@ void HoistCtrl::entryAction_errorState() {
 }
 
 HoistCtrl::Event HoistCtrl::doAction_errorState() {
-    DBINFO2ln("Hoist State: errorState");
+    DBINFO1ln("Hoist State: errorState");
     //Generate the Event
 
     return Event::NoEvent;
 }
 
 void HoistCtrl::exitAction_errorState() {
-    DBINFO2ln("Hoist Leaving State: errorState");
+    DBSTATUSln("Hoist Leaving State: errorState");
 }
 
 //============================================================================

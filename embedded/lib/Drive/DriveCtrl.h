@@ -33,10 +33,11 @@ class DriveCtrl {
     * @brief Enum holds all possible events
     * 
     */
-    enum class Event { TurnLeft,          ///< Ext.: Turn Left
-                       TurnRight,         ///< Ext.: Turn Right
-                       TurnAround,        ///< Ext.: Turn Around on Position
-                       FollowLine,        ///< Ext.: Follow the Line
+    enum class Event { TurnLeft,           ///< Ext.: Turn Left
+                       TurnRight,          ///< Ext.: Turn Right
+                       TurnAround,         ///< Ext.: Turn Around on Position
+                       FollowLineForward,  ///< Ext.: Follow the Line
+                       FollowLineBackward,
                        FullLineDetected,  ///< Signal: Full Line detected
                        LineAligned,       ///< Signal: Line is alligned in the middle of the Vehicle
                        Error,             ///< Ext.: Error occured
@@ -48,12 +49,13 @@ class DriveCtrl {
     * @brief Enum holds all possible states
     * 
     */
-    enum class State { idle,           ///< idle State
-                       turningLeft,    ///< turning left State
-                       turningRight,   ///< turning right State
-                       turningAround,  ///< turning around State
-                       followingLine,  ///<  follow the Line State
-                       errorState      ///< Error State
+    enum class State { idle,                   ///< idle State
+                       turningLeft,            ///< turning left State
+                       turningRight,           ///< turning right State
+                       turningAround,          ///< turning around State
+                       followingLineForward,   ///<  follow the Line drive forward State
+                       followingLineBackward,  ///<  follow the Line drive forward State
+                       errorState              ///< Error State
     };
 
     /**
@@ -96,7 +98,8 @@ class DriveCtrl {
      */
     Event (DriveCtrl::*doActionFPtr)(void) = &DriveCtrl::doAction_idle;
 
-    unsigned int loopcount;                ///< Var counts how often a do-function is called
+    unsigned int loopcount;  ///< Var counts how often a do-function is called
+    const unsigned int loopcountmax = 5;
     double pController_Input = 0;          ///< Controller Input
     double pController_Output = 0;         ///< Controller Output
     double pController_Setpoint = 0;       ///< Controller Setpoint
@@ -230,30 +233,55 @@ class DriveCtrl {
      */
     void exitAction_turningAround();
 
-    //=====followingLine==========================================================
+    //=====followingLineForward==========================================================
     /**
-     * @brief executes the entry action of the followingLine 
+     * @brief executes the entry action of the followingLineForward 
      * 
      * Start Driving Straight
      */
-    void entryAction_followingLine();
+    void entryAction_followingLineForward();
 
     /**
-     * @brief executes the main action of the followingLine
+     * @brief executes the main action of the followingLineForward
      * 
      * Check Line-deviation adn correct accordingly via PID-Controller
      * and drive until a FullLine is Detected. Return Event FullLine else reutrn NoEvent.
      * 
      * @return DriveCtrl::Event - generated Event
      */
-    DriveCtrl::Event doAction_followingLine();
+    DriveCtrl::Event doAction_followingLineForward();
 
     /**
-     * @brief executes the exit action of the followingLine
+     * @brief executes the exit action of the followingLineForward
      * 
      * Stop driving.
      */
-    void exitAction_followingLine();
+    void exitAction_followingLineForward();
+
+    //=====followingLineBackward==========================================================
+    /**
+     * @brief executes the entry action of the followingLineBackward 
+     * 
+     * Start Driving Straight
+     */
+    void entryAction_followingLineBackward();
+
+    /**
+     * @brief executes the main action of the followingLineBackward
+     * 
+     * Check Line-deviation adn correct accordingly via PID-Controller
+     * and drive until a FullLine is Detected. Return Event FullLine else reutrn NoEvent.
+     * 
+     * @return DriveCtrl::Event - generated Event
+     */
+    DriveCtrl::Event doAction_followingLineBackward();
+
+    /**
+     * @brief executes the exit action of the followingLineBackward
+     * 
+     * Stop driving.
+     */
+    void exitAction_followingLineBackward();
     //==errorState==========================================================
     /**
      * @brief entry action of the errorState

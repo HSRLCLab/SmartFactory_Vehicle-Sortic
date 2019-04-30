@@ -33,9 +33,12 @@ const unsigned int PIN_SENSOR_4 = 9;   ///<
 
 //Setup for PID /////////////////////
 #if SPEEDFACTOR < 2
+// const double PID_KP = 2;       ///<
+// const double PID_KI = 0;       ///<
+// const double PID_KD = 0.0001;  ///<
 const double PID_KP = 5;      ///<
-const double PID_KI = 10;     ///<
-const double PID_KD = 0.002;  ///<
+const double PID_KI = 2;      ///<
+const double PID_KD = 0.001;  ///<
 #else                         //use an more agressiv PID
 const double K_P = 30;    ///<
 const double K_I = 20;    ///<

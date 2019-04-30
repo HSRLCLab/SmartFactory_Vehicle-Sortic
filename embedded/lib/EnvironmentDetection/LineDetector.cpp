@@ -60,13 +60,22 @@ const int LineDetector::deviation() {
         return -4;
     } else if ((pSensorLL == 1) && (pSensorL == 1) && (pSensorM == 1) && (pSensorR == 0) && (pSensorRR == 0)) {  //90°-Kurve
         DBINFO3ln("Possible 90 Degree turn left");
-        return -90;
+        return -10;
     } else if ((pSensorLL == 0) && (pSensorL == 0) && (pSensorM == 1) && (pSensorR == 1) && (pSensorRR == 1)) {  //90°-Kurve
         DBINFO3ln("Possible 90 Degree turn right");
-        return 90;
+        return 10;
     } else if ((pSensorLL == 1) && (pSensorL == 1) && (pSensorM == 1) && (pSensorR == 1) && (pSensorRR == 1)) {
         DBINFO3ln("Full line");
         return 180;
+    } else if ((pSensorLL == 1) && (pSensorL == 1) && (pSensorM == 1) && (pSensorR == 1) && (pSensorRR == 0)) {
+        DBINFO3ln("sloppy Full line");
+        return 180;
+    } else if ((pSensorLL == 0) && (pSensorL == 1) && (pSensorM == 1) && (pSensorR == 1) && (pSensorRR == 1)) {
+        DBINFO3ln("sloppy Full line");
+        return 180;
+        // } else if ((pSensorLL == 0) && (pSensorL == 1) && (pSensorM == 1) && (pSensorR == 1) && (pSensorRR == 0)) {
+        //     DBINFO3ln("Full line");
+        //     return 180;
     } else if ((pSensorLL == 0) && (pSensorL == 0) && (pSensorM == 0) && (pSensorR == 0) && (pSensorRR == 0)) {
         DBINFO3ln("No line detected");
         return 200;  ///@todo line lost

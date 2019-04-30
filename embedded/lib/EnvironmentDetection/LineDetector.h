@@ -39,8 +39,8 @@ class LineDetector {
     /**
      * @brief 
      * 
-     * -90 Degree turn left \n
-     *  90 Degree turn right \n
+     * -10 Degree turn left \n
+     *  10 Degree turn right \n
      * 180 full Line detected \n
      * 200 Line Lost or ErrorValues \n
      *  \n

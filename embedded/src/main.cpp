@@ -351,7 +351,8 @@ void test_ctrl() {
             Serial.println("L - TurnLeft");
             Serial.println("R - TurnRight");
             Serial.println("A - TurnAround");
-            Serial.println("F - FollowLine");
+            Serial.println("F - FollowLineForward");
+            Serial.println("B - FollowLineBackward");
             Serial.println("E - Error");
             Serial.println("r - Resume");
             Serial.println("N - No Event");
@@ -386,9 +387,16 @@ void test_ctrl() {
                     }
                     break;
                 case 'F':
-                    DBINFO1ln("Event: FollowLine");
-                    drivectrl->loop(DriveCtrl::Event::FollowLine);
-                    while ((drivectrl->getcurrentState() == DriveCtrl::State::followingLine) && (Serial.read() != 'E')) {
+                    DBINFO1ln("Event: FollowLineForward");
+                    drivectrl->loop(DriveCtrl::Event::FollowLineForward);
+                    while ((drivectrl->getcurrentState() == DriveCtrl::State::followingLineForward) && (Serial.read() != 'E')) {
+                        drivectrl->loop();
+                    }
+                    break;
+                case 'B':
+                    DBINFO1ln("Event: FollowLineBackward");
+                    drivectrl->loop(DriveCtrl::Event::FollowLineBackward);
+                    while ((drivectrl->getcurrentState() == DriveCtrl::State::followingLineBackward) && (Serial.read() != 'E')) {
                         drivectrl->loop();
                     }
                     break;
@@ -411,6 +419,49 @@ void test_ctrl() {
                 case 'f':
                     DBINFO1ln("Event: FullLineDetected");
                     drivectrl->loop(DriveCtrl::Event::FullLineDetected);
+                    break;
+                case 'x':
+                    DBINFO1ln("AUTOSWITCH LANE");
+                    DBINFO1ln("Event: FollowLineBackward");
+                    drivectrl->loop(DriveCtrl::Event::FollowLineBackward);
+                    while ((drivectrl->getcurrentState() == DriveCtrl::State::followingLineBackward) && (Serial.read() != 'E')) {
+                        drivectrl->loop();
+                    }
+                    DBINFO1ln("Event: TurnAround");
+                    drivectrl->loop(DriveCtrl::Event::TurnAround);
+                    while ((drivectrl->getcurrentState() == DriveCtrl::State::turningAround) && (Serial.read() != 'E')) {
+                        drivectrl->loop();
+                    }
+                    DBINFO1ln("Event: FollowLineForward");
+                    drivectrl->loop(DriveCtrl::Event::FollowLineForward);
+                    while ((drivectrl->getcurrentState() == DriveCtrl::State::followingLineForward) && (Serial.read() != 'E')) {
+                        drivectrl->loop();
+                    }
+                    DBINFO1ln("Event: TurnRight");
+                    drivectrl->loop(DriveCtrl::Event::TurnRight);
+                    while ((drivectrl->getcurrentState() == DriveCtrl::State::turningRight) && (Serial.read() != 'E')) {
+                        drivectrl->loop();
+                    }
+                    DBINFO1ln("Event: FollowLineForward");
+                    drivectrl->loop(DriveCtrl::Event::FollowLineForward);
+                    while ((drivectrl->getcurrentState() == DriveCtrl::State::followingLineForward) && (Serial.read() != 'E')) {
+                        drivectrl->loop();
+                    }
+                    DBINFO1ln("Event: TurnRight");
+                    drivectrl->loop(DriveCtrl::Event::TurnRight);
+                    while ((drivectrl->getcurrentState() == DriveCtrl::State::turningRight) && (Serial.read() != 'E')) {
+                        drivectrl->loop();
+                    }
+                    DBINFO1ln("Event: FollowLineForward");
+                    drivectrl->loop(DriveCtrl::Event::FollowLineForward);
+                    while ((drivectrl->getcurrentState() == DriveCtrl::State::followingLineForward) && (Serial.read() != 'E')) {
+                        drivectrl->loop();
+                    }
+                    DBINFO1ln("Event: FollowLineForward");
+                    drivectrl->loop(DriveCtrl::Event::FollowLineForward);
+                    while ((drivectrl->getcurrentState() == DriveCtrl::State::followingLineForward) && (Serial.read() != 'E')) {
+                        drivectrl->loop();
+                    }
                     break;
                 default:
                     DBINFO1ln("Error: Unknown value entered");
