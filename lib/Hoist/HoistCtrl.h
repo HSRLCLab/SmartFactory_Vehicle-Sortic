@@ -22,6 +22,7 @@
 /**
  * @brief Contains the FSM for the Hoist
  * 
+ * @image html HoistCtrl.png width=1000
  */
 class HoistCtrl {
     //=====PUBLIC====================================================================================

@@ -25,6 +25,7 @@
 /**
  * @brief Contains the FSM to controll the Drive
  * 
+ * @image html DriveCtrl.png width=1000
  */
 class DriveCtrl {
     //=====PUBLIC====================================================================================
