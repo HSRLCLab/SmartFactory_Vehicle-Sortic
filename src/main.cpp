@@ -28,6 +28,7 @@
 #include "DriveCtrl.h"
 #include "EnvironmentDetection.h"
 #include "HoistCtrl.h"
+#include "NavigationCtrl.h"
 
 enum class TestCase {
     RUN,
@@ -36,11 +37,12 @@ enum class TestCase {
     DRIVE,
     DRIVECTRL,
     ENVDETEC,
+    NAVIGATIONCTRL,
     VISION,
     NETWORK,
     SONAR,
     MOTIVATION = 99
-} Test = TestCase::DRIVECTRL;
+} Test = TestCase::NAVIGATIONCTRL;
 
 // /**
 //  * @brief
@@ -74,6 +76,7 @@ Communication *comm;
 myJSONStr tmp_mess;
 HoistCtrl *hoistctrl;
 DriveCtrl *drivectrl;
+NavigationCtrl *navctrl;
 
 Drive *drive;
 EnvironmentDetection *envdetect;
@@ -102,7 +105,7 @@ void test_ctrl();
 void setup() {
     //Initialize serial and wait for port to open:
     if (DEBUGGER == true) {
-        Serial.begin(9600);
+        Serial.begin(115200);
         while (!Serial) {
             ;  // wait for serial port to connect. Needed for native USB port only
         }
@@ -124,6 +127,9 @@ void setup() {
             break;
         case TestCase::DRIVECTRL:
             drivectrl = new DriveCtrl();
+            break;
+        case TestCase::NAVIGATIONCTRL:
+            navctrl = new NavigationCtrl();
             break;
         case TestCase::ENVDETEC:
             envdetect = new EnvironmentDetection();
@@ -167,27 +173,19 @@ void loop() {
             FuncFPtr = &run;
             break;
         case TestCase::HOIST:
-            FuncFPtr = &test_hardware;
-            break;
-        case TestCase::HOISTCTRL:
-            FuncFPtr = &test_ctrl;
-            break;
         case TestCase::DRIVE:
+        case TestCase::ENVDETEC:
+        case TestCase::VISION:
+        case TestCase::SONAR:
             FuncFPtr = &test_hardware;
             break;
+        case TestCase::NAVIGATIONCTRL:
+        case TestCase::HOISTCTRL:
         case TestCase::DRIVECTRL:
             FuncFPtr = &test_ctrl;
             break;
-        case TestCase::ENVDETEC:
-            FuncFPtr = &test_hardware;
-            break;
-        case TestCase::VISION:
-            FuncFPtr = &test_hardware;
-            break;
         case TestCase::NETWORK:
             FuncFPtr = &test_communication;
-            break;
-        case TestCase::SONAR:
             break;
         default:
             break;
@@ -468,7 +466,88 @@ void test_ctrl() {
                     break;
             }
             break;
-
+        case TestCase::NAVIGATIONCTRL:
+            DBSTATUSln("==Test Navigation CTRL==");
+            //read Serial in and generate events
+            Serial.println("Possible Events are:");
+            Serial.println("S - MoveToTargetPosition Sortic 1");
+            Serial.println("s - MoveToTargetPosition Sortic 3");
+            Serial.println("T - MoveToTargetPosition Transfer 1");
+            Serial.println("t - MoveToTargetPosition Transfer 3");
+            Serial.println("E - Error");
+            Serial.println("r - Resume");
+            Serial.println("N - No Event");
+            Serial.println("K - PosEndPointReached");
+            Serial.println("k - PosTransitReached");
+            Serial.println("p - Position Reached");
+            Serial.print("Choose Event: ");
+            while (Serial.available() <= 0) {
+            }
+            inByte = Serial.read();
+            Serial.print((char)inByte);
+            Serial.println();
+            switch (inByte) {
+                case 'S':
+                    DBINFO1ln("Event: MoveToTargetPosition Sortic 1");
+                    navctrl->setTargetPosition(NavigationCtrl::Sector::SorticHandover, 1);
+                    navctrl->loop(NavigationCtrl::Event::MoveToTargetPosition);
+                    while ((navctrl->getcurrentState() != NavigationCtrl::State::endPoint) && (Serial.read() != 'E')) {
+                        navctrl->loop();
+                    }
+                    break;
+                case 's':
+                    DBINFO1ln("Event: MoveToTargetPosition Sortic 3");
+                    navctrl->setTargetPosition(NavigationCtrl::Sector::SorticHandover, 3);
+                    navctrl->loop(NavigationCtrl::Event::MoveToTargetPosition);
+                    while ((navctrl->getcurrentState() != NavigationCtrl::State::endPoint) && (Serial.read() != 'E')) {
+                        navctrl->loop();
+                    }
+                    break;
+                case 'T':
+                    DBINFO1ln("Event: MoveToTargetPosition Transfer 1");
+                    navctrl->setTargetPosition(NavigationCtrl::Sector::TransferHandover, 1);
+                    navctrl->loop(NavigationCtrl::Event::MoveToTargetPosition);
+                    while ((navctrl->getcurrentState() != NavigationCtrl::State::endPoint) && (Serial.read() != 'E')) {
+                        navctrl->loop();
+                    }
+                    break;
+                case 't':
+                    DBINFO1ln("Event: MoveToTargetPosition Transfer 3");
+                    navctrl->setTargetPosition(NavigationCtrl::Sector::TransferHandover, 3);
+                    navctrl->loop(NavigationCtrl::Event::MoveToTargetPosition);
+                    while ((navctrl->getcurrentState() != NavigationCtrl::State::endPoint) && (Serial.read() != 'E')) {
+                        navctrl->loop();
+                    }
+                    break;
+                case 'E':
+                    DBINFO1ln("Event: Error");
+                    navctrl->loop(NavigationCtrl::Event::Error);
+                    break;
+                case 'r':
+                    DBINFO1ln("Event: Resume");
+                    navctrl->loop(NavigationCtrl::Event::Resume);
+                    break;
+                case 'N':
+                    DBINFO1ln("Event: No Event");
+                    navctrl->loop(NavigationCtrl::Event::NoEvent);
+                    break;
+                case 'K':
+                    DBINFO1ln("Event: PosEndPointReached");
+                    navctrl->loop(NavigationCtrl::Event::PosEndPointReached);
+                    break;
+                case 'k':
+                    DBINFO1ln("Event: PosTransitReached");
+                    navctrl->loop(NavigationCtrl::Event::PosTransitReached);
+                    break;
+                case 'p':
+                    DBINFO1ln("Event: posPeached");
+                    navctrl->loop(NavigationCtrl::Event::PosReached);
+                    break;
+                default:
+                    DBINFO1ln("Error: Unknown value entered");
+                    break;
+            }
+            break;
         default:
             break;
     }
