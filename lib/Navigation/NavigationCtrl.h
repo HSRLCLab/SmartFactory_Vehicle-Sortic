@@ -119,23 +119,21 @@ class NavigationCtrl {
     State currentState;         ///< holds the current state of the FSM
     Event currentEvent;         ///< holds the current event of the FSM
     int pCurrentSubState = 0;
-    int pLastSubStateBevorError;
-    int pSubStateLoopInc;
+    int pLastSubStateBevorError = 0;
+    int pSubStateLoopInc = 0;
 
     struct ActualPos {
         Sector startSector = Sector::SorticHandover;
-        Sector sector = startSector;                  ///<
-        int line = 1;                                 ///<
-        Orientation orientation = Orientation::West;  ///<
+        Sector sector = startSector;  ///<
+        int line = 1;                 ///<
         bool token = false;
     } pActual;
 
     struct TargetPos {
-        Sector sector;            ///<
-        int line;                 ///<
-        Orientation orientation;  ///<
+        Sector sector;  ///<
+        int line;       ///<
     } pTarget;
-
+    bool tranistonce = true;
     DriveCtrl::Event pLastGatewayTurn;
 
     /**

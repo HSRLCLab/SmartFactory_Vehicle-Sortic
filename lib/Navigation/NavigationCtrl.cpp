@@ -28,6 +28,8 @@ void NavigationCtrl::loop(Event currentEvent) {
 }
 
 const NavigationCtrl::State NavigationCtrl::getcurrentState() {
+    DBFUNCCALL("Current State: ")
+    DBFUNCCALLln(decodeState(currentState));
     return currentState;
 }
 
@@ -35,11 +37,6 @@ void NavigationCtrl::setTargetPosition(Sector sector, const int line) {
     DBFUNCCALLln("NavigationCtrl::setTargetPosition(Sector sector, const int line)");
     pTarget.sector = sector;
     pTarget.line = line;
-    if (sector == Sector::SorticHandover) {
-        pTarget.orientation = Orientation::West;
-    } else if (sector == Sector::TransferHandover) {
-        pTarget.orientation = Orientation::East;
-    }
 }
 
 void NavigationCtrl::giveToken() {
@@ -132,6 +129,7 @@ void NavigationCtrl::entryAction_endPoint() {
     DBSTATUSln("Navigation Entering State: endPoint");
     currentState = State::endPoint;  // state transition
     doActionFPtr = &NavigationCtrl::doAction_endPoint;
+    pActual.sector = pTarget.sector;
     //Entry-Action
 }
 
@@ -202,9 +200,11 @@ NavigationCtrl::Event NavigationCtrl::doAction_gateway() {
     switch (pCurrentSubState) {
         case 0:  // wait for Token
             DBINFO2ln("Substate: WaitForToken");
-            if (pActual.token) {
-                pCurrentSubState = 10;  //call next case
-            }
+            DBINFO2ln("Token: " + String(pActual.token));
+            // if (pActual.token) {
+            delay(3000);
+            pCurrentSubState = 10;  //call next case
+            // }
             break;
         case 10:  // drive forward
             DBINFO2ln("Substate: drive forward once");
@@ -234,13 +234,15 @@ NavigationCtrl::Event NavigationCtrl::doAction_gateway() {
             }
             break;
         case 30:  // drive forward n times
-            DBINFO2ln("Substate: drive forward n times");
+            DBINFO2("Substate: drive forward times: ");
+            DBINFO2ln(abs(pTarget.line - pActual.line));
+            DBINFO2ln(pSubStateLoopInc);
             pDriveCtrl.loop(DriveCtrl::Event::FollowLineForward);
             if (pDriveCtrl.getcurrentState() == DriveCtrl::State::idle) {
                 pSubStateLoopInc += 1;
-                if (pSubStateLoopInc >= abs(pTarget.line - pActual.line)) {
+                if (abs(pTarget.line - pActual.line) <= pSubStateLoopInc) {
                     pSubStateLoopInc = 0;         //reset back to zero
-                    pSubStateLoopInc = 40;        //call next case
+                    pCurrentSubState = 40;        //call next case
                     pActual.line = pTarget.line;  //update actual line
                 }
             }
@@ -268,9 +270,15 @@ NavigationCtrl::Event NavigationCtrl::doAction_gateway() {
                 if (pSubStateLoopInc >= 2) {
                     pSubStateLoopInc = 0;  //reset back to zero
                     // pSubStateLoopInc+= 10;
-                    pCurrentSubState = 0;   ///<@todo Probelm with Error possible?
+                    pCurrentSubState = 60;  ///<@todo Probelm with Error possible?
                     pActual.token = false;  //release token
-                    return Event::PosReached;
+                    if (pTarget.sector != pActual.startSector && tranistonce) {
+                        tranistonce = false;
+                        return Event::PosTransitReached;
+                    } else {
+                        tranistonce = true;
+                        return Event::PosEndPointReached;
+                    }
                 }
             }
             break;
@@ -296,7 +304,16 @@ void NavigationCtrl::entryAction_crossTransit() {
 NavigationCtrl::Event NavigationCtrl::doAction_crossTransit() {
     DBINFO1ln("Navigation State: crossTransit");
     //Generate the Event
-
+    pDriveCtrl.loop(DriveCtrl::Event::FollowLineForward);
+    if (pDriveCtrl.getcurrentState() == DriveCtrl::State::idle) {
+        DBINFO2ln(pSubStateLoopInc);
+        pSubStateLoopInc += 1;
+        if (pSubStateLoopInc >= 3) {
+            pSubStateLoopInc = 0;  //reset back to zero
+            pCurrentSubState = 0;  ///<@todo Probelm with Error possible?
+            return Event::PosReached;
+        }
+    }
     return Event::NoEvent;
 }
 
@@ -315,6 +332,15 @@ void NavigationCtrl::entryAction_toEndPoint() {
 NavigationCtrl::Event NavigationCtrl::doAction_toEndPoint() {
     DBINFO1ln("Navigation State: toEndPoint");
     //Generate the Event
+    pDriveCtrl.loop(DriveCtrl::Event::FollowLineForward);
+    if (pDriveCtrl.getcurrentState() == DriveCtrl::State::idle) {
+        pSubStateLoopInc += 1;
+        if (pSubStateLoopInc >= 1) {
+            pSubStateLoopInc = 0;  //reset back to zero
+            pCurrentSubState = 0;  ///<@todo Probelm with Error possible?
+            return Event::PosEndPointReached;
+        }
+    }
     return Event::NoEvent;
 }
 
@@ -330,6 +356,7 @@ void NavigationCtrl::entryAction_errorState() {
     currentState = State::errorState;  // state transition
     doActionFPtr = &NavigationCtrl::doAction_errorState;
     //Entry-Action
+    pDriveCtrl.loop(DriveCtrl::Event::Error);
 }
 
 NavigationCtrl::Event NavigationCtrl::doAction_errorState() {
@@ -341,6 +368,7 @@ NavigationCtrl::Event NavigationCtrl::doAction_errorState() {
 
 void NavigationCtrl::exitAction_errorState() {
     DBSTATUSln("Navigation Leaving State: errorState");
+    pDriveCtrl.loop(DriveCtrl::Event::Resume);
 }
 
 //============================================================================

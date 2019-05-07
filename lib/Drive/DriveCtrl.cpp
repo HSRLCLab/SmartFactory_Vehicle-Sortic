@@ -164,7 +164,8 @@ void DriveCtrl::entryAction_turningLeft() {
     DBSTATUSln("Drive Entering State: turningLeft");
     currentState = State::turningLeft;  // state transition
     doActionFPtr = &DriveCtrl::doAction_turningLeft;
-    loopcount = 0;
+    previousMillis = millis();
+    currentMillis = millis();
     //Entry-Action
     pDrive.turn(Drive::Direction::Left, TURNING_SPEED);
 }
@@ -172,8 +173,8 @@ void DriveCtrl::entryAction_turningLeft() {
 DriveCtrl::Event DriveCtrl::doAction_turningLeft() {
     DBINFO1ln("Drive State: turningLeft");
     //Generate the Event
-
-    if ((abs(pEnvdetect.Linedeviation()) < 1) && (loopcount > loopcountmax + 20)) {
+    currentMillis = millis();
+    if ((abs(pEnvdetect.Linedeviation()) < 1) && ((currentMillis - previousMillis) > ignoreSensorTurnMillis)) {
         return Event::LineAligned;
     }
     loopcount += 1;
@@ -190,7 +191,8 @@ void DriveCtrl::entryAction_turningRight() {
     DBSTATUSln("Drive Entering State: turningRight");
     currentState = State::turningRight;  // state transition
     doActionFPtr = &DriveCtrl::doAction_turningRight;
-    loopcount = 0;
+    previousMillis = millis();
+    currentMillis = millis();
     //Entry-Action
     pDrive.turn(Drive::Direction::Right, TURNING_SPEED);
 }
@@ -198,7 +200,8 @@ void DriveCtrl::entryAction_turningRight() {
 DriveCtrl::Event DriveCtrl::doAction_turningRight() {
     DBINFO1ln("Drive State: turningRight");
     //Generate Event
-    if ((abs(pEnvdetect.Linedeviation()) < 1) && (loopcount > loopcountmax + 20)) {
+    currentMillis = millis();
+    if ((abs(pEnvdetect.Linedeviation()) < 1) && ((currentMillis - previousMillis) > ignoreSensorTurnMillis)) {
         return Event::LineAligned;
     }
     loopcount += 1;
@@ -215,7 +218,8 @@ void DriveCtrl::entryAction_turningAround() {
     DBSTATUSln("Drive Entering State: turningAround");
     currentState = State::turningAround;  // state transition
     doActionFPtr = &DriveCtrl::doAction_turningAround;
-    loopcount = 0;
+    previousMillis = millis();
+    currentMillis = millis();
     //Entry-Action
     // pDrive.turnonpoint(Drive::Direction::Right, TURNING_SPEED);
     pDrive.turnonpoint(Drive::Direction::Left, TURNING_SPEED);
@@ -224,11 +228,11 @@ void DriveCtrl::entryAction_turningAround() {
 DriveCtrl::Event DriveCtrl::doAction_turningAround() {
     DBINFO1ln("Drive State: turningAround");
     //Generate the Event
-    DBINFO2ln(loopcount);
     int linedev = pEnvdetect.Linedeviation();
     DBINFO2ln(linedev);
     DBINFO2ln(abs(linedev));
-    if ((abs(linedev) < 2) && (loopcount > loopcountmax + 20)) {
+    currentMillis = millis();
+    if ((abs(linedev) < 2) && ((currentMillis - previousMillis) > ignoreSensorAroundMillis)) {
         return Event::LineAligned;
     }
     loopcount += 1;
@@ -245,7 +249,8 @@ void DriveCtrl::entryAction_followingLineForward() {
     DBSTATUSln("Drive Entering State: followingLineForward");
     currentState = State::followingLineForward;  // state transition
     doActionFPtr = &DriveCtrl::doAction_followingLineForward;
-    loopcount = 0;
+    previousMillis = millis();
+    currentMillis = millis();
     pController_Input = 0;
     //Entry-Action
     pDrive.drive(Drive::Direction::Forward, SPEED);
@@ -256,7 +261,8 @@ DriveCtrl::Event DriveCtrl::doAction_followingLineForward() {
     //Generate the Event
     // DBINFO3ln(pEnvdetect.Linedeviation());
     int linedeviation = pEnvdetect.Linedeviation();
-    if ((abs(linedeviation) == 180) && (loopcount > loopcountmax)) {
+    currentMillis = millis();
+    if ((abs(linedeviation) == 180) && ((currentMillis - previousMillis) > ignoreSensorTurnMillis)) {
         return Event::FullLineDetected;
     } else if ((abs(linedeviation) == 200)) {
         //Line lost
@@ -288,7 +294,8 @@ void DriveCtrl::entryAction_followingLineBackward() {
     DBSTATUSln("Drive Entering State: followingLineBackward");
     currentState = State::followingLineBackward;  // state transition
     doActionFPtr = &DriveCtrl::doAction_followingLineBackward;
-    loopcount = 0;
+    previousMillis = millis();
+    currentMillis = millis();
     pController_Input = 0;
     //Entry-Action
     // pController.SetControllerDirection(REVERSE);
@@ -301,7 +308,8 @@ DriveCtrl::Event DriveCtrl::doAction_followingLineBackward() {
     //Generate the Event
     // DBINFO3ln(pEnvdetect.Linedeviation());
     int linedeviation = pEnvdetect.Linedeviation();
-    if ((abs(linedeviation) == 180) && (loopcount > loopcountmax)) {
+    currentMillis = millis();
+    if ((abs(linedeviation) == 180) && ((currentMillis - previousMillis) > ignoreSensorTurnMillis)) {
         return Event::FullLineDetected;
     } else if ((abs(linedeviation) == 200)) {
         //Line lost

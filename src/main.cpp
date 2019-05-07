@@ -295,6 +295,7 @@ void test_hardware() {
 void test_ctrl() {
     //https://www.arduino.cc/en/Tutorial/SwitchCase2
     int inByte;
+    bool firstcall = true;
     switch (Test) {
         case TestCase::HOISTCTRL:
             DBSTATUSln("==Test Hoist CTRL==");
@@ -486,6 +487,7 @@ void test_ctrl() {
             inByte = Serial.read();
             Serial.print((char)inByte);
             Serial.println();
+            firstcall = true;
             switch (inByte) {
                 case 'S':
                     DBINFO1ln("Event: MoveToTargetPosition Sortic 1");
@@ -493,6 +495,11 @@ void test_ctrl() {
                     navctrl->loop(NavigationCtrl::Event::MoveToTargetPosition);
                     while ((navctrl->getcurrentState() != NavigationCtrl::State::endPoint) && (Serial.read() != 'E')) {
                         navctrl->loop();
+                        // if (navctrl->getcurrentState() == NavigationCtrl::State::gateway && firstcall) {
+                        //     firstcall = false;
+                        //     delay(3000);
+                        //     navctrl->giveToken();
+                        // }
                     }
                     break;
                 case 's':
@@ -501,6 +508,11 @@ void test_ctrl() {
                     navctrl->loop(NavigationCtrl::Event::MoveToTargetPosition);
                     while ((navctrl->getcurrentState() != NavigationCtrl::State::endPoint) && (Serial.read() != 'E')) {
                         navctrl->loop();
+                        // if (navctrl->getcurrentState() == NavigationCtrl::State::gateway && firstcall) {
+                        //     firstcall = false;
+                        //     delay(3000);
+                        //     navctrl->giveToken();
+                        // }
                     }
                     break;
                 case 'T':
@@ -509,6 +521,11 @@ void test_ctrl() {
                     navctrl->loop(NavigationCtrl::Event::MoveToTargetPosition);
                     while ((navctrl->getcurrentState() != NavigationCtrl::State::endPoint) && (Serial.read() != 'E')) {
                         navctrl->loop();
+                        // if (navctrl->getcurrentState() == NavigationCtrl::State::gateway && firstcall) {
+                        //     firstcall = false;
+                        //     delay(3000);
+                        //     navctrl->giveToken();
+                        // }
                     }
                     break;
                 case 't':
@@ -517,6 +534,11 @@ void test_ctrl() {
                     navctrl->loop(NavigationCtrl::Event::MoveToTargetPosition);
                     while ((navctrl->getcurrentState() != NavigationCtrl::State::endPoint) && (Serial.read() != 'E')) {
                         navctrl->loop();
+                        // if (navctrl->getcurrentState() == NavigationCtrl::State::gateway && firstcall) {
+                        //     firstcall = false;
+                        //     delay(3000);
+                        //     navctrl->giveToken();
+                        // }
                     }
                     break;
                 case 'E':
