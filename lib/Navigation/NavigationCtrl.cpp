@@ -130,6 +130,7 @@ void NavigationCtrl::entryAction_endPoint() {
     currentState = State::endPoint;  // state transition
     doActionFPtr = &NavigationCtrl::doAction_endPoint;
     pActual.sector = pTarget.sector;
+    pActual.startSector = pActual.sector;
     //Entry-Action
 }
 
@@ -141,7 +142,6 @@ NavigationCtrl::Event NavigationCtrl::doAction_endPoint() {
 
 void NavigationCtrl::exitAction_endPoint() {
     DBSTATUSln("Navigation Leaving State: endPoint");
-    pActual.startSector = pActual.sector;
 }
 
 //==toGateway==========================================================
@@ -310,7 +310,7 @@ NavigationCtrl::Event NavigationCtrl::doAction_crossTransit() {
         pSubStateLoopInc += 1;
         if (pSubStateLoopInc >= 3) {
             pSubStateLoopInc = 0;  //reset back to zero
-            pCurrentSubState = 0;  ///<@todo Probelm with Error possible?
+            pCurrentSubState = 0;  ///@todo Probelm with Error possible?
             return Event::PosReached;
         }
     }
@@ -337,7 +337,7 @@ NavigationCtrl::Event NavigationCtrl::doAction_toEndPoint() {
         pSubStateLoopInc += 1;
         if (pSubStateLoopInc >= 1) {
             pSubStateLoopInc = 0;  //reset back to zero
-            pCurrentSubState = 0;  ///<@todo Probelm with Error possible?
+            pCurrentSubState = 0;  ///@todo Probelm with Error possible?
             return Event::PosEndPointReached;
         }
     }
@@ -423,6 +423,45 @@ String NavigationCtrl::decodeEvent(Event event) {
             break;
         default:
             return "ERROR: No matching event";
+            break;
+    }
+}
+
+String NavigationCtrl::decodeSector(Sector sector) {
+    switch (sector) {
+        case Sector::SorticHandover:
+            return "Sector::SorticHandover";
+            break;
+        case Sector::SorticWaitForGateway:
+            return "Sector::SorticWaitForGateway";
+            break;
+        case Sector::SorticGateway:
+            return "Sector::SorticGateway";
+            break;
+        case Sector::TransitWaitForGatewaySortic:
+            return "Sector::TransitWaitForGatewaySortic";
+            break;
+        case Sector::Transit:
+            return "Sector::Transit";
+            break;
+        case Sector::Parking:
+            return "Sector::Parking";
+            break;
+        case Sector::TransitWaitForGatewayTransfer:
+            return "Sector::TransitWaitForGatewayTransfer";
+            break;
+        case Sector::TransferGateway:
+            return "Sector::TransferGateway";
+            break;
+        case Sector::TransferWaitForGateway:
+            return "Sector::TransferWaitForGateway";
+            break;
+        case Sector::TransferHandover:
+            return "Sector::TransferHandover";
+            break;
+
+        default:
+            return "ERROR: No matching sector";
             break;
     }
 }

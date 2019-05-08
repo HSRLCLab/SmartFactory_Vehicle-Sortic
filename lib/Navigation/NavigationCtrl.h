@@ -23,6 +23,7 @@
  * @brief Contains the FSM for the Navigation
  * 
  * @image html NavigationCtrl.png width=1000
+ * @image html Gametable.png width=1000
  */
 class NavigationCtrl {
     //=====PUBLIC====================================================================================
@@ -53,24 +54,24 @@ class NavigationCtrl {
     };
 
     enum class Sector {
-        SorticHandover,
-        SorticWaitForGateway,
-        SorticGateway,
-        TransitWaitForGatewaySortic,
-        Transit,
-        Parking,
-        TransitWaitForGatewayTransfer,
-        TransferGateway,
-        TransferWaitForGateway,
-        TransferHandover
+        SorticHandover,                 ///< Sortic Handover
+        SorticWaitForGateway,           ///< Sortic - Wait for Gateway
+        SorticGateway,                  ///< Sortic - Gateway
+        TransitWaitForGatewaySortic,    ///< Transit - Wait for Gateway Sortic
+        Transit,                        ///< Transit
+        Parking,                        ///< Parking (not used atm)
+        TransitWaitForGatewayTransfer,  ///< Transit - Wait for Gateway Transfer
+        TransferGateway,                ///< Transfer - Gateway
+        TransferWaitForGateway,         ///< Transfer - wait for Gateway
+        TransferHandover                ///< Transfer - Handover
     };
 
-    enum class Orientation {
-        North,
-        East,
-        South,
-        West
-    };
+    // enum class Orientation {
+    //     North,
+    //     East,
+    //     South,
+    //     West
+    // };
 
     /**
      * @brief Construct a new Navigation Ctrl object
@@ -102,39 +103,40 @@ class NavigationCtrl {
     /**
      * @brief Set the Target Position object
      * 
-     * @param sector - 
-     * @param line - 
+     * @param sector - TargetSector ( HandoverSortic or HandoverTransfer)
+     * @param line - TargetLine
      */
     void setTargetPosition(Sector sector, const int line);
 
     /**
-     * @brief 
+     * @brief give Token to access the Gateway
      * 
      */
     void giveToken();
 
     //=====PRIVATE====================================================================================
    private:
-    State lastStateBevorError;  ///< holds the last state of the FSM so it's possible to resume after error
-    State currentState;         ///< holds the current state of the FSM
-    Event currentEvent;         ///< holds the current event of the FSM
-    int pCurrentSubState = 0;
-    int pLastSubStateBevorError = 0;
-    int pSubStateLoopInc = 0;
+    State lastStateBevorError;        ///< holds the last state of the FSM so it's possible to resume after error
+    State currentState;               ///< holds the current state of the FSM
+    Event currentEvent;               ///< holds the current event of the FSM
+    int pCurrentSubState = 0;         ///< Counter for the Current Substate
+    int pLastSubStateBevorError = 0;  ///< Holds the last Substate befor an Error occured
+    int pSubStateLoopInc = 0;         ///< Counter so you can call the same substatefunction multiple times
 
     struct ActualPos {
-        Sector startSector = Sector::SorticHandover;
-        Sector sector = startSector;  ///<
-        int line = 1;                 ///<
-        bool token = false;
+        Sector startSector = Sector::SorticHandover;  ///< Startpoint from current path
+        Sector sector = startSector;                  ///< actual sector
+        int line = 1;                                 ///< actual line
+        bool token = false;                           ///< token for gateway accees
     } pActual;
 
     struct TargetPos {
-        Sector sector;  ///<
-        int line;       ///<
+        Sector sector;  ///< TargetSector
+        int line;       ///< TargetLine
     } pTarget;
-    bool tranistonce = true;
-    DriveCtrl::Event pLastGatewayTurn;
+
+    bool tranistonce = true;            ///< prevents an loop between transit and gateway
+    DriveCtrl::Event pLastGatewayTurn;  ///< Variable which holds the first Turn in gateway
 
     /**
      * 
@@ -158,12 +160,13 @@ class NavigationCtrl {
     /**
      * @brief executes the entry action of the endPoint state.
      * 
+     * Update actual sector and startsector with taregt sector.
      */
     void entryAction_endPoint();
 
     /**
      * @brief executes the main action of the endPoint state.
-     * 
+     * This is an Idel-state ->NoEvent generated
      * @return NavigationCtrl::Event - generated Event
      */
     NavigationCtrl::Event doAction_endPoint();
@@ -184,6 +187,12 @@ class NavigationCtrl {
     /**
      * @brief executes the main action of the toGateway state.
      * 
+     * @image html NavigationCtrlSubtoGateway.png width=100
+     * 
+     * 0 Drive backwards \n
+     * 10 turn around \n
+     * 20 drive forward once adn return Event::PosReached
+     * 
      * @return NavigationCtrl::Event - generated Event
      */
     NavigationCtrl::Event doAction_toGateway();
@@ -202,6 +211,17 @@ class NavigationCtrl {
 
     /**
      * @brief executes the main action of the gateway state.
+     * 
+     * @image html NavigationCtrlSubGateway.png width=100
+     * 
+     * 0 Wait for Token \n
+     * 10 Drive forward once \n
+     * 20  turn left/right depending on target and current orientation or go straith (50) \n
+     * 30 drive forward n times depending on actual line and targetline \n
+     * 40 turn left/right depending on target and current orientation
+     * 50 drive forward twice. \n
+     * if startsector = target.sector then return Event::PosEndPointReached
+     * else return Event::PosTransitReached
      * 
      * @return NavigationCtrl::Event - generated Event
      */
@@ -222,6 +242,9 @@ class NavigationCtrl {
 
     /**
      * @brief executes the main action of the crossTransit state.
+     * 
+     * drive forward three times and return Event::PosReached
+     * 
      * @return NavigationCtrl::Event - generated Event
      */
     NavigationCtrl::Event doAction_crossTransit();
@@ -240,6 +263,8 @@ class NavigationCtrl {
 
     /**
      * @brief executes the main action of the toEndPoint state.
+     * 
+     * drive forward once and return Event::PosEndPointReached
      * @return NavigationCtrl::Event - generated Event
      */
     NavigationCtrl::Event doAction_toEndPoint();
@@ -294,13 +319,5 @@ class NavigationCtrl {
      * @return String - Sector as String
      */
     String decodeSector(Sector sector);
-
-    /**
-     * @brief Decodes the Orientation-Enum and returns a description
-     * 
-     * @param orientation - enum Orientation
-     * @return String - orientation as String
-     */
-    String decodeOrientation(Orientation orientation);
 };
 #endif
