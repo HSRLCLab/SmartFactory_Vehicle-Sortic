@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['sector',['sector',['../struct_navigation_ctrl_1_1_actual_pos.html#a80a33f293bc79f1cfb0cc898e18078b2',1,'NavigationCtrl::ActualPos::sector()'],['../struct_navigation_ctrl_1_1_target_pos.html#a6acff85d3e3fdfca8ab20255af7716c0',1,'NavigationCtrl::TargetPos::sector()']]],
   ['sensor',['sensor',['../struct_chassis_state.html#acef08b84097e6781f903c8568ce9cf4c',1,'ChassisState::sensor()'],['../structmy_j_s_o_n_str.html#a2f535a558a94f79113c10b180b6b4525',1,'myJSONStr::sensor()']]],
   ['sensor0',['sensor0',['../class_chassis.html#ac8a36d7a62fd60c1239391dee8f03ea9',1,'Chassis']]],
   ['sensor1',['sensor1',['../class_chassis.html#a2c71b771fabb6a4e72a7295878aa0889',1,'Chassis']]],
@@ -21,5 +22,6 @@ var searchData=
   ['sonarservo',['sonarServo',['../class_sonar.html#ad1f4f2fcba78c786fa3a1d590aef3eda',1,'Sonar']]],
   ['speed',['speed',['../struct_chassis_state.html#ae32121eb67b625ffee5903120503084e',1,'ChassisState::speed()'],['../_configuration_8h.html#adb7f9566c2c7d5ebf724e420d8ec247c',1,'SPEED():&#160;Configuration.h']]],
   ['speedfactor',['SPEEDFACTOR',['../_configuration_8h.html#a259dcd3a895ad5520f48604212d538b8',1,'Configuration.h']]],
-  ['sspin',['ssPin',['../class_link_s_p_i___s_s.html#a1196773a93cb6455e9f3b2e65219e8ee',1,'LinkSPI_SS']]]
+  ['sspin',['ssPin',['../class_link_s_p_i___s_s.html#a1196773a93cb6455e9f3b2e65219e8ee',1,'LinkSPI_SS']]],
+  ['startsector',['startSector',['../struct_navigation_ctrl_1_1_actual_pos.html#a79d5d991d2f848eb483be9eb33931aac',1,'NavigationCtrl::ActualPos']]]
 ];

@@ -19,6 +19,7 @@ var searchData=
   ['motorcontrol',['motorControl',['../class_chassis.html#ada742a8f2b40451e2241bdd36628b4cf',1,'Chassis']]],
   ['motorleft',['motorLeft',['../class_chassis.html#a750f3c40c7ace997305ac3753920a947',1,'Chassis']]],
   ['motorright',['motorRight',['../class_chassis.html#a813c8a4fb2979312b12af38863fee2f4',1,'Chassis']]],
+  ['movetotargetposition',['MoveToTargetPosition',['../class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14fa88d265fa614db70884480a53410d0cd8',1,'NavigationCtrl']]],
   ['mqttconnectionfailed',['MQTTConnectionFailed',['../classmy_m_q_t_t.html#a260a10a835dc83e7268bc901c5a45a00',1,'myMQTT']]],
   ['myjson',['myJSON',['../classmy_j_s_o_n.html',1,'myJSON'],['../classmy_j_s_o_n.html#a5c9dde3f1ce95c419aee1390b32b80b0',1,'myJSON::myJSON()']]],
   ['myjson_2ecpp',['myJSON.cpp',['../my_j_s_o_n_8cpp.html',1,'']]],

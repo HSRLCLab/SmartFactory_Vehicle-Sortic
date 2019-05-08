@@ -47,6 +47,12 @@ var files_dup =
     [ "myMQTT.h", "my_m_q_t_t_8h.html", [
       [ "myMQTT", "classmy_m_q_t_t.html", "classmy_m_q_t_t" ]
     ] ],
+    [ "NavigationCtrl.cpp", "_navigation_ctrl_8cpp.html", null ],
+    [ "NavigationCtrl.h", "_navigation_ctrl_8h.html", [
+      [ "NavigationCtrl", "class_navigation_ctrl.html", "class_navigation_ctrl" ],
+      [ "ActualPos", "struct_navigation_ctrl_1_1_actual_pos.html", "struct_navigation_ctrl_1_1_actual_pos" ],
+      [ "TargetPos", "struct_navigation_ctrl_1_1_target_pos.html", "struct_navigation_ctrl_1_1_target_pos" ]
+    ] ],
     [ "Network.cpp", "_network_8cpp.html", null ],
     [ "Network.h", "_network_8h.html", [
       [ "Network", "class_network.html", "class_network" ]

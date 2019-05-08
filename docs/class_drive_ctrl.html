@@ -243,6 +243,16 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a979bfb77874d80331181341bd51b114a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac235dce590d30e27319a6848b976ab02"><td class="memItemLeft" align="right" valign="top">const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_drive_ctrl.html#ac235dce590d30e27319a6848b976ab02">loopcountmax</a> = 5</td></tr>
 <tr class="separator:ac235dce590d30e27319a6848b976ab02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa74647e3c9045787048edd81df9aa6a9"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_drive_ctrl.html#aa74647e3c9045787048edd81df9aa6a9">currentMillis</a> = 0</td></tr>
+<tr class="memdesc:aa74647e3c9045787048edd81df9aa6a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">will store current time  <a href="#aa74647e3c9045787048edd81df9aa6a9">More...</a><br /></td></tr>
+<tr class="separator:aa74647e3c9045787048edd81df9aa6a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33c7c0a652229d717a8f7a54699a4865"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_drive_ctrl.html#a33c7c0a652229d717a8f7a54699a4865">previousMillis</a> = 0</td></tr>
+<tr class="memdesc:a33c7c0a652229d717a8f7a54699a4865"><td class="mdescLeft">&#160;</td><td class="mdescRight">will store last time  <a href="#a33c7c0a652229d717a8f7a54699a4865">More...</a><br /></td></tr>
+<tr class="separator:a33c7c0a652229d717a8f7a54699a4865"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac77a69f12b6ee65fb04b3adbc9681e5b"><td class="memItemLeft" align="right" valign="top">const unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_drive_ctrl.html#ac77a69f12b6ee65fb04b3adbc9681e5b">ignoreSensorTurnMillis</a> = 750</td></tr>
+<tr class="separator:ac77a69f12b6ee65fb04b3adbc9681e5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf210611cd8353edc28b953a1a6b6246"><td class="memItemLeft" align="right" valign="top">const unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_drive_ctrl.html#adf210611cd8353edc28b953a1a6b6246">ignoreSensorAroundMillis</a> = 1000</td></tr>
+<tr class="separator:adf210611cd8353edc28b953a1a6b6246"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade1cd453bcf2371f056c1baaa897d4d5"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_drive_ctrl.html#ade1cd453bcf2371f056c1baaa897d4d5">pController_Input</a> = 0</td></tr>
 <tr class="memdesc:ade1cd453bcf2371f056c1baaa897d4d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Controller Input.  <a href="#ade1cd453bcf2371f056c1baaa897d4d5">More...</a><br /></td></tr>
 <tr class="separator:ade1cd453bcf2371f056c1baaa897d4d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -427,7 +437,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>String - Event as String </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00377">377</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00385">385</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -464,7 +474,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>String - State as String </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00355">355</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00363">363</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -494,7 +504,7 @@ Private Attributes</h2></td></tr>
 <p>main action of the errorState </p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_drive_ctrl.html#ae3e758374bbb5879814e961b5232d8da" title="Enum holds all possible events.">DriveCtrl::Event</a> - generated Event </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00343">343</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00351">351</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -525,7 +535,7 @@ Private Attributes</h2></td></tr>
 <p>Check Line-deviation adn correct accordingly via PID-Controller and drive until a FullLine is Detected. Return Event FullLine else reutrn NoEvent.</p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_drive_ctrl.html#ae3e758374bbb5879814e961b5232d8da" title="Enum holds all possible events.">DriveCtrl::Event</a> - generated Event </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00299">299</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00306">306</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -556,7 +566,7 @@ Private Attributes</h2></td></tr>
 <p>Check Line-deviation adn correct accordingly via PID-Controller and drive until a FullLine is Detected. Return Event FullLine else reutrn NoEvent.</p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_drive_ctrl.html#ae3e758374bbb5879814e961b5232d8da" title="Enum holds all possible events.">DriveCtrl::Event</a> - generated Event </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00254">254</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00259">259</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -618,7 +628,7 @@ Private Attributes</h2></td></tr>
 <p>Turn Right until the line is aligned again. Return LineAligned else return no Event.</p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_drive_ctrl.html#ae3e758374bbb5879814e961b5232d8da" title="Enum holds all possible events.">DriveCtrl::Event</a> - generated Event </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00224">224</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00228">228</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -649,7 +659,7 @@ Private Attributes</h2></td></tr>
 <p>Turn Left until the line is aligned again. Return LineAligned else return no Event.</p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_drive_ctrl.html#ae3e758374bbb5879814e961b5232d8da" title="Enum holds all possible events.">DriveCtrl::Event</a> - generated Event </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00172">172</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00173">173</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -680,7 +690,7 @@ Private Attributes</h2></td></tr>
 <p>Turn Right until the line is aligned again. Return LineAligned else return no Event.</p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_drive_ctrl.html#ae3e758374bbb5879814e961b5232d8da" title="Enum holds all possible events.">DriveCtrl::Event</a> - generated Event </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00198">198</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00200">200</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -709,7 +719,7 @@ Private Attributes</h2></td></tr>
 
 <p>entry action of the errorState </p>
 
-<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00334">334</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00342">342</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -739,7 +749,7 @@ Private Attributes</h2></td></tr>
 <p>executes the entry action of the followingLineBackward </p>
 <p>Start Driving Straight </p>
 
-<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00287">287</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00293">293</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -769,7 +779,7 @@ Private Attributes</h2></td></tr>
 <p>executes the entry action of the followingLineForward </p>
 <p>Start Driving Straight </p>
 
-<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00244">244</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00248">248</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -828,7 +838,7 @@ Private Attributes</h2></td></tr>
 <p>executes the entry action of the turningAround </p>
 <p>Start Turning Right. </p>
 
-<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00214">214</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00217">217</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -888,7 +898,7 @@ Private Attributes</h2></td></tr>
 <p>executes the entry action of the turningRight </p>
 <p>Start Turning Right. </p>
 
-<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00189">189</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00190">190</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -917,7 +927,7 @@ Private Attributes</h2></td></tr>
 
 <p>exit action of the errorState </p>
 
-<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00349">349</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00357">357</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -947,7 +957,7 @@ Private Attributes</h2></td></tr>
 <p>executes the exit action of the followingLineBackward </p>
 <p>Stop driving. </p>
 
-<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00326">326</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00334">334</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -977,7 +987,7 @@ Private Attributes</h2></td></tr>
 <p>executes the exit action of the followingLineForward </p>
 <p>Stop driving. </p>
 
-<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00281">281</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00287">287</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1036,7 +1046,7 @@ Private Attributes</h2></td></tr>
 <p>executes the exit action of the turningAround </p>
 <p>Stop Driving. </p>
 
-<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00238">238</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00242">242</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1066,7 +1076,7 @@ Private Attributes</h2></td></tr>
 <p>executes the exit action of the turningLeft </p>
 <p>Stop Driving. </p>
 
-<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00183">183</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00184">184</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1096,7 +1106,7 @@ Private Attributes</h2></td></tr>
 <p>executes the exit action of the turningRight </p>
 <p>Stop Driving. </p>
 
-<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00208">208</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8cpp_source.html#l00211">211</a> of file <a class="el" href="_drive_ctrl_8cpp_source.html">DriveCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1234,6 +1244,32 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="aa74647e3c9045787048edd81df9aa6a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa74647e3c9045787048edd81df9aa6a9">&#9670;&nbsp;</a></span>currentMillis</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long DriveCtrl::currentMillis = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>will store current time </p>
+
+<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8h_source.html#l00104">104</a> of file <a class="el" href="_drive_ctrl_8h_source.html">DriveCtrl.h</a>.</p>
+
+</div>
+</div>
 <a id="a50f6f7d97c73d7a093b95b31a5e37af7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a50f6f7d97c73d7a093b95b31a5e37af7">&#9670;&nbsp;</a></span>currentState</h2>
 
@@ -1284,6 +1320,54 @@ Private Attributes</h2></td></tr>
 <p><a href="https://stackoverflow.com/questions/1485983/calling-c-class-methods-via-a-function-pointer">https://stackoverflow.com/questions/1485983/calling-c-class-methods-via-a-function-pointer</a> </p>
 
 <p class="definition">Definition at line <a class="el" href="_drive_ctrl_8h_source.html#l00100">100</a> of file <a class="el" href="_drive_ctrl_8h_source.html">DriveCtrl.h</a>.</p>
+
+</div>
+</div>
+<a id="adf210611cd8353edc28b953a1a6b6246"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf210611cd8353edc28b953a1a6b6246">&#9670;&nbsp;</a></span>ignoreSensorAroundMillis</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const unsigned long DriveCtrl::ignoreSensorAroundMillis = 1000</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8h_source.html#l00107">107</a> of file <a class="el" href="_drive_ctrl_8h_source.html">DriveCtrl.h</a>.</p>
+
+</div>
+</div>
+<a id="ac77a69f12b6ee65fb04b3adbc9681e5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac77a69f12b6ee65fb04b3adbc9681e5b">&#9670;&nbsp;</a></span>ignoreSensorTurnMillis</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const unsigned long DriveCtrl::ignoreSensorTurnMillis = 750</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8h_source.html#l00106">106</a> of file <a class="el" href="_drive_ctrl_8h_source.html">DriveCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1393,7 +1477,7 @@ Private Attributes</h2></td></tr>
 </ol>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>improve controller and make it adaptive to speedchanges </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8h_source.html#l00124">124</a> of file <a class="el" href="_drive_ctrl_8h_source.html">DriveCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8h_source.html#l00129">129</a> of file <a class="el" href="_drive_ctrl_8h_source.html">DriveCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1419,7 +1503,7 @@ Private Attributes</h2></td></tr>
 
 <p>Controller Input. </p>
 
-<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8h_source.html#l00104">104</a> of file <a class="el" href="_drive_ctrl_8h_source.html">DriveCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8h_source.html#l00109">109</a> of file <a class="el" href="_drive_ctrl_8h_source.html">DriveCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1445,7 +1529,7 @@ Private Attributes</h2></td></tr>
 
 <p>Controller Output. </p>
 
-<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8h_source.html#l00105">105</a> of file <a class="el" href="_drive_ctrl_8h_source.html">DriveCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8h_source.html#l00110">110</a> of file <a class="el" href="_drive_ctrl_8h_source.html">DriveCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1471,7 +1555,7 @@ Private Attributes</h2></td></tr>
 
 <p>Controller Setpoint. </p>
 
-<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8h_source.html#l00106">106</a> of file <a class="el" href="_drive_ctrl_8h_source.html">DriveCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8h_source.html#l00111">111</a> of file <a class="el" href="_drive_ctrl_8h_source.html">DriveCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1497,7 +1581,7 @@ Private Attributes</h2></td></tr>
 
 <p><a class="el" href="class_drive.html" title="Class Drive handels the Driving-System.">Drive</a> Object. </p>
 
-<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8h_source.html#l00125">125</a> of file <a class="el" href="_drive_ctrl_8h_source.html">DriveCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8h_source.html#l00130">130</a> of file <a class="el" href="_drive_ctrl_8h_source.html">DriveCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1523,7 +1607,33 @@ Private Attributes</h2></td></tr>
 
 <p>EnviromentDetection Object. </p>
 
-<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8h_source.html#l00126">126</a> of file <a class="el" href="_drive_ctrl_8h_source.html">DriveCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8h_source.html#l00131">131</a> of file <a class="el" href="_drive_ctrl_8h_source.html">DriveCtrl.h</a>.</p>
+
+</div>
+</div>
+<a id="a33c7c0a652229d717a8f7a54699a4865"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33c7c0a652229d717a8f7a54699a4865">&#9670;&nbsp;</a></span>previousMillis</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long DriveCtrl::previousMillis = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>will store last time </p>
+
+<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8h_source.html#l00105">105</a> of file <a class="el" href="_drive_ctrl_8h_source.html">DriveCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1549,7 +1659,7 @@ Private Attributes</h2></td></tr>
 
 <p>Controler SampleTime in ms. </p>
 
-<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8h_source.html#l00107">107</a> of file <a class="el" href="_drive_ctrl_8h_source.html">DriveCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8h_source.html#l00112">112</a> of file <a class="el" href="_drive_ctrl_8h_source.html">DriveCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1575,7 +1685,7 @@ Private Attributes</h2></td></tr>
 
 <p>D-Value (independet of SamplingTime) </p>
 
-<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8h_source.html#l00110">110</a> of file <a class="el" href="_drive_ctrl_8h_source.html">DriveCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8h_source.html#l00115">115</a> of file <a class="el" href="_drive_ctrl_8h_source.html">DriveCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1601,7 +1711,7 @@ Private Attributes</h2></td></tr>
 
 <p>I-Value (independet of SamplingTime) </p>
 
-<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8h_source.html#l00109">109</a> of file <a class="el" href="_drive_ctrl_8h_source.html">DriveCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8h_source.html#l00114">114</a> of file <a class="el" href="_drive_ctrl_8h_source.html">DriveCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1627,7 +1737,7 @@ Private Attributes</h2></td></tr>
 
 <p>P-Value. </p>
 
-<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8h_source.html#l00108">108</a> of file <a class="el" href="_drive_ctrl_8h_source.html">DriveCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_drive_ctrl_8h_source.html#l00113">113</a> of file <a class="el" href="_drive_ctrl_8h_source.html">DriveCtrl.h</a>.</p>
 
 </div>
 </div>

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['sonar',['Sonar',['../class_sonar.html',1,'']]],
-  ['sonarstate',['SonarState',['../struct_sonar_state.html',1,'']]]
+  ['navigationctrl',['NavigationCtrl',['../class_navigation_ctrl.html',1,'']]],
+  ['network',['Network',['../class_network.html',1,'']]]
 ];

@@ -5,6 +5,7 @@ var searchData=
   ['setbrightness',['setBrightness',['../class_t_pixy.html#a8c9f442eff27c2fd563da0df9d397d42',1,'TPixy']]],
   ['setled',['setLED',['../class_t_pixy.html#a938f7b3d42778ecf8bff8f6eb58ff1c8',1,'TPixy']]],
   ['setservos',['setServos',['../class_t_pixy.html#a8d768d7d679742d487a44a6af85ccecd',1,'TPixy']]],
+  ['settargetposition',['setTargetPosition',['../class_navigation_ctrl.html#a8cba249ab6c573d77f72bf82148618ea',1,'NavigationCtrl']]],
   ['setup',['setup',['../main_8cpp.html#a4fc01d736fe50cf5b977f755b675f11d',1,'main.cpp']]],
   ['size',['size',['../class_communication.html#a097f09aba41fec80fd226c75b91c1cd5',1,'Communication']]],
   ['sonar',['Sonar',['../class_sonar.html#ac2a93501d20b4ce79b6d7b9f1815e1da',1,'Sonar']]],

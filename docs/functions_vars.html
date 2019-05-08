@@ -140,11 +140,16 @@ $(document).ready(function(){initNavTree('functions_vars.html','');});
 <li>currentEvent
 : <a class="el" href="class_drive_ctrl.html#ab4dbd708aaa85fef281062514f69d90d">DriveCtrl</a>
 , <a class="el" href="class_hoist_ctrl.html#a437a6b1adcf9beea2f30e59b6f4bf616">HoistCtrl</a>
+, <a class="el" href="class_navigation_ctrl.html#a43929cb28eee4b798d2e050601d19b41">NavigationCtrl</a>
+</li>
+<li>currentMillis
+: <a class="el" href="class_drive_ctrl.html#aa74647e3c9045787048edd81df9aa6a9">DriveCtrl</a>
 </li>
 <li>currentState
 : <a class="el" href="class_chassis.html#a2d76f9452ee918b81300220e2e97b4a8">Chassis</a>
 , <a class="el" href="class_drive_ctrl.html#a50f6f7d97c73d7a093b95b31a5e37af7">DriveCtrl</a>
 , <a class="el" href="class_hoist_ctrl.html#a7ca2e0bed7213e402d7726848ee1fe97">HoistCtrl</a>
+, <a class="el" href="class_navigation_ctrl.html#a4eef36856657895890ac58ff8d85e680">NavigationCtrl</a>
 </li>
 </ul>
 
@@ -168,6 +173,7 @@ $(document).ready(function(){initNavTree('functions_vars.html','');});
 <li>doActionFPtr
 : <a class="el" href="class_drive_ctrl.html#a965aedee0c1a17e87b49f290fb899785">DriveCtrl</a>
 , <a class="el" href="class_hoist_ctrl.html#a3d4e7e31ca719dcc22cb6531ef928175">HoistCtrl</a>
+, <a class="el" href="class_navigation_ctrl.html#af4e4012c47104f10fed2493b499f6f17">NavigationCtrl</a>
 </li>
 <li>DValue
 : <a class="el" href="class_chassis.html#a9228ac94f768e1c091298ed17956c51e">Chassis</a>
@@ -206,6 +212,12 @@ $(document).ready(function(){initNavTree('functions_vars.html','');});
 
 
 <h3><a id="index_i"></a>- i -</h3><ul>
+<li>ignoreSensorAroundMillis
+: <a class="el" href="class_drive_ctrl.html#adf210611cd8353edc28b953a1a6b6246">DriveCtrl</a>
+</li>
+<li>ignoreSensorTurnMillis
+: <a class="el" href="class_drive_ctrl.html#ac77a69f12b6ee65fb04b3adbc9681e5b">DriveCtrl</a>
+</li>
 <li>inQ
 : <a class="el" href="class_link_s_p_i.html#a678ce08f3700bfe61b555fdd6333338d">LinkSPI</a>
 </li>
@@ -250,6 +262,7 @@ $(document).ready(function(){initNavTree('functions_vars.html','');});
 <li>lastStateBevorError
 : <a class="el" href="class_drive_ctrl.html#a70eaa12f9d9c570c67e8171a1ff053e9">DriveCtrl</a>
 , <a class="el" href="class_hoist_ctrl.html#a4f719be9cea57f9dc4596a7d53d23106">HoistCtrl</a>
+, <a class="el" href="class_navigation_ctrl.html#abab5185ddb4042fe28287ffe5b5d1bd5">NavigationCtrl</a>
 </li>
 <li>leftMotorSpeed
 : <a class="el" href="class_chassis.html#a387a21cfc9d191d94c9d806c048fc0d5">Chassis</a>
@@ -259,6 +272,10 @@ $(document).ready(function(){initNavTree('functions_vars.html','');});
 </li>
 <li>len
 : <a class="el" href="struct_circular_q.html#a20090a9bede41f90b16e279e9d2ca2f4">CircularQ&lt; BufType &gt;</a>
+</li>
+<li>line
+: <a class="el" href="struct_navigation_ctrl_1_1_actual_pos.html#aec44ff3c7d65e68bbcb0d76913a368d3">NavigationCtrl::ActualPos</a>
+, <a class="el" href="struct_navigation_ctrl_1_1_target_pos.html#ae1c968984b579f562b3029b3a0bf6e95">NavigationCtrl::TargetPos</a>
 </li>
 <li>link
 : <a class="el" href="class_t_pixy.html#ad35910660bf93554978d35ce97970714">TPixy&lt; LinkType &gt;</a>
@@ -330,6 +347,9 @@ $(document).ready(function(){initNavTree('functions_vars.html','');});
 
 
 <h3><a id="index_p"></a>- p -</h3><ul>
+<li>pActual
+: <a class="el" href="class_navigation_ctrl.html#a61c982a62c01dea766151ffd58f941a3">NavigationCtrl</a>
+</li>
 <li>pAFMS
 : <a class="el" href="class_drive.html#ab5f7f474bbda6fffcafefbb0ecf5b016">Drive</a>
 </li>
@@ -354,8 +374,14 @@ $(document).ready(function(){initNavTree('functions_vars.html','');});
 <li>pController_Setpoint
 : <a class="el" href="class_drive_ctrl.html#a23e554291745c6c19022e00c6f6ac427">DriveCtrl</a>
 </li>
+<li>pCurrentSubState
+: <a class="el" href="class_navigation_ctrl.html#aca6c14c0c3f21c743f7fee0580068aba">NavigationCtrl</a>
+</li>
 <li>pDrive
 : <a class="el" href="class_drive_ctrl.html#af69379598ee826855dfafe9a76f2364f">DriveCtrl</a>
+</li>
+<li>pDriveCtrl
+: <a class="el" href="class_navigation_ctrl.html#a91f7d7fcf6a2a84c84d66c8a3a8635cf">NavigationCtrl</a>
 </li>
 <li>pEncryption
 : <a class="el" href="class_network.html#a20c58da03c41b7a9f1b5145e2ce320ea">Network</a>
@@ -380,6 +406,12 @@ $(document).ready(function(){initNavTree('functions_vars.html','');});
 </li>
 <li>pixy
 : <a class="el" href="class_vision.html#ad38de35ab75503b33dc88f3065e01133">Vision</a>
+</li>
+<li>pLastGatewayTurn
+: <a class="el" href="class_navigation_ctrl.html#a6864554653efbb3f645bbaf14aaa53b1">NavigationCtrl</a>
+</li>
+<li>pLastSubStateBevorError
+: <a class="el" href="class_navigation_ctrl.html#a70cd6db3e7f09d9cda50bb67c97e017b">NavigationCtrl</a>
 </li>
 <li>pLinedetector
 : <a class="el" href="class_environment_detection.html#aad261375c320266826a3b7a90d78d18a">EnvironmentDetection</a>
@@ -425,6 +457,7 @@ $(document).ready(function(){initNavTree('functions_vars.html','');});
 </li>
 <li>previousMillis
 : <a class="el" href="class_chassis.html#ae1504df96fe7693f98afd5bef0b23f07">Chassis</a>
+, <a class="el" href="class_drive_ctrl.html#a33c7c0a652229d717a8f7a54699a4865">DriveCtrl</a>
 </li>
 <li>previousPIDValue
 : <a class="el" href="class_chassis.html#a1afa51adb622f5e43bd5a59cf1ce82a0">Chassis</a>
@@ -477,6 +510,12 @@ $(document).ready(function(){initNavTree('functions_vars.html','');});
 <li>pSsid
 : <a class="el" href="class_network.html#a37b8b3f25aed35e0813c78e494ea8575">Network</a>
 </li>
+<li>pSubStateLoopInc
+: <a class="el" href="class_navigation_ctrl.html#a2b68a4d00efb49b03f2306fc8ec18c77">NavigationCtrl</a>
+</li>
+<li>pTarget
+: <a class="el" href="class_navigation_ctrl.html#ad046112a8c3d1c60edc378168b0b9525">NavigationCtrl</a>
+</li>
 <li>pTurnSpeedLeft
 : <a class="el" href="class_drive.html#a5c36798aefbaa7221778d2cc52be4b91">Drive</a>
 </li>
@@ -518,6 +557,10 @@ $(document).ready(function(){initNavTree('functions_vars.html','');});
 
 
 <h3><a id="index_s"></a>- s -</h3><ul>
+<li>sector
+: <a class="el" href="struct_navigation_ctrl_1_1_actual_pos.html#a80a33f293bc79f1cfb0cc898e18078b2">NavigationCtrl::ActualPos</a>
+, <a class="el" href="struct_navigation_ctrl_1_1_target_pos.html#a6acff85d3e3fdfca8ab20255af7716c0">NavigationCtrl::TargetPos</a>
+</li>
 <li>sensor
 : <a class="el" href="struct_chassis_state.html#acef08b84097e6781f903c8568ce9cf4c">ChassisState</a>
 , <a class="el" href="structmy_j_s_o_n_str.html#a2f535a558a94f79113c10b180b6b4525">myJSONStr</a>
@@ -582,6 +625,9 @@ $(document).ready(function(){initNavTree('functions_vars.html','');});
 <li>ssPin
 : <a class="el" href="class_link_s_p_i___s_s.html#a1196773a93cb6455e9f3b2e65219e8ee">LinkSPI_SS</a>
 </li>
+<li>startSector
+: <a class="el" href="struct_navigation_ctrl_1_1_actual_pos.html#a79d5d991d2f848eb483be9eb33931aac">NavigationCtrl::ActualPos</a>
+</li>
 </ul>
 
 
@@ -643,6 +689,9 @@ $(document).ready(function(){initNavTree('functions_vars.html','');});
 <li>timeLoopCounter
 : <a class="el" href="class_chassis.html#ab68aa7cb30de74ed3f881b739a643451">Chassis</a>
 </li>
+<li>token
+: <a class="el" href="struct_navigation_ctrl_1_1_actual_pos.html#aa460134d019faa14906183ad29b73ac6">NavigationCtrl::ActualPos</a>
+</li>
 <li>toleranceLeft
 : <a class="el" href="class_vision.html#af7adcc25506d7017ca61df4f74069da3">Vision</a>
 </li>
@@ -651,6 +700,9 @@ $(document).ready(function(){initNavTree('functions_vars.html','');});
 </li>
 <li>topic
 : <a class="el" href="structmy_j_s_o_n_str.html#aff87d3e159f45872701dd70a6e74b996">myJSONStr</a>
+</li>
+<li>tranistonce
+: <a class="el" href="class_navigation_ctrl.html#a89bd9a0cafc75b679b10b67c7fadcc79">NavigationCtrl</a>
 </li>
 <li>turnCounter
 : <a class="el" href="class_chassis.html#a89ff11d2e15ff870b5c16948d3d71897">Chassis</a>

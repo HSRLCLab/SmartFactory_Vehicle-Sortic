@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['tpixy',['TPixy',['../class_t_pixy.html',1,'']]],
-  ['tpixy_3c_20linki2c_20_3e',['TPixy&lt; LinkI2C &gt;',['../class_t_pixy.html',1,'']]]
+  ['sonar',['Sonar',['../class_sonar.html',1,'']]],
+  ['sonarstate',['SonarState',['../struct_sonar_state.html',1,'']]]
 ];

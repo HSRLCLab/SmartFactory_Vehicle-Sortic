@@ -1,5 +1,6 @@
 var hierarchy =
 [
+    [ "NavigationCtrl::ActualPos", "struct_navigation_ctrl_1_1_actual_pos.html", null ],
     [ "Block", "struct_block.html", null ],
     [ "ChassisState", "struct_chassis_state.html", null ],
     [ "CircularQ< BufType >", "struct_circular_q.html", null ],
@@ -24,8 +25,10 @@ var hierarchy =
     [ "myJSON", "classmy_j_s_o_n.html", null ],
     [ "myJSONStr", "structmy_j_s_o_n_str.html", null ],
     [ "myMQTT", "classmy_m_q_t_t.html", null ],
+    [ "NavigationCtrl", "class_navigation_ctrl.html", null ],
     [ "Network", "class_network.html", null ],
     [ "SonarState", "struct_sonar_state.html", null ],
+    [ "NavigationCtrl::TargetPos", "struct_navigation_ctrl_1_1_target_pos.html", null ],
     [ "TPixy< LinkType >", "class_t_pixy.html", null ],
     [ "TPixy< LinkI2C >", "class_t_pixy.html", null ],
     [ "VisionState", "struct_vision_state.html", null ]
