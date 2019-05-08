@@ -16,7 +16,7 @@
 #define CONFIGURATION_H
 
 //Setup for Drive /////////////////
-const double SPEEDFACTOR = 1;
+const double SPEEDFACTOR = 1.3;
 const unsigned int RIGHT_MOTOR = 1;                   ///<
 const unsigned int LEFT_MOTOR = 2;                    ///<
 const unsigned int SPEED = 70 * SPEEDFACTOR;          ///<
@@ -33,13 +33,13 @@ const unsigned int PIN_SENSOR_4 = 9;   ///<
 
 //Setup for PID /////////////////////
 #if SPEEDFACTOR < 2
-// const double PID_KP = 2;       ///<
-// const double PID_KI = 0;       ///<
-// const double PID_KD = 0.0001;  ///<
-const double PID_KP = 5;      ///<
+const double PID_KP = 10;     ///<
 const double PID_KI = 2;      ///<
-const double PID_KD = 0.001;  ///<
-#else                         //use an more agressiv PID
+const double PID_KD = 0.005;  ///<
+// const double PID_KP = 5;      ///<
+// const double PID_KI = 2;      ///<
+// const double PID_KD = 0.001;  ///<
+#else  //use an more agressiv PID
 const double K_P = 30;    ///<
 const double K_I = 20;    ///<
 const double K_D = 0.05;  ///<

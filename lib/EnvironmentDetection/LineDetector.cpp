@@ -73,14 +73,16 @@ const int LineDetector::deviation() {
     } else if ((pSensorLL == 0) && (pSensorL == 1) && (pSensorM == 1) && (pSensorR == 1) && (pSensorRR == 1)) {
         DBINFO3ln("sloppy Full line");
         return 180;
-        // } else if ((pSensorLL == 0) && (pSensorL == 1) && (pSensorM == 1) && (pSensorR == 1) && (pSensorRR == 0)) {
-        //     DBINFO3ln("Full line");
-        //     return 180;
+    } else if ((pSensorLL == 0) && (pSensorL == 1) && (pSensorM == 1) && (pSensorR == 1) && (pSensorRR == 0)) {
+        DBINFO3ln("Line to wide");
+        return 0;
     } else if ((pSensorLL == 0) && (pSensorL == 0) && (pSensorM == 0) && (pSensorR == 0) && (pSensorRR == 0)) {
         DBINFO3ln("No line detected");
         return 200;  ///@todo line lost
     } else {
         DBWARNINGln("LineDetector: Unexpected Results");
+        DBWARNINGln(String("LinePosition: ") + String(pSensorLL) + String(pSensorL) + String(pSensorM) + String(pSensorR) + String(pSensorRR));
+
         return 200;  ///@todo wired results
     }
 }

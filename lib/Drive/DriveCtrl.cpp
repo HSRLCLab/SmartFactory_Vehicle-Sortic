@@ -9,7 +9,7 @@
  * @date 2019-04-23
  * @copyright Copyright (c) 2019
  * 
- * @todo solve linedetection with something like first position and not with loopcount
+ * @todo solve linedetection with something like first position and not with (nonblocking) delay
  */
 
 #include "DriveCtrl.h"
@@ -177,7 +177,6 @@ DriveCtrl::Event DriveCtrl::doAction_turningLeft() {
     if ((abs(pEnvdetect.Linedeviation()) < 1) && ((currentMillis - previousMillis) > ignoreSensorTurnMillis)) {
         return Event::LineAligned;
     }
-    loopcount += 1;
     return Event::NoEvent;
 }
 
@@ -204,7 +203,6 @@ DriveCtrl::Event DriveCtrl::doAction_turningRight() {
     if ((abs(pEnvdetect.Linedeviation()) < 1) && ((currentMillis - previousMillis) > ignoreSensorTurnMillis)) {
         return Event::LineAligned;
     }
-    loopcount += 1;
     return Event::NoEvent;
 }
 
@@ -235,7 +233,6 @@ DriveCtrl::Event DriveCtrl::doAction_turningAround() {
     if ((abs(linedev) < 2) && ((currentMillis - previousMillis) > ignoreSensorAroundMillis)) {
         return Event::LineAligned;
     }
-    loopcount += 1;
     return Event::NoEvent;
 }
 
@@ -280,7 +277,6 @@ DriveCtrl::Event DriveCtrl::doAction_followingLineForward() {
         pDrive.turn(Drive::Direction::Right, abs(pController_Output));
     }
 
-    loopcount += 1;
     return Event::NoEvent;
 }
 
@@ -301,6 +297,7 @@ void DriveCtrl::entryAction_followingLineBackward() {
     // pController.SetControllerDirection(REVERSE);
     pController.SetTunings(1, 0, 0.01);
     pDrive.drive(Drive::Direction::Backward, SPEED * 0.8);
+    pDrive.turn(Drive::Direction::Right, 4);  //correct motor power diffrence
 }
 
 DriveCtrl::Event DriveCtrl::doAction_followingLineBackward() {
@@ -311,23 +308,24 @@ DriveCtrl::Event DriveCtrl::doAction_followingLineBackward() {
     currentMillis = millis();
     if ((abs(linedeviation) == 180) && ((currentMillis - previousMillis) > ignoreSensorTurnMillis)) {
         return Event::FullLineDetected;
-    } else if ((abs(linedeviation) == 200)) {
-        //Line lost
-        // return Event::FullLineDetected;
-    }
-    if ((linedeviation != 180) && (linedeviation != 200)) {
-        pController_Input = linedeviation;
-    }
-    DBINFO2ln(String("Controll-Input: ") + String(pController_Input));
-    pController.Compute();
-    DBINFO2ln(String("Controll-Correction: ") + String(pController_Output));
-    if (pController_Output > 0) {
-        pDrive.turn(Drive::Direction::Left, abs(pController_Output));
-    } else if (pController_Output < 0) {
-        pDrive.turn(Drive::Direction::Right, abs(pController_Output));
     }
 
-    loopcount += 1;
+    // } else if ((abs(linedeviation) == 200)) {
+    //     //Line lost
+    //     // return Event::FullLineDetected;
+    // }.
+    // if ((linedeviation != 180) && (linedeviation != 200)) {
+    //     pController_Input = linedeviation;
+    // }
+    // DBINFO2ln(String("Controll-Input: ") + String(pController_Input));
+    // pController.Compute();
+    // DBINFO2ln(String("Controll-Correction: ") + String(pController_Output));
+    // if (pController_Output > 0) {
+    //     pDrive.turn(Drive::Direction::Left, abs(pController_Output));
+    // } else if (pController_Output < 0) {
+    //     pDrive.turn(Drive::Direction::Right, abs(pController_Output));
+    // }
+
     return Event::NoEvent;
 }
 

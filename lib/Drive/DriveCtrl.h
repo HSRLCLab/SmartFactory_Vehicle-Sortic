@@ -99,12 +99,10 @@ class DriveCtrl {
      */
     Event (DriveCtrl::*doActionFPtr)(void) = &DriveCtrl::doAction_idle;
 
-    unsigned int loopcount;  ///< Var counts how often a do-function is called
-    const unsigned int loopcountmax = 5;
     unsigned long currentMillis = 0;   ///< will store current time
     unsigned long previousMillis = 0;  ///< will store last time
-    const unsigned long ignoreSensorTurnMillis = 750;
-    const unsigned long ignoreSensorAroundMillis = 1000;
+    const unsigned long ignoreSensorTurnMillis = 500;
+    const unsigned long ignoreSensorAroundMillis = 1500;
 
     double pController_Input = 0;          ///< Controller Input
     double pController_Output = 0;         ///< Controller Output

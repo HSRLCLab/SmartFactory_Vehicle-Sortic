@@ -129,9 +129,16 @@ void NavigationCtrl::entryAction_endPoint() {
     DBSTATUSln("Navigation Entering State: endPoint");
     currentState = State::endPoint;  // state transition
     doActionFPtr = &NavigationCtrl::doAction_endPoint;
+    //Entry-Action
+    if (pActual.lastSector == Sector::SorticToHandover) {
+        pActual.sector = Sector::SorticHandover;
+    } else if (pActual.lastSector == Sector::TransferToHandover) {
+        pActual.sector = Sector::TransferHandover;
+    }
+
     pActual.sector = pTarget.sector;
     pActual.startSector = pActual.sector;
-    //Entry-Action
+    DBSTATUSln(decodeSector(pActual.sector) + String(" Line: ") + String(pActual.line));
 }
 
 NavigationCtrl::Event NavigationCtrl::doAction_endPoint() {
@@ -142,6 +149,7 @@ NavigationCtrl::Event NavigationCtrl::doAction_endPoint() {
 
 void NavigationCtrl::exitAction_endPoint() {
     DBSTATUSln("Navigation Leaving State: endPoint");
+    pActual.lastSector = pActual.sector;
 }
 
 //==toGateway==========================================================
@@ -150,6 +158,13 @@ void NavigationCtrl::entryAction_toGateway() {
     currentState = State::toGateway;  // state transition
     doActionFPtr = &NavigationCtrl::doAction_toGateway;
     //Entry-Action
+    //Update position
+    if (pActual.lastSector == Sector::SorticHandover) {
+        pActual.sector = Sector::SorticWaitForGateway;
+    } else if (pActual.lastSector == Sector::TransferHandover) {
+        pActual.sector = Sector::TransferWaitForGateway;
+    }
+    DBSTATUSln(decodeSector(pActual.sector) + String(" Line: ") + String(pActual.line));
 }
 
 NavigationCtrl::Event NavigationCtrl::doAction_toGateway() {
@@ -184,6 +199,7 @@ NavigationCtrl::Event NavigationCtrl::doAction_toGateway() {
 
 void NavigationCtrl::exitAction_toGateway() {
     DBSTATUSln("Navigation Leaving State: toGateway");
+    pActual.lastSector = pActual.sector;
 }
 
 //==gateway==========================================================
@@ -194,6 +210,9 @@ void NavigationCtrl::entryAction_gateway() {
     //Entry-Action
 }
 
+/**
+ * @todo refactoring so it only checks the neares sector not startsector
+ */
 NavigationCtrl::Event NavigationCtrl::doAction_gateway() {
     DBINFO1ln("Navigation State: gateway");
     //Generate Event
@@ -201,10 +220,20 @@ NavigationCtrl::Event NavigationCtrl::doAction_gateway() {
         case 0:  // wait for Token
             DBINFO2ln("Substate: WaitForToken");
             DBINFO2ln("Token: " + String(pActual.token));
-            // if (pActual.token) {
-            delay(3000);
-            pCurrentSubState = 10;  //call next case
-            // }
+            // if (pActual.token)
+            {
+                delay(3000);
+                pCurrentSubState = 10;  //call next case
+                //Update positiom
+                if ((pActual.lastSector == Sector::SorticWaitForGateway) ||
+                    (pActual.lastSector == Sector::TransitWaitForGatewaySortic)) {
+                    pActual.sector = Sector::SorticGateway;
+                } else if ((pActual.lastSector == Sector::TransferWaitForGateway) ||
+                           (pActual.lastSector == Sector::TransitWaitForGatewayTransfer)) {
+                    pActual.sector = Sector::TransferGateway;
+                }
+                DBSTATUSln(decodeSector(pActual.sector) + String(" Line: ") + String(pActual.line));
+            }
             break;
         case 10:  // drive forward
             DBINFO2ln("Substate: drive forward once");
@@ -291,6 +320,7 @@ NavigationCtrl::Event NavigationCtrl::doAction_gateway() {
 
 void NavigationCtrl::exitAction_gateway() {
     DBSTATUSln("Navigation Leaving State: gateway");
+    pActual.lastSector = pActual.sector;
 }
 
 //==crossTransit==========================================================
@@ -299,6 +329,12 @@ void NavigationCtrl::entryAction_crossTransit() {
     currentState = State::crossTransit;  // state transition
     doActionFPtr = &NavigationCtrl::doAction_crossTransit;
     //Entry-Action
+    if (pActual.lastSector == Sector::SorticGateway) {
+        pActual.sector = Sector::TransitToTransfer;
+    } else if (pActual.lastSector == Sector::TransferGateway) {
+        pActual.sector = Sector::TransitToSortic;
+    }
+    DBSTATUSln(decodeSector(pActual.sector) + String(" Line: ") + String(pActual.line));
 }
 
 NavigationCtrl::Event NavigationCtrl::doAction_crossTransit() {
@@ -319,6 +355,13 @@ NavigationCtrl::Event NavigationCtrl::doAction_crossTransit() {
 
 void NavigationCtrl::exitAction_crossTransit() {
     DBSTATUSln("Navigation Leaving State: crossTransit");
+    pActual.lastSector = pActual.sector;
+    if (pActual.lastSector == Sector::TransitToTransfer) {
+        pActual.sector = Sector::TransitWaitForGatewayTransfer;
+    } else if (pActual.lastSector == Sector::TransitToSortic) {
+        pActual.sector = Sector::TransitWaitForGatewaySortic;
+    }
+    DBSTATUSln(decodeSector(pActual.sector) + String(" Line: ") + String(pActual.line));
 }
 
 //==toEndPoint==========================================================
@@ -327,6 +370,12 @@ void NavigationCtrl::entryAction_toEndPoint() {
     currentState = State::toEndPoint;  // state transition
     doActionFPtr = &NavigationCtrl::doAction_toEndPoint;
     //Entry-Action
+    if (pActual.lastSector == Sector::SorticGateway) {
+        pActual.sector = Sector::SorticToHandover;
+    } else if (pActual.lastSector == Sector::TransferGateway) {
+        pActual.sector = Sector::TransferToHandover;
+    }
+    DBSTATUSln(decodeSector(pActual.sector) + String(" Line: ") + String(pActual.line));
 }
 
 NavigationCtrl::Event NavigationCtrl::doAction_toEndPoint() {
@@ -346,6 +395,7 @@ NavigationCtrl::Event NavigationCtrl::doAction_toEndPoint() {
 
 void NavigationCtrl::exitAction_toEndPoint() {
     DBSTATUSln("Navigation Leaving State: toEndPoint");
+    pActual.lastSector = pActual.sector;
 }
 
 //==errorState========================================================
@@ -432,6 +482,9 @@ String NavigationCtrl::decodeSector(Sector sector) {
         case Sector::SorticHandover:
             return "Sector::SorticHandover";
             break;
+        case Sector::SorticToHandover:
+            return "Sector::SorticHandover";
+            break;
         case Sector::SorticWaitForGateway:
             return "Sector::SorticWaitForGateway";
             break;
@@ -441,8 +494,11 @@ String NavigationCtrl::decodeSector(Sector sector) {
         case Sector::TransitWaitForGatewaySortic:
             return "Sector::TransitWaitForGatewaySortic";
             break;
-        case Sector::Transit:
-            return "Sector::Transit";
+        case Sector::TransitToSortic:
+            return "Sector::TransitToSortic";
+            break;
+        case Sector::TransitToTransfer:
+            return "Sector::TransitToTransfer";
             break;
         case Sector::Parking:
             return "Sector::Parking";
@@ -455,6 +511,9 @@ String NavigationCtrl::decodeSector(Sector sector) {
             break;
         case Sector::TransferWaitForGateway:
             return "Sector::TransferWaitForGateway";
+            break;
+        case Sector::TransferToHandover:
+            return "Sector::TransferHandover";
             break;
         case Sector::TransferHandover:
             return "Sector::TransferHandover";

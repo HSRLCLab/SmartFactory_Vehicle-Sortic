@@ -23,7 +23,7 @@
  * @brief Contains the FSM for the Navigation
  * 
  * @image html NavigationCtrl.png width=1000
- * @image html Gametable.png width=1000
+ * @image html Gametable.png width=1200
  */
 class NavigationCtrl {
     //=====PUBLIC====================================================================================
@@ -54,15 +54,18 @@ class NavigationCtrl {
     };
 
     enum class Sector {
-        SorticHandover,                 ///< Sortic Handover
+        SorticHandover,                 ///< Sortic - Handover
+        SorticToHandover,               ///< Sortic - to Handover
         SorticWaitForGateway,           ///< Sortic - Wait for Gateway
         SorticGateway,                  ///< Sortic - Gateway
         TransitWaitForGatewaySortic,    ///< Transit - Wait for Gateway Sortic
-        Transit,                        ///< Transit
+        TransitToSortic,                ///< Transit - to Sortic
+        TransitToTransfer,              ///< Transit - to Transfer
         Parking,                        ///< Parking (not used atm)
         TransitWaitForGatewayTransfer,  ///< Transit - Wait for Gateway Transfer
         TransferGateway,                ///< Transfer - Gateway
         TransferWaitForGateway,         ///< Transfer - wait for Gateway
+        TransferToHandover,             ///< Transfer - to Handover
         TransferHandover                ///< Transfer - Handover
     };
 
@@ -125,6 +128,7 @@ class NavigationCtrl {
 
     struct ActualPos {
         Sector startSector = Sector::SorticHandover;  ///< Startpoint from current path
+        Sector lastSector;                            ///< last sector
         Sector sector = startSector;                  ///< actual sector
         int line = 1;                                 ///< actual line
         bool token = false;                           ///< token for gateway accees
