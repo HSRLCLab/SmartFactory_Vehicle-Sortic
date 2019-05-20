@@ -28,9 +28,19 @@ void NavigationCtrl::loop(Event currentEvent) {
 }
 
 const NavigationCtrl::State NavigationCtrl::getcurrentState() {
-    DBFUNCCALL("Current State: ")
+    DBFUNCCALL("Current State: ");
     DBFUNCCALLln(decodeState(currentState));
     return currentState;
+}
+
+const NavigationCtrl::Sector NavigationCtrl::getcurrentSector() {
+    DBFUNCCALL("Current Sector: ");
+    return pActual.sector;
+}
+
+const int NavigationCtrl::getcurrentLine() {
+    DBFUNCCALL("Current line: ");
+    return pActual.line;
 }
 
 void NavigationCtrl::setTargetPosition(Sector sector, const int line) {
@@ -43,6 +53,85 @@ void NavigationCtrl::giveToken() {
     DBFUNCCALLln("NavigationCtrl::giveToken()");
     pActual.token = true;
 }
+
+String NavigationCtrl::decodeSector(Sector sector) {
+    switch (sector) {
+        case Sector::SorticHandover:
+            return "SorticHandover";
+            break;
+        case Sector::SorticToHandover:
+            return "SorticHandover";
+            break;
+        case Sector::SorticWaitForGateway:
+            return "SorticWaitForGateway";
+            break;
+        case Sector::SorticGateway:
+            return "SorticGateway";
+            break;
+        case Sector::TransitWaitForGatewaySortic:
+            return "TransitWaitForGatewaySortic";
+            break;
+        case Sector::TransitToSortic:
+            return "TransitToSortic";
+            break;
+        case Sector::TransitToTransfer:
+            return "TransitToTransfer";
+            break;
+        case Sector::Parking:
+            return "Parking";
+            break;
+        case Sector::TransitWaitForGatewayTransfer:
+            return "TransitWaitForGatewayTransfer";
+            break;
+        case Sector::TransferGateway:
+            return "TransferGateway";
+            break;
+        case Sector::TransferWaitForGateway:
+            return "TransferWaitForGateway";
+            break;
+        case Sector::TransferToHandover:
+            return "TransferHandover";
+            break;
+        case Sector::TransferHandover:
+            return "TransferHandover";
+            break;
+
+        default:
+            return "ERROR: No matching sector";
+            break;
+    }
+}
+
+NavigationCtrl::Sector NavigationCtrl::decodeSector(String sector) {
+    if (String("SorticHandover") == sector) {
+        return Sector::SorticHandover;
+    } else if (String("SorticToHandover") == sector) {
+        return Sector::SorticToHandover;
+    } else if (String("SorticWaitForGateway") == sector) {
+        return Sector::SorticWaitForGateway;
+    } else if (String("TransitWaitForGatewaySortic") == sector) {
+        return Sector::TransitWaitForGatewaySortic;
+    } else if (String("TransitToSortic") == sector) {
+        return Sector::TransitToSortic;
+    } else if (String("TransitToTransfer") == sector) {
+        return Sector::TransitToTransfer;
+    } else if (String("Parking") == sector) {
+        return Sector::Parking;
+    } else if (String("TransitWaitForGatewayTransfer") == sector) {
+        return Sector::TransitWaitForGatewayTransfer;
+    } else if (String("TransferGateway") == sector) {
+        return Sector::TransferGateway;
+    } else if (String("TransferWaitForGateway") == sector) {
+        return Sector::TransferWaitForGateway;
+    } else if (String("TransferToHandover") == sector) {
+        return Sector::TransferToHandover;
+    } else if (String("TransferHandover") == sector) {
+        return Sector::TransferHandover;
+    } else {
+        return Sector::error;
+    }
+}
+
 //=====PRIVATE====================================================================================
 void NavigationCtrl::process(Event e) {
     DBFUNCCALL("NavigationCtrl::process ")
@@ -138,7 +227,7 @@ void NavigationCtrl::entryAction_endPoint() {
 
     pActual.sector = pTarget.sector;
     pActual.startSector = pActual.sector;
-    DBSTATUSln(decodeSector(pActual.sector) + String(" Line: ") + String(pActual.line));
+    DBPOSln(decodeSector(pActual.sector) + String(" Line: ") + String(pActual.line));
 }
 
 NavigationCtrl::Event NavigationCtrl::doAction_endPoint() {
@@ -164,7 +253,7 @@ void NavigationCtrl::entryAction_toGateway() {
     } else if (pActual.lastSector == Sector::TransferHandover) {
         pActual.sector = Sector::TransferWaitForGateway;
     }
-    DBSTATUSln(decodeSector(pActual.sector) + String(" Line: ") + String(pActual.line));
+    DBPOSln(decodeSector(pActual.sector) + String(" Line: ") + String(pActual.line));
 }
 
 NavigationCtrl::Event NavigationCtrl::doAction_toGateway() {
@@ -232,7 +321,7 @@ NavigationCtrl::Event NavigationCtrl::doAction_gateway() {
                            (pActual.lastSector == Sector::TransitWaitForGatewayTransfer)) {
                     pActual.sector = Sector::TransferGateway;
                 }
-                DBSTATUSln(decodeSector(pActual.sector) + String(" Line: ") + String(pActual.line));
+                DBPOSln(decodeSector(pActual.sector) + String(" Line: ") + String(pActual.line));
             }
             break;
         case 10:  // drive forward
@@ -249,12 +338,12 @@ NavigationCtrl::Event NavigationCtrl::doAction_gateway() {
                 break;
             }
 
-            if (((pActual.line < pTarget.line) && pActual.startSector != Sector::SorticHandover) ||
-                ((pActual.line > pTarget.line) && pActual.startSector != Sector::TransferHandover)) {
+            if (((pActual.line < pTarget.line) && (pActual.startSector != Sector::SorticHandover)) ||    //nach unten und von rechts
+                ((pActual.line > pTarget.line) && (pActual.startSector != Sector::TransferHandover))) {  //nach oben und von links
                 pLastGatewayTurn = DriveCtrl::Event::TurnLeft;
                 pDriveCtrl.loop(pLastGatewayTurn);
-            } else if (((pActual.line > pTarget.line) && pActual.startSector != Sector::SorticHandover) ||
-                       ((pActual.line < pTarget.line) && pActual.startSector != Sector::TransferHandover)) {
+            } else if (((pActual.line > pTarget.line) && (pActual.startSector != Sector::SorticHandover)) ||    //nach oben und von rechts
+                       ((pActual.line < pTarget.line) && (pActual.startSector != Sector::TransferHandover))) {  //nach unten und von links
                 pLastGatewayTurn = DriveCtrl::Event::TurnRight;
                 pDriveCtrl.loop(pLastGatewayTurn);
             }
@@ -334,7 +423,7 @@ void NavigationCtrl::entryAction_crossTransit() {
     } else if (pActual.lastSector == Sector::TransferGateway) {
         pActual.sector = Sector::TransitToSortic;
     }
-    DBSTATUSln(decodeSector(pActual.sector) + String(" Line: ") + String(pActual.line));
+    DBPOSln(decodeSector(pActual.sector) + String(" Line: ") + String(pActual.line));
 }
 
 NavigationCtrl::Event NavigationCtrl::doAction_crossTransit() {
@@ -361,7 +450,7 @@ void NavigationCtrl::exitAction_crossTransit() {
     } else if (pActual.lastSector == Sector::TransitToSortic) {
         pActual.sector = Sector::TransitWaitForGatewaySortic;
     }
-    DBSTATUSln(decodeSector(pActual.sector) + String(" Line: ") + String(pActual.line));
+    DBPOSln(decodeSector(pActual.sector) + String(" Line: ") + String(pActual.line));
 }
 
 //==toEndPoint==========================================================
@@ -375,7 +464,7 @@ void NavigationCtrl::entryAction_toEndPoint() {
     } else if (pActual.lastSector == Sector::TransferGateway) {
         pActual.sector = Sector::TransferToHandover;
     }
-    DBSTATUSln(decodeSector(pActual.sector) + String(" Line: ") + String(pActual.line));
+    DBPOSln(decodeSector(pActual.sector) + String(" Line: ") + String(pActual.line));
 }
 
 NavigationCtrl::Event NavigationCtrl::doAction_toEndPoint() {
@@ -473,54 +562,6 @@ String NavigationCtrl::decodeEvent(Event event) {
             break;
         default:
             return "ERROR: No matching event";
-            break;
-    }
-}
-
-String NavigationCtrl::decodeSector(Sector sector) {
-    switch (sector) {
-        case Sector::SorticHandover:
-            return "Sector::SorticHandover";
-            break;
-        case Sector::SorticToHandover:
-            return "Sector::SorticHandover";
-            break;
-        case Sector::SorticWaitForGateway:
-            return "Sector::SorticWaitForGateway";
-            break;
-        case Sector::SorticGateway:
-            return "Sector::SorticGateway";
-            break;
-        case Sector::TransitWaitForGatewaySortic:
-            return "Sector::TransitWaitForGatewaySortic";
-            break;
-        case Sector::TransitToSortic:
-            return "Sector::TransitToSortic";
-            break;
-        case Sector::TransitToTransfer:
-            return "Sector::TransitToTransfer";
-            break;
-        case Sector::Parking:
-            return "Sector::Parking";
-            break;
-        case Sector::TransitWaitForGatewayTransfer:
-            return "Sector::TransitWaitForGatewayTransfer";
-            break;
-        case Sector::TransferGateway:
-            return "Sector::TransferGateway";
-            break;
-        case Sector::TransferWaitForGateway:
-            return "Sector::TransferWaitForGateway";
-            break;
-        case Sector::TransferToHandover:
-            return "Sector::TransferHandover";
-            break;
-        case Sector::TransferHandover:
-            return "Sector::TransferHandover";
-            break;
-
-        default:
-            return "ERROR: No matching sector";
             break;
     }
 }

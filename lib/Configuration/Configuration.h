@@ -46,6 +46,9 @@ const double K_D = 0.05;  ///<
 #endif
 /////////////////////////////////////
 
+const unsigned int TIME_BETWEEN_PUBLISH = 100;
+const unsigned int TIMEOUT_VACKS = 15 * 1000;
+
 //Setup for sonar ///////////////////
 #define SONAR_SERVO_PIN 5        ///<
 #define SONAR_TRIGGER_PIN 15     ///<
@@ -72,24 +75,24 @@ const double K_D = 0.05;  ///<
 #define VISION_START_ANGLE 90       ///<
 ////////////////////////////////////
 
-//Setup for webAPI /////////////////
-#define SECRET_SSID "DigitalLab"    ///<
-#define SECRET_PASS "digital42HSR"  ///<
-#define KEY_INDEX 1                 ///<
-//Ip-Address //////////////////////
-#define IP1 192        ///<
-#define IP2 168        ///<
-#define IP3 1          ///<
-#define IP4 4          ///<
-#define IP4_Idefix 3   ///<
-#define IP4_Obelix 27  ///<
-//WiFi pins //////////////////////
-#define WIFI_CS 8   ///<
-#define WIFI_IRQ 7  ///<
-#define WIFI_RST 4  ///<
-#define WIFI_EN 2   ///<
-//Ports //////////////////////////
-#define LISTEN_PORT 80     ///<
-#define SENDING_PORT 1880  ///<
+// //Setup for webAPI /////////////////
+// #define SECRET_SSID "DigitalLab"    ///<
+// #define SECRET_PASS "digital42HSR"  ///<
+// #define KEY_INDEX 1                 ///<
+// //Ip-Address //////////////////////
+// #define IP1 192        ///<
+// #define IP2 168        ///<
+// #define IP3 1          ///<
+// #define IP4 4          ///<
+// #define IP4_Idefix 3   ///<
+// #define IP4_Obelix 27  ///<
+// //WiFi pins //////////////////////
+// #define WIFI_CS 8   ///<
+// #define WIFI_IRQ 7  ///<
+// #define WIFI_RST 4  ///<
+// #define WIFI_EN 2   ///<
+// //Ports //////////////////////////
+// #define LISTEN_PORT 80     ///<
+// #define SENDING_PORT 1880  ///<
 
 #endif

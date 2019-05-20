@@ -66,7 +66,8 @@ class NavigationCtrl {
         TransferGateway,                ///< Transfer - Gateway
         TransferWaitForGateway,         ///< Transfer - wait for Gateway
         TransferToHandover,             ///< Transfer - to Handover
-        TransferHandover                ///< Transfer - Handover
+        TransferHandover,               ///< Transfer - Handover
+        error
     };
 
     // enum class Orientation {
@@ -104,6 +105,15 @@ class NavigationCtrl {
     const State getcurrentState();
 
     /**
+     * @brief Get the current State
+     * 
+     * @return const Sector - 
+     */
+    const Sector getcurrentSector();
+
+    const int getcurrentLine();
+
+    /**
      * @brief Set the Target Position object
      * 
      * @param sector - TargetSector ( HandoverSortic or HandoverTransfer)
@@ -116,6 +126,22 @@ class NavigationCtrl {
      * 
      */
     void giveToken();
+
+    /**
+     * @brief Decodes the Sector-Enum and returns a description
+     * 
+     * @param sector - enum Sector
+     * @return String - Sector as String
+     */
+    String decodeSector(Sector sector);
+
+    /**
+     * @brief 
+     * 
+     * @param sector - 
+     * @return NavigationCtrl::Sector - 
+     */
+    NavigationCtrl::Sector decodeSector(String sector);
 
     //=====PRIVATE====================================================================================
    private:
@@ -315,13 +341,5 @@ class NavigationCtrl {
      * @return String - Event as String
      */
     String decodeEvent(Event event);
-
-    /**
-     * @brief Decodes the Sector-Enum and returns a description
-     * 
-     * @param sector - enum Sector
-     * @return String - Sector as String
-     */
-    String decodeSector(Sector sector);
 };
 #endif
