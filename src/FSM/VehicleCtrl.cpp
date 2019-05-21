@@ -98,6 +98,17 @@ void VehicleCtrl::process(Event e) {
                         break;
                 }
             }
+            if (Event::Reset == e) {
+                exitAction_errorState();   // Exit-action current state
+                entryAction_resetState();  // Entry-actions next state
+            }
+            break;
+        case State::resetState:
+            if (Event::Resume == e) {
+                exitAction_resetState();   // Exit-action current state
+                entryAction_waitForBox();  // Entry-actions next state
+            }
+            break;
         default:
             break;
     }
@@ -359,9 +370,13 @@ VehicleCtrl::Event VehicleCtrl::doAction_errorState() {
                    // if (!pComm.isEmpty()) {
     while (!pComm.isEmpty()) {
         // if (!pComm.first().error) {
-        if (!pComm.pop().error) {
+        myJSONStr temp = pComm.pop();
+        if (!temp.error && !temp.token) {
             // pComm.shift();
             return Event::Resume;
+        } else if (temp.error && temp.token) {
+            // pComm.shift();
+            return Event::Reset;
         }
     }
     return Event::NoEvent;
@@ -370,6 +385,40 @@ VehicleCtrl::Event VehicleCtrl::doAction_errorState() {
 void VehicleCtrl::exitAction_errorState() {
     DBSTATUSln("Leaving State: errorState");
     pComm.clear();
+}
+
+//==resetState========================================================
+void VehicleCtrl::entryAction_resetState() {
+    DBERROR("Entering State: resetState");
+    lastStateBevorError = currentState;
+    currentState = State::resetState;  // state transition
+    doActionFPtr = &VehicleCtrl::doAction_resetState;
+    publishState(currentState);  //Update Current State and Publish
+    pComm.clear();
+}
+
+VehicleCtrl::Event VehicleCtrl::doAction_resetState() {
+    DBINFO1ln("State: resetState");
+    //Generate the Event
+    if (pHoistCtrl.getcurrentState() != HoistCtrl::State::low) {
+        pHoistCtrl.loop(HoistCtrl::Event::Lower);
+    } else {
+        pComm.loop();  //Check for new Messages
+        while (!pComm.isEmpty()) {
+            myJSONStr temp = pComm.pop();
+            if (!temp.error && !temp.token) {
+                return Event::Resume;
+            }
+        }
+    }
+    return Event::NoEvent;
+}
+
+void VehicleCtrl::exitAction_resetState() {
+    DBSTATUSln("Leaving State: resetState");
+    pComm.clear();
+    vehicle = {};  //reset struct
+    substate = 0;
 }
 
 //============================================================================
@@ -390,6 +439,9 @@ String VehicleCtrl::decodeState(State state) {
             break;
         case State::errorState:
             return "errorState";
+            break;
+        case State::resetState:
+            return "resetState";
             break;
         default:
             return "ERROR: No matching state";
@@ -416,6 +468,9 @@ String VehicleCtrl::decodeEvent(Event event) {
             break;
         case Event::Resume:
             return "Event::Resume";
+            break;
+        case Event::Reset:
+            return "Event::Reset";
             break;
         case Event::NoEvent:
             return "Event::NoEvent";

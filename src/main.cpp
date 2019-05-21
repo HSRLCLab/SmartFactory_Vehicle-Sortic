@@ -70,7 +70,7 @@ enum class TestCase {
 Sonar *vehicleSonar;
 Vision *vehicleVision;
 Hoist *vehicleHoist;
-Chassis *vehicleChassis;
+// Chassis *vehicleChassis;
 // VehicleWebAPI *vehicleAPI;
 
 // Network *network;
@@ -107,13 +107,13 @@ void test_ctrl();
  * after each powerup or reset of the board
  */
 void setup() {
-    //Initialize serial and wait for port to open:
-    if (DEBUGGER == true) {
-        Serial.begin(115200);
-        while (!Serial) {
-            ;  // wait for serial port to connect. Needed for native USB port only
-        }
-    }
+    // Initialize serial and wait for port to open:
+    // if (DEBUGGER == true) {
+    //     Serial.begin(115200);
+    //     while (!Serial) {
+    //         ;  // wait for serial port to connect. Needed for native USB port only
+    //     }
+    // }
 
     DBFUNCCALLln("==setup()==");
     DBSTATUSln("Vehicle: booting...");

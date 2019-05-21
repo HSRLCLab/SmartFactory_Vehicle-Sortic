@@ -46,7 +46,7 @@ const double K_D = 0.05;  ///<
 #endif
 /////////////////////////////////////
 
-const unsigned int TIME_BETWEEN_PUBLISH = 100;
+const unsigned int TIME_BETWEEN_PUBLISH = 500;
 const unsigned int TIMEOUT_VACKS = 15 * 1000;
 
 //Setup for sonar ///////////////////

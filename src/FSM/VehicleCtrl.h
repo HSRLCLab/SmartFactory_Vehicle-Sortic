@@ -52,6 +52,7 @@ class VehicleCtrl {
                        NoAnswerReceived,  ///< No Answer received
                        Error,             ///< Error occured
                        Resume,            ///< Resume after Error occured
+                       Reset,             ///< Reset after Error occured
                        NoEvent            ///< No event generated
     };
 
@@ -91,6 +92,7 @@ class VehicleCtrl {
                        handshake,      ///<handshake
                        loadVehicle,    ///<load box
                        unloadVehicle,  ///<unload box
+                       resetState,     ///< reset state
                        errorState };   ///< error state
 
     State lastStateBevorError;  ///< holds the last state of the FSM so it's possible to resume after error
@@ -218,6 +220,25 @@ class VehicleCtrl {
      */
     void exitAction_errorState();
 
+    //==resetState==========================================================
+    /**
+     * @brief entry action of the resetState
+     * 
+     */
+    void entryAction_resetState();
+
+    /**
+     * @brief main action of the resetState
+     * 
+     *  @return VehicleLevelCtrl::Event - generated Event
+     */
+    VehicleCtrl::Event doAction_resetState();
+
+    /**
+     * @brief exit action of the resetState
+     * 
+     */
+    void exitAction_resetState();
     //============================================================================
     //==Aux-Function==============================================================
     /**
