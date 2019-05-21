@@ -30,6 +30,8 @@
 #include "HoistCtrl.h"
 #include "NavigationCtrl.h"
 
+#include "FSM/VehicleCtrl.h"
+
 enum class TestCase {
     RUN,
     HOIST,
@@ -42,7 +44,7 @@ enum class TestCase {
     NETWORK,
     SONAR,
     MOTIVATION = 99
-} Test = TestCase::NAVIGATIONCTRL;
+} Test = TestCase::RUN;
 
 // /**
 //  * @brief
@@ -80,6 +82,8 @@ NavigationCtrl *navctrl;
 
 Drive *drive;
 EnvironmentDetection *envdetect;
+
+VehicleCtrl *vehictrl;
 
 unsigned long currentMillis = 0;   ///< will store current time
 unsigned long previousMillis = 0;  ///< will store last time
@@ -141,15 +145,18 @@ void setup() {
             //     vehicleAPI = new VehicleWebAPI(&state.api);
 
             comm = new Communication();
-            comm->init();
+            // comm->init();
             comm->printNetworkInfo();
             comm->subscribe("Test");
             break;
         case TestCase::SONAR:
             // vehicleSonar = new Sonar(SONAR_SERVO_PIN, SONAR_TRIGGER_PIN, SONAR_ECHO_PIN, SONAR_MAX_DISTANCE, MIN_ERROR, MAX_ERROR, MIN_TURN_ANGLE, MAX_TURN_ANGLE);
             break;
-
+        case TestCase::RUN:
+            vehictrl = new VehicleCtrl();
+            break;
         default:
+
             break;
     }
     DBSTATUSln("Booting complete!");
@@ -194,6 +201,7 @@ void loop() {
 }
 
 void run() {
+    vehictrl->loop();
     //     vehicleAPI->loop(&state.api);
     //     if (state.api.workState == true) {
     //         state.sonarCount++;
@@ -316,11 +324,13 @@ void test_ctrl() {
             switch (inByte) {
                 case 'R':
                     DBINFO1ln("Event: Raise");
-                    hoistctrl->loop(HoistCtrl::Event::Raise);
+                    while (hoistctrl->getcurrentState() != HoistCtrl::State::high)
+                        hoistctrl->loop(HoistCtrl::Event::Raise);
                     break;
                 case 'L':
                     DBINFO1ln("Event: Lower");
-                    hoistctrl->loop(HoistCtrl::Event::Lower);
+                    while (hoistctrl->getcurrentState() != HoistCtrl::State::low)
+                        hoistctrl->loop(HoistCtrl::Event::Lower);
                     break;
                 case 'E':
                     DBINFO1ln("Event: Error");

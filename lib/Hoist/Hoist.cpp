@@ -48,14 +48,19 @@ void Hoist::init() {
  */
 bool Hoist::raise() {
     DBFUNCCALLln("Hoist::raise()");
-    if (position > positionMax) {
-        DBSTATUSln("Begin raiseing..");
-        DBINFO1("Position: ");
-        DBINFO1ln(position);
-        position--;
-        hoistServo.write(position);  //< Update Servo-position
-        // delay(servoDelay);
+    currentMillis = millis();
+    if ((currentMillis - previousMillis) > servoDelay) {
+        previousMillis = currentMillis;
+        if (position > positionMax) {
+            DBSTATUSln("Begin raiseing..");
+            DBINFO1("Position: ");
+            DBINFO1ln(position);
+            position--;
+            hoistServo.write(position);  //< Update Servo-position
+            // delay(servoDelay);
+        }
     }
+
     if (position == positionMax) {
         DBSTATUSln("Hoist raised!");
         return true;
@@ -69,13 +74,17 @@ bool Hoist::raise() {
 bool Hoist::lower() {
     DBFUNCCALLln("Hoist::lower()");
     // hoistServo.attach(servoPin);
-    if (position < positionMin) {
-        DBSTATUSln("Begin lowering...");
-        DBINFO1("Position: ");
-        DBINFO1ln(position);
-        position++;
-        hoistServo.write(position);
-        // delay(servoDelay);
+    currentMillis = millis();
+    if ((currentMillis - previousMillis) > servoDelay) {
+        previousMillis = currentMillis;
+        if (position < positionMin) {
+            DBSTATUSln("Begin lowering...");
+            DBINFO1("Position: ");
+            DBINFO1ln(position);
+            position++;
+            hoistServo.write(position);
+            // delay(servoDelay);
+        }
     }
     if (position == positionMin) {
         DBSTATUSln("Hoist lowered!");

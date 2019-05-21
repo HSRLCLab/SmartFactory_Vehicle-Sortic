@@ -20,6 +20,7 @@ VehicleCtrl::VehicleCtrl() : currentState(State::waitForBox) {
     pComm.subscribe("Vehicle/" + String(vehicle.id) + "/error");
     pComm.subscribe("Vehicle/error");
     pComm.subscribe("error");
+    pComm.subscribe("Box/+/handshake");
 }
 
 void VehicleCtrl::loop() {
@@ -168,7 +169,7 @@ VehicleCtrl::Event VehicleCtrl::doAction_handshake() {
     switch (substate) {
         case 0:  //Publish request for Box and check for ack
             //Check for Ack and Timeout
-            if ((currentMillis - previousMillis) < TIMEOUT_VACKS * 1000) {
+            if ((currentMillis - previousMillis) < TIMEOUT_VACKS) {
                 DBINFO2ln("Check for ack.");
                 if (!pComm.isEmpty()) {
                     myJSONStr temp = pComm.pop();

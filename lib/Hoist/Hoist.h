@@ -89,6 +89,9 @@ class Hoist {
     int positionMin;   ///< minimal Position (Hardware)
     int positionMax;   ///< maximal Position (Hardware)
     int servoDelay;    ///<
+
+    unsigned long currentMillis = 0;   ///< will store current time
+    unsigned long previousMillis = 0;  ///< will store last time
 };
 
 #endif
