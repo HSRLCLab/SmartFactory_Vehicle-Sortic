@@ -113,9 +113,10 @@ class VehicleCtrl {
 
     // myJSONStr pTemp;
 
-    unsigned long currentMillis = 0;          ///< will store current time
-    unsigned long previousMillis = 0;         ///< will store last time
-    unsigned long previousMillisPublish = 0;  ///< will store last publish time
+    unsigned long currentMillis = 0;             ///< will store current time
+    unsigned long previousMillis = 0;            ///< will store last time
+    unsigned long previousMillisPublish = 0;     ///< will store last publish time
+    unsigned long previousMillisPublishPos = 0;  ///< will store last publish position time
 
     //=====StateFunctions===============================================================
     //==waitForBox==========================================================
@@ -276,5 +277,11 @@ class VehicleCtrl {
      * @return false - 
      */
     bool checkForError();
+
+    /**
+     * @brief 
+     * 
+     */
+    void clearGui();
 };
 #endif
