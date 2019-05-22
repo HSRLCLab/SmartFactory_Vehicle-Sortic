@@ -198,6 +198,7 @@ void NavigationCtrl::process(Event e) {
         case State::errorState:
             if (Event::Resume == e) {
                 exitAction_errorState();  // Exit-action current state
+                pDriveCtrl.loop(DriveCtrl::Event::Resume);
                 switch (lastStateBevorError) {
                     case State::endPoint:
                         entryAction_endPoint();  // Entry-actions next state
@@ -215,6 +216,19 @@ void NavigationCtrl::process(Event e) {
                         break;
                 }
             }
+            if (Event::Reset == e) {
+                exitAction_errorState();  // Exit-action current state
+                pDriveCtrl.loop(DriveCtrl::Event::Reset);
+                entryAction_resetState();  // Entry-actions next state
+            }
+            break;
+        case State::resetState:
+            if (Event::Resume == e) {
+                exitAction_resetState();  // Exit-action current state
+                pDriveCtrl.loop(DriveCtrl::Event::Resume);
+                entryAction_endPoint();  // Entry-actions next state
+            }
+            break;
         default:
             break;
     }
@@ -315,9 +329,8 @@ NavigationCtrl::Event NavigationCtrl::doAction_gateway() {
         case 0:  // wait for Token
             DBINFO2ln("Substate: WaitForToken");
             DBINFO2ln("Token: " + String(pActual.token));
-            // if (pActual.token)
-            {
-                delay(3000);
+            if (pActual.token) {
+                // delay(3000);
                 pCurrentSubState = 10;  //call next case
                 //Update positiom
                 if ((pActual.lastSector == Sector::SorticWaitForGateway) ||
@@ -507,13 +520,34 @@ void NavigationCtrl::entryAction_errorState() {
 NavigationCtrl::Event NavigationCtrl::doAction_errorState() {
     DBINFO1ln("Navigation State: errorState");
     //Generate the Event
-
     return Event::NoEvent;
 }
 
 void NavigationCtrl::exitAction_errorState() {
     DBSTATUSln("Navigation Leaving State: errorState");
-    pDriveCtrl.loop(DriveCtrl::Event::Resume);
+}
+
+//==resetState========================================================
+void NavigationCtrl::entryAction_resetState() {
+    DBERROR("Entering State: resetState");
+    currentState = State::resetState;  // state transition
+    doActionFPtr = &NavigationCtrl::doAction_resetState;
+}
+
+NavigationCtrl::Event NavigationCtrl::doAction_resetState() {
+    DBINFO1ln("State: resetState");
+    //Generate the Event
+    return Event::NoEvent;
+}
+
+void NavigationCtrl::exitAction_resetState() {
+    DBSTATUSln("Leaving State: resetState");
+    pActual = {};  //reset struct
+    pTarget = {};  //reset struct
+    tranistonce = true;
+    pCurrentSubState = 0;
+    pLastSubStateBevorError = 0;
+    pSubStateLoopInc = 0;
 }
 
 //============================================================================
@@ -536,6 +570,9 @@ String NavigationCtrl::decodeState(State state) {
             break;
         case State::errorState:
             return "State::errorState";
+            break;
+        case State::resetState:
+            return "State::resetState";
             break;
         default:
             return "ERROR: No matching state";
@@ -562,6 +599,9 @@ String NavigationCtrl::decodeEvent(Event event) {
             break;
         case Event::Resume:
             return "Event::Resume";
+            break;
+        case Event::Reset:
+            return "Event::Reset";
             break;
         case Event::NoEvent:
             return "Event::NoEvent";

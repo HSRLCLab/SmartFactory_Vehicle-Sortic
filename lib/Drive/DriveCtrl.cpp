@@ -137,6 +137,17 @@ void DriveCtrl::process(Event e) {
                         break;
                 }
             }
+            if (Event::Reset == e) {
+                exitAction_errorState();   // Exit-action current state
+                entryAction_resetState();  // Entry-actions next state
+            }
+            break;
+        case State::resetState:
+            if (Event::Resume == e) {
+                exitAction_resetState();  // Exit-action current state
+                entryAction_idle();       // Entry-actions next state
+            }
+            break;
         default:
             break;
     }
@@ -356,6 +367,23 @@ void DriveCtrl::exitAction_errorState() {
     DBSTATUSln("Drive Leaving State:  errorState");
 }
 
+//==resetState========================================================
+void DriveCtrl::entryAction_resetState() {
+    DBERROR("Entering State: resetState");
+    currentState = State::resetState;  // state transition
+    doActionFPtr = &DriveCtrl::doAction_resetState;
+}
+
+DriveCtrl::Event DriveCtrl::doAction_resetState() {
+    DBINFO1ln("State: resetState");
+    //Generate the Event
+    return Event::NoEvent;
+}
+
+void DriveCtrl::exitAction_resetState() {
+    DBSTATUSln("Leaving State: resetState");
+}
+
 //============================================================================
 //==Aux-Function==============================================================
 String DriveCtrl::decodeState(State state) {
@@ -373,6 +401,9 @@ String DriveCtrl::decodeState(State state) {
             break;
         case State::errorState:
             return "State::errorState";
+            break;
+        case State::resetState:
+            return "State::resetState";
             break;
         default:
             return "ERROR: No matching state";
@@ -408,6 +439,9 @@ String DriveCtrl::decodeEvent(Event event) {
             break;
         case Event::Resume:
             return "Event::Resume";
+            break;
+        case Event::Reset:
+            return "Event::Reset";
             break;
         case Event::NoEvent:
             return "Event::NoEvent";

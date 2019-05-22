@@ -36,6 +36,7 @@ class HoistCtrl {
                        PosReached,  ///< Signal: Position reached
                        Error,       ///< Error occured
                        Resume,      ///< Ext: Resume after Error occured
+                       Reset,       ///<  Ext.: Reset after Error occured
                        NoEvent      ///< No event generated
     };
 
@@ -43,11 +44,12 @@ class HoistCtrl {
     * @brief Enum holds all possible states for the Hoist
     * 
     */
-    enum class State { low,        ///< low State
-                       raising,    ///< raising State
-                       high,       ///< high State
-                       lowering,   ///< lowering State
-                       errorState  ///< error State
+    enum class State { low,         ///< low State
+                       raising,     ///< raising State
+                       high,        ///< high State
+                       lowering,    ///< lowering State
+                       resetState,  ///< reset state
+                       errorState   ///< error State
     };
     /**
      * @brief Construct a new Hoist Ctrl object
@@ -213,6 +215,26 @@ class HoistCtrl {
      * 
      */
     void exitAction_errorState();
+
+    //==resetState==========================================================
+    /**
+     * @brief entry action of the resetState
+     * 
+     */
+    void entryAction_resetState();
+
+    /**
+     * @brief main action of the resetState
+     * 
+     *  @return DriveCtrl::Event - generated Event
+     */
+    HoistCtrl::Event doAction_resetState();
+
+    /**
+     * @brief exit action of the resetState
+     * 
+     */
+    void exitAction_resetState();
 
     //============================================================================
     //==Aux-Function==============================================================

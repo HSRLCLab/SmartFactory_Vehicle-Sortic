@@ -38,6 +38,7 @@ class NavigationCtrl {
                        PosReached,            ///< Signal: Position reached
                        Error,                 ///< Error occured
                        Resume,                ///< Ext: Resume after Error occured
+                       Reset,                 ///<  Ext.: Reset after Error occured
                        NoEvent                ///< No event generated
     };
 
@@ -50,6 +51,7 @@ class NavigationCtrl {
                        gateway,       ///< gateway State
                        crossTransit,  ///< crossTransit State
                        toEndPoint,    ///< toEndPoint State
+                       resetState,    ///< reset state
                        errorState     ///< error State
     };
 
@@ -332,6 +334,25 @@ class NavigationCtrl {
      */
     void exitAction_errorState();
 
+    //==resetState==========================================================
+    /**
+     * @brief entry action of the resetState
+     * 
+     */
+    void entryAction_resetState();
+
+    /**
+     * @brief main action of the resetState
+     * 
+     *  @return NavigationCtrl::Event - generated Event
+     */
+    NavigationCtrl::Event doAction_resetState();
+
+    /**
+     * @brief exit action of the resetState
+     * 
+     */
+    void exitAction_resetState();
     //============================================================================
     //==Aux-Function==============================================================
     /**

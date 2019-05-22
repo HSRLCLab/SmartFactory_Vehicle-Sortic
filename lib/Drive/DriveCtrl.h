@@ -43,6 +43,7 @@ class DriveCtrl {
                        LineAligned,       ///< Signal: Line is alligned in the middle of the Vehicle
                        Error,             ///< Ext.: Error occured
                        Resume,            ///< Ext.: Resume after Error occured
+                       Reset,             ///<  Ext.: Reset after Error occured
                        NoEvent            ///< No event generated
     };
 
@@ -56,6 +57,7 @@ class DriveCtrl {
                        turningAround,          ///< turning around State
                        followingLineForward,   ///<  follow the Line drive forward State
                        followingLineBackward,  ///<  follow the Line drive forward State
+                       resetState,             ///< reset state
                        errorState              ///< Error State
     };
 
@@ -306,6 +308,25 @@ class DriveCtrl {
      */
     void exitAction_errorState();
 
+    //==resetState==========================================================
+    /**
+     * @brief entry action of the resetState
+     * 
+     */
+    void entryAction_resetState();
+
+    /**
+     * @brief main action of the resetState
+     * 
+     *  @return DriveCtrl::Event - generated Event
+     */
+    DriveCtrl::Event doAction_resetState();
+
+    /**
+     * @brief exit action of the resetState
+     * 
+     */
+    void exitAction_resetState();
     //============================================================================
     //==Aux-Function==============================================================
     /**

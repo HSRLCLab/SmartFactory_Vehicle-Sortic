@@ -37,6 +37,7 @@ Hoist::Hoist(int hoistServoPin, int hoistServoDelay, int posMax, int posMin) : s
 
 void Hoist::init() {
     attach();
+    position = hoistServo.read();
     while (!lower()) {
     };
     detach();

@@ -83,7 +83,9 @@ void VehicleCtrl::process(Event e) {
             break;
         case State::errorState:
             if (Event::Resume == e) {
-                exitAction_errorState();  // Exit-action current state
+                exitAction_errorState();                       // Exit-action current state
+                pHoistCtrl.loop(HoistCtrl::Event::Resume);     ///< Resume State for HoistCtrl
+                pNavCtrl.loop(NavigationCtrl::Event::Resume);  ///< Resume State for NavigationCtrl
                 switch (lastStateBevorError) {
                     case State::waitForBox:
                         entryAction_waitForBox();  // Entry-actions next state
@@ -102,14 +104,18 @@ void VehicleCtrl::process(Event e) {
                 }
             }
             if (Event::Reset == e) {
-                exitAction_errorState();   // Exit-action current state
-                entryAction_resetState();  // Entry-actions next state
+                exitAction_errorState();                      // Exit-action current state
+                pHoistCtrl.loop(HoistCtrl::Event::Reset);     ///< Reset State for HoistCtrl
+                pNavCtrl.loop(NavigationCtrl::Event::Reset);  ///< Reset State for NavigationCtrl
+                entryAction_resetState();                     // Entry-actions next state
             }
             break;
         case State::resetState:
             if (Event::Resume == e) {
-                exitAction_resetState();   // Exit-action current state
-                entryAction_waitForBox();  // Entry-actions next state
+                exitAction_resetState();                       // Exit-action current state
+                pHoistCtrl.loop(HoistCtrl::Event::Resume);     ///< Resume State for HoistCtrl
+                pNavCtrl.loop(NavigationCtrl::Event::Resume);  ///< Resume State for NavigationCtrl
+                entryAction_waitForBox();                      // Entry-actions next state
             }
             break;
         default:
@@ -290,6 +296,7 @@ VehicleCtrl::Event VehicleCtrl::doAction_loadVehicle() {
                 currentMillis = millis();
             }
 
+            ///< @bug doesn't work properly atm
             if ((currentMillis - previousMillis) > TIME_BETWEEN_PUBLISH * 15) {  //if no message for some time take token
                 if (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::SorticWaitForGateway) {
                     pComm.unsubscribe("Sortic/Gateway");
@@ -416,24 +423,20 @@ void VehicleCtrl::entryAction_resetState() {
     doActionFPtr = &VehicleCtrl::doAction_resetState;
     publishState(currentState);  //Update Current State and Publish
     pComm.clear();
-    pHoistCtrl.loop(HoistCtrl::Event::Resume);     ///< @todo add Reset State for HoistCtrl
-    pNavCtrl.loop(NavigationCtrl::Event::Resume);  ///< @todo add Reset State for NavigationCtrl
 }
 
 VehicleCtrl::Event VehicleCtrl::doAction_resetState() {
     DBINFO1ln("State: resetState");
     //Generate the Event
-    if (pHoistCtrl.getcurrentState() != HoistCtrl::State::low) {
-        pHoistCtrl.loop(HoistCtrl::Event::Lower);
-    } else {
-        pComm.loop();  //Check for new Messages
-        while (!pComm.isEmpty()) {
-            myJSONStr temp = pComm.pop();
-            if (!temp.error && !temp.token) {
-                return Event::Resume;
-            }
+    pComm.loop();  //Check for new Messages
+    while (!pComm.isEmpty()) {
+        myJSONStr temp = pComm.pop();
+        if (!temp.error && !temp.token) {
+            return Event::Resume;
         }
     }
+    pHoistCtrl.loop();
+    pNavCtrl.loop();
     return Event::NoEvent;
 }
 
