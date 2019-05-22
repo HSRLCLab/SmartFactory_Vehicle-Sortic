@@ -49,6 +49,12 @@ void NavigationCtrl::setTargetPosition(Sector sector, const int line) {
     pTarget.line = line;
 }
 
+void NavigationCtrl::setActualPosition(Sector sector, const int line) {
+    DBFUNCCALLln("NavigationCtrl::setActualPosition(Sector sector, const int line)");
+    pActual.sector = sector;
+    pActual.line = line;
+}
+
 void NavigationCtrl::giveToken() {
     DBFUNCCALLln("NavigationCtrl::giveToken()");
     pActual.token = true;

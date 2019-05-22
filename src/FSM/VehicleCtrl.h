@@ -123,8 +123,7 @@ class VehicleCtrl {
      * @brief entry action of the waitForBox
      * 
      */
-    void
-    entryAction_waitForBox();
+    void entryAction_waitForBox();
 
     /**
      * @brief main action of the waitForBox
@@ -263,6 +262,12 @@ class VehicleCtrl {
      * @param state - 
      */
     void publishState(State state);
+
+    /**
+     * @brief 
+     * 
+     */
+    void publishPosition();
 
     /**
      * @brief 

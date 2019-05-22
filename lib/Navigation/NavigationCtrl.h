@@ -122,6 +122,14 @@ class NavigationCtrl {
     void setTargetPosition(Sector sector, const int line);
 
     /**
+     * @brief Set the actual Position object
+     * 
+     * @param sector - actualSector ( HandoverSortic or HandoverTransfer)
+     * @param line - actualLine
+     */
+    void setActualPosition(Sector sector, const int line);
+
+    /**
      * @brief give Token to access the Gateway
      * 
      */

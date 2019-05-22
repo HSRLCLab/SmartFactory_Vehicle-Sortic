@@ -16,6 +16,8 @@ VehicleCtrl::VehicleCtrl() : currentState(State::waitForBox) {
     DBFUNCCALLln("VehicleCtrl::VehicleCtrl()");
     delay(100);
     publishState(currentState);
+    publishPosition();
+    pNavCtrl.setActualPosition(vehicle.actualSector, vehicle.actualLine);
     pComm.unsubscribe("#");
     pComm.subscribe("Vehicle/" + String(vehicle.id) + "/error");
     pComm.subscribe("Vehicle/error");
@@ -119,6 +121,7 @@ void VehicleCtrl::entryAction_waitForBox() {
     currentState = State::waitForBox;  // state transition
     doActionFPtr = &VehicleCtrl::doAction_waitForBox;
     publishState(currentState);  //Update Current State and Publish
+    publishPosition();
 
     pComm.subscribe("Box/+/handshake");
     previousMillis = millis();
@@ -163,6 +166,7 @@ void VehicleCtrl::entryAction_handshake() {
     currentState = State::handshake;  // state transition
     doActionFPtr = &VehicleCtrl::doAction_handshake;
     publishState(currentState);  //Update Current State and Publish
+    publishPosition();
     previousMillis = millis();
     previousMillisPublish = previousMillis;
     currentMillis = previousMillis;
@@ -210,9 +214,9 @@ VehicleCtrl::Event VehicleCtrl::doAction_handshake() {
                 if ((currentMillis - previousMillisPublish) > TIME_BETWEEN_PUBLISH) {  //only publish all xx seconds
                     previousMillisPublish = millis();
                     pComm.publishMessage("Vehicle/" + String(vehicle.id) + "/handshake", "{\"id\":\"" + String(vehicle.id) + "\",\"ack\":\"" + String(vehicle.ack) + "\"}");
-                } else {
-                    return Event::HSsucessful;
                 }
+            } else {
+                return Event::HSsucessful;
             }
             return Event::NoEvent;
             break;
@@ -233,7 +237,7 @@ void VehicleCtrl::entryAction_loadVehicle() {
     currentState = State::loadVehicle;  // state transition
     doActionFPtr = &VehicleCtrl::doAction_loadVehicle;
     publishState(currentState);  //Update Current State and Publish
-
+    publishPosition();
     //update targetPosition
     previousMillis = millis();
     previousMillisPublish = previousMillis;
@@ -258,15 +262,18 @@ VehicleCtrl::Event VehicleCtrl::doAction_loadVehicle() {
         case 0:  //check if already in TargetPosition and subscribe to Gateway if waiting for one
             if (pNavCtrl.getcurrentSector() == vehicle.targetSector &&
                 pNavCtrl.getcurrentLine() == vehicle.targetLine) {
+                publishPosition();
                 substate = 40;
             }
 
             if (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::SorticWaitForGateway) {
                 pComm.subscribe("Sortic/Gateway");
                 substate = 10;
+                publishPosition();
             } else if (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::TransferWaitForGateway) {
                 pComm.subscribe("Transfer/Gateway");
                 substate = 10;
+                publishPosition();
             }
             break;
         case 10:                     //check incomming messages. if gateway is free for some time take token
@@ -293,8 +300,10 @@ VehicleCtrl::Event VehicleCtrl::doAction_loadVehicle() {
             if ((currentMillis - previousMillisPublish) > TIME_BETWEEN_PUBLISH) {  //only publish all xx seconds
                 previousMillisPublish = millis();
                 if (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::SorticGateway) {
+                    publishPosition();
                     pComm.publishMessage("Sortic/Gateway", "{\"id\":\"" + String(vehicle.id) + "\",\"token\":false}");
                 } else if (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::TransferGateway) {
+                    publishPosition();
                     pComm.publishMessage("Transfer/Gateway", "{\"id\":\"" + String(vehicle.id) + "\",\"token\":false}");
                 } else {
                     substate = 30;
@@ -304,6 +313,7 @@ VehicleCtrl::Event VehicleCtrl::doAction_loadVehicle() {
         case 30:  //check if in position
             if (pNavCtrl.getcurrentSector() == vehicle.targetSector &&
                 pNavCtrl.getcurrentLine() == vehicle.targetLine) {
+                publishPosition();
                 substate = 40;
             }
             break;
@@ -334,6 +344,7 @@ void VehicleCtrl::entryAction_unloadVehicle() {
     currentState = State::unloadVehicle;  // state transition
     doActionFPtr = &VehicleCtrl::doAction_unloadVehicle;
     publishState(currentState);  //Update Current State and Publish
+    publishPosition();
 }
 
 VehicleCtrl::Event VehicleCtrl::doAction_unloadVehicle() {
@@ -418,6 +429,7 @@ void VehicleCtrl::exitAction_resetState() {
     DBSTATUSln("Leaving State: resetState");
     pComm.clear();
     vehicle = {};  //reset struct
+    pNavCtrl.setActualPosition(vehicle.actualSector, vehicle.actualLine);
     substate = 0;
 }
 
@@ -527,4 +539,10 @@ bool VehicleCtrl::checkForError() {
 void VehicleCtrl::publishState(State state) {
     vehicle.status = decodeState(state);
     pComm.publishMessage("Vehicle/" + String(vehicle.id) + "/status", "{\"status\":\"" + String(vehicle.status) + "\"}");
+}
+
+void VehicleCtrl::publishPosition() {
+    vehicle.actualSector = pNavCtrl.getcurrentSector();
+    vehicle.actualLine = pNavCtrl.getcurrentLine();
+    pComm.publishMessage("Vehicle/" + String(vehicle.id) + "/position", "{\"sector\":\"" + pNavCtrl.decodeSector(vehicle.actualSector) + "\",\"line\":\"" + String(vehicle.actualLine) + "\"}");
 }
