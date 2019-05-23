@@ -197,8 +197,8 @@ void NavigationCtrl::process(Event e) {
             break;
         case State::errorState:
             if (Event::Resume == e) {
-                exitAction_errorState();  // Exit-action current state
-                pDriveCtrl.loop(DriveCtrl::Event::Resume);
+                exitAction_errorState();                    // Exit-action current state
+                pDriveCtrl.loop(DriveCtrl::Event::Resume);  //Pass Event to DriveCtrl
                 switch (lastStateBevorError) {
                     case State::endPoint:
                         entryAction_endPoint();  // Entry-actions next state
@@ -217,16 +217,16 @@ void NavigationCtrl::process(Event e) {
                 }
             }
             if (Event::Reset == e) {
-                exitAction_errorState();  // Exit-action current state
-                pDriveCtrl.loop(DriveCtrl::Event::Reset);
-                entryAction_resetState();  // Entry-actions next state
+                exitAction_errorState();                   // Exit-action current state
+                pDriveCtrl.loop(DriveCtrl::Event::Reset);  //Pass Event to DriveCtrl
+                entryAction_resetState();                  // Entry-actions next state
             }
             break;
         case State::resetState:
             if (Event::Resume == e) {
-                exitAction_resetState();  // Exit-action current state
-                pDriveCtrl.loop(DriveCtrl::Event::Resume);
-                entryAction_endPoint();  // Entry-actions next state
+                exitAction_resetState();                    // Exit-action current state
+                pDriveCtrl.loop(DriveCtrl::Event::Resume);  //Pass Event to DriveCtrl
+                entryAction_endPoint();                     // Entry-actions next state
             }
             break;
         default:
@@ -295,7 +295,7 @@ NavigationCtrl::Event NavigationCtrl::doAction_toGateway() {
         case 20:  // drive forward once
             pDriveCtrl.loop(DriveCtrl::Event::FollowLineForward);
             if (pDriveCtrl.getcurrentState() == DriveCtrl::State::idle) {
-                pCurrentSubState = 0;  ///<@todo Probelm with Error possible?
+                pCurrentSubState = 0;  ///@todo Probelm with Error possible?
                 return Event::PosReached;
             }
             break;
@@ -407,7 +407,7 @@ NavigationCtrl::Event NavigationCtrl::doAction_gateway() {
                 if (pSubStateLoopInc >= 2) {
                     pSubStateLoopInc = 0;  //reset back to zero
                     // pSubStateLoopInc+= 10;
-                    pCurrentSubState = 60;  ///<@todo Probelm with Error possible?
+                    pCurrentSubState = 60;  ///@todo Probelm with Error possible?
                     pActual.token = false;  //release token
                     if (pTarget.sector != pActual.startSector && tranistonce) {
                         tranistonce = false;

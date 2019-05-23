@@ -35,6 +35,10 @@ Hoist::Hoist(int hoistServoPin, int hoistServoDelay, int posMax, int posMin) : s
     init();
 }
 
+/**
+ * @bug hoistServo.read() does somehow not retrun the actual value.. Always starts raised and lowers to Low-Pos
+ * 
+ */
 void Hoist::init() {
     attach();
     position = hoistServo.read();
@@ -44,8 +48,7 @@ void Hoist::init() {
 }
 
 /**
- * @todo non blocking delay 
- * @todo reale pos abfragen
+ * @todo check real position
  */
 bool Hoist::raise() {
     DBFUNCCALLln("Hoist::raise()");
@@ -70,7 +73,7 @@ bool Hoist::raise() {
 }
 
 /**
- * @todo non blocking delay 
+ * @todo check real position
  */
 bool Hoist::lower() {
     DBFUNCCALLln("Hoist::lower()");

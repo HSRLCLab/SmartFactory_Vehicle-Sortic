@@ -13,7 +13,7 @@
 
 #include "HoistCtrl.h"
 //=====PUBLIC====================================================================================
-HoistCtrl::HoistCtrl() : currentState(State::low) {
+HoistCtrl::HoistCtrl() : currentState(State::low), doActionFPtr(&HoistCtrl::doAction_low) {
 }
 
 void HoistCtrl::loop() {

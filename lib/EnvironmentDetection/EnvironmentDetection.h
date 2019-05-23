@@ -27,18 +27,35 @@
 class EnvironmentDetection {
     //=====PUBLIC====================================================================================
    public:
+    /**
+    * @brief Construct a new Environment Detection object
+    * 
+    */
     EnvironmentDetection(){};
 
     /**
-     * @brief 
+     * @brief Recognise deviation from vehicle to line
      * 
-     * @return const int - 
+     * -10 Degree turn left \n
+     *  10 Degree turn right \n
+     * 180 full Line detected \n
+     * 200 Line Lost or ErrorValues \n
+     *  \n
+     *  4 Line is on the right side \n
+     *  0 Line is in the middle \n
+     * -4 Line is on the left side \n
+     * 
+     * @return const int - deviation from middle sensor
      */
     inline const int Linedeviation() {
         return pLinedetector.deviation();
     }
     //=====PRIVATE===================================================================================
    private:
+    /**
+    * @brief Linedetector Object with 5 Sensors
+    * 
+    */
     LineDetector pLinedetector = LineDetector(PIN_SENSOR_0, PIN_SENSOR_1, PIN_SENSOR_2, PIN_SENSOR_3, PIN_SENSOR_4);
 };
 #endif

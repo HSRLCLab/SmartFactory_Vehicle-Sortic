@@ -36,7 +36,7 @@ class HoistCtrl {
                        PosReached,  ///< Signal: Position reached
                        Error,       ///< Error occured
                        Resume,      ///< Ext: Resume after Error occured
-                       Reset,       ///<  Ext.: Reset after Error occured
+                       Reset,       ///< Ext.: Reset after Error occured
                        NoEvent      ///< No event generated
     };
 
@@ -51,6 +51,7 @@ class HoistCtrl {
                        resetState,  ///< reset state
                        errorState   ///< error State
     };
+
     /**
      * @brief Construct a new Hoist Ctrl object
      * and initailize the currentState with low state
@@ -89,7 +90,7 @@ class HoistCtrl {
      * 
      * https://stackoverflow.com/questions/1485983/calling-c-class-methods-via-a-function-pointer
      */
-    Event (HoistCtrl::*doActionFPtr)(void) = &HoistCtrl::doAction_low;
+    Event (HoistCtrl::*doActionFPtr)(void) = nullptr;
 
     Hoist pHoist;  ///< Hoist Object
 
@@ -97,6 +98,7 @@ class HoistCtrl {
     /**
      * @brief changes the state of the FSM based on the event
      * 
+     * This Functions switchs the state based on the occuring events
      * @param e - Event
      */
     void process(Event e);
@@ -220,12 +222,14 @@ class HoistCtrl {
     /**
      * @brief entry action of the resetState
      * 
+     * attach servo
      */
     void entryAction_resetState();
 
     /**
      * @brief main action of the resetState
      * 
+     * lower the hoist and then detach the servo
      *  @return DriveCtrl::Event - generated Event
      */
     HoistCtrl::Event doAction_resetState();

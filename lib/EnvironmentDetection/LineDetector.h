@@ -37,7 +37,7 @@ class LineDetector {
     LineDetector(const int sensorPin_0, const int sensorPin_1, const int sensorPin_2, const int sensorPin_3, const int sensorPin_4);
 
     /**
-     * @brief 
+     * @brief Recognise deviation from vehicle to line
      * 
      * -10 Degree turn left \n
      *  10 Degree turn right \n

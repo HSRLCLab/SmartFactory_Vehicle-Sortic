@@ -9,12 +9,12 @@
  * @date 2019-04-23
  * @copyright Copyright (c) 2019
  * 
- * @todo solve linedetection with something like first position and not with (nonblocking) delay
+
  */
 
 #include "DriveCtrl.h"
 //=====PUBLIC====================================================================================
-DriveCtrl::DriveCtrl() : currentState(State::idle) {
+DriveCtrl::DriveCtrl() : currentState(State::idle), doActionFPtr(&DriveCtrl::doAction_idle) {
     pController.SetTunings(pVal_p, pVal_i, pVal_d);
     pController.SetOutputLimits(-255, 255);
     pController.SetSampleTime(pSampleTime);  // Sampletime in milliseconds
@@ -306,7 +306,7 @@ void DriveCtrl::entryAction_followingLineBackward() {
     pController_Input = 0;
     //Entry-Action
     // pController.SetControllerDirection(REVERSE);
-    pController.SetTunings(1, 0, 0.01);
+    // pController.SetTunings(1, 0, 0.01);
     pDrive.drive(Drive::Direction::Backward, SPEED * 0.8);
     pDrive.turn(Drive::Direction::Right, 4);  //correct motor power diffrence
 }
@@ -343,7 +343,7 @@ DriveCtrl::Event DriveCtrl::doAction_followingLineBackward() {
 void DriveCtrl::exitAction_followingLineBackward() {
     DBSTATUSln("Drive Leaving State:  followingLineBackward");
     pDrive.stop();
-    pController.SetTunings(pVal_p, pVal_i, pVal_d);
+    // pController.SetTunings(pVal_p, pVal_i, pVal_d);
     // pController.SetControllerDirection(DIRECT);
 }
 

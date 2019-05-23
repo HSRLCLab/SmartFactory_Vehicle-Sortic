@@ -84,8 +84,8 @@ void VehicleCtrl::process(Event e) {
         case State::errorState:
             if (Event::Resume == e) {
                 exitAction_errorState();                       // Exit-action current state
-                pHoistCtrl.loop(HoistCtrl::Event::Resume);     ///< Resume State for HoistCtrl
-                pNavCtrl.loop(NavigationCtrl::Event::Resume);  ///< Resume State for NavigationCtrl
+                pHoistCtrl.loop(HoistCtrl::Event::Resume);     // Resume State for HoistCtrl
+                pNavCtrl.loop(NavigationCtrl::Event::Resume);  // Resume State for NavigationCtrl
                 switch (lastStateBevorError) {
                     case State::waitForBox:
                         entryAction_waitForBox();  // Entry-actions next state
@@ -105,16 +105,16 @@ void VehicleCtrl::process(Event e) {
             }
             if (Event::Reset == e) {
                 exitAction_errorState();                      // Exit-action current state
-                pHoistCtrl.loop(HoistCtrl::Event::Reset);     ///< Reset State for HoistCtrl
-                pNavCtrl.loop(NavigationCtrl::Event::Reset);  ///< Reset State for NavigationCtrl
+                pHoistCtrl.loop(HoistCtrl::Event::Reset);     // Reset State for HoistCtrl
+                pNavCtrl.loop(NavigationCtrl::Event::Reset);  // Reset State for NavigationCtrl
                 entryAction_resetState();                     // Entry-actions next state
             }
             break;
         case State::resetState:
             if (Event::Resume == e) {
                 exitAction_resetState();                       // Exit-action current state
-                pHoistCtrl.loop(HoistCtrl::Event::Resume);     ///< Resume State for HoistCtrl
-                pNavCtrl.loop(NavigationCtrl::Event::Resume);  ///< Resume State for NavigationCtrl
+                pHoistCtrl.loop(HoistCtrl::Event::Resume);     // Resume State for HoistCtrl
+                pNavCtrl.loop(NavigationCtrl::Event::Resume);  // Resume State for NavigationCtrl
                 entryAction_waitForBox();                      // Entry-actions next state
             }
             break;
@@ -127,9 +127,10 @@ void VehicleCtrl::entryAction_waitForBox() {
     DBSTATUSln("Entering State: emptyState");
     currentState = State::waitForBox;  // state transition
     doActionFPtr = &VehicleCtrl::doAction_waitForBox;
-    publishState(currentState);                                                                           //Update Current State and Publish
-    publishPosition();                                                                                    //Update Current Position and Publish for GUI
-    pComm.publishMessage("Vehicle/" + String(vehicle.id) + "/handshake", "{\"ack\":\"\",\"req\":\"\"}");  //Clear handshake in Gui
+    publishState(currentState);  //Update Current State and Publish
+    publishPosition();           //Update Current Position and Publish for GUI
+                                 //Clear handshake in Gui
+    pComm.publishMessage("Vehicle/" + String(vehicle.id) + "/handshake", "{\"ack\":\"\",\"req\":\"\"}");
 
     pComm.subscribe("Box/+/handshake");
     previousMillis = millis();
@@ -192,9 +193,9 @@ VehicleCtrl::Event VehicleCtrl::doAction_handshake() {
     currentMillis = millis();
     switch (substate) {
         case 0:  //Publish request for Box and check for ack
-            //Check for Ack and Timeout
+            //Check for Ack from box and Timeout
             if ((currentMillis - previousMillis) < TIMEOUT_VACKS) {
-                DBINFO2ln("Check for ack.");
+                DBINFO2ln("Check for ack. fron box");
                 if (!pComm.isEmpty()) {
                     myJSONStr temp = pComm.pop();
                     DBINFO2ln(String("temp.ack: ") + String(temp.ack) + String("==") + String("vehicle.id: ") + String(vehicle.id));

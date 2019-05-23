@@ -9,6 +9,8 @@
  * @date 2019-04-23
  * @copyright Copyright (c) 2019
  * 
+ * @todo solve linedetection with something like where was the line first detected and NOT with a (nonblocking) delay
+ *  This would allow to change the speed and still detect all lines correctly
  */
 
 #ifndef DRIVECTRL_H__
@@ -34,36 +36,36 @@ class DriveCtrl {
     * @brief Enum holds all possible events
     * 
     */
-    enum class Event { TurnLeft,           ///< Ext.: Turn Left
-                       TurnRight,          ///< Ext.: Turn Right
-                       TurnAround,         ///< Ext.: Turn Around on Position
-                       FollowLineForward,  ///< Ext.: Follow the Line
-                       FollowLineBackward,
-                       FullLineDetected,  ///< Signal: Full Line detected
-                       LineAligned,       ///< Signal: Line is alligned in the middle of the Vehicle
-                       Error,             ///< Ext.: Error occured
-                       Resume,            ///< Ext.: Resume after Error occured
-                       Reset,             ///<  Ext.: Reset after Error occured
-                       NoEvent            ///< No event generated
+    enum class Event { TurnLeft,            ///< Ext.: Turn left
+                       TurnRight,           ///< Ext.: Turn right
+                       TurnAround,          ///< Ext.: Turn around on position
+                       FollowLineForward,   ///< Ext.: Follow the line forwards
+                       FollowLineBackward,  ///< Ext.: Follow the line backwards
+                       FullLineDetected,    ///< Signal: Full line detected
+                       LineAligned,         ///< Signal: Line is alligned in the middle of the vehicle
+                       Error,               ///< Ext.: Error occured
+                       Resume,              ///< Ext.: Resume after Error occured
+                       Reset,               ///< Ext.: Reset after Error occured
+                       NoEvent              ///< No event generated
     };
 
     /**
     * @brief Enum holds all possible states
     * 
     */
-    enum class State { idle,                   ///< idle State
-                       turningLeft,            ///< turning left State
-                       turningRight,           ///< turning right State
-                       turningAround,          ///< turning around State
-                       followingLineForward,   ///<  follow the Line drive forward State
-                       followingLineBackward,  ///<  follow the Line drive forward State
-                       resetState,             ///< reset state
-                       errorState              ///< Error State
+    enum class State { idle,                   ///< idle state
+                       turningLeft,            ///< turning left state
+                       turningRight,           ///< turning right state
+                       turningAround,          ///< turning around state
+                       followingLineForward,   ///< follow the line while driving forward state
+                       followingLineBackward,  ///< follow the line while driving backward state
+                       resetState,             ///< Reset state
+                       errorState              ///< Error state
     };
 
     /**
      * @brief Construct a new Drive Ctrl object
-     * and initailize the currentState with idle state and the PID-Controller
+     * and set the currentState with idle state and initialize the PID-Controller 
      * 
      */
     DriveCtrl();
@@ -99,12 +101,12 @@ class DriveCtrl {
      * 
      * https://stackoverflow.com/questions/1485983/calling-c-class-methods-via-a-function-pointer
      */
-    Event (DriveCtrl::*doActionFPtr)(void) = &DriveCtrl::doAction_idle;
+    Event (DriveCtrl::*doActionFPtr)(void) = nullptr;
 
-    unsigned long currentMillis = 0;   ///< will store current time
-    unsigned long previousMillis = 0;  ///< will store last time
-    const unsigned long ignoreSensorTurnMillis = 500;
-    const unsigned long ignoreSensorAroundMillis = 1500;
+    unsigned long currentMillis = 0;                      ///< will store current time
+    unsigned long previousMillis = 0;                     ///< will store last time
+    const unsigned long ignoreSensorTurnMillis = 500;     ///< sets how long the sensors are ignored for a turn
+    const unsigned long ignoreSensorAroundMillis = 1500;  ///< sets how long the sensors are ignored for a turning around
 
     double pController_Input = 0;          ///< Controller Input
     double pController_Output = 0;         ///< Controller Output
@@ -142,7 +144,6 @@ class DriveCtrl {
     //=====idle==========================================================
     /**
      * @brief executes the entry action of the idle
-     * 
      * 
      */
     void entryAction_idle();
@@ -250,7 +251,7 @@ class DriveCtrl {
     /**
      * @brief executes the main action of the followingLineForward
      * 
-     * Check Line-deviation adn correct accordingly via PID-Controller
+     * Check Line-deviation and correct accordingly via PID-Controller
      * and drive until a FullLine is Detected. Return Event FullLine else reutrn NoEvent.
      * 
      * @return DriveCtrl::Event - generated Event
@@ -275,7 +276,7 @@ class DriveCtrl {
     /**
      * @brief executes the main action of the followingLineBackward
      * 
-     * Check Line-deviation adn correct accordingly via PID-Controller
+     * Check Line-deviation and correct accordingly via PID-Controller
      * and drive until a FullLine is Detected. Return Event FullLine else reutrn NoEvent.
      * 
      * @return DriveCtrl::Event - generated Event

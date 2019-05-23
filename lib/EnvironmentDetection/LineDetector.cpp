@@ -1,10 +1,9 @@
 /**
  * @file LineDetector.cpp
- * @brief 
+ * @brief Implementation of LineDetector class
  * 
  * @author Luca Mazzoleni (luca.mazzoleni@hsr.ch)
  * 
- * @version 1.0 - Description - {author} - {date}
  * 
  * @date 2019-04-26
  * @copyright Copyright (c) 2019

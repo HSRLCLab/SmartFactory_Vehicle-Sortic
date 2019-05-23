@@ -55,6 +55,10 @@ class NavigationCtrl {
                        errorState     ///< error State
     };
 
+    /**
+     * @brief Enum holds all possible sectors
+     * 
+     */
     enum class Sector {
         SorticHandover,                 ///< Sortic - Handover
         SorticToHandover,               ///< Sortic - to Handover
@@ -69,7 +73,7 @@ class NavigationCtrl {
         TransferWaitForGateway,         ///< Transfer - wait for Gateway
         TransferToHandover,             ///< Transfer - to Handover
         TransferHandover,               ///< Transfer - Handover
-        error
+        error                           ///< error for unknown sector
     };
 
     // enum class Orientation {
@@ -107,12 +111,17 @@ class NavigationCtrl {
     const State getcurrentState();
 
     /**
-     * @brief Get the current State
+     * @brief Get the current Sector
      * 
-     * @return const Sector - 
+     * @return const Sector - current Sector
      */
     const Sector getcurrentSector();
 
+    /**
+     * @brief Get the current Line
+     * 
+     * @return const int - current line
+     */
     const int getcurrentLine();
 
     /**
@@ -146,10 +155,10 @@ class NavigationCtrl {
     String decodeSector(Sector sector);
 
     /**
-     * @brief 
+     * @brief Decodes a sectro String and returns the sector
      * 
-     * @param sector - 
-     * @return NavigationCtrl::Sector - 
+     * @param sector - Sector as String
+     * @return NavigationCtrl::Sector -  enum Sector
      */
     NavigationCtrl::Sector decodeSector(String sector);
 
@@ -162,6 +171,10 @@ class NavigationCtrl {
     int pLastSubStateBevorError = 0;  ///< Holds the last Substate befor an Error occured
     int pSubStateLoopInc = 0;         ///< Counter so you can call the same substatefunction multiple times
 
+    /**
+     * @brief Holds the actual information about the vehicleposition
+     * 
+     */
     struct ActualPos {
         Sector startSector = Sector::SorticHandover;  ///< Startpoint from current path
         Sector lastSector;                            ///< last sector
@@ -170,6 +183,10 @@ class NavigationCtrl {
         bool token = false;                           ///< token for gateway accees
     } pActual;
 
+    /**
+     * @brief Holds the information about the vehicle target
+     * 
+     */
     struct TargetPos {
         Sector sector;  ///< TargetSector
         int line;       ///< TargetLine

@@ -30,12 +30,16 @@
 class VehicleCtrl {
     //=====PUBLIC====================================================================================
    public:
+    /**
+    * @brief Holds all relevant infos for the vehicle
+    * 
+    */
     struct Vehicle {
         String id = DEFAULT_HOSTNAME;                                                  ///< Vehiclename
         NavigationCtrl::Sector actualSector = NavigationCtrl::Sector::SorticHandover;  ///< actual sector initialise with Sortic handover
-        int actualLine = 1;
+        int actualLine = 1;                                                            ///< actual line initialised with 1
         NavigationCtrl::Sector targetSector = NavigationCtrl::Sector::SorticHandover;  ///< actual sector initialise with Sortic handover
-        int targetLine = 1;                                                            ///< actual line initialised with 1
+        int targetLine = 1;                                                            ///< tartget line initialised with 1
         String cargo = "null";                                                         ///< cargo; not used atm
         String status = "null";                                                        ///< status of the Vehicle FSM
         String ack = "null";                                                           ///< ack for handshake vehicle
@@ -58,6 +62,14 @@ class VehicleCtrl {
 
     /**
      * @brief Construct a new Vehicle Ctrl object
+     * 
+     * - Clears GUI
+     * - Publishs current State and position
+     * - sets start position in NavigationCtrl
+     * - subscribe to "Vehicle/vehicle.id/error"
+     * - subscribe to "Vehicle/error"
+     * - subscribe to "error"
+     * - subscribe to "Box/+/handshake"
      * 
      */
     VehicleCtrl();
@@ -88,12 +100,13 @@ class VehicleCtrl {
     * 
     * https://stackoverflow.com/questions/18335861/why-is-enum-class-preferred-over-plain-enum
     */
-    enum class State { waitForBox,     ///<wait for box to transport
-                       handshake,      ///<handshake
-                       loadVehicle,    ///<load box
-                       unloadVehicle,  ///<unload box
+    enum class State { waitForBox,     ///< wait for box to transport
+                       handshake,      ///< handshake
+                       loadVehicle,    ///< load box
+                       unloadVehicle,  ///< unload box
                        resetState,     ///< reset state
-                       errorState };   ///< error state
+                       errorState      ///< error state
+    };
 
     State lastStateBevorError;  ///< holds the last state of the FSM so it's possible to resume after error
     State currentState;         ///< holds the current state of the FSM
@@ -107,11 +120,9 @@ class VehicleCtrl {
      */
     Event (VehicleCtrl::*doActionFPtr)(void) = &VehicleCtrl::doAction_waitForBox;
 
-    NavigationCtrl pNavCtrl;
-    Communication pComm;
-    HoistCtrl pHoistCtrl;
-
-    // myJSONStr pTemp;
+    NavigationCtrl pNavCtrl;  ///< Navigation Controll object
+    Communication pComm;      ///< Communication object
+    HoistCtrl pHoistCtrl;     ///< Hoist Controll object
 
     unsigned long currentMillis = 0;             ///< will store current time
     unsigned long previousMillis = 0;            ///< will store last time
@@ -123,11 +134,21 @@ class VehicleCtrl {
     /**
      * @brief entry action of the waitForBox
      * 
+     * - publish current state and position
+     * - publish "Vehicle/vehicle.id/handshake" {ack:"",req:""} to clear GUI-Entry
+     * - subscirbe to "Box/+/handske"
      */
     void entryAction_waitForBox();
 
     /**
      * @brief main action of the waitForBox
+     * 
+     * - check incomming message for error
+     *   - return Event::Error
+     * - check if a Box requests the vehicle
+     *   - update vehicle.req with box.id
+     *   - return Event::AnswerReceived
+     * - publish all xx seconds "Vehicle/vehicle.id/availabel" {"sector": "actualSector", "line":number}
      * 
      * 
      * @return VehicleCtrl::Event - generated Event
@@ -137,6 +158,9 @@ class VehicleCtrl {
     /**
      * @brief exit action of the waitForBox
      * 
+     * - unsubscribe "Box/+/handshake"
+     * - publish "Vehicle/vehicle.id/available", {"id":"vehicle.id","sector":""","line":""} to clear GUI-Entry
+     * 
      */
     void exitAction_waitForBox();
 
@@ -144,11 +168,27 @@ class VehicleCtrl {
     /**
      * @brief entry action of the handshake
      * 
+     * - publish current state and position
+     * - subscribe to "Box/vehicle.req/handshake"
      */
     void entryAction_handshake();
 
     /**
      * @brief main action of the handshake
+     * 
+     * - check incomming message for error
+     *     - return Event::Error
+     * 
+     * 0 check for ack
+     *   - check if Box ack vehicle
+     *     - update targetSector and targetLine
+     *     - switch to next state
+     *   - if timeout
+     *     - return Event:NoAnswerReceived
+     * 
+     * 10 publish ack for Box 5 times
+     *     - "Vehicle/vehicle.id/handshake" {"id":"vehicle.id","ack":"vehicle.ack "}
+     *       - return Event:HSsucessful
      * 
      *  @return VehicleCtrl::Event - generated Event
      */
@@ -157,6 +197,7 @@ class VehicleCtrl {
     /**
      * @brief exit action of the handshake
      * 
+     * - unsubscribe from "Box/vehicle.req/handshake"
      */
     void exitAction_handshake();
 
@@ -164,12 +205,34 @@ class VehicleCtrl {
     /**
      * @brief entry action of the loadVehicle
      * 
+     * - publish current state and position
+     * - update NavCtrls TargetPosition
+     * - send NavigationCtrl::Event::MoveToTargetPosition
      */
     void entryAction_loadVehicle();
 
     /**
      * @brief main action of the loadVehicle
      * 
+     * - check incomming message for error
+     *     - return Event::Error
+     * - publish all position all xx seconds
+     * 
+     * 0 check position
+     *  - if in positon switch to state 40
+     *  - if in sector SorticWaitForGateway
+     *      -   subscribe to "Sortic/Gateway"
+     *  - if in sector TransferWaitForGateway
+     *      -   subscribe to "Transfer/Gateway"
+     * 
+     * 10 wait for gateway
+     *  - if gateway free for xx seconds
+     *  
+     * 20 block gateway
+     * 
+     * 30 chek if in position
+     * 
+     * 40 raise hoist
      *  @return VehicleLevelCtrl::Event - generated Event
      */
     VehicleCtrl::Event doAction_loadVehicle();
@@ -204,11 +267,14 @@ class VehicleCtrl {
     /**
      * @brief entry action of the errorState
      * 
+     * pass Errorevent to Hoist and NavCtrl
      */
     void entryAction_errorState();
 
     /**
      * @brief main action of the errorState
+     * 
+     * check for reset message
      * 
      *  @return VehicleLevelCtrl::Event - generated Event
      */
@@ -229,6 +295,8 @@ class VehicleCtrl {
 
     /**
      * @brief main action of the resetState
+     * 
+     * check for resume message
      * 
      *  @return VehicleLevelCtrl::Event - generated Event
      */
@@ -258,28 +326,30 @@ class VehicleCtrl {
     String decodeEvent(Event event);
 
     /**
-     * @brief 
-     * 
-     * @param state - 
+     * @brief Update State and Publish actual state
+     * - update vehicle state
+     * - publishMessage "Vehicle/vehicle.id/status" {"status":"vehicle.status"}
+     * @param state - state for update
      */
     void publishState(State state);
 
     /**
-     * @brief 
-     * 
+     * @brief Update position and Publish actual position
+     * - update vehicle position
+     * - publishMessage "Vehicle/vehicle.id/position" {"sector":vehicle.actualSector,"line":vehicle.actualLine"}
      */
     void publishPosition();
 
     /**
-     * @brief 
+     * @brief Check if a new message with a error is received
      * 
-     * @return true - 
-     * @return false - 
+     * @return true - error received
+     * @return false - no error received
      */
     bool checkForError();
 
     /**
-     * @brief 
+     * @brief clear node Red gui
      * 
      */
     void clearGui();
