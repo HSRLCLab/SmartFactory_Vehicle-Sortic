@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['chassis',['Chassis',['../class_chassis.html',1,'']]],
-  ['chassisstate',['ChassisState',['../struct_chassis_state.html',1,'']]],
   ['circularq',['CircularQ',['../struct_circular_q.html',1,'']]],
   ['circularq_3c_20uint16_5ft_20_3e',['CircularQ&lt; uint16_t &gt;',['../struct_circular_q.html',1,'']]],
   ['circularq_3c_20uint8_5ft_20_3e',['CircularQ&lt; uint8_t &gt;',['../struct_circular_q.html',1,'']]],

@@ -1,20 +1,9 @@
 var searchData=
 [
-  ['vehiclechassis',['vehicleChassis',['../main_8cpp.html#a3304e16e0dd0cadb7975becd82af0353',1,'main.cpp']]],
-  ['vehiclehoist',['vehicleHoist',['../main_8cpp.html#a9f461ee2ad058278144a1012d50f1344',1,'main.cpp']]],
-  ['vehiclesonar',['vehicleSonar',['../main_8cpp.html#a9041baaa75510e2ba176fa9e6665671a',1,'main.cpp']]],
-  ['vehiclevision',['vehicleVision',['../main_8cpp.html#a955a6f77ea4dcffc6e6702595070f2d6',1,'main.cpp']]],
-  ['vehiclewebapi_2ecpp',['VehicleWebAPI.cpp',['../_vehicle_web_a_p_i_8cpp.html',1,'']]],
-  ['vehiclewebapi_2eh',['VehicleWebAPI.h',['../_vehicle_web_a_p_i_8h.html',1,'']]],
-  ['virtualerror',['virtualError',['../struct_chassis_state.html#a879d03349f15c12541c49bb7ffef6850',1,'ChassisState']]],
-  ['vision',['Vision',['../class_vision.html',1,'Vision'],['../class_vision.html#a15fcf9745bee7c75cadabb91990bfb2d',1,'Vision::Vision()'],['../main_8cpp.html#a61fe0349d692eb6d4f5b94e35049b2e9a7e0587ea8ffdd03a191500efa700d619',1,'VISION():&#160;main.cpp']]],
-  ['vision_2ecpp',['Vision.cpp',['../_vision_8cpp.html',1,'']]],
-  ['vision_2eh',['Vision.h',['../_vision_8h.html',1,'']]],
-  ['vision_5fdelay_5ffactor',['VISION_DELAY_FACTOR',['../_configuration_8h.html#aab38604509f480441347f394d811a94a',1,'Configuration.h']]],
-  ['vision_5fservo_5fpin',['VISION_SERVO_PIN',['../_configuration_8h.html#ae44224f21b79253547e64f793aa2e40c',1,'Configuration.h']]],
-  ['vision_5fstart_5fangle',['VISION_START_ANGLE',['../_configuration_8h.html#a36d29bc6656692535c4aa9d9400733f8',1,'Configuration.h']]],
-  ['vision_5ftolerance_5fleft',['VISION_TOLERANCE_LEFT',['../_configuration_8h.html#a8702a13f891520136a3c0ff09ec04763',1,'Configuration.h']]],
-  ['vision_5ftolerance_5fright',['VISION_TOLERANCE_RIGHT',['../_configuration_8h.html#abd2b703e1b9aed676cf4c9be50f4ac33',1,'Configuration.h']]],
-  ['visionservo',['visionServo',['../class_vision.html#ac6ab280b34fe86f065dc30a42d0acf32',1,'Vision']]],
-  ['visionstate',['VisionState',['../struct_vision_state.html',1,'VisionState'],['../class_vision.html#a88b93542aa1e01ed33a708bb62eadc6a',1,'Vision::visionState()']]]
+  ['waitforbox',['waitForBox',['../class_vehicle_ctrl.html#ab4034db99cf09b689e4d5a3964c0f2c0acfaff6b837fb65559d640cd91cfdc504',1,'VehicleCtrl']]],
+  ['webapi_2ecpp',['WebAPI.cpp',['../_web_a_p_i_8cpp.html',1,'']]],
+  ['webapi_2eh',['WebAPI.h',['../_web_a_p_i_8h.html',1,'']]],
+  ['width',['width',['../struct_block.html#a393b5c60f6a9ffbadc9645f882f71009',1,'Block']]],
+  ['write',['write',['../struct_circular_q.html#adf486a7da6ef3d464617b92f3a06df15',1,'CircularQ']]],
+  ['writeindex',['writeIndex',['../struct_circular_q.html#abf7f3fb11ab2db753a32a0793ce6e938',1,'CircularQ']]]
 ];

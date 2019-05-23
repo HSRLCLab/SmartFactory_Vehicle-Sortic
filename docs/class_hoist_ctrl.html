@@ -96,7 +96,7 @@ $(document).ready(function(){initNavTree('class_hoist_ctrl.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>Contains the FSM for the <a class="el" href="class_hoist.html" title="Provides the basic Functions to Controll the Hoist.">Hoist</a>.  
+<p>Contains the FSM for the <a class="el" href="class_hoist.html" title="Provides the basic functions to controll the Hoist.">Hoist</a>.  
  <a href="class_hoist_ctrl.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_hoist_ctrl_8h_source.html">HoistCtrl.h</a>&gt;</code></p>
@@ -110,6 +110,7 @@ Public Types</h2></td></tr>
 <a class="el" href="class_hoist_ctrl.html#a76f2b7dcb5beb85fbd5f9b5e29cf51f0a902b0d55fddef6f8d651fe1035b7d4bd">Event::Error</a>, 
 <br />
 &#160;&#160;<a class="el" href="class_hoist_ctrl.html#a76f2b7dcb5beb85fbd5f9b5e29cf51f0af1cefec9e2196c672a622347f1fbc325">Event::Resume</a>, 
+<a class="el" href="class_hoist_ctrl.html#a76f2b7dcb5beb85fbd5f9b5e29cf51f0a526d688f37a86d3c3f27d0c5016eb71d">Event::Reset</a>, 
 <a class="el" href="class_hoist_ctrl.html#a76f2b7dcb5beb85fbd5f9b5e29cf51f0a9b8e7e8d81a268a2240a96b7962a0183">Event::NoEvent</a>
 <br />
  }</td></tr>
@@ -121,16 +122,17 @@ Public Types</h2></td></tr>
 <a class="el" href="class_hoist_ctrl.html#a97fd8345369aabb47f1036b1d788226aa8d966b2253a917086c8604959e152243">State::high</a>, 
 <a class="el" href="class_hoist_ctrl.html#a97fd8345369aabb47f1036b1d788226aa071a3a2bfd3fb60bafdc7d15c6a314ec">State::lowering</a>, 
 <br />
-&#160;&#160;<a class="el" href="class_hoist_ctrl.html#a97fd8345369aabb47f1036b1d788226aadda7002e7ba1602d5293c2af63089825">State::errorState</a>
+&#160;&#160;<a class="el" href="class_hoist_ctrl.html#a97fd8345369aabb47f1036b1d788226aa18f44934484beaf4fe2743bb244a7205">State::resetState</a>, 
+<a class="el" href="class_hoist_ctrl.html#a97fd8345369aabb47f1036b1d788226aadda7002e7ba1602d5293c2af63089825">State::errorState</a>
 <br />
  }</td></tr>
-<tr class="memdesc:a97fd8345369aabb47f1036b1d788226a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enum holds all possible states for the <a class="el" href="class_hoist.html" title="Provides the basic Functions to Controll the Hoist.">Hoist</a>.  <a href="class_hoist_ctrl.html#a97fd8345369aabb47f1036b1d788226a">More...</a><br /></td></tr>
+<tr class="memdesc:a97fd8345369aabb47f1036b1d788226a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enum holds all possible states for the <a class="el" href="class_hoist.html" title="Provides the basic functions to controll the Hoist.">Hoist</a>.  <a href="class_hoist_ctrl.html#a97fd8345369aabb47f1036b1d788226a">More...</a><br /></td></tr>
 <tr class="separator:a97fd8345369aabb47f1036b1d788226a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a5627a82a4865af980e762903b39cdd68"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoist_ctrl.html#a5627a82a4865af980e762903b39cdd68">HoistCtrl</a> ()</td></tr>
-<tr class="memdesc:a5627a82a4865af980e762903b39cdd68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="class_hoist.html" title="Provides the basic Functions to Controll the Hoist.">Hoist</a> Ctrl object and initailize the currentState with low state.  <a href="#a5627a82a4865af980e762903b39cdd68">More...</a><br /></td></tr>
+<tr class="memdesc:a5627a82a4865af980e762903b39cdd68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="class_hoist.html" title="Provides the basic functions to controll the Hoist.">Hoist</a> Ctrl object and initailize the currentState with low state.  <a href="#a5627a82a4865af980e762903b39cdd68">More...</a><br /></td></tr>
 <tr class="separator:a5627a82a4865af980e762903b39cdd68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52f4e57aea2bf026989be9fdada1c8c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoist_ctrl.html#a52f4e57aea2bf026989be9fdada1c8c8">loop</a> ()</td></tr>
 <tr class="memdesc:a52f4e57aea2bf026989be9fdada1c8c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calls the do-function of the active state and hence generates Events.  <a href="#a52f4e57aea2bf026989be9fdada1c8c8">More...</a><br /></td></tr>
@@ -192,6 +194,15 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:a1ce9dd06cdcf96a10c954e688f1fb7e2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoist_ctrl.html#a1ce9dd06cdcf96a10c954e688f1fb7e2">exitAction_errorState</a> ()</td></tr>
 <tr class="memdesc:a1ce9dd06cdcf96a10c954e688f1fb7e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">exit action of the errorState state.  <a href="#a1ce9dd06cdcf96a10c954e688f1fb7e2">More...</a><br /></td></tr>
 <tr class="separator:a1ce9dd06cdcf96a10c954e688f1fb7e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f55a2e8d01fb503fe35f292e68f5cd1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoist_ctrl.html#a6f55a2e8d01fb503fe35f292e68f5cd1">entryAction_resetState</a> ()</td></tr>
+<tr class="memdesc:a6f55a2e8d01fb503fe35f292e68f5cd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">entry action of the resetState  <a href="#a6f55a2e8d01fb503fe35f292e68f5cd1">More...</a><br /></td></tr>
+<tr class="separator:a6f55a2e8d01fb503fe35f292e68f5cd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac014771ede6f4bd4a56fc2dd44268f5a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_hoist_ctrl.html#a76f2b7dcb5beb85fbd5f9b5e29cf51f0">HoistCtrl::Event</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoist_ctrl.html#ac014771ede6f4bd4a56fc2dd44268f5a">doAction_resetState</a> ()</td></tr>
+<tr class="memdesc:ac014771ede6f4bd4a56fc2dd44268f5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">main action of the resetState  <a href="#ac014771ede6f4bd4a56fc2dd44268f5a">More...</a><br /></td></tr>
+<tr class="separator:ac014771ede6f4bd4a56fc2dd44268f5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c2dc3a91ca217079838893306e228b7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoist_ctrl.html#a4c2dc3a91ca217079838893306e228b7">exitAction_resetState</a> ()</td></tr>
+<tr class="memdesc:a4c2dc3a91ca217079838893306e228b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">exit action of the resetState  <a href="#a4c2dc3a91ca217079838893306e228b7">More...</a><br /></td></tr>
+<tr class="separator:a4c2dc3a91ca217079838893306e228b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ab222c59f0f2d600562ca539baf34d8"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoist_ctrl.html#a0ab222c59f0f2d600562ca539baf34d8">decodeState</a> (<a class="el" href="class_hoist_ctrl.html#a97fd8345369aabb47f1036b1d788226a">State</a> state)</td></tr>
 <tr class="memdesc:a0ab222c59f0f2d600562ca539baf34d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decodes the State-Enum and returns a description.  <a href="#a0ab222c59f0f2d600562ca539baf34d8">More...</a><br /></td></tr>
 <tr class="separator:a0ab222c59f0f2d600562ca539baf34d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -210,15 +221,15 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a437a6b1adcf9beea2f30e59b6f4bf616"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_hoist_ctrl.html#a76f2b7dcb5beb85fbd5f9b5e29cf51f0">Event</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoist_ctrl.html#a437a6b1adcf9beea2f30e59b6f4bf616">currentEvent</a></td></tr>
 <tr class="memdesc:a437a6b1adcf9beea2f30e59b6f4bf616"><td class="mdescLeft">&#160;</td><td class="mdescRight">holds the current event of the FSM  <a href="#a437a6b1adcf9beea2f30e59b6f4bf616">More...</a><br /></td></tr>
 <tr class="separator:a437a6b1adcf9beea2f30e59b6f4bf616"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d4e7e31ca719dcc22cb6531ef928175"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_hoist_ctrl.html#a76f2b7dcb5beb85fbd5f9b5e29cf51f0">Event</a>(HoistCtrl::*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoist_ctrl.html#a3d4e7e31ca719dcc22cb6531ef928175">doActionFPtr</a> )(void) = &amp;<a class="el" href="class_hoist_ctrl.html#ac4f6d18acbb1ed0c162568fb980dc7f0">HoistCtrl::doAction_low</a></td></tr>
+<tr class="memitem:a3d4e7e31ca719dcc22cb6531ef928175"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_hoist_ctrl.html#a76f2b7dcb5beb85fbd5f9b5e29cf51f0">Event</a>(HoistCtrl::*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoist_ctrl.html#a3d4e7e31ca719dcc22cb6531ef928175">doActionFPtr</a> )(void) = nullptr</td></tr>
 <tr class="memdesc:a3d4e7e31ca719dcc22cb6531ef928175"><td class="mdescLeft">&#160;</td><td class="mdescRight">Functionpointer to call the current states do-function.  <a href="#a3d4e7e31ca719dcc22cb6531ef928175">More...</a><br /></td></tr>
 <tr class="separator:a3d4e7e31ca719dcc22cb6531ef928175"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a149b99df0651dfeecd03b9e971d59ef0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_hoist.html">Hoist</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoist_ctrl.html#a149b99df0651dfeecd03b9e971d59ef0">pHoist</a></td></tr>
-<tr class="memdesc:a149b99df0651dfeecd03b9e971d59ef0"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_hoist.html" title="Provides the basic Functions to Controll the Hoist.">Hoist</a> Object.  <a href="#a149b99df0651dfeecd03b9e971d59ef0">More...</a><br /></td></tr>
+<tr class="memdesc:a149b99df0651dfeecd03b9e971d59ef0"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_hoist.html" title="Provides the basic functions to controll the Hoist.">Hoist</a> Object.  <a href="#a149b99df0651dfeecd03b9e971d59ef0">More...</a><br /></td></tr>
 <tr class="separator:a149b99df0651dfeecd03b9e971d59ef0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Contains the FSM for the <a class="el" href="class_hoist.html" title="Provides the basic Functions to Controll the Hoist.">Hoist</a>. </p>
+<div class="textblock"><p>Contains the FSM for the <a class="el" href="class_hoist.html" title="Provides the basic functions to controll the Hoist.">Hoist</a>. </p>
 <div class="image">
 <img src="HoistCtrl.png" alt="HoistCtrl.png" width="1000"/>
 </div>
@@ -257,6 +268,8 @@ Private Attributes</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><a id="a76f2b7dcb5beb85fbd5f9b5e29cf51f0af1cefec9e2196c672a622347f1fbc325"></a>Resume&#160;</td><td class="fielddoc"><p>Ext: Resume after Error occured. </p>
 </td></tr>
+<tr><td class="fieldname"><a id="a76f2b7dcb5beb85fbd5f9b5e29cf51f0a526d688f37a86d3c3f27d0c5016eb71d"></a>Reset&#160;</td><td class="fielddoc"><p>Ext.: Reset after Error occured. </p>
+</td></tr>
 <tr><td class="fieldname"><a id="a76f2b7dcb5beb85fbd5f9b5e29cf51f0a9b8e7e8d81a268a2240a96b7962a0183"></a>NoEvent&#160;</td><td class="fielddoc"><p>No event generated. </p>
 </td></tr>
 </table>
@@ -285,7 +298,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Enum holds all possible states for the <a class="el" href="class_hoist.html" title="Provides the basic Functions to Controll the Hoist.">Hoist</a>. </p>
+<p>Enum holds all possible states for the <a class="el" href="class_hoist.html" title="Provides the basic functions to controll the Hoist.">Hoist</a>. </p>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a97fd8345369aabb47f1036b1d788226aa53cced8d281a1a0ace3cb6594daaa4f7"></a>low&#160;</td><td class="fielddoc"><p>low State </p>
 </td></tr>
@@ -295,11 +308,13 @@ Private Attributes</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><a id="a97fd8345369aabb47f1036b1d788226aa071a3a2bfd3fb60bafdc7d15c6a314ec"></a>lowering&#160;</td><td class="fielddoc"><p>lowering State </p>
 </td></tr>
+<tr><td class="fieldname"><a id="a97fd8345369aabb47f1036b1d788226aa18f44934484beaf4fe2743bb244a7205"></a>resetState&#160;</td><td class="fielddoc"><p>reset state </p>
+</td></tr>
 <tr><td class="fieldname"><a id="a97fd8345369aabb47f1036b1d788226aadda7002e7ba1602d5293c2af63089825"></a>errorState&#160;</td><td class="fielddoc"><p>error State </p>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8h_source.html#l00046">46</a> of file <a class="el" href="_hoist_ctrl_8h_source.html">HoistCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8h_source.html#l00047">47</a> of file <a class="el" href="_hoist_ctrl_8h_source.html">HoistCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -319,7 +334,7 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Construct a new <a class="el" href="class_hoist.html" title="Provides the basic Functions to Controll the Hoist.">Hoist</a> Ctrl object and initailize the currentState with low state. </p>
+<p>Construct a new <a class="el" href="class_hoist.html" title="Provides the basic functions to controll the Hoist.">Hoist</a> Ctrl object and initailize the currentState with low state. </p>
 
 <p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00016">16</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
 
@@ -359,7 +374,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>String - Event as String </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00225">225</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00260">260</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -396,7 +411,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>String - State as String </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00203">203</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00235">235</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -426,7 +441,7 @@ Private Attributes</h2></td></tr>
 <p>main action of the errorState state. </p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_hoist_ctrl.html#a76f2b7dcb5beb85fbd5f9b5e29cf51f0" title="Enum holds all possible events.">HoistCtrl::Event</a> - generated Event </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00190">190</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00201">201</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -457,7 +472,7 @@ Private Attributes</h2></td></tr>
 <p>This is an idle-state. Return NoEvent.</p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_hoist_ctrl.html#a76f2b7dcb5beb85fbd5f9b5e29cf51f0" title="Enum holds all possible events.">HoistCtrl::Event</a> - generated Event </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00147">147</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00158">158</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -488,7 +503,7 @@ Private Attributes</h2></td></tr>
 <p>This is an idle-state. Return NoEvent.</p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_hoist_ctrl.html#a76f2b7dcb5beb85fbd5f9b5e29cf51f0" title="Enum holds all possible events.">HoistCtrl::Event</a> - generated Event </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00106">106</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00117">117</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -518,7 +533,7 @@ Private Attributes</h2></td></tr>
 <p>executes the main action of the lowering state. </p>
 <p>Lower the hoist till the lowposition is reached and then generate the event PosReached. else return NoEvent. </p><dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_hoist_ctrl.html#a76f2b7dcb5beb85fbd5f9b5e29cf51f0" title="Enum holds all possible events.">HoistCtrl::Event</a> - generated Event </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00167">167</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00178">178</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -546,10 +561,40 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>executes the main action of the raising state. </p>
-<p>Raise the <a class="el" href="class_hoist.html" title="Provides the basic Functions to Controll the Hoist.">Hoist</a> till the Endposition is reached and generate an PosReached Event. Else return NoEvent.</p>
+<p>Raise the <a class="el" href="class_hoist.html" title="Provides the basic functions to controll the Hoist.">Hoist</a> till the Endposition is reached and generate an PosReached Event. Else return NoEvent.</p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_hoist_ctrl.html#a76f2b7dcb5beb85fbd5f9b5e29cf51f0" title="Enum holds all possible events.">HoistCtrl::Event</a> - generated Event </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00125">125</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00136">136</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ac014771ede6f4bd4a56fc2dd44268f5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac014771ede6f4bd4a56fc2dd44268f5a">&#9670;&nbsp;</a></span>doAction_resetState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_hoist_ctrl.html#a76f2b7dcb5beb85fbd5f9b5e29cf51f0">HoistCtrl::Event</a> HoistCtrl::doAction_resetState </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>main action of the resetState </p>
+<p>lower the hoist and then detach the servo </p><dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_drive_ctrl.html#ae3e758374bbb5879814e961b5232d8da" title="Enum holds all possible events.">DriveCtrl::Event</a> - generated Event </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00220">220</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -578,7 +623,7 @@ Private Attributes</h2></td></tr>
 
 <p>entry action of the errorState state. </p>
 
-<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00182">182</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00193">193</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -607,7 +652,7 @@ Private Attributes</h2></td></tr>
 
 <p>executes the entry action of the high state. </p>
 
-<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00140">140</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00151">151</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -636,7 +681,7 @@ Private Attributes</h2></td></tr>
 
 <p>executes the entry action of the low state. </p>
 
-<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00099">99</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00110">110</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -666,7 +711,7 @@ Private Attributes</h2></td></tr>
 <p>executes the entry action of the lowering state. </p>
 <p>Attach Servo. </p>
 
-<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00159">159</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00170">170</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -696,7 +741,37 @@ Private Attributes</h2></td></tr>
 <p>executes the entry action of the raising state. </p>
 <p>Attach Servo. </p>
 
-<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00117">117</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00128">128</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a6f55a2e8d01fb503fe35f292e68f5cd1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f55a2e8d01fb503fe35f292e68f5cd1">&#9670;&nbsp;</a></span>entryAction_resetState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HoistCtrl::entryAction_resetState </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>entry action of the resetState </p>
+<p>attach servo </p>
+
+<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00213">213</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -725,7 +800,7 @@ Private Attributes</h2></td></tr>
 
 <p>exit action of the errorState state. </p>
 
-<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00197">197</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00208">208</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -754,7 +829,7 @@ Private Attributes</h2></td></tr>
 
 <p>executes the exit action of the high state. </p>
 
-<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00154">154</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00165">165</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -783,7 +858,7 @@ Private Attributes</h2></td></tr>
 
 <p>executes the exit action of the low state. </p>
 
-<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00112">112</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00123">123</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -813,7 +888,7 @@ Private Attributes</h2></td></tr>
 <p>executes the exit action of the lowering state. </p>
 <p>Detache the Servo. </p>
 
-<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00176">176</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00187">187</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -843,7 +918,36 @@ Private Attributes</h2></td></tr>
 <p>executes the exit action of the raising state. </p>
 <p>Detach Servo. </p>
 
-<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00134">134</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00145">145</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a4c2dc3a91ca217079838893306e228b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c2dc3a91ca217079838893306e228b7">&#9670;&nbsp;</a></span>exitAction_resetState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HoistCtrl::exitAction_resetState </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>exit action of the resetState </p>
+
+<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8cpp_source.html#l00229">229</a> of file <a class="el" href="_hoist_ctrl_8cpp_source.html">HoistCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -943,7 +1047,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>changes the state of the FSM based on the event </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>This Functions switchs the state based on the occuring events </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">e</td><td>- Event </td></tr>
   </table>
@@ -977,7 +1081,7 @@ Private Attributes</h2></td></tr>
 
 <p>holds the current event of the FSM </p>
 
-<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8h_source.html#l00083">83</a> of file <a class="el" href="_hoist_ctrl_8h_source.html">HoistCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8h_source.html#l00086">86</a> of file <a class="el" href="_hoist_ctrl_8h_source.html">HoistCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1003,7 +1107,7 @@ Private Attributes</h2></td></tr>
 
 <p>holds the current state of the FSM </p>
 
-<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8h_source.html#l00082">82</a> of file <a class="el" href="_hoist_ctrl_8h_source.html">HoistCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8h_source.html#l00085">85</a> of file <a class="el" href="_hoist_ctrl_8h_source.html">HoistCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1017,7 +1121,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_hoist_ctrl.html#a76f2b7dcb5beb85fbd5f9b5e29cf51f0">Event</a>(HoistCtrl::* HoistCtrl::doActionFPtr) (void) = &amp;<a class="el" href="class_hoist_ctrl.html#ac4f6d18acbb1ed0c162568fb980dc7f0">HoistCtrl::doAction_low</a></td>
+          <td class="memname"><a class="el" href="class_hoist_ctrl.html#a76f2b7dcb5beb85fbd5f9b5e29cf51f0">Event</a>(HoistCtrl::* HoistCtrl::doActionFPtr) (void) = nullptr</td>
         </tr>
       </table>
   </td>
@@ -1030,7 +1134,7 @@ Private Attributes</h2></td></tr>
 <p>Functionpointer to call the current states do-function. </p>
 <p><a href="https://stackoverflow.com/questions/1485983/calling-c-class-methods-via-a-function-pointer">https://stackoverflow.com/questions/1485983/calling-c-class-methods-via-a-function-pointer</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8h_source.html#l00090">90</a> of file <a class="el" href="_hoist_ctrl_8h_source.html">HoistCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8h_source.html#l00093">93</a> of file <a class="el" href="_hoist_ctrl_8h_source.html">HoistCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1056,7 +1160,7 @@ Private Attributes</h2></td></tr>
 
 <p>holds the last state of the FSM so it's possible to resume after error </p>
 
-<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8h_source.html#l00081">81</a> of file <a class="el" href="_hoist_ctrl_8h_source.html">HoistCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8h_source.html#l00084">84</a> of file <a class="el" href="_hoist_ctrl_8h_source.html">HoistCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1080,9 +1184,9 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="class_hoist.html" title="Provides the basic Functions to Controll the Hoist.">Hoist</a> Object. </p>
+<p><a class="el" href="class_hoist.html" title="Provides the basic functions to controll the Hoist.">Hoist</a> Object. </p>
 
-<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8h_source.html#l00092">92</a> of file <a class="el" href="_hoist_ctrl_8h_source.html">HoistCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hoist_ctrl_8h_source.html#l00095">95</a> of file <a class="el" href="_hoist_ctrl_8h_source.html">HoistCtrl.h</a>.</p>
 
 </div>
 </div>

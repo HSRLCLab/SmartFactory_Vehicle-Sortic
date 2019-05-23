@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['y',['y',['../struct_block.html#a86d0e413b7dd0346c3d0771f8dddba1c',1,'Block']]]
+  ['_7etpixy',['~TPixy',['../class_t_pixy.html#acd5ad62123022638e036e9177fad0b24',1,'TPixy']]]
 ];

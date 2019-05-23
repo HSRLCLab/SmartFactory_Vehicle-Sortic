@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['navctrl',['navctrl',['../main_8cpp.html#ae211d1cc156d691052262b97722a551c',1,'main.cpp']]],
-  ['numleft',['numLeft',['../class_chassis.html#a4bd21bd61545dbc62688b32b063e2ebc',1,'Chassis']]],
-  ['numright',['numRight',['../class_chassis.html#a7d016b7f5534df88bfdc05b24b4f8ed8',1,'Chassis']]]
+  ['obstacledistance',['obstacleDistance',['../struct_sonar_state.html#a38a818be4415bd8e36a511347c2f1ba1',1,'SonarState']]],
+  ['outbuf',['outBuf',['../class_link_s_p_i___s_s.html#ae0ba8121d0585634a1653184e8e2467e',1,'LinkSPI_SS']]],
+  ['outindex',['outIndex',['../class_link_s_p_i___s_s.html#a3d892d3fd64c57949575c40c585062e2',1,'LinkSPI_SS']]],
+  ['outlen',['outLen',['../class_link_s_p_i___s_s.html#a059960060fcd8a52c2fed1d2c2c59673',1,'LinkSPI_SS']]],
+  ['outq',['outQ',['../class_link_s_p_i.html#afe975d5595507f26019ef6a31edd8495',1,'LinkSPI']]]
 ];

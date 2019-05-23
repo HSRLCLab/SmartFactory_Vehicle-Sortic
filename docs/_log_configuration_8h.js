@@ -11,15 +11,10 @@ var _log_configuration_8h =
     [ "DBINFO2ln", "_log_configuration_8h.html#ad5e4fc69679a7d37a0f5ccee74131d31", null ],
     [ "DBINFO3", "_log_configuration_8h.html#a41c91510ee3a0a613eb1224582e7de09", null ],
     [ "DBINFO3ln", "_log_configuration_8h.html#aca02c977110a7135b59da81de618bd67", null ],
+    [ "DBPOS", "_log_configuration_8h.html#a59ec379657de330f6526e09316a68188", null ],
+    [ "DBPOSln", "_log_configuration_8h.html#a1a04fe2e71aaeec7dbff6f155eb21478", null ],
     [ "DBSTATUS", "_log_configuration_8h.html#a3d5cd0b350536a27014902a8bf120ae2", null ],
     [ "DBSTATUSln", "_log_configuration_8h.html#a6be94c808105f6506cb1e72f330f0777", null ],
     [ "DBWARNING", "_log_configuration_8h.html#a0ff23a4b212ae8912ff37cfa0bde6c1e", null ],
-    [ "DBWARNINGln", "_log_configuration_8h.html#a7685d06c4a136c1dd994845777060c5a", null ],
-    [ "DEBUG_ERROR", "_log_configuration_8h.html#a49bce9dafa991fde5616257caa9e3c4a", null ],
-    [ "DEBUG_EVENT", "_log_configuration_8h.html#a6cbdc8a4b1cfab4db2f6ac32138c59a7", null ],
-    [ "DEBUG_INFO1", "_log_configuration_8h.html#a56db5aa24b43447c483fdbfc1c4adbc4", null ],
-    [ "DEBUG_INFO2", "_log_configuration_8h.html#aa05813093d5383d10ff488b9e8c63144", null ],
-    [ "DEBUG_STATUS", "_log_configuration_8h.html#a04c63ab2d82d3f4b94883e1fb75e62f4", null ],
-    [ "DEBUG_WARNING", "_log_configuration_8h.html#a8a4e4885193c12b840ff3cbedec2451d", null ],
-    [ "DEBUGGER", "_log_configuration_8h.html#a1a79d68958390ef0582f82cd2272a3a1", null ]
+    [ "DBWARNINGln", "_log_configuration_8h.html#a7685d06c4a136c1dd994845777060c5a", null ]
 ];

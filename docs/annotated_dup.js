@@ -1,8 +1,6 @@
 var annotated_dup =
 [
     [ "Block", "struct_block.html", "struct_block" ],
-    [ "Chassis", "class_chassis.html", "class_chassis" ],
-    [ "ChassisState", "struct_chassis_state.html", "struct_chassis_state" ],
     [ "CircularQ", "struct_circular_q.html", "struct_circular_q" ],
     [ "Communication", "class_communication.html", "class_communication" ],
     [ "Component", "class_component.html", "class_component" ],
@@ -24,6 +22,7 @@ var annotated_dup =
     [ "Sonar", "class_sonar.html", "class_sonar" ],
     [ "SonarState", "struct_sonar_state.html", "struct_sonar_state" ],
     [ "TPixy", "class_t_pixy.html", "class_t_pixy" ],
+    [ "VehicleCtrl", "class_vehicle_ctrl.html", "class_vehicle_ctrl" ],
     [ "Vision", "class_vision.html", "class_vision" ],
     [ "VisionState", "struct_vision_state.html", "struct_vision_state" ]
 ];

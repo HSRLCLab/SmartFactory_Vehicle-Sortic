@@ -1,4 +1,23 @@
 var searchData=
 [
-  ['unsubscribe',['unsubscribe',['../class_communication.html#a6be65dea68cf039e41df2986386dac61',1,'Communication::unsubscribe()'],['../classmy_m_q_t_t.html#a215cee06699f991dd068e92e302563a5',1,'myMQTT::unsubscribe()']]]
+  ['vehicle',['Vehicle',['../struct_vehicle_ctrl_1_1_vehicle.html',1,'VehicleCtrl::Vehicle'],['../class_vehicle_ctrl.html#a2e60411f999149686df424d78195f7ea',1,'VehicleCtrl::vehicle()']]],
+  ['vehiclectrl',['VehicleCtrl',['../class_vehicle_ctrl.html',1,'VehicleCtrl'],['../class_vehicle_ctrl.html#ae69d79d4aa7b030d8552fe352bd548da',1,'VehicleCtrl::VehicleCtrl()']]],
+  ['vehiclectrl_2ecpp',['VehicleCtrl.cpp',['../_vehicle_ctrl_8cpp.html',1,'']]],
+  ['vehiclectrl_2eh',['VehicleCtrl.h',['../_vehicle_ctrl_8h.html',1,'']]],
+  ['vehiclehoist',['vehicleHoist',['../main_8cpp.html#a9f461ee2ad058278144a1012d50f1344',1,'main.cpp']]],
+  ['vehiclesonar',['vehicleSonar',['../main_8cpp.html#a9041baaa75510e2ba176fa9e6665671a',1,'main.cpp']]],
+  ['vehiclevision',['vehicleVision',['../main_8cpp.html#a955a6f77ea4dcffc6e6702595070f2d6',1,'main.cpp']]],
+  ['vehiclewebapi_2ecpp',['VehicleWebAPI.cpp',['../_vehicle_web_a_p_i_8cpp.html',1,'']]],
+  ['vehiclewebapi_2eh',['VehicleWebAPI.h',['../_vehicle_web_a_p_i_8h.html',1,'']]],
+  ['vehictrl',['vehictrl',['../main_8cpp.html#a788e5a6502c8e82c055878ee7b7160e5',1,'main.cpp']]],
+  ['vision',['Vision',['../class_vision.html',1,'Vision'],['../class_vision.html#a15fcf9745bee7c75cadabb91990bfb2d',1,'Vision::Vision()'],['../main_8cpp.html#a61fe0349d692eb6d4f5b94e35049b2e9a7e0587ea8ffdd03a191500efa700d619',1,'VISION():&#160;main.cpp']]],
+  ['vision_2ecpp',['Vision.cpp',['../_vision_8cpp.html',1,'']]],
+  ['vision_2eh',['Vision.h',['../_vision_8h.html',1,'']]],
+  ['vision_5fdelay_5ffactor',['VISION_DELAY_FACTOR',['../_configuration_8h.html#aab38604509f480441347f394d811a94a',1,'Configuration.h']]],
+  ['vision_5fservo_5fpin',['VISION_SERVO_PIN',['../_configuration_8h.html#ae44224f21b79253547e64f793aa2e40c',1,'Configuration.h']]],
+  ['vision_5fstart_5fangle',['VISION_START_ANGLE',['../_configuration_8h.html#a36d29bc6656692535c4aa9d9400733f8',1,'Configuration.h']]],
+  ['vision_5ftolerance_5fleft',['VISION_TOLERANCE_LEFT',['../_configuration_8h.html#a8702a13f891520136a3c0ff09ec04763',1,'Configuration.h']]],
+  ['vision_5ftolerance_5fright',['VISION_TOLERANCE_RIGHT',['../_configuration_8h.html#abd2b703e1b9aed676cf4c9be50f4ac33',1,'Configuration.h']]],
+  ['visionservo',['visionServo',['../class_vision.html#ac6ab280b34fe86f065dc30a42d0acf32',1,'Vision']]],
+  ['visionstate',['VisionState',['../struct_vision_state.html',1,'VisionState'],['../class_vision.html#a88b93542aa1e01ed33a708bb62eadc6a',1,'Vision::visionState()']]]
 ];

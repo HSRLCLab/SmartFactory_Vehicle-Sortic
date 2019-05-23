@@ -102,13 +102,16 @@ $(document).ready(function(){initNavTree('class_environment_detection.html','');
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a8b4e5f254d065894782942630879a6a7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_environment_detection.html#a8b4e5f254d065894782942630879a6a7">EnvironmentDetection</a> ()</td></tr>
+<tr class="memdesc:a8b4e5f254d065894782942630879a6a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Environment Detection object.  <a href="#a8b4e5f254d065894782942630879a6a7">More...</a><br /></td></tr>
 <tr class="separator:a8b4e5f254d065894782942630879a6a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c83b52ed74eeaade3eb9a3eb0bf019f"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_environment_detection.html#a2c83b52ed74eeaade3eb9a3eb0bf019f">Linedeviation</a> ()</td></tr>
+<tr class="memdesc:a2c83b52ed74eeaade3eb9a3eb0bf019f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recognise deviation from vehicle to line.  <a href="#a2c83b52ed74eeaade3eb9a3eb0bf019f">More...</a><br /></td></tr>
 <tr class="separator:a2c83b52ed74eeaade3eb9a3eb0bf019f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:aad261375c320266826a3b7a90d78d18a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_line_detector.html">LineDetector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_environment_detection.html#aad261375c320266826a3b7a90d78d18a">pLinedetector</a> = <a class="el" href="class_line_detector.html">LineDetector</a>(<a class="el" href="_configuration_8h.html#a64f1497eb84801df3fb9cf85f17a855a">PIN_SENSOR_0</a>, <a class="el" href="_configuration_8h.html#a40a4a0c39c01d8191338d30df8cd1efc">PIN_SENSOR_1</a>, <a class="el" href="_configuration_8h.html#abd4c39ff40a3ffe0f75afbac80463e1d">PIN_SENSOR_2</a>, <a class="el" href="_configuration_8h.html#a059bb6f9084b631286fd3fe4e5d02bca">PIN_SENSOR_3</a>, <a class="el" href="_configuration_8h.html#ad925549521d640a27eaad4fb303affa1">PIN_SENSOR_4</a>)</td></tr>
+<tr class="memdesc:aad261375c320266826a3b7a90d78d18a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linedetector Object with 5 Sensors.  <a href="#aad261375c320266826a3b7a90d78d18a">More...</a><br /></td></tr>
 <tr class="separator:aad261375c320266826a3b7a90d78d18a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -139,7 +142,9 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_environment_detection_8h_source.html#l00030">30</a> of file <a class="el" href="_environment_detection_8h_source.html">EnvironmentDetection.h</a>.</p>
+<p>Construct a new Environment Detection object. </p>
+
+<p class="definition">Definition at line <a class="el" href="_environment_detection_8h_source.html#l00034">34</a> of file <a class="el" href="_environment_detection_8h_source.html">EnvironmentDetection.h</a>.</p>
 
 </div>
 </div>
@@ -166,9 +171,19 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>const int - </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_environment_detection_8h_source.html#l00037">37</a> of file <a class="el" href="_environment_detection_8h_source.html">EnvironmentDetection.h</a>.</p>
+<p>Recognise deviation from vehicle to line. </p>
+<p>-10 Degree turn left <br />
+ 10 Degree turn right <br />
+180 full Line detected <br />
+200 Line Lost or ErrorValues <br />
+ <br />
+ 4 Line is on the right side <br />
+ 0 Line is in the middle <br />
+-4 Line is on the left side <br />
+ </p><dl class="section return"><dt>Returns</dt><dd>const int - deviation from middle sensor </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_environment_detection_8h_source.html#l00050">50</a> of file <a class="el" href="_environment_detection_8h_source.html">EnvironmentDetection.h</a>.</p>
 
 </div>
 </div>
@@ -193,7 +208,9 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_environment_detection_8h_source.html#l00042">42</a> of file <a class="el" href="_environment_detection_8h_source.html">EnvironmentDetection.h</a>.</p>
+<p>Linedetector Object with 5 Sensors. </p>
+
+<p class="definition">Definition at line <a class="el" href="_environment_detection_8h_source.html#l00059">59</a> of file <a class="el" href="_environment_detection_8h_source.html">EnvironmentDetection.h</a>.</p>
 
 </div>
 </div>

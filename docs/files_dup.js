@@ -1,10 +1,7 @@
 var files_dup =
 [
     [ "Chassis.cpp", "_chassis_8cpp.html", null ],
-    [ "Chassis.h", "_chassis_8h.html", [
-      [ "ChassisState", "struct_chassis_state.html", "struct_chassis_state" ],
-      [ "Chassis", "class_chassis.html", "class_chassis" ]
-    ] ],
+    [ "Chassis.h", "_chassis_8h.html", null ],
     [ "Communication.cpp", "_communication_8cpp.html", "_communication_8cpp" ],
     [ "Communication.h", "_communication_8h.html", "_communication_8h" ],
     [ "CommunicationConfiguration.h", "_communication_configuration_8h.html", "_communication_configuration_8h" ],
@@ -17,7 +14,6 @@ var files_dup =
     [ "DriveCtrl.h", "_drive_ctrl_8h.html", [
       [ "DriveCtrl", "class_drive_ctrl.html", "class_drive_ctrl" ]
     ] ],
-    [ "EnvironmentDetection.cpp", "_environment_detection_8cpp.html", null ],
     [ "EnvironmentDetection.h", "_environment_detection_8h.html", [
       [ "EnvironmentDetection", "class_environment_detection.html", "class_environment_detection" ]
     ] ],
@@ -67,6 +63,11 @@ var files_dup =
       [ "Sonar", "class_sonar.html", "class_sonar" ]
     ] ],
     [ "TPixy.h", "_t_pixy_8h.html", "_t_pixy_8h" ],
+    [ "VehicleCtrl.cpp", "_vehicle_ctrl_8cpp.html", null ],
+    [ "VehicleCtrl.h", "_vehicle_ctrl_8h.html", [
+      [ "VehicleCtrl", "class_vehicle_ctrl.html", "class_vehicle_ctrl" ],
+      [ "Vehicle", "struct_vehicle_ctrl_1_1_vehicle.html", "struct_vehicle_ctrl_1_1_vehicle" ]
+    ] ],
     [ "VehicleWebAPI.cpp", "_vehicle_web_a_p_i_8cpp.html", null ],
     [ "VehicleWebAPI.h", "_vehicle_web_a_p_i_8h.html", null ],
     [ "Vision.cpp", "_vision_8cpp.html", null ],

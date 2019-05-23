@@ -1,9 +1,10 @@
 var searchData=
 [
-  ['ip1',['IP1',['../_configuration_8h.html#ac711196d87ed1b698841d4fb57205e2a',1,'Configuration.h']]],
-  ['ip2',['IP2',['../_configuration_8h.html#af6d130ac97c4edb9c0b1e1d04daf7755',1,'Configuration.h']]],
-  ['ip3',['IP3',['../_configuration_8h.html#a3684effce9443ef8b18511b410fee8a5',1,'Configuration.h']]],
-  ['ip4',['IP4',['../_configuration_8h.html#a72c8befce69f41eb2f1b3d1c62d4cf67',1,'Configuration.h']]],
-  ['ip4_5fidefix',['IP4_Idefix',['../_configuration_8h.html#ae9909f3957ffbb242b96b231aef0cf88',1,'Configuration.h']]],
-  ['ip4_5fobelix',['IP4_Obelix',['../_configuration_8h.html#a8dfd89157c14743e5a93e9ce39101d22',1,'Configuration.h']]]
+  ['max_5ferror',['MAX_ERROR',['../_configuration_8h.html#a7c213cc89d01ec9cdbaa3356698a86ce',1,'Configuration.h']]],
+  ['max_5fjson_5fmessages_5fsaved',['MAX_JSON_MESSAGES_SAVED',['../_communication_configuration_8h.html#acf4afb55aa7d1288ad9dffc623360a8c',1,'CommunicationConfiguration.h']]],
+  ['max_5fjson_5fparse_5fsize',['MAX_JSON_PARSE_SIZE',['../_communication_configuration_8h.html#a268cecf8b27e3323864627d776dee31d',1,'CommunicationConfiguration.h']]],
+  ['max_5fmqtt_5ftopic_5fdepth',['MAX_MQTT_TOPIC_DEPTH',['../_communication_configuration_8h.html#a8ef1dda67b152600d665bc83d81a7537',1,'CommunicationConfiguration.h']]],
+  ['max_5fturn_5fangle',['MAX_TURN_ANGLE',['../_configuration_8h.html#a90483554deac4fb6484ee7c043ecce41',1,'Configuration.h']]],
+  ['min_5ferror',['MIN_ERROR',['../_configuration_8h.html#a80c2c0cbab028b3b18d7c7c521815721',1,'Configuration.h']]],
+  ['min_5fturn_5fangle',['MIN_TURN_ANGLE',['../_configuration_8h.html#a705080bb50b512a2c78d43bd2009e4e0',1,'Configuration.h']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['west',['West',['../class_navigation_ctrl.html#a264067782494c9133e9456e3dd4609dfabf495fc048d8d44b7f32536df5cf3930',1,'NavigationCtrl']]]
+  ['unloadvehicle',['unloadVehicle',['../class_vehicle_ctrl.html#ab4034db99cf09b689e4d5a3964c0f2c0a51acfab9ca22f83114ba7b68b46f39f5',1,'VehicleCtrl']]]
 ];

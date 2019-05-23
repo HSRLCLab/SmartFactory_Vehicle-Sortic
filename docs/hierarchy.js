@@ -2,13 +2,11 @@ var hierarchy =
 [
     [ "NavigationCtrl::ActualPos", "struct_navigation_ctrl_1_1_actual_pos.html", null ],
     [ "Block", "struct_block.html", null ],
-    [ "ChassisState", "struct_chassis_state.html", null ],
     [ "CircularQ< BufType >", "struct_circular_q.html", null ],
     [ "CircularQ< uint16_t >", "struct_circular_q.html", null ],
     [ "CircularQ< uint8_t >", "struct_circular_q.html", null ],
     [ "Communication", "class_communication.html", null ],
     [ "Component", "class_component.html", [
-      [ "Chassis", "class_chassis.html", null ],
       [ "Sonar", "class_sonar.html", null ],
       [ "Vision", "class_vision.html", null ]
     ] ],
@@ -31,5 +29,7 @@ var hierarchy =
     [ "NavigationCtrl::TargetPos", "struct_navigation_ctrl_1_1_target_pos.html", null ],
     [ "TPixy< LinkType >", "class_t_pixy.html", null ],
     [ "TPixy< LinkI2C >", "class_t_pixy.html", null ],
+    [ "VehicleCtrl::Vehicle", "struct_vehicle_ctrl_1_1_vehicle.html", null ],
+    [ "VehicleCtrl", "class_vehicle_ctrl.html", null ],
     [ "VisionState", "struct_vision_state.html", null ]
 ];

@@ -108,6 +108,7 @@ $(document).ready(function(){initNavTree('main_8cpp.html','');});
 <code>#include &quot;<a class="el" href="_environment_detection_8h_source.html">EnvironmentDetection.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_hoist_ctrl_8h_source.html">HoistCtrl.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_vehicle_ctrl_8h_source.html">FSM/VehicleCtrl.h</a>&quot;</code><br />
 </div>
 <p><a href="main_8cpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -155,7 +156,7 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a0605f4e402ba899e0bce75442e78e083"><td class="memItemLeft" align="right" valign="top">enum <a class="el" href="main_8cpp.html#a61fe0349d692eb6d4f5b94e35049b2e9">TestCase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a0605f4e402ba899e0bce75442e78e083">Test</a> = <a class="el" href="main_8cpp.html#a61fe0349d692eb6d4f5b94e35049b2e9a8468548e823b10d0716b51734300aeb5">TestCase::NAVIGATIONCTRL</a></td></tr>
+<tr class="memitem:a0605f4e402ba899e0bce75442e78e083"><td class="memItemLeft" align="right" valign="top">enum <a class="el" href="main_8cpp.html#a61fe0349d692eb6d4f5b94e35049b2e9">TestCase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a0605f4e402ba899e0bce75442e78e083">Test</a> = <a class="el" href="main_8cpp.html#a61fe0349d692eb6d4f5b94e35049b2e9a855520d2a5b0b1a64b939e7e30889e2a">TestCase::RUN</a></td></tr>
 <tr class="separator:a0605f4e402ba899e0bce75442e78e083"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9041baaa75510e2ba176fa9e6665671a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_sonar.html">Sonar</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a9041baaa75510e2ba176fa9e6665671a">vehicleSonar</a></td></tr>
 <tr class="separator:a9041baaa75510e2ba176fa9e6665671a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -163,8 +164,6 @@ Variables</h2></td></tr>
 <tr class="separator:a955a6f77ea4dcffc6e6702595070f2d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f461ee2ad058278144a1012d50f1344"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_hoist.html">Hoist</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a9f461ee2ad058278144a1012d50f1344">vehicleHoist</a></td></tr>
 <tr class="separator:a9f461ee2ad058278144a1012d50f1344"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3304e16e0dd0cadb7975becd82af0353"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_chassis.html">Chassis</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a3304e16e0dd0cadb7975becd82af0353">vehicleChassis</a></td></tr>
-<tr class="separator:a3304e16e0dd0cadb7975becd82af0353"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7909b7794d7c1d3bb44f2bd5caa96a9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_communication.html">Communication</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ac7909b7794d7c1d3bb44f2bd5caa96a9">comm</a></td></tr>
 <tr class="separator:ac7909b7794d7c1d3bb44f2bd5caa96a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f66244347eb1e657981aba2c8b92c70"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structmy_j_s_o_n_str.html">myJSONStr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a6f66244347eb1e657981aba2c8b92c70">tmp_mess</a></td></tr>
@@ -179,6 +178,8 @@ Variables</h2></td></tr>
 <tr class="separator:aa45afd7ad503319b9ff0d98bce031ce0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a377e93b8e1d0153bfdca4c5cbf33ad13"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_environment_detection.html">EnvironmentDetection</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a377e93b8e1d0153bfdca4c5cbf33ad13">envdetect</a></td></tr>
 <tr class="separator:a377e93b8e1d0153bfdca4c5cbf33ad13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a788e5a6502c8e82c055878ee7b7160e5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_vehicle_ctrl.html">VehicleCtrl</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a788e5a6502c8e82c055878ee7b7160e5">vehictrl</a></td></tr>
+<tr class="separator:a788e5a6502c8e82c055878ee7b7160e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0cbaf532dc7817c544d33554786336b"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ae0cbaf532dc7817c544d33554786336b">currentMillis</a> = 0</td></tr>
 <tr class="memdesc:ae0cbaf532dc7817c544d33554786336b"><td class="mdescLeft">&#160;</td><td class="mdescRight">will store current time  <a href="#ae0cbaf532dc7817c544d33554786336b">More...</a><br /></td></tr>
 <tr class="separator:ae0cbaf532dc7817c544d33554786336b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -197,7 +198,7 @@ Variables</h2></td></tr>
 1.0 - BA FTS FS 2018</dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2019-03-20 </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2019</dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000022">Todo:</a></b></dt><dd>entkoppelung von configfiles </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000024">Todo:</a></b></dt><dd>entkoppelung von configfiles </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
@@ -251,7 +252,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a61fe0349d692eb6d4f5b94e35049b2e9aa757b15cdaa17b327ffb809e85213003"></a>MOTIVATION&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00033">33</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00035">35</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -273,7 +274,7 @@ Variables</h2></td></tr>
 
 <p>After creating a <a class="el" href="main_8cpp.html#a4fc01d736fe50cf5b977f755b675f11d" title="For initialisation of the Board.">setup()</a> function, which initializes and sets the initial values, the <a class="el" href="main_8cpp.html#afe461d27b9c48d5921c00d521181f12f" title="After creating a setup() function, which initializes and sets the initial values, the loop() function...">loop()</a> function does precisely what its name suggests, and loops consecutively, allowing your program to change and respond. Use it to actively control the board. </p>
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00169">169</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00176">176</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -292,7 +293,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00196">196</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00203">203</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -314,7 +315,7 @@ Variables</h2></td></tr>
 <p>For initialisation of the Board. </p>
 <p>Use it to initialize variables, pin modes, start using libraries, etc. The <a class="el" href="main_8cpp.html#a4fc01d736fe50cf5b977f755b675f11d" title="For initialisation of the Board.">setup()</a> function will only run once, after each powerup or reset of the board </p>
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00105">105</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00109">109</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -333,7 +334,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00213">213</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00221">221</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -352,7 +353,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00295">295</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00303">303</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -371,7 +372,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00249">249</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00257">257</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -388,7 +389,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00075">75</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00077">77</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -406,7 +407,7 @@ Variables</h2></td></tr>
 
 <p>will store current time </p>
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00084">84</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00088">88</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -422,7 +423,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00081">81</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00083">83</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -438,7 +439,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00078">78</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00080">80</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -454,7 +455,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00082">82</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00084">84</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -472,7 +473,7 @@ Variables</h2></td></tr>
 
 <p>This shit is fucked up. </p>
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00092">92</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00096">96</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -488,7 +489,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00077">77</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00079">79</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -504,7 +505,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00079">79</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00081">81</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -522,7 +523,7 @@ Variables</h2></td></tr>
 
 <p>will store last time </p>
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00085">85</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00089">89</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -533,7 +534,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="main_8cpp.html#a61fe0349d692eb6d4f5b94e35049b2e9">TestCase</a>  Test = <a class="el" href="main_8cpp.html#a61fe0349d692eb6d4f5b94e35049b2e9a8468548e823b10d0716b51734300aeb5">TestCase::NAVIGATIONCTRL</a></td>
+          <td class="memname">enum <a class="el" href="main_8cpp.html#a61fe0349d692eb6d4f5b94e35049b2e9">TestCase</a>  Test = <a class="el" href="main_8cpp.html#a61fe0349d692eb6d4f5b94e35049b2e9a855520d2a5b0b1a64b939e7e30889e2a">TestCase::RUN</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -552,23 +553,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00076">76</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a3304e16e0dd0cadb7975becd82af0353"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3304e16e0dd0cadb7975becd82af0353">&#9670;&nbsp;</a></span>vehicleChassis</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_chassis.html">Chassis</a>* vehicleChassis</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00071">71</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00078">78</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -584,7 +569,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00070">70</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00072">72</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -600,7 +585,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00068">68</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00070">70</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -616,7 +601,23 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00069">69</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00071">71</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a788e5a6502c8e82c055878ee7b7160e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a788e5a6502c8e82c055878ee7b7160e5">&#9670;&nbsp;</a></span>vehictrl</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_vehicle_ctrl.html">VehicleCtrl</a>* vehictrl</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00086">86</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>

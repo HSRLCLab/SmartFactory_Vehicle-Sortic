@@ -88,9 +88,6 @@ $(document).ready(function(){initNavTree('functions_d.html','');});
 <div class="textblock">Here is a list of all class members with links to the classes they belong to:</div>
 
 <h3><a id="index_d"></a>- d -</h3><ul>
-<li>data
-: <a class="el" href="structmy_j_s_o_n_str.html#aff2b66518d80b7ab815d793af5d0968b">myJSONStr</a>
-</li>
 <li>ddelay
 : <a class="el" href="class_vision.html#a5ca6d665a8a56164993113a8d2c55565">Vision</a>
 </li>
@@ -104,6 +101,7 @@ $(document).ready(function(){initNavTree('functions_d.html','');});
 : <a class="el" href="class_drive_ctrl.html#a01352938e1d1f06ea75db7bbdbe71158">DriveCtrl</a>
 , <a class="el" href="class_hoist_ctrl.html#a2146be59c6d8409e9b6ad6186e32c259">HoistCtrl</a>
 , <a class="el" href="class_navigation_ctrl.html#a1531d3a8dbc3ea175e6a16d4295d2190">NavigationCtrl</a>
+, <a class="el" href="class_vehicle_ctrl.html#ae708a3a63e5eaf408bb65bfbb8bf206c">VehicleCtrl</a>
 </li>
 <li>decodeMQTTstate()
 : <a class="el" href="classmy_m_q_t_t.html#ae4372969b093a2487479005ccb398cbc">myMQTT</a>
@@ -115,6 +113,7 @@ $(document).ready(function(){initNavTree('functions_d.html','');});
 : <a class="el" href="class_drive_ctrl.html#a990243cad9a3b10a47aecb2c7e56ecca">DriveCtrl</a>
 , <a class="el" href="class_hoist_ctrl.html#a0ab222c59f0f2d600562ca539baf34d8">HoistCtrl</a>
 , <a class="el" href="class_navigation_ctrl.html#a5db65fef12e458a11c10d2a938d0e44f">NavigationCtrl</a>
+, <a class="el" href="class_vehicle_ctrl.html#ad851512c7716832db9300d4b62c58f52">VehicleCtrl</a>
 </li>
 <li>decodeWiFistate()
 : <a class="el" href="class_network.html#a31ebd477ecb0f08f85b7fa52b9f2bb7a">Network</a>
@@ -128,14 +127,8 @@ $(document).ready(function(){initNavTree('functions_d.html','');});
 <li>deviation()
 : <a class="el" href="class_line_detector.html#ad63b0df911e5530605d86fe605dcfbb3">LineDetector</a>
 </li>
-<li>direction
-: <a class="el" href="struct_chassis_state.html#a09e80f953423fbd260d4c0c3e0c6f2a0">ChassisState</a>
-</li>
 <li>Direction
 : <a class="el" href="class_drive.html#af743b338356ce72483e64716047fdf36">Drive</a>
-</li>
-<li>directionError
-: <a class="el" href="struct_chassis_state.html#a1de36c63d51c64a691619196a9a439c4">ChassisState</a>
 </li>
 <li>doAction_crossTransit()
 : <a class="el" href="class_navigation_ctrl.html#a3c512dcf2651a923922d749056774f50">NavigationCtrl</a>
@@ -147,6 +140,7 @@ $(document).ready(function(){initNavTree('functions_d.html','');});
 : <a class="el" href="class_drive_ctrl.html#a417dc1cf3e4a3f926bb7b0076d7f23b9">DriveCtrl</a>
 , <a class="el" href="class_hoist_ctrl.html#a2bbf71003628fac91382626b871b2682">HoistCtrl</a>
 , <a class="el" href="class_navigation_ctrl.html#acb1ec551eab48a79eb7ef3860604742b">NavigationCtrl</a>
+, <a class="el" href="class_vehicle_ctrl.html#a66c4fe46c87263b973ca713a4e3c138a">VehicleCtrl</a>
 </li>
 <li>doAction_followingLineBackward()
 : <a class="el" href="class_drive_ctrl.html#a86eb2633eb5eb51963543c859d30dcfd">DriveCtrl</a>
@@ -157,11 +151,17 @@ $(document).ready(function(){initNavTree('functions_d.html','');});
 <li>doAction_gateway()
 : <a class="el" href="class_navigation_ctrl.html#a0ec7033363c4098de0c34e59e2152a93">NavigationCtrl</a>
 </li>
+<li>doAction_handshake()
+: <a class="el" href="class_vehicle_ctrl.html#ac0f807601ba7d7947085526f37a3579d">VehicleCtrl</a>
+</li>
 <li>doAction_high()
 : <a class="el" href="class_hoist_ctrl.html#a7504646088e630687bf5ee87996947b0">HoistCtrl</a>
 </li>
 <li>doAction_idle()
 : <a class="el" href="class_drive_ctrl.html#a529664e16ca310066ce21d3ed2c93b42">DriveCtrl</a>
+</li>
+<li>doAction_loadVehicle()
+: <a class="el" href="class_vehicle_ctrl.html#ad83c16c0ce0a75ba0ecd12081aba0e06">VehicleCtrl</a>
 </li>
 <li>doAction_low()
 : <a class="el" href="class_hoist_ctrl.html#ac4f6d18acbb1ed0c162568fb980dc7f0">HoistCtrl</a>
@@ -171,6 +171,12 @@ $(document).ready(function(){initNavTree('functions_d.html','');});
 </li>
 <li>doAction_raising()
 : <a class="el" href="class_hoist_ctrl.html#a5cf5c7f2bcd64423be81156b2e7edb64">HoistCtrl</a>
+</li>
+<li>doAction_resetState()
+: <a class="el" href="class_drive_ctrl.html#a6a45b075202c78338cf7f4eb82cc4e0f">DriveCtrl</a>
+, <a class="el" href="class_hoist_ctrl.html#ac014771ede6f4bd4a56fc2dd44268f5a">HoistCtrl</a>
+, <a class="el" href="class_navigation_ctrl.html#a84b21d17ec58aae4dc0448e3b8b425f1">NavigationCtrl</a>
+, <a class="el" href="class_vehicle_ctrl.html#accc1e98d2a1343fa8138c2a88ee5aa50">VehicleCtrl</a>
 </li>
 <li>doAction_toEndPoint()
 : <a class="el" href="class_navigation_ctrl.html#a3dee3f267e76e7bddd677c019fa70cc0">NavigationCtrl</a>
@@ -187,34 +193,26 @@ $(document).ready(function(){initNavTree('functions_d.html','');});
 <li>doAction_turningRight()
 : <a class="el" href="class_drive_ctrl.html#a7b6db585e8bd34b3325f7aac2166fec0">DriveCtrl</a>
 </li>
+<li>doAction_unloadVehicle()
+: <a class="el" href="class_vehicle_ctrl.html#a6a7b271d5d9426a196cfb3829ee97b71">VehicleCtrl</a>
+</li>
+<li>doAction_waitForBox()
+: <a class="el" href="class_vehicle_ctrl.html#ad9ce0133875c275a8cb748b551fb7f99">VehicleCtrl</a>
+</li>
 <li>doActionFPtr
 : <a class="el" href="class_drive_ctrl.html#a965aedee0c1a17e87b49f290fb899785">DriveCtrl</a>
 , <a class="el" href="class_hoist_ctrl.html#a3d4e7e31ca719dcc22cb6531ef928175">HoistCtrl</a>
 , <a class="el" href="class_navigation_ctrl.html#af4e4012c47104f10fed2493b499f6f17">NavigationCtrl</a>
+, <a class="el" href="class_vehicle_ctrl.html#ace3f094f3e9b336de0f80baabe43584d">VehicleCtrl</a>
 </li>
 <li>Drive()
-: <a class="el" href="class_drive.html#ac8df4390fcc19c3bdda93a2fc61ab17a">Drive</a>
+: <a class="el" href="class_drive.html#af18ec3b1c1c6603185fd4f2c9d5d6ac6">Drive</a>
 </li>
 <li>drive()
 : <a class="el" href="class_drive.html#a9138a0655fc206910843be208af4bb58">Drive</a>
 </li>
-<li>driveBack()
-: <a class="el" href="class_chassis.html#aa293bc686a6f2808f4691a2143a7bc5e">Chassis</a>
-</li>
-<li>driveBackLimited()
-: <a class="el" href="class_chassis.html#aebd73c6473a2a8092fca0f54c6404466">Chassis</a>
-</li>
 <li>DriveCtrl()
 : <a class="el" href="class_drive_ctrl.html#a9dc3b057939e2e337850e6b1bb35dce9">DriveCtrl</a>
-</li>
-<li>driveStraight()
-: <a class="el" href="class_chassis.html#a84334c8fe8989dff837f1b6f9a4da734">Chassis</a>
-</li>
-<li>driveStraightLimited()
-: <a class="el" href="class_chassis.html#a1097ed549149ba1c53480123174ded58">Chassis</a>
-</li>
-<li>DValue
-: <a class="el" href="class_chassis.html#a9228ac94f768e1c091298ed17956c51e">Chassis</a>
 </li>
 </ul>
 </div><!-- contents -->

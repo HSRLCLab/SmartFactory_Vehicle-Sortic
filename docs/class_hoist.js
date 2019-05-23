@@ -7,10 +7,12 @@ var class_hoist =
     [ "init", "class_hoist.html#a26a58bd1fff17b97ee57535ce5dcbfdb", null ],
     [ "lower", "class_hoist.html#ac7fd7ee914af03ed9071c35a43e07b47", null ],
     [ "raise", "class_hoist.html#a7f035d4c1e49c3454e18d57ccb7f9905", null ],
+    [ "currentMillis", "class_hoist.html#a2d4176c634f438ca970c9356e1401a8a", null ],
     [ "hoistServo", "class_hoist.html#a3738c6a34deba80c7cc7fffd569e8ce2", null ],
     [ "position", "class_hoist.html#a0d45a502cfd55ea5aff7933f78e7dba7", null ],
     [ "positionMax", "class_hoist.html#a132a706b2bd4d3693a54fdb75798f0ac", null ],
     [ "positionMin", "class_hoist.html#a5937e81839b5958f7cb77089591188e2", null ],
+    [ "previousMillis", "class_hoist.html#a600e68db558f83c06d290123d092954d", null ],
     [ "servoDelay", "class_hoist.html#a1749bc391ce45dea153c6d8d939b4aaf", null ],
     [ "servoPin", "class_hoist.html#ab5bf589b94566d5578980e298c4263c1", null ]
 ];

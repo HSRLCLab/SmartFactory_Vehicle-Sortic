@@ -105,8 +105,10 @@ $(document).ready(function(){initNavTree('class_navigation_ctrl.html','');});
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_navigation_ctrl_1_1_actual_pos.html">ActualPos</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Holds the actual information about the vehicleposition.  <a href="struct_navigation_ctrl_1_1_actual_pos.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_navigation_ctrl_1_1_target_pos.html">TargetPos</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Holds the information about the vehicle target.  <a href="struct_navigation_ctrl_1_1_target_pos.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
@@ -119,6 +121,7 @@ Public Types</h2></td></tr>
 <br />
 &#160;&#160;<a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14fa902b0d55fddef6f8d651fe1035b7d4bd">Event::Error</a>, 
 <a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14faf1cefec9e2196c672a622347f1fbc325">Event::Resume</a>, 
+<a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14fa526d688f37a86d3c3f27d0c5016eb71d">Event::Reset</a>, 
 <a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14fa9b8e7e8d81a268a2240a96b7962a0183">Event::NoEvent</a>
 <br />
  }</td></tr>
@@ -131,6 +134,7 @@ Public Types</h2></td></tr>
 <a class="el" href="class_navigation_ctrl.html#a0101875c0699abe2daccdddff873c72dabf6551233d32bf07676ea9cb39415b8c">State::crossTransit</a>, 
 <br />
 &#160;&#160;<a class="el" href="class_navigation_ctrl.html#a0101875c0699abe2daccdddff873c72da7733a6699cfe8ca3faa19b814ee85743">State::toEndPoint</a>, 
+<a class="el" href="class_navigation_ctrl.html#a0101875c0699abe2daccdddff873c72da18f44934484beaf4fe2743bb244a7205">State::resetState</a>, 
 <a class="el" href="class_navigation_ctrl.html#a0101875c0699abe2daccdddff873c72dadda7002e7ba1602d5293c2af63089825">State::errorState</a>
 <br />
  }</td></tr>
@@ -138,19 +142,25 @@ Public Types</h2></td></tr>
 <tr class="separator:a0101875c0699abe2daccdddff873c72d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4db1addb6502e2bfd72fc1c2660ac94"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94">Sector</a> { <br />
 &#160;&#160;<a class="el" href="class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94a3a7d7d4f2845e5fd09296ec79e8b3c3c">Sector::SorticHandover</a>, 
+<a class="el" href="class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94abcf0ebff461f9c19e95611262b9b4c89">Sector::SorticToHandover</a>, 
 <a class="el" href="class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94a9c90801aa6bc3af44167121de50341b4">Sector::SorticWaitForGateway</a>, 
 <a class="el" href="class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94a0acaa903c278d35a6709633585d9b76e">Sector::SorticGateway</a>, 
-<a class="el" href="class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94af701b8b1faaa61e600a5f71680c059b0">Sector::TransitWaitForGatewaySortic</a>, 
 <br />
-&#160;&#160;<a class="el" href="class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94a687e0cc072d40a2f72f5802da3abf05a">Sector::Transit</a>, 
+&#160;&#160;<a class="el" href="class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94af701b8b1faaa61e600a5f71680c059b0">Sector::TransitWaitForGatewaySortic</a>, 
+<a class="el" href="class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94ae81bb4f2dd656ccbb81c3ccdb2ad9754">Sector::TransitToSortic</a>, 
+<a class="el" href="class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94a97244495f4e80aedfd4693e5cede3e3b">Sector::TransitToTransfer</a>, 
 <a class="el" href="class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94abaaacd7280e91aface947a1cc19d0f79">Sector::Parking</a>, 
-<a class="el" href="class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94a2464c8f93d31723702b353b815e9eecd">Sector::TransitWaitForGatewayTransfer</a>, 
-<a class="el" href="class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94ad331a438dc896d87d3f8ca6484db6aa2">Sector::TransferGateway</a>, 
 <br />
-&#160;&#160;<a class="el" href="class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94a777d7d806fce61e555042aab33f76266">Sector::TransferWaitForGateway</a>, 
-<a class="el" href="class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94aef7baa6f4bee86e08087cfbfa2be3300">Sector::TransferHandover</a>
+&#160;&#160;<a class="el" href="class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94a2464c8f93d31723702b353b815e9eecd">Sector::TransitWaitForGatewayTransfer</a>, 
+<a class="el" href="class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94ad331a438dc896d87d3f8ca6484db6aa2">Sector::TransferGateway</a>, 
+<a class="el" href="class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94a777d7d806fce61e555042aab33f76266">Sector::TransferWaitForGateway</a>, 
+<a class="el" href="class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94a3f1ca4297ce6c53789d502625dca13f0">Sector::TransferToHandover</a>, 
+<br />
+&#160;&#160;<a class="el" href="class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94aef7baa6f4bee86e08087cfbfa2be3300">Sector::TransferHandover</a>, 
+<a class="el" href="class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94acb5e100e5a9a3e7f6d1fd97512215282">Sector::error</a>
 <br />
  }</td></tr>
+<tr class="memdesc:ae4db1addb6502e2bfd72fc1c2660ac94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enum holds all possible sectors.  <a href="class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94">More...</a><br /></td></tr>
 <tr class="separator:ae4db1addb6502e2bfd72fc1c2660ac94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -167,12 +177,27 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa3ead7da46170de02e483e7be11e863a"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_navigation_ctrl.html#a0101875c0699abe2daccdddff873c72d">State</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_navigation_ctrl.html#aa3ead7da46170de02e483e7be11e863a">getcurrentState</a> ()</td></tr>
 <tr class="memdesc:aa3ead7da46170de02e483e7be11e863a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current State.  <a href="#aa3ead7da46170de02e483e7be11e863a">More...</a><br /></td></tr>
 <tr class="separator:aa3ead7da46170de02e483e7be11e863a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9236f060e2b33fea96e0a289a18fc72c"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94">Sector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_navigation_ctrl.html#a9236f060e2b33fea96e0a289a18fc72c">getcurrentSector</a> ()</td></tr>
+<tr class="memdesc:a9236f060e2b33fea96e0a289a18fc72c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current Sector.  <a href="#a9236f060e2b33fea96e0a289a18fc72c">More...</a><br /></td></tr>
+<tr class="separator:a9236f060e2b33fea96e0a289a18fc72c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a700d6ea190f5ad3e017f7b247e2b7fd8"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_navigation_ctrl.html#a700d6ea190f5ad3e017f7b247e2b7fd8">getcurrentLine</a> ()</td></tr>
+<tr class="memdesc:a700d6ea190f5ad3e017f7b247e2b7fd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current Line.  <a href="#a700d6ea190f5ad3e017f7b247e2b7fd8">More...</a><br /></td></tr>
+<tr class="separator:a700d6ea190f5ad3e017f7b247e2b7fd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8cba249ab6c573d77f72bf82148618ea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_navigation_ctrl.html#a8cba249ab6c573d77f72bf82148618ea">setTargetPosition</a> (<a class="el" href="class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94">Sector</a> sector, const int line)</td></tr>
 <tr class="memdesc:a8cba249ab6c573d77f72bf82148618ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Target Position object.  <a href="#a8cba249ab6c573d77f72bf82148618ea">More...</a><br /></td></tr>
 <tr class="separator:a8cba249ab6c573d77f72bf82148618ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1d6acdc41ae6dcdf80c5e9cdbddf6ad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_navigation_ctrl.html#af1d6acdc41ae6dcdf80c5e9cdbddf6ad">setActualPosition</a> (<a class="el" href="class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94">Sector</a> sector, const int line)</td></tr>
+<tr class="memdesc:af1d6acdc41ae6dcdf80c5e9cdbddf6ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the actual Position object.  <a href="#af1d6acdc41ae6dcdf80c5e9cdbddf6ad">More...</a><br /></td></tr>
+<tr class="separator:af1d6acdc41ae6dcdf80c5e9cdbddf6ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43da124099291c515296d95a74547373"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_navigation_ctrl.html#a43da124099291c515296d95a74547373">giveToken</a> ()</td></tr>
 <tr class="memdesc:a43da124099291c515296d95a74547373"><td class="mdescLeft">&#160;</td><td class="mdescRight">give Token to access the Gateway  <a href="#a43da124099291c515296d95a74547373">More...</a><br /></td></tr>
 <tr class="separator:a43da124099291c515296d95a74547373"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a221ef4aa3569723f463883e6cca490d3"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_navigation_ctrl.html#a221ef4aa3569723f463883e6cca490d3">decodeSector</a> (<a class="el" href="class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94">Sector</a> sector)</td></tr>
+<tr class="memdesc:a221ef4aa3569723f463883e6cca490d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decodes the Sector-Enum and returns a description.  <a href="#a221ef4aa3569723f463883e6cca490d3">More...</a><br /></td></tr>
+<tr class="separator:a221ef4aa3569723f463883e6cca490d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2ca4b4a38ab0cf89b3487b737382998"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94">NavigationCtrl::Sector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_navigation_ctrl.html#ac2ca4b4a38ab0cf89b3487b737382998">decodeSector</a> (String sector)</td></tr>
+<tr class="memdesc:ac2ca4b4a38ab0cf89b3487b737382998"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decodes a sectro String and returns the sector.  <a href="#ac2ca4b4a38ab0cf89b3487b737382998">More...</a><br /></td></tr>
+<tr class="separator:ac2ca4b4a38ab0cf89b3487b737382998"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -233,15 +258,21 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:ac9ec58941cd9c9473e7448de59b889ff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_navigation_ctrl.html#ac9ec58941cd9c9473e7448de59b889ff">exitAction_errorState</a> ()</td></tr>
 <tr class="memdesc:ac9ec58941cd9c9473e7448de59b889ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">exit action of the errorState state.  <a href="#ac9ec58941cd9c9473e7448de59b889ff">More...</a><br /></td></tr>
 <tr class="separator:ac9ec58941cd9c9473e7448de59b889ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a643436488aed19f132980351dba56dd1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_navigation_ctrl.html#a643436488aed19f132980351dba56dd1">entryAction_resetState</a> ()</td></tr>
+<tr class="memdesc:a643436488aed19f132980351dba56dd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">entry action of the resetState  <a href="#a643436488aed19f132980351dba56dd1">More...</a><br /></td></tr>
+<tr class="separator:a643436488aed19f132980351dba56dd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84b21d17ec58aae4dc0448e3b8b425f1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14f">NavigationCtrl::Event</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_navigation_ctrl.html#a84b21d17ec58aae4dc0448e3b8b425f1">doAction_resetState</a> ()</td></tr>
+<tr class="memdesc:a84b21d17ec58aae4dc0448e3b8b425f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">main action of the resetState  <a href="#a84b21d17ec58aae4dc0448e3b8b425f1">More...</a><br /></td></tr>
+<tr class="separator:a84b21d17ec58aae4dc0448e3b8b425f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ee8ed4fc79ea04afb958fb9ceee4943"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_navigation_ctrl.html#a8ee8ed4fc79ea04afb958fb9ceee4943">exitAction_resetState</a> ()</td></tr>
+<tr class="memdesc:a8ee8ed4fc79ea04afb958fb9ceee4943"><td class="mdescLeft">&#160;</td><td class="mdescRight">exit action of the resetState  <a href="#a8ee8ed4fc79ea04afb958fb9ceee4943">More...</a><br /></td></tr>
+<tr class="separator:a8ee8ed4fc79ea04afb958fb9ceee4943"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5db65fef12e458a11c10d2a938d0e44f"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_navigation_ctrl.html#a5db65fef12e458a11c10d2a938d0e44f">decodeState</a> (<a class="el" href="class_navigation_ctrl.html#a0101875c0699abe2daccdddff873c72d">State</a> state)</td></tr>
 <tr class="memdesc:a5db65fef12e458a11c10d2a938d0e44f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decodes the State-Enum and returns a description.  <a href="#a5db65fef12e458a11c10d2a938d0e44f">More...</a><br /></td></tr>
 <tr class="separator:a5db65fef12e458a11c10d2a938d0e44f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1531d3a8dbc3ea175e6a16d4295d2190"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_navigation_ctrl.html#a1531d3a8dbc3ea175e6a16d4295d2190">decodeEvent</a> (<a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14f">Event</a> event)</td></tr>
 <tr class="memdesc:a1531d3a8dbc3ea175e6a16d4295d2190"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decodes the Event-Enum and returns a description.  <a href="#a1531d3a8dbc3ea175e6a16d4295d2190">More...</a><br /></td></tr>
 <tr class="separator:a1531d3a8dbc3ea175e6a16d4295d2190"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a221ef4aa3569723f463883e6cca490d3"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_navigation_ctrl.html#a221ef4aa3569723f463883e6cca490d3">decodeSector</a> (<a class="el" href="class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94">Sector</a> sector)</td></tr>
-<tr class="memdesc:a221ef4aa3569723f463883e6cca490d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decodes the Sector-Enum and returns a description.  <a href="#a221ef4aa3569723f463883e6cca490d3">More...</a><br /></td></tr>
-<tr class="separator:a221ef4aa3569723f463883e6cca490d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -286,7 +317,7 @@ Private Attributes</h2></td></tr>
 <img src="NavigationCtrl.png" alt="NavigationCtrl.png" width="1000"/>
 </div>
  <div class="image">
-<img src="Gametable.png" alt="Gametable.png" width="1000"/>
+<img src="Gametable.png" alt="Gametable.png" width="1200"/>
 </div>
  
 <p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00028">28</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
@@ -325,6 +356,8 @@ Private Attributes</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><a id="a08389788c6451604d2a4111f65f4b14faf1cefec9e2196c672a622347f1fbc325"></a>Resume&#160;</td><td class="fielddoc"><p>Ext: Resume after Error occured. </p>
 </td></tr>
+<tr><td class="fieldname"><a id="a08389788c6451604d2a4111f65f4b14fa526d688f37a86d3c3f27d0c5016eb71d"></a>Reset&#160;</td><td class="fielddoc"><p>Ext.: Reset after Error occured. </p>
+</td></tr>
 <tr><td class="fieldname"><a id="a08389788c6451604d2a4111f65f4b14fa9b8e7e8d81a268a2240a96b7962a0183"></a>NoEvent&#160;</td><td class="fielddoc"><p>No event generated. </p>
 </td></tr>
 </table>
@@ -352,8 +385,12 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Enum holds all possible sectors. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ae4db1addb6502e2bfd72fc1c2660ac94a3a7d7d4f2845e5fd09296ec79e8b3c3c"></a>SorticHandover&#160;</td><td class="fielddoc"><p>Sortic Handover. </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ae4db1addb6502e2bfd72fc1c2660ac94a3a7d7d4f2845e5fd09296ec79e8b3c3c"></a>SorticHandover&#160;</td><td class="fielddoc"><p>Sortic - Handover. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae4db1addb6502e2bfd72fc1c2660ac94abcf0ebff461f9c19e95611262b9b4c89"></a>SorticToHandover&#160;</td><td class="fielddoc"><p>Sortic - to Handover. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="ae4db1addb6502e2bfd72fc1c2660ac94a9c90801aa6bc3af44167121de50341b4"></a>SorticWaitForGateway&#160;</td><td class="fielddoc"><p>Sortic - Wait for Gateway. </p>
 </td></tr>
@@ -361,7 +398,9 @@ Private Attributes</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><a id="ae4db1addb6502e2bfd72fc1c2660ac94af701b8b1faaa61e600a5f71680c059b0"></a>TransitWaitForGatewaySortic&#160;</td><td class="fielddoc"><p>Transit - Wait for Gateway Sortic. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ae4db1addb6502e2bfd72fc1c2660ac94a687e0cc072d40a2f72f5802da3abf05a"></a>Transit&#160;</td><td class="fielddoc"><p>Transit. </p>
+<tr><td class="fieldname"><a id="ae4db1addb6502e2bfd72fc1c2660ac94ae81bb4f2dd656ccbb81c3ccdb2ad9754"></a>TransitToSortic&#160;</td><td class="fielddoc"><p>Transit - to Sortic. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae4db1addb6502e2bfd72fc1c2660ac94a97244495f4e80aedfd4693e5cede3e3b"></a>TransitToTransfer&#160;</td><td class="fielddoc"><p>Transit - to Transfer. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="ae4db1addb6502e2bfd72fc1c2660ac94abaaacd7280e91aface947a1cc19d0f79"></a>Parking&#160;</td><td class="fielddoc"><p>Parking (not used atm) </p>
 </td></tr>
@@ -371,11 +410,15 @@ Private Attributes</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><a id="ae4db1addb6502e2bfd72fc1c2660ac94a777d7d806fce61e555042aab33f76266"></a>TransferWaitForGateway&#160;</td><td class="fielddoc"><p>Transfer - wait for Gateway. </p>
 </td></tr>
+<tr><td class="fieldname"><a id="ae4db1addb6502e2bfd72fc1c2660ac94a3f1ca4297ce6c53789d502625dca13f0"></a>TransferToHandover&#160;</td><td class="fielddoc"><p>Transfer - to Handover. </p>
+</td></tr>
 <tr><td class="fieldname"><a id="ae4db1addb6502e2bfd72fc1c2660ac94aef7baa6f4bee86e08087cfbfa2be3300"></a>TransferHandover&#160;</td><td class="fielddoc"><p>Transfer - Handover. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ae4db1addb6502e2bfd72fc1c2660ac94acb5e100e5a9a3e7f6d1fd97512215282"></a>error&#160;</td><td class="fielddoc"><p>error for unknown sector </p>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00056">56</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00062">62</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -411,11 +454,13 @@ Private Attributes</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><a id="a0101875c0699abe2daccdddff873c72da7733a6699cfe8ca3faa19b814ee85743"></a>toEndPoint&#160;</td><td class="fielddoc"><p>toEndPoint State </p>
 </td></tr>
+<tr><td class="fieldname"><a id="a0101875c0699abe2daccdddff873c72da18f44934484beaf4fe2743bb244a7205"></a>resetState&#160;</td><td class="fielddoc"><p>reset state </p>
+</td></tr>
 <tr><td class="fieldname"><a id="a0101875c0699abe2daccdddff873c72dadda7002e7ba1602d5293c2af63089825"></a>errorState&#160;</td><td class="fielddoc"><p>error State </p>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00048">48</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00049">49</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -475,18 +520,15 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>String - Event as String </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00401">401</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00583">583</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
 <a id="a221ef4aa3569723f463883e6cca490d3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a221ef4aa3569723f463883e6cca490d3">&#9670;&nbsp;</a></span>decodeSector()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a221ef4aa3569723f463883e6cca490d3">&#9670;&nbsp;</a></span>decodeSector() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">String NavigationCtrl::decodeSector </td>
@@ -496,11 +538,6 @@ Private Attributes</h2></td></tr>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Decodes the Sector-Enum and returns a description. </p>
@@ -512,7 +549,36 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>String - Sector as String </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00430">430</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00063">63</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ac2ca4b4a38ab0cf89b3487b737382998"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2ca4b4a38ab0cf89b3487b737382998">&#9670;&nbsp;</a></span>decodeSector() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94">NavigationCtrl::Sector</a> NavigationCtrl::decodeSector </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>sector</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Decodes a sectro String and returns the sector. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sector</td><td>- Sector as String </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94" title="Enum holds all possible sectors.">NavigationCtrl::Sector</a> - enum Sector </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00111">111</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -549,7 +615,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>String - State as String </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00376">376</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00555">555</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -579,9 +645,9 @@ Private Attributes</h2></td></tr>
 <p>executes the main action of the crossTransit state. </p>
 <p>drive forward three times and return <a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14fa86700ff4ed4c693c72667f95a756bbe5" title="Signal: Position reached.">Event::PosReached</a></p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14f" title="Enum holds all possible events.">NavigationCtrl::Event</a> - generated Event </dd></dl>
-<p>&lt; </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000015">Todo:</a></b></dt><dd>Probelm with Error possible? </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000017">Todo:</a></b></dt><dd>Probelm with Error possible? </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00304">304</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00448">448</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -611,7 +677,7 @@ Private Attributes</h2></td></tr>
 <p>executes the main action of the endPoint state. This is an Idel-state -&gt;NoEvent generated </p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14f" title="Enum holds all possible events.">NavigationCtrl::Event</a> - generated Event </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00136">136</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00253">253</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -641,7 +707,7 @@ Private Attributes</h2></td></tr>
 <p>main action of the errorState state. </p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14f" title="Enum holds all possible events.">NavigationCtrl::Event</a> - generated Event </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00362">362</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00520">520</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -678,10 +744,41 @@ Private Attributes</h2></td></tr>
 30 drive forward n times depending on actual line and targetline <br />
 40 turn left/right depending on target and current orientation 50 drive forward twice. <br />
 if startsector = target.sector then return <a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14fad06f42dab8fc58022bb372634f581e87" title="Signal: PosEndPointReached.">Event::PosEndPointReached</a> else return <a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14fa380121a39580cfe31ce01bdf5f1a6147" title="Signal: PosEndPointReached.">Event::PosTransitReached</a></p>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14f" title="Enum holds all possible events.">NavigationCtrl::Event</a> - generated Event </dd></dl>
-<p>&lt; </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000014">Todo:</a></b></dt><dd>Probelm with Error possible? </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14f" title="Enum holds all possible events.">NavigationCtrl::Event</a> - generated Event</dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000015">Todo:</a></b></dt><dd>refactoring so it only checks the neares sector not startsector </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000016">Todo:</a></b></dt><dd>Probelm with Error possible? </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00197">197</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00325">325</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a84b21d17ec58aae4dc0448e3b8b425f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84b21d17ec58aae4dc0448e3b8b425f1">&#9670;&nbsp;</a></span>doAction_resetState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14f">NavigationCtrl::Event</a> NavigationCtrl::doAction_resetState </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>main action of the resetState </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14f" title="Enum holds all possible events.">NavigationCtrl::Event</a> - generated Event </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00537">537</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -710,9 +807,9 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>executes the main action of the toEndPoint state. </p>
 <p>drive forward once and return <a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14fad06f42dab8fc58022bb372634f581e87" title="Signal: PosEndPointReached.">Event::PosEndPointReached</a> </p><dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14f" title="Enum holds all possible events.">NavigationCtrl::Event</a> - generated Event </dd></dl>
-<p>&lt; </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000016">Todo:</a></b></dt><dd>Probelm with Error possible? </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000018">Todo:</a></b></dt><dd>Probelm with Error possible? </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00332">332</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00489">489</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -747,9 +844,9 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 10 turn around <br />
 20 drive forward once adn return <a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14fa86700ff4ed4c693c72667f95a756bbe5" title="Signal: Position reached.">Event::PosReached</a></p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14f" title="Enum holds all possible events.">NavigationCtrl::Event</a> - generated Event </dd></dl>
-<p>&lt; </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000013">Todo:</a></b></dt><dd>Probelm with Error possible? </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000014">Todo:</a></b></dt><dd>Probelm with Error possible? </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00155">155</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00279">279</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -778,7 +875,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>executes the entry action of the crossTransit state. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00297">297</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00435">435</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -808,7 +905,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 <p>executes the entry action of the endPoint state. </p>
 <p>Update actual sector and startsector with taregt sector. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00128">128</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00237">237</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -837,7 +934,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>entry action of the errorState state. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00352">352</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00510">510</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -866,7 +963,36 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>executes the entry action of the gateway state. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00190">190</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00315">315</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a643436488aed19f132980351dba56dd1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a643436488aed19f132980351dba56dd1">&#9670;&nbsp;</a></span>entryAction_resetState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void NavigationCtrl::entryAction_resetState </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>entry action of the resetState </p>
+
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00531">531</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -895,7 +1021,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>executes the entry action of the toEndPoint state. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00325">325</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00476">476</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -924,7 +1050,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>executes the entry action of the toGateway state. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00148">148</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00265">265</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -953,7 +1079,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>executes the exit action of the crossTransit state. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00320">320</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00464">464</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -982,7 +1108,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>executes the exit action of the endPoint state. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00142">142</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00259">259</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1011,7 +1137,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>exit action of the errorState state. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00369">369</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00526">526</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1040,7 +1166,36 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>executes the exit action of the gateway state. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00292">292</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00429">429</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a8ee8ed4fc79ea04afb958fb9ceee4943"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ee8ed4fc79ea04afb958fb9ceee4943">&#9670;&nbsp;</a></span>exitAction_resetState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void NavigationCtrl::exitAction_resetState </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>exit action of the resetState </p>
+
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00543">543</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1069,7 +1224,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>executes the exit action of the toEndPoint state. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00347">347</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00504">504</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1098,7 +1253,51 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>executes the exit action of the toGateway state. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00185">185</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00309">309</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a700d6ea190f5ad3e017f7b247e2b7fd8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a700d6ea190f5ad3e017f7b247e2b7fd8">&#9670;&nbsp;</a></span>getcurrentLine()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int NavigationCtrl::getcurrentLine </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the current Line. </p>
+<dl class="section return"><dt>Returns</dt><dd>const int - current line </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00041">41</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a9236f060e2b33fea96e0a289a18fc72c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9236f060e2b33fea96e0a289a18fc72c">&#9670;&nbsp;</a></span>getcurrentSector()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94">NavigationCtrl::Sector</a> NavigationCtrl::getcurrentSector </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the current Sector. </p>
+<dl class="section return"><dt>Returns</dt><dd>const Sector - current Sector </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00036">36</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1141,7 +1340,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>give Token to access the Gateway </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00042">42</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00058">58</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1226,7 +1425,46 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00047">47</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00142">142</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+
+</div>
+</div>
+<a id="af1d6acdc41ae6dcdf80c5e9cdbddf6ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1d6acdc41ae6dcdf80c5e9cdbddf6ad">&#9670;&nbsp;</a></span>setActualPosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void NavigationCtrl::setActualPosition </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94">Sector</a>&#160;</td>
+          <td class="paramname"><em>sector</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>line</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the actual Position object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sector</td><td>- actualSector ( HandoverSortic or HandoverTransfer) </td></tr>
+    <tr><td class="paramname">line</td><td>- actualLine </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00052">52</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1265,7 +1503,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00036">36</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00046">46</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1292,7 +1530,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>holds the current event of the FSM </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00121">121</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00169">169</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1318,7 +1556,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>holds the current state of the FSM </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00120">120</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00168">168</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1345,7 +1583,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 <p>Functionpointer to call the current states do-function. </p>
 <p><a href="https://stackoverfendPoint.com/questions/1485983/calling-c-class-methods-via-a-function-pointer">https://stackoverfendPoint.com/questions/1485983/calling-c-class-methods-via-a-function-pointer</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00147">147</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00204">204</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1371,7 +1609,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>holds the last state of the FSM so it's possible to resume after error </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00119">119</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00167">167</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1419,7 +1657,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>Counter for the Current Substate. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00122">122</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00170">170</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1445,7 +1683,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>Navigation Object. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00149">149</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00206">206</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1471,7 +1709,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>Variable which holds the first Turn in gateway. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00139">139</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00196">196</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1497,7 +1735,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>Holds the last Substate befor an Error occured. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00123">123</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00171">171</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1523,7 +1761,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>Counter so you can call the same substatefunction multiple times. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00124">124</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00172">172</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1571,7 +1809,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>prevents an loop between transit and gateway </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00138">138</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00195">195</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
 
 </div>
 </div>
