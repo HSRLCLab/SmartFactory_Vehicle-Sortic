@@ -226,6 +226,7 @@ VehicleCtrl::Event VehicleCtrl::doAction_handshake() {
                     pComm.publishMessage("Vehicle/" + String(vehicle.id) + "/handshake", "{\"id\":\"" + String(vehicle.id) + "\",\"ack\":\"" + String(vehicle.ack) + "\"}");
                 }
             } else {
+                substate = 0;
                 return Event::HSsucessful;
             }
             return Event::NoEvent;
@@ -274,31 +275,33 @@ VehicleCtrl::Event VehicleCtrl::doAction_loadVehicle() {
     }
     switch (substate) {
         case 0:  //check if already in TargetPosition and subscribe to Gateway if waiting for one
-            if (pNavCtrl.getcurrentSector() == vehicle.targetSector &&
-                pNavCtrl.getcurrentLine() == vehicle.targetLine) {
+            if ((pNavCtrl.getcurrentSector() == vehicle.targetSector) &&
+                (pNavCtrl.getcurrentLine() == vehicle.targetLine)) {
                 substate = 40;
             }
 
             if (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::SorticWaitForGateway) {  //check in which sector and subscribe to actual gateway
                 pComm.subscribe("Sortic/Gateway");
                 substate = 10;
+                previousMillis = millis();
             } else if (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::TransferWaitForGateway) {
                 pComm.subscribe("Transfer/Gateway");
                 substate = 10;
+                previousMillis = millis();
             }
             break;
-        case 10:                     //check incomming messages. if gateway is free for some time take token
-            if (!pComm.isEmpty()) {  //check for message
+        case 10:  //check incomming messages. if gateway is free for some time take token
+            DBINFO2ln("if gateway is free for some time take token");
+            pComm.loop();               //Check for new Messages
+            while (!pComm.isEmpty()) {  //check for message
                 myJSONStr temp = pComm.pop();
                 DBINFO2ln(String("vehicle.id: ") + String(vehicle.id) + String(": ") + String("temp.token: ") + String(temp.token));
                 if (!temp.token) {  //if token is not availabel reset time
                     previousMillis = millis();
                 }
-                currentMillis = millis();
             }
-
-            ///< @bug doesn't work properly atm
-            if ((currentMillis - previousMillis) > TIME_BETWEEN_PUBLISH * 15) {  //if no message for some time take token
+            currentMillis = millis();
+            if ((currentMillis - previousMillis) > TIME_BETWEEN_PUBLISH * 10) {  //if no message for some time take token
                 if (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::SorticWaitForGateway) {
                     pComm.unsubscribe("Sortic/Gateway");
                 } else if (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::TransferWaitForGateway) {

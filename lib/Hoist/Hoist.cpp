@@ -27,38 +27,40 @@ Hoist::Hoist() : Hoist(HOIST_SERVO_PIN,
 }
 
 Hoist::Hoist(int hoistServoPin, int hoistServoDelay, int posMax, int posMin) : servoPin(hoistServoPin),
-                                                                               position(hoistServo.read()),
+                                                                               position(posMin),
                                                                                positionMin(posMin),
                                                                                positionMax(posMax),
                                                                                servoDelay(hoistServoDelay) {
     DBFUNCCALLln("Hoist::Hoist(int hoistServoPin, int hoistServoDelay, int posMax, int posMin)");
-    init();
+    Hoist::init();
 }
 
-/**
- * @bug hoistServo.read() does somehow not retrun the actual value.. Always starts raised and lowers to Low-Pos
- * 
+/*
+ * hoistServo.read() Read the current angle of the servo (the value passed to the LAST call to write()).
  */
 void Hoist::init() {
-    attach();
-    position = hoistServo.read();
+    Hoist::attach();
+    position -= 5;
     while (!lower()) {
-    };
-    detach();
+    }
+    // DBINFO1ln(hoistServo.read());
+    // position = hoistServo.read();
+    // DBINFO1("Position: ");
+    // DBINFO1ln(position);
+    Hoist::detach();
 }
 
-/**
- * @todo check real position
- */
 bool Hoist::raise() {
     DBFUNCCALLln("Hoist::raise()");
     currentMillis = millis();
     if ((currentMillis - previousMillis) > servoDelay) {
         previousMillis = currentMillis;
         if (position > positionMax) {
-            DBSTATUSln("Begin raiseing..");
-            DBINFO1("Position: ");
-            DBINFO1ln(position);
+            // DBSTATUSln("Begin raiseing..");
+            // DBINFO1("Position: ");
+            // DBINFO1ln(position);
+            // DBINFO1("Position read: ");
+            // DBINFO1ln(String(hoistServo.read()));
             position--;
             hoistServo.write(position);  //< Update Servo-position
             // delay(servoDelay);
@@ -72,9 +74,6 @@ bool Hoist::raise() {
     return false;
 }
 
-/**
- * @todo check real position
- */
 bool Hoist::lower() {
     DBFUNCCALLln("Hoist::lower()");
     // hoistServo.attach(servoPin);
@@ -82,9 +81,11 @@ bool Hoist::lower() {
     if ((currentMillis - previousMillis) > servoDelay) {
         previousMillis = currentMillis;
         if (position < positionMin) {
-            DBSTATUSln("Begin lowering...");
-            DBINFO1("Position: ");
-            DBINFO1ln(position);
+            // DBSTATUSln("Begin lowering...");
+            // DBINFO1("Position: ");
+            // DBINFO1ln(position);
+            // DBINFO1("Position read: ");
+            // DBINFO1ln(hoistServo.read());
             position++;
             hoistServo.write(position);
             // delay(servoDelay);
