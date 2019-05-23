@@ -63,7 +63,7 @@ const unsigned int TIMEOUT_VACKS = 5 * 1000;
 //Setup for Hoist //////////////////
 #define HOIST_SERVO_PIN 6       ///< Pin-Number for Servocontroll of the Hoist
 #define HOIST_SERVO_DELAY 30    ///< Duration of the delay between the position updates of the Servo
-#define HOIST_POSITION_MIN 168  ///< Minimal angle of the Servo
+#define HOIST_POSITION_MIN 160  ///< Minimal angle of the Servo
 #define HOIST_POISITION_MAX 65  ///< Maximal angle of the Servo
 ////////////////////////////////////
 
