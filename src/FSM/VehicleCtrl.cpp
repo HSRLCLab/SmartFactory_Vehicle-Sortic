@@ -379,7 +379,7 @@ void VehicleCtrl::entryAction_unloadVehicle() {
 }
 
 VehicleCtrl::Event VehicleCtrl::doAction_unloadVehicle() {
-    DBINFO1ln("State: unloadVehicle");
+    DBINFO1ln("State: unloadVehicle " + String(substate));
     currentMillis = millis();
     pNavCtrl.loop();
     pComm.loop();  //Check for new Messages
@@ -488,7 +488,8 @@ VehicleCtrl::Event VehicleCtrl::doAction_unloadVehicle() {
                 substate = 32;
             }
             break;
-        case 31:                                                                   //publish token to gateway as long as you're blocking it
+        case 31:  //publish token to gateway as long as you're blocking it
+            DBINFO2ln("Substate 31: Token Sortic");
             if ((currentMillis - previousMillisPublish) > TIME_BETWEEN_PUBLISH) {  //only publish all xx seconds
                 previousMillisPublish = millis();
                 if (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::SorticGateway) {
@@ -498,7 +499,8 @@ VehicleCtrl::Event VehicleCtrl::doAction_unloadVehicle() {
                     substate = 40;
                 }
             }
-        case 32:                                                                   //publish token to gateway as long as you're blocking it
+        case 32:  //publish token to gateway as long as you're blocking it
+            DBINFO2ln("Substate 32: Token Transfer");
             if ((currentMillis - previousMillisPublish) > TIME_BETWEEN_PUBLISH) {  //only publish all xx seconds
                 previousMillisPublish = millis();
                 if (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::TransferGateway) {
@@ -508,7 +510,8 @@ VehicleCtrl::Event VehicleCtrl::doAction_unloadVehicle() {
                     substate = 40;
                 }
             }
-        case 40:                                                                                       //check if in position waitforHandover or in targetpos
+        case 40:  //check if in position waitforHandover or in targetpos
+            DBINFO2ln("Substate 40: Check if in Position");
             if (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::TransitWaitForGatewaySortic) {  //check in which sector and subscribe to actual gateway
                 pComm.subscribe("Sortic/Gateway");
                 substate = 20;
@@ -525,6 +528,7 @@ VehicleCtrl::Event VehicleCtrl::doAction_unloadVehicle() {
             }
             break;
         case 50:  //lower hoist and leave state
+            DBINFO2ln("Substate 50: Lower Hoist");
             if (pHoistCtrl.getcurrentState() != HoistCtrl::State::low) {
                 pHoistCtrl.loop(HoistCtrl::Event::Lower);
             } else {

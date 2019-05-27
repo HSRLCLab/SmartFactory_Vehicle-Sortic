@@ -34,7 +34,7 @@ class NavigationCtrl {
     */
     enum class Event { MoveToTargetPosition,  ///< Ext: Start MoveToTargetPosition
                        PosEndPointReached,    ///< Signal: PosEndPointReached
-                       PosTransitReached,     ///< Signal: PosEndPointReached
+                       PosTransitReached,     ///< Signal: PosTransitReached
                        PosReached,            ///< Signal: Position reached
                        Error,                 ///< Error occured
                        Resume,                ///< Ext: Resume after Error occured
