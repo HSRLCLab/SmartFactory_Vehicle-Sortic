@@ -48,6 +48,7 @@ const double K_D = 0.05;  ///<
 
 const unsigned int TIME_BETWEEN_PUBLISH = 500;
 const unsigned int TIMEOUT_VACKS = 5 * 1000;
+const unsigned int SORTIC_MAX_LINE = 3;
 
 //Setup for sonar ///////////////////
 #define SONAR_SERVO_PIN 5        ///<

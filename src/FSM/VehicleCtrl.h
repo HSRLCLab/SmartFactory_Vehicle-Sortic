@@ -108,10 +108,11 @@ class VehicleCtrl {
                        errorState      ///< error state
     };
 
-    State lastStateBevorError;  ///< holds the last state of the FSM so it's possible to resume after error
-    State currentState;         ///< holds the current state of the FSM
-    Event currentEvent;         ///< holds the current event of the FSM
-    int substate = 0;           ///< actual Substate of FSM
+    State lastStateBevorError;               ///< holds the last state of the FSM so it's possible to resume after error
+    State currentState;                      ///< holds the current state of the FSM
+    Event currentEvent;                      ///< holds the current event of the FSM
+    int substate = 0;                        ///< actual Substate of FSM
+    int pSorticPark[SORTIC_MAX_LINE] = {0};  ///< Sortic with 10 diffrent lines
 
     /**
      * @brief Functionpointer to call the current states do-function
@@ -353,5 +354,7 @@ class VehicleCtrl {
      * 
      */
     void clearGui();
+
+    int chooseLine(int array[]);
 };
 #endif
