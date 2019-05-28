@@ -76,13 +76,6 @@ class NavigationCtrl {
         error                           ///< error for unknown sector
     };
 
-    // enum class Orientation {
-    //     North,
-    //     East,
-    //     South,
-    //     West
-    // };
-
     /**
      * @brief Construct a new Navigation Ctrl object
      * and initailize the currentState with endPoint state

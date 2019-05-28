@@ -9,6 +9,7 @@
  * @date 2019-04-23
  * @copyright Copyright (c) 2019
  * 
+ * @todo write a single function for positionupdate
  */
 
 #include "NavigationCtrl.h"
@@ -66,7 +67,7 @@ String NavigationCtrl::decodeSector(Sector sector) {
             return "SorticHandover";
             break;
         case Sector::SorticToHandover:
-            return "SorticHandover";
+            return "SorticToHandover";
             break;
         case Sector::SorticWaitForGateway:
             return "SorticWaitForGateway";
@@ -96,7 +97,7 @@ String NavigationCtrl::decodeSector(Sector sector) {
             return "TransferWaitForGateway";
             break;
         case Sector::TransferToHandover:
-            return "TransferHandover";
+            return "TransferToHandover";
             break;
         case Sector::TransferHandover:
             return "TransferHandover";
@@ -365,6 +366,7 @@ NavigationCtrl::Event NavigationCtrl::doAction_gateway() {
         case 20:  // turn left/right depending on target and current orientation
             DBINFO2ln("Substate: turn left or right");
             if (pActual.line == pTarget.line) {
+                pSubStateLoopInc = 0;   //reset back to zero
                 pCurrentSubState = 50;  // jump direct to last substate -> driveForwardTwice
                 break;
             }
@@ -379,6 +381,7 @@ NavigationCtrl::Event NavigationCtrl::doAction_gateway() {
                 pDriveCtrl.loop(pLastGatewayTurn);
             }
             if (pDriveCtrl.getcurrentState() == DriveCtrl::State::idle) {
+                pSubStateLoopInc = 0;   //reset back to zero
                 pCurrentSubState = 30;  //call next case
             }
             break;
@@ -421,6 +424,7 @@ NavigationCtrl::Event NavigationCtrl::doAction_gateway() {
                     // pSubStateLoopInc+= 10;
                     pCurrentSubState = 50;  ///@todo Probelm with Error possible?
                     pActual.token = false;  //release token
+                    DBPOSln(String("pTarget.sector: ") + decodeSector(pTarget.sector) + String(" pActual.startSector: ") + decodeSector(pActual.startSector));
                     if (pTarget.sector != pActual.startSector && tranistonce) {
                         tranistonce = false;
                         pCurrentSubState = 0;
@@ -442,20 +446,23 @@ NavigationCtrl::Event NavigationCtrl::doAction_gateway() {
 
 void NavigationCtrl::exitAction_gateway() {
     DBSTATUSln("Navigation Leaving State: gateway");
+    DBPOSln(String("lastSector: ") + decodeSector(pActual.lastSector) + String(" Actual: ") + decodeSector(pActual.sector));
+    DBPOSln(String("targetSector: ") + decodeSector(pTarget.sector));
     pActual.lastSector = pActual.sector;
-    if ((pActual.lastSector == Sector::SorticGateway) &&
-        (pTarget.sector == Sector::TransferHandover)) {
-        pActual.sector = Sector::TransitToTransfer;
-    } else if ((pActual.lastSector == Sector::TransferGateway) &&
-               (pTarget.sector == Sector::TransferHandover)) {
-        pActual.sector = Sector::TransferToHandover;
-    } else if ((pActual.lastSector == Sector::SorticGateway) &&
-               (pTarget.sector == Sector::SorticHandover)) {
-        pActual.sector = Sector::SorticToHandover;
-    } else if ((pActual.lastSector == Sector::TransferGateway) &&
-               (pTarget.sector == Sector::SorticToHandover)) {
-        pActual.sector = Sector::TransitToSortic;
-    }
+    // if ((pActual.lastSector == Sector::SorticGateway) &&
+    //     (pTarget.sector == Sector::TransferHandover)) {
+    //     pActual.sector = Sector::TransitToTransfer;
+    // } else if ((pActual.lastSector == Sector::TransferGateway) &&
+    //            (pTarget.sector == Sector::TransferHandover)) {
+    //     pActual.sector = Sector::TransferToHandover;
+    // } else if ((pActual.lastSector == Sector::SorticGateway) &&
+    //            (pTarget.sector == Sector::SorticHandover)) {
+    //     pActual.sector = Sector::SorticToHandover;
+    // } else if ((pActual.lastSector == Sector::TransferGateway) &&
+    //            (pTarget.sector == Sector::SorticToHandover)) {
+    //     pActual.sector = Sector::TransitToSortic;
+    // }
+    DBPOSln(String("lastSector: ") + decodeSector(pActual.lastSector) + String(" Actual: ") + decodeSector(pActual.sector));
 }
 
 //==crossTransit==========================================================
@@ -465,6 +472,13 @@ void NavigationCtrl::entryAction_crossTransit() {
     doActionFPtr = &NavigationCtrl::doAction_crossTransit;
     //Entry-Action
     DBPOSln(decodeSector(pActual.sector) + String(" Line: ") + String(pActual.line));
+    pActual.lastSector = pActual.sector;
+    if (pActual.lastSector == Sector::SorticGateway) {
+        pActual.sector = Sector::TransitToTransfer;
+    } else if (pActual.lastSector == Sector::TransferGateway) {
+        pActual.sector = Sector::TransitToSortic;
+        DBPOSln(decodeSector(pActual.sector) + String(" Line: ") + String(pActual.line));
+    }
 }
 
 NavigationCtrl::Event NavigationCtrl::doAction_crossTransit() {
@@ -494,6 +508,8 @@ void NavigationCtrl::entryAction_toEndPoint() {
     currentState = State::toEndPoint;  // state transition
     doActionFPtr = &NavigationCtrl::doAction_toEndPoint;
     //Entry-Action
+    DBPOSln(decodeSector(pActual.sector) + String(" Line: ") + String(pActual.line));
+    pActual.lastSector = pActual.sector;
     if (pActual.lastSector == Sector::SorticGateway) {
         pActual.sector = Sector::SorticToHandover;
     } else if (pActual.lastSector == Sector::TransferGateway) {

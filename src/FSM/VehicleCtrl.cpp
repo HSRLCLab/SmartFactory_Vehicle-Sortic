@@ -387,7 +387,6 @@ VehicleCtrl::Event VehicleCtrl::doAction_unloadVehicle() {
         return Event::Error;
     }
 
-    currentMillis = millis();
     if ((currentMillis - previousMillisPublishPos) > TIME_BETWEEN_PUBLISH) {  //only publish all xx seconds
         previousMillisPublishPos = millis();
         publishPosition();  //Update Current Position and Publish for GUI
@@ -447,12 +446,13 @@ VehicleCtrl::Event VehicleCtrl::doAction_unloadVehicle() {
                 (pNavCtrl.getcurrentLine() == vehicle.targetLine)) {
                 substate = 40;
             }
-
-            if (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::SorticWaitForGateway) {  //check in which sector and subscribe to actual gateway
+            if ((pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::SorticWaitForGateway) ||
+                (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::TransitWaitForGatewaySortic)) {  //check in which sector and subscribe to actual gateway
                 pComm.subscribe("Sortic/Gateway");
                 substate = 20;
                 previousMillis = millis();
-            } else if (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::TransferWaitForGateway) {
+            } else if ((pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::TransferWaitForGateway) ||
+                       (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::TransitWaitForGatewayTransfer)) {
                 pComm.subscribe("Transfer/Gateway");
                 substate = 20;
                 previousMillis = millis();
@@ -473,12 +473,14 @@ VehicleCtrl::Event VehicleCtrl::doAction_unloadVehicle() {
                 if ((pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::SorticWaitForGateway) ||
                     (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::TransitWaitForGatewaySortic)) {
                     pComm.unsubscribe("Sortic/Gateway");
+                    pNavCtrl.giveToken();
+                    substate = 30;
                 } else if ((pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::TransferWaitForGateway) ||
                            (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::TransitWaitForGatewayTransfer)) {
                     pComm.unsubscribe("Transfer/Gateway");
+                    pNavCtrl.giveToken();
+                    substate = 30;
                 }
-                pNavCtrl.giveToken();
-                substate = 30;
             }
             break;
         case 30:  //choose which gateway to block
@@ -499,8 +501,9 @@ VehicleCtrl::Event VehicleCtrl::doAction_unloadVehicle() {
                     substate = 40;
                 }
             }
+            break;
         case 32:  //publish token to gateway as long as you're blocking it
-            DBINFO2ln("Substate 32: Token Transfer");
+            DBINFO2ln("Vehicle-Substate 32: Token Transfer");
             if ((currentMillis - previousMillisPublish) > TIME_BETWEEN_PUBLISH) {  //only publish all xx seconds
                 previousMillisPublish = millis();
                 if (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::TransferGateway) {
@@ -510,8 +513,9 @@ VehicleCtrl::Event VehicleCtrl::doAction_unloadVehicle() {
                     substate = 40;
                 }
             }
+            break;
         case 40:  //check if in position waitforHandover or in targetpos
-            DBINFO2ln("Substate 40: Check if in Position");
+            DBINFO2ln("Vehicle-Substate 40: Check if in Position");
             if (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::TransitWaitForGatewaySortic) {  //check in which sector and subscribe to actual gateway
                 pComm.subscribe("Sortic/Gateway");
                 substate = 20;
@@ -531,6 +535,22 @@ VehicleCtrl::Event VehicleCtrl::doAction_unloadVehicle() {
             DBINFO2ln("Substate 50: Lower Hoist");
             if (pHoistCtrl.getcurrentState() != HoistCtrl::State::low) {
                 pHoistCtrl.loop(HoistCtrl::Event::Lower);
+            } else {
+                substate = 60;
+                previousMillis = millis();
+            }
+            break;
+        case 60:  //publish position to box
+            DBINFO2ln("Vehicle-Substate 60: Publish Position to Box");
+            if ((currentMillis - previousMillis) < TIME_BETWEEN_PUBLISH * 5) {         //publish 5times
+                if ((currentMillis - previousMillisPublish) > TIME_BETWEEN_PUBLISH) {  //only publish all xx seconds
+                    previousMillisPublish = millis();
+                    DBINFO2ln("Box/" + String(vehicle.ack) +
+                              "/position"
+                              "{\"id\":\"" +
+                              String(vehicle.id) + "\",\"sector\":\"" + pNavCtrl.decodeSector(vehicle.actualSector) + "\",\"line\":\"" + String(vehicle.actualLine) + "\"}");
+                    pComm.publishMessage("Box/" + String(vehicle.ack) + "/position", "{\"id\":\"" + String(vehicle.id) + "\",\"sector\":\"" + pNavCtrl.decodeSector(vehicle.actualSector) + "\",\"line\":\"" + String(vehicle.actualLine) + "\"}");
+                }
             } else {
                 substate = 0;
                 return Event::PosReached;
@@ -739,12 +759,13 @@ int VehicleCtrl::chooseLine(int array[]) {
     int size = sizeof(array) / sizeof(array[0]);
     int line = 0;
     for (int i = 0; i < size; i++) {
-        if (array[i] != 0) {
-            line = i;
+        if (array[i] == 0) {
+            line = i + 1;  //update line with empty line
+        } else {
+            array[i] = 0;  //reset arrayvalue at index
         }
-        array[i] = 0;
     }
-    return line + 1;
+    return line;
 }
 
 void VehicleCtrl::clearGui() {
