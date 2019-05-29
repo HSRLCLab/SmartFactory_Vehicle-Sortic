@@ -12,18 +12,19 @@
  */
 #include "VehicleCtrl.h"
 //=====PUBLIC====================================================================================
-VehicleCtrl::VehicleCtrl() : currentState(State::waitForBox) {
+VehicleCtrl::VehicleCtrl() : currentState(State::waitForBox), doActionFPtr(&VehicleCtrl::doAction_waitForBox) {
     DBFUNCCALLln("VehicleCtrl::VehicleCtrl()");
     delay(100);
     clearGui();
-    publishState(currentState);
-    publishPosition();
-    pNavCtrl.setActualPosition(vehicle.actualSector, vehicle.actualLine);
     pComm.unsubscribe("#");
     pComm.subscribe("Vehicle/" + String(vehicle.id) + "/error");
     pComm.subscribe("Vehicle/error");
     pComm.subscribe("error");
     pComm.subscribe("Box/+/handshake");
+    publishState(currentState);
+    delay(100);
+    pNavCtrl.setActualPosition(vehicle.actualSector, vehicle.actualLine);
+    publishPosition();
 }
 
 void VehicleCtrl::loop() {
@@ -112,9 +113,9 @@ void VehicleCtrl::process(Event e) {
             break;
         case State::resetState:
             if (Event::Resume == e) {
-                exitAction_resetState();                       // Exit-action current state
                 pHoistCtrl.loop(HoistCtrl::Event::Resume);     // Resume State for HoistCtrl
                 pNavCtrl.loop(NavigationCtrl::Event::Resume);  // Resume State for NavigationCtrl
+                exitAction_resetState();                       // Exit-action current state
                 entryAction_waitForBox();                      // Entry-actions next state
             }
             break;
@@ -303,7 +304,7 @@ VehicleCtrl::Event VehicleCtrl::doAction_loadVehicle() {
                 }
             }
             currentMillis = millis();
-            if ((currentMillis - previousMillis) > TIME_BETWEEN_PUBLISH * 10) {  //if no message for some time take token
+            if ((currentMillis - previousMillis) > (TIME_BETWEEN_PUBLISH * 10 + (rand() % 2000 + 1))) {  //if no message for some time  + some rand time to prevent collision take token
                 if (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::SorticWaitForGateway) {
                     pComm.unsubscribe("Sortic/Gateway");
                 } else if (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::TransferWaitForGateway) {
@@ -426,7 +427,7 @@ VehicleCtrl::Event VehicleCtrl::doAction_unloadVehicle() {
             DBINFO2ln("Substate 2: listen for empty place in Sortic");
             currentMillis = millis();
             DBINFO2ln(String(currentMillis - previousMillis) + String(" < ") + String(TIME_BETWEEN_PUBLISH * 10));
-            if ((currentMillis - previousMillis) < TIME_BETWEEN_PUBLISH * 10) {  //wait some time and add message to array and evaluate afer timeout
+            if ((currentMillis - previousMillis) < (TIME_BETWEEN_PUBLISH * 10 + (rand() % 2000 + 1))) {  //wait some time and add message to array and evaluate afer timeout
                 if (!pComm.isEmpty()) {
                     myJSONStr temp = pComm.pop();
                     DBINFO2ln(String("Sector: ") + String(temp.sector) + String(" line: ") + String(temp.line));
@@ -456,7 +457,7 @@ VehicleCtrl::Event VehicleCtrl::doAction_unloadVehicle() {
                 // int line = chooseLine(pSorticPark);
                 DBINFO2("Line: ");
                 DBINFO2ln(line);
-                delay(10000);
+                // delay(10000);
 
                 if (line != 0) {
                     vehicle.targetSector = NavigationCtrl::Sector::SorticHandover;
@@ -464,7 +465,7 @@ VehicleCtrl::Event VehicleCtrl::doAction_unloadVehicle() {
                     substate = 5;
                     DBINFO2ln("Change Substate to 5");
                     previousMillis = millis();
-                    pComm.unsubscribe("Sortic/Handover");
+                    // pComm.unsubscribe("Sortic/Handover");
                     pComm.unsubscribe("Transfer/Handover");
                 } else {  //start again if noavailable line found
                     previousMillis = millis();
@@ -504,7 +505,7 @@ VehicleCtrl::Event VehicleCtrl::doAction_unloadVehicle() {
                 }
             }
             currentMillis = millis();
-            if ((currentMillis - previousMillis) > TIME_BETWEEN_PUBLISH * 10) {  //if no message for some time take token
+            if ((currentMillis - previousMillis) > (TIME_BETWEEN_PUBLISH * 10 + (rand() % 2000 + 1))) {  //if no message for some time take token
                 if ((pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::SorticWaitForGateway) ||
                     (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::TransitWaitForGatewaySortic)) {
                     pComm.unsubscribe("Sortic/Gateway");
@@ -651,6 +652,12 @@ void VehicleCtrl::entryAction_resetState() {
     clearGui();
     publishState(currentState);  //Update Current State and Publish
     pComm.clear();
+    pComm.unsubscribe("Box/+/handshake");
+    pComm.unsubscribe("Box/" + String(vehicle.req) + "/handshake");
+    pComm.unsubscribe("Sortic/Gateway");
+    pComm.unsubscribe("Sortic/Handover");
+    pComm.unsubscribe("Transfer/Gateway");
+    pComm.unsubscribe("Transfer/Handover");
 }
 
 VehicleCtrl::Event VehicleCtrl::doAction_resetState() {
@@ -672,6 +679,7 @@ void VehicleCtrl::exitAction_resetState() {
     DBSTATUSln("Leaving State: resetState");
     pComm.clear();
     vehicle = {};  //reset struct
+    delay(100);
     pNavCtrl.setActualPosition(vehicle.actualSector, vehicle.actualLine);
     substate = 0;
     clearGui();
