@@ -12,7 +12,7 @@
  * 
  * @todo entkoppelung von configfiles
  */
-#define TESTING 5  //0=run, 1=hoist, 2=sonar, 3=chassis, 4=vision, 5=network ,99= Motivation
+// #define TESTING 5  //0=run, 1=hoist, 2=sonar, 3=chassis, 4=vision, 5=network ,99= Motivation
 
 // #include <WiFi101.h>
 #include "Arduino.h"
@@ -107,13 +107,13 @@ void test_ctrl();
  * after each powerup or reset of the board
  */
 void setup() {
-    // Initialize serial and wait for port to open:
-    // if (DEBUGGER == true) {
-    //     Serial.begin(115200);
-    //     while (!Serial) {
-    //         ;  // wait for serial port to connect. Needed for native USB port only
-    //     }
-    // }
+// Initialize serial and wait for port to open:
+#ifdef DEBUGGER
+    Serial.begin(115200);
+    while (!Serial) {
+        ;  // wait for serial port to connect. Needed for native USB port only
+    }
+#endif
 
     DBFUNCCALLln("==setup()==");
     DBSTATUSln("Vehicle: booting...");
@@ -147,7 +147,7 @@ void setup() {
             comm = new Communication();
             // comm->init();
             comm->printNetworkInfo();
-            comm->subscribe("Test");
+            comm->subscribe("Sortic/Gateway");
             break;
         case TestCase::SONAR:
             // vehicleSonar = new Sonar(SONAR_SERVO_PIN, SONAR_TRIGGER_PIN, SONAR_ECHO_PIN, SONAR_MAX_DISTANCE, MIN_ERROR, MAX_ERROR, MIN_TURN_ANGLE, MAX_TURN_ANGLE);
@@ -175,6 +175,10 @@ void setup() {
  */
 void loop() {
     DBINFO1ln("==loop()==");
+    currentMillis = millis();
+    // Serial.print("LoopTime [ms]: ");
+    // Serial.println(currentMillis - previousMillis);
+    previousMillis = currentMillis;
     switch (Test) {
         case TestCase::RUN:
             FuncFPtr = &run;
@@ -240,14 +244,14 @@ void test_communication() {
             tmp_mess = comm->pop();
             DBINFO1("Topic: ");
             DBINFO1ln(tmp_mess.topic);
-            DBINFO1("Sensor: ");
-            DBINFO1ln(tmp_mess.sensor);
-            DBINFO1("Time: ");
-            DBINFO1ln(tmp_mess.time);
-            DBINFO1("data_0: ");
-            DBINFO1ln(tmp_mess.data[0]);
-            DBINFO1("data_1: ");
-            DBINFO1ln(tmp_mess.data[1]);
+            DBINFO1("token: ");
+            DBINFO1ln(tmp_mess.token);
+            // DBINFO1("Time: ");
+            // DBINFO1ln(tmp_mess.time);
+            // DBINFO1("data_0: ");
+            // DBINFO1ln(tmp_mess.data[0]);
+            // DBINFO1("data_1: ");
+            // DBINFO1ln(tmp_mess.data[1]);
         }
     }
 
@@ -324,13 +328,13 @@ void test_ctrl() {
             switch (inByte) {
                 case 'R':
                     DBINFO1ln("Event: Raise");
-                    while (hoistctrl->getcurrentState() != HoistCtrl::State::high)
-                        hoistctrl->loop(HoistCtrl::Event::Raise);
+                    // while (hoistctrl->getcurrentState() != HoistCtrl::State::high)
+                    hoistctrl->loop(HoistCtrl::Event::Raise);
                     break;
                 case 'L':
                     DBINFO1ln("Event: Lower");
-                    while (hoistctrl->getcurrentState() != HoistCtrl::State::low)
-                        hoistctrl->loop(HoistCtrl::Event::Lower);
+                    // while (hoistctrl->getcurrentState() != HoistCtrl::State::low)
+                    hoistctrl->loop(HoistCtrl::Event::Lower);
                     break;
                 case 'E':
                     DBINFO1ln("Event: Error");

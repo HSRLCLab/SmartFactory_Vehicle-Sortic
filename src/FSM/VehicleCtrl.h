@@ -9,6 +9,7 @@
  * @date 2019-04-03
  * @copyright Copyright (c) 2019
  * 
+ * @todo Change pSorticPark[] array so its dynamic size
  */
 
 #ifndef BOXCTRL_H__
@@ -341,6 +342,8 @@ class VehicleCtrl {
      */
     void publishPosition();
 
+    void publishTargetPosition();
+
     /**
      * @brief Check if a new message with a error is received
      * 
@@ -355,6 +358,6 @@ class VehicleCtrl {
      */
     void clearGui();
 
-    int chooseLine(int array[]);
+    // int chooseLine(int array[]);
 };
 #endif
