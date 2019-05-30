@@ -126,10 +126,11 @@ class VehicleCtrl {
     Communication pComm;      ///< Communication object
     HoistCtrl pHoistCtrl;     ///< Hoist Controll object
 
-    unsigned long currentMillis = 0;             ///< will store current time
-    unsigned long previousMillis = 0;            ///< will store last time
-    unsigned long previousMillisPublish = 0;     ///< will store last publish time
-    unsigned long previousMillisPublishPos = 0;  ///< will store last publish position time
+    unsigned long currentMillis = 0;               ///< will store current time
+    unsigned long previousMillis = 0;              ///< will store last time  published
+    unsigned long previousMillisPublishToken = 0;  ///< will store last time token published
+    unsigned long previousMillisPublish = 0;       ///< will store last publish time
+    unsigned long previousMillisPublishPos = 0;    ///< will store last publish position time
 
     //=====StateFunctions===============================================================
     //==waitForBox==========================================================

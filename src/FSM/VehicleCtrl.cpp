@@ -25,7 +25,7 @@ VehicleCtrl::VehicleCtrl() : currentState(State::waitForBox), doActionFPtr(&Vehi
     delay(100);
     pNavCtrl.setActualPosition(vehicle.actualSector, vehicle.actualLine);
     publishPosition();
-    pRandomDelayFactor = random(10);
+    pRandomDelayFactor = random(3);
 }
 
 void VehicleCtrl::loop() {
@@ -131,13 +131,19 @@ void VehicleCtrl::entryAction_waitForBox() {
     doActionFPtr = &VehicleCtrl::doAction_waitForBox;
     publishState(currentState);  //Update Current State and Publish
     publishPosition();           //Update Current Position and Publish for GUI
-                                 //Clear handshake in Gui
-    pComm.publishMessage("Vehicle/" + String(vehicle.id) + "/handshake", "{\"ack\":\"\",\"req\":\"\"}");
+    pComm.clear();               //clear all old message
 
+    //Clear Gui-Stuff
+    pComm.publishMessage("Vehicle/" + String(vehicle.id) + "/handshake", "{\"ack\":\"\",\"req\":\"\"}");
     pComm.subscribe("Box/+/handshake");
     previousMillis = millis();
     previousMillisPublish = previousMillis;
     currentMillis = previousMillis;
+    if (vehicle.targetSector == NavigationCtrl::Sector::TransferHandover) {
+        pComm.publishMessage("Transfer/Handover", "{\"id\":\"\",\"sector\":\"" + pNavCtrl.decodeSector(vehicle.targetSector) + "\",\"line\":" + String(vehicle.targetLine) + "}");
+    } else if (vehicle.targetSector == NavigationCtrl::Sector::SorticHandover) {
+        pComm.publishMessage("Sortic/Handover", "{\"id\":\"\",\"sector\":\"" + pNavCtrl.decodeSector(vehicle.targetSector) + "\",\"line\":" + String(vehicle.targetLine) + "}");
+    }
 }
 
 VehicleCtrl::Event VehicleCtrl::doAction_waitForBox() {
@@ -257,6 +263,12 @@ void VehicleCtrl::entryAction_loadVehicle() {
     previousMillisPublish = previousMillis;
     currentMillis = previousMillis;
 
+    if (vehicle.targetSector == NavigationCtrl::Sector::TransferHandover) {
+        pComm.publishMessage("Transfer/Handover", "{\"id\":\"\",\"sector\":\"" + pNavCtrl.decodeSector(vehicle.targetSector) + "\",\"line\":" + String(vehicle.targetLine) + "}");
+    } else if (vehicle.targetSector == NavigationCtrl::Sector::SorticHandover) {
+        pComm.publishMessage("Sortic/Handover", "{\"id\":\"\",\"sector\":\"" + pNavCtrl.decodeSector(vehicle.targetSector) + "\",\"line\":" + String(vehicle.targetLine) + "}");
+    }
+
     pNavCtrl.setTargetPosition(vehicle.targetSector, vehicle.targetLine);
     pNavCtrl.loop(NavigationCtrl::Event::MoveToTargetPosition);
 }
@@ -287,11 +299,11 @@ VehicleCtrl::Event VehicleCtrl::doAction_loadVehicle() {
             if (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::SorticWaitForGateway) {  //check in which sector and subscribe to actual gateway
                 pComm.subscribe("Sortic/Gateway");
                 substate = 10;
-                previousMillis = millis();
+                previousMillisPublishToken = millis();
             } else if (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::TransferWaitForGateway) {
                 pComm.subscribe("Transfer/Gateway");
                 substate = 10;
-                previousMillis = millis();
+                previousMillisPublishToken = millis();
             }
             break;
         case 10:  //check incomming messages. if gateway is free for some time take token
@@ -301,19 +313,48 @@ VehicleCtrl::Event VehicleCtrl::doAction_loadVehicle() {
                 myJSONStr temp = pComm.pop();
                 DBINFO2ln(String("vehicle.id: ") + String(vehicle.id) + String(": ") + String("temp.token: ") + String(temp.token));
                 if (temp.token && (temp.topic.endsWith("Gateway"))) {  //if token is not availabel reset time
-                    previousMillis = millis();
+                    previousMillisPublishToken = millis();
                 }
             }
             currentMillis = millis();
-            if ((currentMillis - previousMillis) > (TIME_BETWEEN_PUBLISH * (5 + pRandomDelayFactor))) {  //if no message for some time  + some rand time to prevent collision take token
+            if ((currentMillis - previousMillisPublishToken) > (TIME_BETWEEN_PUBLISH_TOKEN * (6 + pRandomDelayFactor * 2))) {  //if no message for some time  + some rand time to prevent collision take token
+                previousMillisPublishToken = millis();
+                substate = 11;
+            }
+            break;
+        case 11:                                                                         //start publish and check if the only one if not go back and listen for free gateway
+            if ((currentMillis - previousMillisPublish) > TIME_BETWEEN_PUBLISH_TOKEN) {  //only publish all xx seconds
+                previousMillisPublish = millis();
+                if (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::SorticWaitForGateway) {
+                    pComm.publishMessage("Sortic/Gateway", "{\"id\":\"" + String(vehicle.id) + "\",\"token\":true}");
+                } else if (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::TransferWaitForGateway) {
+                    pComm.publishMessage("Transfer/Gateway", "{\"id\":\"" + String(vehicle.id) + "\",\"token\":true}");
+                }
+            }
+
+            pComm.loop();               //Check for new Messages
+            while (!pComm.isEmpty()) {  //check for message
+                myJSONStr temp = pComm.pop();
+                DBINFO2ln(String("vehicle.id: ") + String(vehicle.id) + String(": ") + String("temp.token: ") + String(temp.token));
+                if (temp.token && (temp.topic.endsWith("Gateway")) && (vehicle.id != temp.id)) {  //if token is not availabel reset time
+                    substate = 10;
+                    previousMillisPublishToken = millis();
+                }
+            }
+
+            currentMillis = millis();
+            if ((currentMillis - previousMillisPublishToken) > (TIME_BETWEEN_PUBLISH_TOKEN * (8))) {  //if no message for some time  + some rand time to prevent collision take token
                 if (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::SorticWaitForGateway) {
                     pComm.unsubscribe("Sortic/Gateway");
+                    pComm.publishMessage("Sortic/Gateway", "{\"id\":\"" + String(vehicle.id) + "\",\"token\":true}");
                 } else if (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::TransferWaitForGateway) {
                     pComm.unsubscribe("Transfer/Gateway");
+                    pComm.publishMessage("Transfer/Gateway", "{\"id\":\"" + String(vehicle.id) + "\",\"token\":true}");
                 }
                 pNavCtrl.giveToken();
                 substate = 20;
             }
+
             break;
         case 20:  //choose which gateway to block
             if (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::SorticGateway) {
@@ -322,9 +363,9 @@ VehicleCtrl::Event VehicleCtrl::doAction_loadVehicle() {
                 substate = 22;
             }
             break;
-        case 21:                                                                   //publish token to gateway as long as you're blocking it
-            if ((currentMillis - previousMillisPublish) > TIME_BETWEEN_PUBLISH) {  //only publish all xx seconds
-                previousMillisPublish = millis();
+        case 21:                                                                              //publish token to gateway as long as you're blocking it
+            if ((currentMillis - previousMillisPublishToken) > TIME_BETWEEN_PUBLISH_TOKEN) {  //only publish all xx seconds
+                previousMillisPublishToken = millis();
                 if (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::SorticGateway) {
                     pComm.publishMessage("Sortic/Gateway", "{\"id\":\"" + String(vehicle.id) + "\",\"token\":true}");
                 } else {  //exit substate
@@ -332,9 +373,9 @@ VehicleCtrl::Event VehicleCtrl::doAction_loadVehicle() {
                     substate = 30;
                 }
             }
-        case 22:                                                                   //publish token to gateway as long as you're blocking it
-            if ((currentMillis - previousMillisPublish) > TIME_BETWEEN_PUBLISH) {  //only publish all xx seconds
-                previousMillisPublish = millis();
+        case 22:                                                                              //publish token to gateway as long as you're blocking it
+            if ((currentMillis - previousMillisPublishToken) > TIME_BETWEEN_PUBLISH_TOKEN) {  //only publish all xx seconds
+                previousMillisPublishToken = millis();
                 if (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::TransferGateway) {
                     pComm.publishMessage("Transfer/Gateway", "{\"id\":\"" + String(vehicle.id) + "\",\"token\":true}");
                 } else {  //exit substate
@@ -379,6 +420,12 @@ void VehicleCtrl::entryAction_unloadVehicle() {
     previousMillis = millis();
     previousMillisPublish = previousMillis;
     currentMillis = previousMillis;
+
+    if (vehicle.targetSector == NavigationCtrl::Sector::TransferHandover) {
+        pComm.publishMessage("Transfer/Handover", "{\"id\":\"\",\"sector\":\"" + pNavCtrl.decodeSector(vehicle.targetSector) + "\",\"line\":" + String(vehicle.targetLine) + "}");
+    } else if (vehicle.targetSector == NavigationCtrl::Sector::SorticHandover) {
+        pComm.publishMessage("Sortic/Handover", "{\"id\":\"\",\"sector\":\"" + pNavCtrl.decodeSector(vehicle.targetSector) + "\",\"line\":" + String(vehicle.targetLine) + "}");
+    }
 }
 
 VehicleCtrl::Event VehicleCtrl::doAction_unloadVehicle() {
@@ -427,8 +474,8 @@ VehicleCtrl::Event VehicleCtrl::doAction_unloadVehicle() {
         case 2:  // listen for empty place in Sortic
             DBINFO2ln("Substate 2: listen for empty place in Sortic");
             currentMillis = millis();
-            DBINFO2ln(String(currentMillis - previousMillis) + String(" < ") + String(TIME_BETWEEN_PUBLISH * 10));
-            if ((currentMillis - previousMillis) < (TIME_BETWEEN_PUBLISH * (5 + pRandomDelayFactor))) {  //wait some time and add message to array and evaluate afer timeout
+            DBINFO2ln(String(currentMillis - previousMillis) + String(" < ") + String(4 + DEFAUL_HOSTNAME_NUMBER + pRandomDelayFactor * 2));
+            if ((currentMillis - previousMillis) < (TIME_BETWEEN_PUBLISH * (4 + DEFAUL_HOSTNAME_NUMBER + pRandomDelayFactor * 2))) {  //wait some time and add message to array and evaluate afer timeout
                 if (!pComm.isEmpty()) {
                     myJSONStr temp = pComm.pop();
                     DBINFO2ln(String("Sector: ") + String(temp.sector) + String(" line: ") + String(temp.line));
@@ -450,8 +497,7 @@ VehicleCtrl::Event VehicleCtrl::doAction_unloadVehicle() {
                 int line = 0;
                 for (int i = 0; i < SORTIC_MAX_LINE; i++) {
                     if (pSorticPark[i] == 0) {
-                        line = i + 1;  //update line with empty line
-                    } else {
+                        line = i + 1;        //update line with empty line
                         pSorticPark[i] = 0;  //reset arrayvalue at index
                     }
                 }
@@ -461,8 +507,16 @@ VehicleCtrl::Event VehicleCtrl::doAction_unloadVehicle() {
                 // delay(10000);
 
                 if (line != 0) {
+                    //clear old targetpos in gui
+                    if (vehicle.targetSector == NavigationCtrl::Sector::TransferHandover) {
+                        pComm.publishMessage("Transfer/Handover", "{\"id\":\"\",\"sector\":\"" + pNavCtrl.decodeSector(vehicle.targetSector) + "\",\"line\":" + String(vehicle.targetLine) + "}");
+                    } else if (vehicle.targetSector == NavigationCtrl::Sector::SorticHandover) {
+                        pComm.publishMessage("Sortic/Handover", "{\"id\":\"\",\"sector\":\"" + pNavCtrl.decodeSector(vehicle.targetSector) + "\",\"line\":" + String(vehicle.targetLine) + "}");
+                    }
+
                     vehicle.targetSector = NavigationCtrl::Sector::SorticHandover;
                     vehicle.targetLine = line;
+                    publishTargetPosition();
                     substate = 5;
                     DBINFO2ln("Change Substate to 5");
                     previousMillis = millis();
@@ -487,12 +541,12 @@ VehicleCtrl::Event VehicleCtrl::doAction_unloadVehicle() {
                 (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::TransitWaitForGatewaySortic)) {  //check in which sector and subscribe to actual gateway
                 pComm.subscribe("Sortic/Gateway");
                 substate = 20;
-                previousMillis = millis();
+                previousMillisPublishToken = millis();
             } else if ((pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::TransferWaitForGateway) ||
                        (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::TransitWaitForGatewayTransfer)) {
                 pComm.subscribe("Transfer/Gateway");
                 substate = 20;
-                previousMillis = millis();
+                previousMillisPublishToken = millis();
             }
             break;
         case 20:  // wait for gateway
@@ -501,23 +555,52 @@ VehicleCtrl::Event VehicleCtrl::doAction_unloadVehicle() {
             while (!pComm.isEmpty()) {  //check for message
                 myJSONStr temp = pComm.pop();
                 DBINFO2ln(String("vehicle.id: ") + String(vehicle.id) + String(": ") + String("temp.token: ") + String(temp.token));
-                if (temp.token && (temp.topic.endsWith("Gateway"))) {  //if token is not availabel reset time
-                    previousMillis = millis();
+                if (temp.token && (temp.topic.endsWith("Gateway")) && (vehicle.id != temp.id)) {  //if token is not availabel reset time
+                    previousMillisPublishToken = millis();
                 }
             }
+
             currentMillis = millis();
-            if ((currentMillis - previousMillis) > (TIME_BETWEEN_PUBLISH * (5 + pRandomDelayFactor))) {  //if no message for some time take token
+            if ((currentMillis - previousMillisPublishToken) > (TIME_BETWEEN_PUBLISH_TOKEN * (6 + pRandomDelayFactor * 2))) {  //if no message for some time take token
+                previousMillisPublishToken = millis();
+                substate = 21;
+            }
+            break;
+        case 21:
+            if ((currentMillis - previousMillisPublish) > TIME_BETWEEN_PUBLISH_TOKEN) {  //only publish all xx seconds
+                previousMillisPublish = millis();
+                if ((pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::SorticWaitForGateway) ||
+                    (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::TransitWaitForGatewaySortic)) {
+                    pComm.publishMessage("Sortic/Gateway", "{\"id\":\"" + String(vehicle.id) + "\",\"token\":true}");
+                } else if ((pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::TransferWaitForGateway) ||
+                           (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::TransitWaitForGatewayTransfer)) {
+                    pComm.publishMessage("Transfer/Gateway", "{\"id\":\"" + String(vehicle.id) + "\",\"token\":true}");
+                }
+            }
+
+            pComm.loop();               //Check for new Messages
+            while (!pComm.isEmpty()) {  //check for message
+                myJSONStr temp = pComm.pop();
+                DBINFO2ln(String("vehicle.id: ") + String(vehicle.id) + String(": ") + String("temp.token: ") + String(temp.token));
+                if (temp.token && (temp.topic.endsWith("Gateway")) && (vehicle.id != temp.id)) {  //if token is not availabel reset time
+                    substate = 20;
+                    previousMillisPublishToken = millis();
+                }
+            }
+
+            currentMillis = millis();
+            if ((currentMillis - previousMillisPublishToken) > (TIME_BETWEEN_PUBLISH_TOKEN * (8))) {  //if no message for some time  + some rand time to prevent collision take token
                 if ((pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::SorticWaitForGateway) ||
                     (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::TransitWaitForGatewaySortic)) {
                     pComm.unsubscribe("Sortic/Gateway");
-                    pNavCtrl.giveToken();
-                    substate = 31;
+                    pComm.publishMessage("Sortic/Gateway", "{\"id\":\"" + String(vehicle.id) + "\",\"token\":true}");
                 } else if ((pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::TransferWaitForGateway) ||
                            (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::TransitWaitForGatewayTransfer)) {
                     pComm.unsubscribe("Transfer/Gateway");
-                    pNavCtrl.giveToken();
-                    substate = 32;
+                    pComm.publishMessage("Transfer/Gateway", "{\"id\":\"" + String(vehicle.id) + "\",\"token\":true}");
                 }
+                pNavCtrl.giveToken();
+                substate = 30;
             }
             break;
         case 30:  //choose which gateway to block
@@ -529,8 +612,8 @@ VehicleCtrl::Event VehicleCtrl::doAction_unloadVehicle() {
             break;
         case 31:  //publish token to gateway as long as you're blocking it
             DBINFO2ln("Substate 31: Token Sortic");
-            if ((currentMillis - previousMillisPublish) > TIME_BETWEEN_PUBLISH) {  //only publish all xx seconds
-                previousMillisPublish = millis();
+            if ((currentMillis - previousMillisPublishToken) > TIME_BETWEEN_PUBLISH_TOKEN) {  //only publish all xx seconds
+                previousMillisPublishToken = millis();
                 if (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::SorticGateway) {
                     pComm.publishMessage("Sortic/Gateway", "{\"id\":\"" + String(vehicle.id) + "\",\"token\":true}");
                 } else {                                                                                                //exit substate
@@ -541,8 +624,8 @@ VehicleCtrl::Event VehicleCtrl::doAction_unloadVehicle() {
             break;
         case 32:  //publish token to gateway as long as you're blocking it
             DBINFO2ln("Vehicle-Substate 32: Token Transfer");
-            if ((currentMillis - previousMillisPublish) > TIME_BETWEEN_PUBLISH) {  //only publish all xx seconds
-                previousMillisPublish = millis();
+            if ((currentMillis - previousMillisPublishToken) > TIME_BETWEEN_PUBLISH_TOKEN) {  //only publish all xx seconds
+                previousMillisPublishToken = millis();
                 if (pNavCtrl.getcurrentSector() == NavigationCtrl::Sector::TransferGateway) {
                     pComm.publishMessage("Transfer/Gateway", "{\"id\":\"" + String(vehicle.id) + "\",\"token\":true}");
                 } else {                                                                                                  //exit substate
