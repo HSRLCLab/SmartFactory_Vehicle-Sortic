@@ -38,9 +38,9 @@ class VehicleCtrl {
     struct Vehicle {
         String id = DEFAULT_HOSTNAME;                                                  ///< Vehiclename
         NavigationCtrl::Sector actualSector = NavigationCtrl::Sector::SorticHandover;  ///< actual sector initialise with Sortic handover
-        int actualLine = 1;                                                            ///< actual line initialised with 1
+        int actualLine = DEFAUL_HOSTNAME_NUMBER;                                       ///< actual line initialised with 1
         NavigationCtrl::Sector targetSector = NavigationCtrl::Sector::SorticHandover;  ///< actual sector initialise with Sortic handover
-        int targetLine = 1;                                                            ///< tartget line initialised with 1
+        int targetLine = actualLine;                                                   ///< tartget line initialised with 1
         String cargo = "null";                                                         ///< cargo; not used atm
         String status = "null";                                                        ///< status of the Vehicle FSM
         String ack = "null";                                                           ///< ack for handshake vehicle
@@ -114,13 +114,13 @@ class VehicleCtrl {
     Event currentEvent;                      ///< holds the current event of the FSM
     int substate = 0;                        ///< actual Substate of FSM
     int pSorticPark[SORTIC_MAX_LINE] = {0};  ///< Sortic with 10 diffrent lines
-
+    unsigned int pRandomDelayFactor = 0;     ///< some sort of ALOHA stuff
     /**
      * @brief Functionpointer to call the current states do-function
      * 
      * https://stackoverflow.com/questions/1485983/calling-c-class-methods-via-a-function-pointer
      */
-    Event (VehicleCtrl::*doActionFPtr)(void) = &VehicleCtrl::doAction_waitForBox;
+    Event (VehicleCtrl::*doActionFPtr)(void) = nullptr;
 
     NavigationCtrl pNavCtrl;  ///< Navigation Controll object
     Communication pComm;      ///< Communication object
