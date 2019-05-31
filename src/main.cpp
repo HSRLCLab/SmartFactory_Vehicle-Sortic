@@ -176,9 +176,12 @@ void setup() {
 void loop() {
     DBINFO1ln("==loop()==");
     currentMillis = millis();
-    // Serial.print("LoopTime [ms]: ");
-    // Serial.println(currentMillis - previousMillis);
+    Serial.print("LoopTime [ms]: ");
+    Serial.println(currentMillis - previousMillis);
     previousMillis = currentMillis;
+    // Serial.print("RandNumber: ");
+    // unsigned int randDelay = random(30) / 10.0 * 1000;
+    // Serial.println(randDelay);
     switch (Test) {
         case TestCase::RUN:
             FuncFPtr = &run;

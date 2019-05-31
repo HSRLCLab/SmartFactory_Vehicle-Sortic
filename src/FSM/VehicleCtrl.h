@@ -109,12 +109,13 @@ class VehicleCtrl {
                        errorState      ///< error state
     };
 
-    State lastStateBevorError;               ///< holds the last state of the FSM so it's possible to resume after error
-    State currentState;                      ///< holds the current state of the FSM
-    Event currentEvent;                      ///< holds the current event of the FSM
-    int substate = 0;                        ///< actual Substate of FSM
-    int pSorticPark[SORTIC_MAX_LINE] = {0};  ///< Sortic with 10 diffrent lines
-    unsigned int pRandomDelayFactor = 0;     ///< some sort of ALOHA stuff
+    State lastStateBevorError;                 ///< holds the last state of the FSM so it's possible to resume after error
+    State currentState;                        ///< holds the current state of the FSM
+    Event currentEvent;                        ///< holds the current event of the FSM
+    int substate = 0;                          ///< actual Substate of FSM
+    int pSorticPark[SORTIC_MAX_LINE] = {0};    ///< Sortic with 10 diffrent lines
+    int pTransferPark[SORTIC_MAX_LINE] = {1};  ///< Sortic with 10 diffrent lines
+    unsigned int pRandomDelayFactor = 0;       ///< some sort of ALOHA stuff
     /**
      * @brief Functionpointer to call the current states do-function
      * 

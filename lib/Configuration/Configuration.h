@@ -46,8 +46,8 @@ const double K_D = 0.05;  ///<
 #endif
 /////////////////////////////////////
 
-const unsigned int TIME_BETWEEN_PUBLISH = 500;
-const unsigned int TIME_BETWEEN_PUBLISH_TOKEN = 300;
+const unsigned int TIME_BETWEEN_PUBLISH = 300;
+const unsigned int TIME_BETWEEN_PUBLISH_TOKEN = 200;
 const unsigned int TIMEOUT_VACKS = 5 * 1000;
 const unsigned int SORTIC_MAX_LINE = 3;
 
