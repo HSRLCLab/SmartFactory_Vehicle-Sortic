@@ -26,7 +26,7 @@
 /**
  * @brief The Vehicle Controll class contains the FSM for the complete Vehicle
  * 
- * @image html VehicleCtrl.png width=800
+ * @image html VehicleCtrl.png width=1000
  */
 class VehicleCtrl {
     //=====PUBLIC====================================================================================
@@ -43,6 +43,7 @@ class VehicleCtrl {
         int targetLine = actualLine;                                                   ///< tartget line initialised with 1
         String cargo = "null";                                                         ///< cargo; not used atm
         String status = "null";                                                        ///< status of the Vehicle FSM
+        String substate = "null";                                                      ///< substatus of the Vhicle
         String ack = "null";                                                           ///< ack for handshake vehicle
         String req = "null";                                                           ///< req for handshake vehicle
     } vehicle;
@@ -139,8 +140,10 @@ class VehicleCtrl {
      * @brief entry action of the waitForBox
      * 
      * - publish current state and position
+     * - clear old message from circular buffer
      * - publish "Vehicle/vehicle.id/handshake" {ack:"",req:""} to clear GUI-Entry
-     * - subscirbe to "Box/+/handske"
+     * - subscribe to "Box/+/handshake"
+     * - publish to target sector to clear GUI-Entry
      */
     void entryAction_waitForBox();
 
@@ -210,6 +213,7 @@ class VehicleCtrl {
      * @brief entry action of the loadVehicle
      * 
      * - publish current state and position
+     * - publish empty targe pos to clear GUI-Entry
      * - update NavCtrls TargetPosition
      * - send NavigationCtrl::Event::MoveToTargetPosition
      */
@@ -220,23 +224,40 @@ class VehicleCtrl {
      * 
      * - check incomming message for error
      *     - return Event::Error
-     * - publish all position all xx seconds
+     * - publish position and targetposition all TIME_BETWEEN_PUBLISH seconds
      * 
      * 0 check position
-     *  - if in positon switch to state 40
+     *  - if in positon switch to state 40 "raise hoist"
      *  - if in sector SorticWaitForGateway
      *      -   subscribe to "Sortic/Gateway"
      *  - if in sector TransferWaitForGateway
      *      -   subscribe to "Transfer/Gateway"
      * 
      * 10 wait for gateway
-     *  - if gateway free for xx seconds
+     *  -  listen if no token is published for current gateway for xx seconds + some random time
      *  
-     * 20 block gateway
+     * 11 listen if only one in gateway
+     *  - publish token for gateway and check if the only one for xx seconds
+     *  - if not available go back to 10 "wait for gateway"
+     *  - else go to 20 "check which gateway to block"
+     * 
+     * 20 check which gateway to block
+     *  - if in sector SorticGateway go to 21 "block Gateway Sortic"
+     *  - if in sector TransitGateway go to 22 "block gateway Transfer"
+     * 
+     * 21 block Gateway Sortic
+     *  - publish token to Gateway as long as in sector Gateway
+     *  - go to substate 30 "chek if in position"
+     * 
+     * 22 block gateway Transfer
+     *  - publish token to Gateway as long as in sector Gateway
+     *  - go to substate 30 "chek if in position"
      * 
      * 30 chek if in position
+     *  - if current sector = target sector go to 40 " raise hoist"
      * 
      * 40 raise hoist
+     * 
      *  @return VehicleLevelCtrl::Event - generated Event
      */
     VehicleCtrl::Event doAction_loadVehicle();
@@ -251,11 +272,88 @@ class VehicleCtrl {
     /**
      * @brief entry action of the unloadVehicle
      *
+     * - publish current state and position
+     * - publish empty targe pos to clear GUI-Entry
      */
     void entryAction_unloadVehicle();
 
     /**
      * @brief main action of the unloadVehicle
+     * 
+     * - check incomming message for error
+     * - return Event::Error
+     * - publish position and targetposition all TIME_BETWEEN_PUBLISH seconds
+     * 
+     * 0 check actual sector and subscribe to handover
+     *  - if in SorticHandover subscirbe to "Transfer/Handover" and switch state to 10 "search suitable targetPos Transfer"
+     *  - if in TransferHandover subscirbe to "Sortic/Handover" and switch state to 20 "search suitable targetPos Sortic"
+     * 
+     * 10 search suitable targetPos Transfer
+     *  - listen for places with matching cargo till timeout is reached
+     *  - listen to occupied places till timeout is reached
+     *  - evaluate new targetposition
+     *  - if targetposition is valid
+     *      - publish targetposition and switch state to 11 "ensure valid target position Transfer"
+     * 
+     * 11 ensure valid target position Transfer
+     *  - publish target position and listen if not occupied
+     * 
+     * 20 search suitable targetPos Sortic
+     *  - listen to occupied places till timeout is reached
+     *  - evaluate new targetposition
+     *  - if targetposition is valid
+     *      - publish targetposition and switch state to 21 "ensure valid target position Sortic"
+     * 
+     * 21 ensure valid target position Sortic
+     *  - publish target position and listen if not occupied
+     * 
+     * 50 set targetposition
+     *  - set Navigation TargetPosition
+     *  - send Event MoveToTargetPosition to NavigationCtrl
+     *  - switch to substate 100 "check position"
+     * 
+     * 100 check position
+     *  - if already in position switcht to substate 400
+     *  - check in which sector and subscribe to actual gateway
+     *      - if waiting for gateway Sortic subscribe to "Sortic/Gateway"
+     *      - if waiting for gateway Transfer subscribe to "Transfer/Gateway"
+     *      - switch substate to 200 "wait for free gateway"
+	 * 
+     * 200 wait for free gateway
+     *  -  listen if no token is published for current gateway for xx seconds + some random time
+     *  
+     * 210 listen if only one in gateway
+     *  - publish token for gateway and check if the only one for xx seconds
+     *  - if not available go back to 200 "wait for free gateway"
+     *  - else go to 20 "check which gateway to block"
+     * 
+     * 300 check which gateway to block
+     *  - if in sector SorticGateway go to 21 "block Gateway Sortic"
+     *  - if in sector TransitGateway go to 22 "block gateway Transfer"
+     * 
+     * 310 block gateway Sortic
+     *  - publish token to Gateway as long as in sector Gateway
+     *  - go to substate 400 "chek if in position"
+     * 
+     * 320 block gateway Transfer
+     *  - publish token to Gateway as long as in sector Gateway
+     *  - go to substate 400 "chek if in position"
+     * 
+     * 
+     * 400 chek if in position
+     *  - if current sector = target sector
+     *      - go to 500 "lower hoist"
+     *  - if current sector = TransitWaitForGatewaySortic
+     *      - subscribe to "Sortic/Gateway"
+     *      - go to 200 "wait for free gateway"
+     *  - if current sector = TransitWaitForGatewayTransfer
+     *      - subscribe to "Transfer/Gateway"
+     *      - go to 200 "wait for free gateway"
+     *  
+     * 500 lower hoist
+     *  - if hoist is low go to 600 "publish position to Box"
+     * 
+     * 600 publish position to Box
      * 
      *  @return VehicleLevelCtrl::Event - generated Event 
      */
@@ -344,6 +442,10 @@ class VehicleCtrl {
      */
     void publishPosition();
 
+    /**
+     * @brief Update position and Publish actual position
+     * - publishMessage "Vehicle/vehicle.id/position" {"sector":vehicle.targetSector,"line":vehicle.targetLine"}
+     */
     void publishTargetPosition();
 
     /**
@@ -359,7 +461,5 @@ class VehicleCtrl {
      * 
      */
     void clearGui();
-
-    // int chooseLine(int array[]);
 };
 #endif
