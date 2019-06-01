@@ -15,6 +15,15 @@
 #ifndef CONFIGURATION_H
 #define CONFIGURATION_H
 
+const unsigned int TIME_BETWEEN_PUBLISH = 300;
+const unsigned int TIME_BETWEEN_PUBLISH_TOKEN = 200;
+const unsigned int TIMEOUT_VACKS = 5 * 1000;
+const unsigned int SORTIC_MAX_LINE = 3;
+
+// #define DEFAULT_HOSTNAME_RAND String(random(0xffff), HEX)  ///< for Vehicles, used for MQTT and WiFi, must be unique in Network
+const int DEFAUL_HOSTNAME_NUMBER = 1;                                     //defines also startline
+#define DEFAULT_HOSTNAME (String("SV") + String(DEFAUL_HOSTNAME_NUMBER))  // + DEFAULT_HOSTNAME_RAND)
+
 //Setup for Drive /////////////////
 const double SPEEDFACTOR = 1.3;
 const unsigned int RIGHT_MOTOR = 1;                   ///<
@@ -46,10 +55,7 @@ const double K_D = 0.05;  ///<
 #endif
 /////////////////////////////////////
 
-const unsigned int TIME_BETWEEN_PUBLISH = 300;
-const unsigned int TIME_BETWEEN_PUBLISH_TOKEN = 200;
-const unsigned int TIMEOUT_VACKS = 5 * 1000;
-const unsigned int SORTIC_MAX_LINE = 3;
+
 
 //Setup for sonar ///////////////////
 #define SONAR_SERVO_PIN 5        ///<

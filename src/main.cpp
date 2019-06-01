@@ -16,19 +16,19 @@
 
 // #include <WiFi101.h>
 #include "Arduino.h"
-#include "Chassis.h"
-#include "Hoist.h"
+// #include "Chassis.h"
+// #include "Hoist.h"
 #include "LogConfiguration.h"
 // #include "SPI.h"
-#include "Sonar.h"
+// #include "Sonar.h"
 // #include "VehicleWebAPI.h"
-#include "Vision.h"
+// #include "Vision.h"
 
-#include "Communication.h"
-#include "DriveCtrl.h"
-#include "EnvironmentDetection.h"
+// #include "DriveCtrl.h"
+// #include "EnvironmentDetection.h"
 #include "HoistCtrl.h"
-#include "NavigationCtrl.h"
+// #include "MQTTCommunication.h"
+// #include "NavigationCtrl.h"
 
 #include "FSM/VehicleCtrl.h"
 
@@ -67,8 +67,8 @@ enum class TestCase {
 //     String side = "";
 // } state;
 
-Sonar *vehicleSonar;
-Vision *vehicleVision;
+// Sonar *vehicleSonar;
+// Vision *vehicleVision;
 Hoist *vehicleHoist;
 // Chassis *vehicleChassis;
 // VehicleWebAPI *vehicleAPI;
@@ -144,7 +144,7 @@ void setup() {
         case TestCase::NETWORK:
             //     vehicleAPI = new VehicleWebAPI(&state.api);
 
-            comm = new Communication();
+            comm = new Communication(DEFAULT_HOSTNAME);
             // comm->init();
             comm->printNetworkInfo();
             comm->subscribe("Sortic/Gateway");
@@ -299,7 +299,7 @@ void test_hardware() {
              * 1 - run test for servo
              * 2 - run test for obstacle detection
              * */
-            vehicleSonar->Sonar::Test(1);
+            // vehicleSonar->Sonar::Test(1);
             break;
 
         default:

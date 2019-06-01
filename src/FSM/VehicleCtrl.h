@@ -18,9 +18,10 @@
 #include <Arduino.h>
 
 // own files:
+// #include "CommunicationConfiguration.h"
 
-#include "Communication.h"
 #include "HoistCtrl.h"
+#include "MQTTCommunication.h"
 #include "NavigationCtrl.h"
 
 /**
@@ -125,7 +126,7 @@ class VehicleCtrl {
     Event (VehicleCtrl::*doActionFPtr)(void) = nullptr;
 
     NavigationCtrl pNavCtrl;  ///< Navigation Controll object
-    Communication pComm;      ///< Communication object
+    Communication pComm = Communication(DEFAULT_HOSTNAME);      ///< Communication object
     HoistCtrl pHoistCtrl;     ///< Hoist Controll object
 
     unsigned long currentMillis = 0;               ///< will store current time

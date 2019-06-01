@@ -38,9 +38,9 @@
 #define DEFAULT_MQTT_BROKER_IP4 22   ///<
 #define DEFAULT_MQTT_PORT 1883       ///< MQTT connection port
 
-// #define DEFAULT_HOSTNAME_RAND String(random(0xffff), HEX)  ///< for Vehicles, used for MQTT and WiFi, must be unique in Network
-const int DEFAUL_HOSTNAME_NUMBER = 2;                                     //defines also startline
-#define DEFAULT_HOSTNAME (String("SV") + String(DEFAUL_HOSTNAME_NUMBER))  // + DEFAULT_HOSTNAME_RAND)
+// // #define DEFAULT_HOSTNAME_RAND String(random(0xffff), HEX)  ///< for Vehicles, used for MQTT and WiFi, must be unique in Network
+// const int DEFAUL_HOSTNAME_NUMBER = 1;                                     //defines also startline
+// #define DEFAULT_HOSTNAME (String("SV") + String(DEFAUL_HOSTNAME_NUMBER))  // + DEFAULT_HOSTNAME_RAND)
 
 // #define DEFAULT_HOSTNAME "Vehicle"            ///< for Vehicles, used for MQTT and WiFi, must be unique in Network
 // #define DEFAULT_HOSTNAME_SMARTBOX "SmartBox"  ///< for SmartBoxes, used for MQTT and WiFi, must be unique in Network
@@ -63,17 +63,17 @@ const int DEFAUL_HOSTNAME_NUMBER = 2;                                     //defi
 //   "error":false
 // }
 
-struct myJSONStr {
-    String id = "-1";
-    String topic = "-1";
-    String status = "-1";
-    String sector = "-1";
-    int line = -1;
-    String ack = "-1";
-    String req = "-1";
-    String cargo = "-1";
-    bool token = false;
-    bool error = false;
-};
+// struct myJSONStr {
+//     String id = "-1";
+//     String topic = "-1";
+//     String status = "-1";
+//     String sector = "-1";
+//     int line = -1;
+//     String ack = "-1";
+//     String req = "-1";
+//     String cargo = "-1";
+//     bool token = false;
+//     bool error = false;
+// };
 
 #endif
