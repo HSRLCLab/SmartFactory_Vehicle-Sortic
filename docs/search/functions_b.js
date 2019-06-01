@@ -10,5 +10,6 @@ var searchData=
   ['process',['process',['../class_drive_ctrl.html#aa77ae942a68ca0bec366da120078b19d',1,'DriveCtrl::process()'],['../class_hoist_ctrl.html#a5406409add882535f7342c001a663739',1,'HoistCtrl::process()'],['../class_navigation_ctrl.html#a021329210dd8c887504f9ed02639f2eb',1,'NavigationCtrl::process()'],['../class_vehicle_ctrl.html#a6e0bdf94eddd322110129b94b85a955b',1,'VehicleCtrl::process()']]],
   ['publishmessage',['publishMessage',['../class_communication.html#aa59e118e1ed15e911ae2534274ab2e58',1,'Communication::publishMessage()'],['../classmy_m_q_t_t.html#ae15c915d8f868cc4cf5505c20f3d9816',1,'myMQTT::publishMessage()']]],
   ['publishposition',['publishPosition',['../class_vehicle_ctrl.html#a8830c4f26a1bb93415310515d0d5a453',1,'VehicleCtrl']]],
-  ['publishstate',['publishState',['../class_vehicle_ctrl.html#ae884f825ca17d94842f0e5ff704c5f59',1,'VehicleCtrl']]]
+  ['publishstate',['publishState',['../class_vehicle_ctrl.html#ae884f825ca17d94842f0e5ff704c5f59',1,'VehicleCtrl']]],
+  ['publishtargetposition',['publishTargetPosition',['../class_vehicle_ctrl.html#a97f6cc8f0cbd2904a782656e0e50f4d6',1,'VehicleCtrl']]]
 ];

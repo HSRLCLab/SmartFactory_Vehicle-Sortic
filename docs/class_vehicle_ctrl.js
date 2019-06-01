@@ -47,6 +47,7 @@ var class_vehicle_ctrl =
     [ "process", "class_vehicle_ctrl.html#a6e0bdf94eddd322110129b94b85a955b", null ],
     [ "publishPosition", "class_vehicle_ctrl.html#a8830c4f26a1bb93415310515d0d5a453", null ],
     [ "publishState", "class_vehicle_ctrl.html#ae884f825ca17d94842f0e5ff704c5f59", null ],
+    [ "publishTargetPosition", "class_vehicle_ctrl.html#a97f6cc8f0cbd2904a782656e0e50f4d6", null ],
     [ "currentEvent", "class_vehicle_ctrl.html#a3e2131084463dfb9b2bccefc898bbcb9", null ],
     [ "currentMillis", "class_vehicle_ctrl.html#aa12295b31b62cf09aaac4c2924b3329c", null ],
     [ "currentState", "class_vehicle_ctrl.html#ab0e53852b3c4835347d61b07e2cdab7c", null ],
@@ -55,9 +56,13 @@ var class_vehicle_ctrl =
     [ "pComm", "class_vehicle_ctrl.html#a0da7672d6ee426af965d1d66c4834f20", null ],
     [ "pHoistCtrl", "class_vehicle_ctrl.html#aecf4d7e32d481680d6acf953a9533aa7", null ],
     [ "pNavCtrl", "class_vehicle_ctrl.html#af65f50fe7d0738515479bc652737cf96", null ],
+    [ "pRandomDelayFactor", "class_vehicle_ctrl.html#a77e5ebe6bea80f0523a53d7d09ef62ae", null ],
     [ "previousMillis", "class_vehicle_ctrl.html#ac7afd972e8f54602fb29afe1c487fced", null ],
     [ "previousMillisPublish", "class_vehicle_ctrl.html#ad30fd51119309051bc5614829092e1ea", null ],
     [ "previousMillisPublishPos", "class_vehicle_ctrl.html#a660829eea07dfe280cf4d675c5ec21a5", null ],
+    [ "previousMillisPublishToken", "class_vehicle_ctrl.html#ab1bb6652edfabeed0261093806088fff", null ],
+    [ "pSorticPark", "class_vehicle_ctrl.html#a1607ab1d41699e44e3a80b730da0e636", null ],
+    [ "pTransferPark", "class_vehicle_ctrl.html#aef906b90757f6788d58003cd7b0d3586", null ],
     [ "substate", "class_vehicle_ctrl.html#aa64431ca5634241afad7ce1ff26e9a70", null ],
     [ "vehicle", "class_vehicle_ctrl.html#a2e60411f999149686df424d78195f7ea", null ]
 ];

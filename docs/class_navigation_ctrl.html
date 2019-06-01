@@ -348,7 +348,7 @@ Private Attributes</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><a id="a08389788c6451604d2a4111f65f4b14fad06f42dab8fc58022bb372634f581e87"></a>PosEndPointReached&#160;</td><td class="fielddoc"><p>Signal: PosEndPointReached. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a08389788c6451604d2a4111f65f4b14fa380121a39580cfe31ce01bdf5f1a6147"></a>PosTransitReached&#160;</td><td class="fielddoc"><p>Signal: PosEndPointReached. </p>
+<tr><td class="fieldname"><a id="a08389788c6451604d2a4111f65f4b14fa380121a39580cfe31ce01bdf5f1a6147"></a>PosTransitReached&#160;</td><td class="fielddoc"><p>Signal: PosTransitReached. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a08389788c6451604d2a4111f65f4b14fa86700ff4ed4c693c72667f95a756bbe5"></a>PosReached&#160;</td><td class="fielddoc"><p>Signal: Position reached. </p>
 </td></tr>
@@ -482,7 +482,7 @@ Private Attributes</h2></td></tr>
 
 <p>Construct a new Navigation Ctrl object and initailize the currentState with endPoint state. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00016">16</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00017">17</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -520,7 +520,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>String - Event as String </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00583">583</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00615">615</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -549,7 +549,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>String - Sector as String </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00063">63</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00064">64</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -578,7 +578,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94" title="Enum holds all possible sectors.">NavigationCtrl::Sector</a> - enum Sector </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00111">111</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00112">112</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -615,7 +615,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>String - State as String </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00555">555</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00587">587</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -645,9 +645,9 @@ Private Attributes</h2></td></tr>
 <p>executes the main action of the crossTransit state. </p>
 <p>drive forward three times and return <a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14fa86700ff4ed4c693c72667f95a756bbe5" title="Signal: Position reached.">Event::PosReached</a></p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14f" title="Enum holds all possible events.">NavigationCtrl::Event</a> - generated Event </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000017">Todo:</a></b></dt><dd>Probelm with Error possible? </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000016">Todo:</a></b></dt><dd>Probelm with Error possible? </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00448">448</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00484">484</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -677,7 +677,7 @@ Private Attributes</h2></td></tr>
 <p>executes the main action of the endPoint state. This is an Idel-state -&gt;NoEvent generated </p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14f" title="Enum holds all possible events.">NavigationCtrl::Event</a> - generated Event </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00253">253</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00254">254</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -707,7 +707,7 @@ Private Attributes</h2></td></tr>
 <p>main action of the errorState state. </p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14f" title="Enum holds all possible events.">NavigationCtrl::Event</a> - generated Event </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00520">520</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00552">552</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -743,12 +743,12 @@ Private Attributes</h2></td></tr>
 20 turn left/right depending on target and current orientation or go straith (50) <br />
 30 drive forward n times depending on actual line and targetline <br />
 40 turn left/right depending on target and current orientation 50 drive forward twice. <br />
-if startsector = target.sector then return <a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14fad06f42dab8fc58022bb372634f581e87" title="Signal: PosEndPointReached.">Event::PosEndPointReached</a> else return <a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14fa380121a39580cfe31ce01bdf5f1a6147" title="Signal: PosEndPointReached.">Event::PosTransitReached</a></p>
+if startsector = target.sector then return <a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14fad06f42dab8fc58022bb372634f581e87" title="Signal: PosEndPointReached.">Event::PosEndPointReached</a> else return <a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14fa380121a39580cfe31ce01bdf5f1a6147" title="Signal: PosTransitReached.">Event::PosTransitReached</a></p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14f" title="Enum holds all possible events.">NavigationCtrl::Event</a> - generated Event</dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000015">Todo:</a></b></dt><dd>refactoring so it only checks the neares sector not startsector </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000016">Todo:</a></b></dt><dd>Probelm with Error possible? </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000014">Todo:</a></b></dt><dd>refactoring so it only checks the neares sector not startsector </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000015">Todo:</a></b></dt><dd>Probelm with Error possible? </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00325">325</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00332">332</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -778,7 +778,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 <p>main action of the resetState </p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14f" title="Enum holds all possible events.">NavigationCtrl::Event</a> - generated Event </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00537">537</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00569">569</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -807,9 +807,9 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>executes the main action of the toEndPoint state. </p>
 <p>drive forward once and return <a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14fad06f42dab8fc58022bb372634f581e87" title="Signal: PosEndPointReached.">Event::PosEndPointReached</a> </p><dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14f" title="Enum holds all possible events.">NavigationCtrl::Event</a> - generated Event </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000018">Todo:</a></b></dt><dd>Probelm with Error possible? </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000017">Todo:</a></b></dt><dd>Probelm with Error possible? </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00489">489</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00521">521</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -844,9 +844,9 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 10 turn around <br />
 20 drive forward once adn return <a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14fa86700ff4ed4c693c72667f95a756bbe5" title="Signal: Position reached.">Event::PosReached</a></p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14f" title="Enum holds all possible events.">NavigationCtrl::Event</a> - generated Event </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000014">Todo:</a></b></dt><dd>Probelm with Error possible? </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000013">Todo:</a></b></dt><dd>Probelm with Error possible? </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00279">279</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00280">280</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -875,7 +875,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>executes the entry action of the crossTransit state. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00435">435</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00469">469</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -905,7 +905,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 <p>executes the entry action of the endPoint state. </p>
 <p>Update actual sector and startsector with taregt sector. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00237">237</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00238">238</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -934,7 +934,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>entry action of the errorState state. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00510">510</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00542">542</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -963,7 +963,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>executes the entry action of the gateway state. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00315">315</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00316">316</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -992,7 +992,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>entry action of the resetState </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00531">531</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00563">563</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1021,7 +1021,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>executes the entry action of the toEndPoint state. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00476">476</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00506">506</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1050,7 +1050,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>executes the entry action of the toGateway state. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00265">265</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00266">266</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1079,7 +1079,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>executes the exit action of the crossTransit state. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00464">464</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00500">500</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1108,7 +1108,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>executes the exit action of the endPoint state. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00259">259</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00260">260</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1137,7 +1137,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>exit action of the errorState state. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00526">526</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00558">558</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1166,7 +1166,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>executes the exit action of the gateway state. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00429">429</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00447">447</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1195,7 +1195,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>exit action of the resetState </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00543">543</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00575">575</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1224,7 +1224,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>executes the exit action of the toEndPoint state. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00504">504</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00536">536</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1253,7 +1253,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>executes the exit action of the toGateway state. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00309">309</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00310">310</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1275,7 +1275,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 <p>Get the current Line. </p>
 <dl class="section return"><dt>Returns</dt><dd>const int - current line </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00041">41</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00042">42</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1297,7 +1297,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 <p>Get the current Sector. </p>
 <dl class="section return"><dt>Returns</dt><dd>const Sector - current Sector </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00036">36</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00037">37</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1319,7 +1319,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 <p>Get the current State. </p>
 <dl class="section return"><dt>Returns</dt><dd>State - current State </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00030">30</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00031">31</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1340,7 +1340,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>give Token to access the Gateway </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00058">58</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00059">59</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1361,7 +1361,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>Calls the do-function of the active state and hence generates Events. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00019">19</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00020">20</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1389,7 +1389,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00024">24</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00025">25</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1425,7 +1425,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00142">142</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00143">143</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1464,7 +1464,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00052">52</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00053">53</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1503,7 +1503,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00046">46</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00047">47</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1530,7 +1530,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>holds the current event of the FSM </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00169">169</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00162">162</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1556,7 +1556,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>holds the current state of the FSM </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00168">168</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00161">161</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1583,7 +1583,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 <p>Functionpointer to call the current states do-function. </p>
 <p><a href="https://stackoverfendPoint.com/questions/1485983/calling-c-class-methods-via-a-function-pointer">https://stackoverfendPoint.com/questions/1485983/calling-c-class-methods-via-a-function-pointer</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00204">204</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00197">197</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1609,7 +1609,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>holds the last state of the FSM so it's possible to resume after error </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00167">167</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00160">160</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1657,7 +1657,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>Counter for the Current Substate. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00170">170</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00163">163</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1683,7 +1683,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>Navigation Object. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00206">206</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00199">199</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1709,7 +1709,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>Variable which holds the first Turn in gateway. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00196">196</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00189">189</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1735,7 +1735,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>Holds the last Substate befor an Error occured. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00171">171</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00164">164</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1761,7 +1761,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>Counter so you can call the same substatefunction multiple times. </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00172">172</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00165">165</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1809,7 +1809,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>prevents an loop between transit and gateway </p>
 
-<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00195">195</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8h_source.html#l00188">188</a> of file <a class="el" href="_navigation_ctrl_8h_source.html">NavigationCtrl.h</a>.</p>
 
 </div>
 </div>

@@ -7,6 +7,7 @@ var struct_vehicle_ctrl_1_1_vehicle =
     [ "id", "struct_vehicle_ctrl_1_1_vehicle.html#adde713d55efd2e97cece859b2b083580", null ],
     [ "req", "struct_vehicle_ctrl_1_1_vehicle.html#a17ea7505c740387a994e9a2709e61b7c", null ],
     [ "status", "struct_vehicle_ctrl_1_1_vehicle.html#aba3242a6d6d50a2c28790ad1e3efc479", null ],
+    [ "substate", "struct_vehicle_ctrl_1_1_vehicle.html#aad227f900861369d06620034fdaa2771", null ],
     [ "targetLine", "struct_vehicle_ctrl_1_1_vehicle.html#a93c1c28a912c7056a2a72212f14b35b7", null ],
     [ "targetSector", "struct_vehicle_ctrl_1_1_vehicle.html#aa491c41162a66044568fd677aecd87c4", null ]
 ];

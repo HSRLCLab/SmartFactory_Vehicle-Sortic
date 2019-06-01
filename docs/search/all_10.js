@@ -27,6 +27,7 @@ var searchData=
   ['sonarfactor',['sonarFactor',['../struct_sonar_state.html#a59192a552f4a1f8c4b4116e102115edf',1,'SonarState']]],
   ['sonarservo',['sonarServo',['../class_sonar.html#ad1f4f2fcba78c786fa3a1d590aef3eda',1,'Sonar']]],
   ['sonarstate',['SonarState',['../struct_sonar_state.html',1,'']]],
+  ['sortic_5fmax_5fline',['SORTIC_MAX_LINE',['../_configuration_8h.html#aa37d01e66cad434de466cd72b1d18726',1,'Configuration.h']]],
   ['sorticgateway',['SorticGateway',['../class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94a0acaa903c278d35a6709633585d9b76e',1,'NavigationCtrl']]],
   ['sortichandover',['SorticHandover',['../class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94a3a7d7d4f2845e5fd09296ec79e8b3c3c',1,'NavigationCtrl']]],
   ['sortictohandover',['SorticToHandover',['../class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94abcf0ebff461f9c19e95611262b9b4c89',1,'NavigationCtrl']]],
@@ -40,5 +41,5 @@ var searchData=
   ['stop',['stop',['../class_drive.html#a002bdfaf44a7cad5a360aaa5e0868811',1,'Drive']]],
   ['structisequal',['StructIsEqual',['../classmy_j_s_o_n.html#a4291e1d5fc0369d03f8e094bf1db2b31',1,'myJSON']]],
   ['subscribe',['subscribe',['../class_communication.html#ae7600b9fe0f1249effde2852e8101593',1,'Communication::subscribe()'],['../classmy_m_q_t_t.html#a55566e23e8705bf3390b6f8209cbd9a1',1,'myMQTT::subscribe()']]],
-  ['substate',['substate',['../class_vehicle_ctrl.html#aa64431ca5634241afad7ce1ff26e9a70',1,'VehicleCtrl']]]
+  ['substate',['substate',['../struct_vehicle_ctrl_1_1_vehicle.html#aad227f900861369d06620034fdaa2771',1,'VehicleCtrl::Vehicle::substate()'],['../class_vehicle_ctrl.html#aa64431ca5634241afad7ce1ff26e9a70',1,'VehicleCtrl::substate()']]]
 ];

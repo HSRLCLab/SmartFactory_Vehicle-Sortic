@@ -29,9 +29,11 @@ var _configuration_8h =
     [ "PUSH_SPEED", "_configuration_8h.html#a0248e56af9cddbe917de7637e9697bd8", null ],
     [ "REDUCED_SPEED", "_configuration_8h.html#ab3a08ddc50a7adb59f40d2685a9cd6b3", null ],
     [ "RIGHT_MOTOR", "_configuration_8h.html#a7a11b2a95ce57ef2c4c98eaeb7204014", null ],
+    [ "SORTIC_MAX_LINE", "_configuration_8h.html#aa37d01e66cad434de466cd72b1d18726", null ],
     [ "SPEED", "_configuration_8h.html#adb7f9566c2c7d5ebf724e420d8ec247c", null ],
     [ "SPEEDFACTOR", "_configuration_8h.html#a259dcd3a895ad5520f48604212d538b8", null ],
     [ "TIME_BETWEEN_PUBLISH", "_configuration_8h.html#a7b221f0e28fd77d8b5b765d2a48fcf4d", null ],
+    [ "TIME_BETWEEN_PUBLISH_TOKEN", "_configuration_8h.html#af4d5634d9962769db6aa6937cb3d3e71", null ],
     [ "TIMEOUT_VACKS", "_configuration_8h.html#a872b415db6d784b9251edf0eb253d3a1", null ],
     [ "TURNING_SPEED", "_configuration_8h.html#a815f8e242260a9a297d62b1829fb3f36", null ]
 ];

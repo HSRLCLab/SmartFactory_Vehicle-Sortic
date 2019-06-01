@@ -15,7 +15,7 @@
 #ifndef LOGCONFIGURATION_H
 #define LOGCONFIGURATION_H
 
-#define DEBUGGER  ///< Option to activate the Serial.print global
+// #define DEBUGGER  ///< Option to activate the Serial.print global
 
 #ifdef DEBUGGER
 #define DEBUG_ERROR  ///< Define DEBUG_ERROR global to print all  occuring errors via serial
@@ -25,7 +25,7 @@
 #define DEBUG_POSITION  ///< Define DEBUG_Position global to print all Positions via serial
 // #define DEBUG_INFO1  ///< Define DEBUG_INFO1 global to print all occuring FSM status changes (entering/leaving) via serial
 #define DEBUG_INFO2  ///< Define DEBUG_INFO2 global to print all occuring infos inside the FSM via serial
-// #define DEBUG_INFO3     ///< Define DEBUG_INFO3 global to print all occuring message on hardwarelevel via serial
+// #define DEBUG_INFO3  ///< Define DEBUG_INFO3 global to print all occuring message on hardwarelevel via serial
 // #define DEBUG_FUNCCALL  ///< Define DEBUG_FUNCCALL global to print all occuring functioncalls via serial
 #endif
 

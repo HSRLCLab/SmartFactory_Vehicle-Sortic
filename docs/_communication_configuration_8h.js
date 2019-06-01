@@ -15,5 +15,6 @@ var _communication_configuration_8h =
     [ "DEFAULT_WIFI_SSID", "_communication_configuration_8h.html#a7ea92631acc3bc41ae5eadc069323267", null ],
     [ "MAX_JSON_MESSAGES_SAVED", "_communication_configuration_8h.html#acf4afb55aa7d1288ad9dffc623360a8c", null ],
     [ "MAX_JSON_PARSE_SIZE", "_communication_configuration_8h.html#a268cecf8b27e3323864627d776dee31d", null ],
-    [ "MAX_MQTT_TOPIC_DEPTH", "_communication_configuration_8h.html#a8ef1dda67b152600d665bc83d81a7537", null ]
+    [ "MAX_MQTT_TOPIC_DEPTH", "_communication_configuration_8h.html#a8ef1dda67b152600d665bc83d81a7537", null ],
+    [ "DEFAUL_HOSTNAME_NUMBER", "_communication_configuration_8h.html#adc9d10db2d5538b7504c28c87d0ab345", null ]
 ];

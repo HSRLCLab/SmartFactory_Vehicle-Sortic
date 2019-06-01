@@ -122,7 +122,7 @@ Macros</h2></td></tr>
 <tr class="memitem:a470698486c2071308dfc9a0a099dc604"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_configuration_8h.html#a470698486c2071308dfc9a0a099dc604">HOIST_SERVO_DELAY</a>&#160;&#160;&#160;30</td></tr>
 <tr class="memdesc:a470698486c2071308dfc9a0a099dc604"><td class="mdescLeft">&#160;</td><td class="mdescRight">Duration of the delay between the position updates of the Servo.  <a href="#a470698486c2071308dfc9a0a099dc604">More...</a><br /></td></tr>
 <tr class="separator:a470698486c2071308dfc9a0a099dc604"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7491208d8508e67121506d6ae20f80e4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_configuration_8h.html#a7491208d8508e67121506d6ae20f80e4">HOIST_POSITION_MIN</a>&#160;&#160;&#160;168</td></tr>
+<tr class="memitem:a7491208d8508e67121506d6ae20f80e4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_configuration_8h.html#a7491208d8508e67121506d6ae20f80e4">HOIST_POSITION_MIN</a>&#160;&#160;&#160;160</td></tr>
 <tr class="memdesc:a7491208d8508e67121506d6ae20f80e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimal angle of the Servo.  <a href="#a7491208d8508e67121506d6ae20f80e4">More...</a><br /></td></tr>
 <tr class="separator:a7491208d8508e67121506d6ae20f80e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e2724711632396b55305b088875e2d4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_configuration_8h.html#a3e2724711632396b55305b088875e2d4">HOIST_POISITION_MAX</a>&#160;&#160;&#160;65</td></tr>
@@ -171,10 +171,14 @@ Variables</h2></td></tr>
 <tr class="separator:a32a866d02be32142f546db36880fea1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a90feaa7374c5c362fc49293faeb362a8"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_configuration_8h.html#a90feaa7374c5c362fc49293faeb362a8">PID_KD</a> = 0.005</td></tr>
 <tr class="separator:a90feaa7374c5c362fc49293faeb362a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b221f0e28fd77d8b5b765d2a48fcf4d"><td class="memItemLeft" align="right" valign="top">const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_configuration_8h.html#a7b221f0e28fd77d8b5b765d2a48fcf4d">TIME_BETWEEN_PUBLISH</a> = 500</td></tr>
+<tr class="memitem:a7b221f0e28fd77d8b5b765d2a48fcf4d"><td class="memItemLeft" align="right" valign="top">const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_configuration_8h.html#a7b221f0e28fd77d8b5b765d2a48fcf4d">TIME_BETWEEN_PUBLISH</a> = 300</td></tr>
 <tr class="separator:a7b221f0e28fd77d8b5b765d2a48fcf4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4d5634d9962769db6aa6937cb3d3e71"><td class="memItemLeft" align="right" valign="top">const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_configuration_8h.html#af4d5634d9962769db6aa6937cb3d3e71">TIME_BETWEEN_PUBLISH_TOKEN</a> = 200</td></tr>
+<tr class="separator:af4d5634d9962769db6aa6937cb3d3e71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a872b415db6d784b9251edf0eb253d3a1"><td class="memItemLeft" align="right" valign="top">const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_configuration_8h.html#a872b415db6d784b9251edf0eb253d3a1">TIMEOUT_VACKS</a> = 5 * 1000</td></tr>
 <tr class="separator:a872b415db6d784b9251edf0eb253d3a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa37d01e66cad434de466cd72b1d18726"><td class="memItemLeft" align="right" valign="top">const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_configuration_8h.html#aa37d01e66cad434de466cd72b1d18726">SORTIC_MAX_LINE</a> = 3</td></tr>
+<tr class="separator:aa37d01e66cad434de466cd72b1d18726"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>File that contains the configuratioindetails of the different modules. </p>
@@ -201,7 +205,7 @@ Variables</h2></td></tr>
 
 <p>Maximal angle of the Servo. </p>
 
-<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00067">67</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00069">69</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
 
 </div>
 </div>
@@ -212,14 +216,14 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define HOIST_POSITION_MIN&#160;&#160;&#160;168</td>
+          <td class="memname">#define HOIST_POSITION_MIN&#160;&#160;&#160;160</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Minimal angle of the Servo. </p>
 
-<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00066">66</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00068">68</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
 
 </div>
 </div>
@@ -237,7 +241,7 @@ Variables</h2></td></tr>
 
 <p>Duration of the delay between the position updates of the Servo. </p>
 
-<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00065">65</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00067">67</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
 
 </div>
 </div>
@@ -255,7 +259,7 @@ Variables</h2></td></tr>
 
 <p>Pin-Number for Servocontroll of the <a class="el" href="class_hoist.html" title="Provides the basic functions to controll the Hoist.">Hoist</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00064">64</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00066">66</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
 
 </div>
 </div>
@@ -271,7 +275,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00058">58</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00060">60</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
 
 </div>
 </div>
@@ -287,7 +291,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00060">60</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00062">62</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
 
 </div>
 </div>
@@ -303,7 +307,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00057">57</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00059">59</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
 
 </div>
 </div>
@@ -319,7 +323,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00059">59</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00061">61</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
 
 </div>
 </div>
@@ -335,7 +339,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00055">55</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00057">57</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
 
 </div>
 </div>
@@ -351,7 +355,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00056">56</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00058">58</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
 
 </div>
 </div>
@@ -367,7 +371,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00053">53</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00055">55</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
 
 </div>
 </div>
@@ -383,7 +387,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00054">54</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00056">56</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
 
 </div>
 </div>
@@ -399,7 +403,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00072">72</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00074">74</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
 
 </div>
 </div>
@@ -415,7 +419,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00071">71</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00073">73</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
 
 </div>
 </div>
@@ -431,7 +435,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00075">75</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00077">77</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
 
 </div>
 </div>
@@ -447,7 +451,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00073">73</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00075">75</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
 
 </div>
 </div>
@@ -463,7 +467,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00074">74</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00076">76</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
 
 </div>
 </div>
@@ -660,6 +664,22 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="aa37d01e66cad434de466cd72b1d18726"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa37d01e66cad434de466cd72b1d18726">&#9670;&nbsp;</a></span>SORTIC_MAX_LINE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const unsigned int SORTIC_MAX_LINE = 3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00052">52</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
+
+</div>
+</div>
 <a id="adb7f9566c2c7d5ebf724e420d8ec247c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adb7f9566c2c7d5ebf724e420d8ec247c">&#9670;&nbsp;</a></span>SPEED</h2>
 
@@ -699,12 +719,28 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const unsigned int TIME_BETWEEN_PUBLISH = 500</td>
+          <td class="memname">const unsigned int TIME_BETWEEN_PUBLISH = 300</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00049">49</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
+
+</div>
+</div>
+<a id="af4d5634d9962769db6aa6937cb3d3e71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4d5634d9962769db6aa6937cb3d3e71">&#9670;&nbsp;</a></span>TIME_BETWEEN_PUBLISH_TOKEN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const unsigned int TIME_BETWEEN_PUBLISH_TOKEN = 200</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00050">50</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
 
 </div>
 </div>
@@ -720,7 +756,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00050">50</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_configuration_8h_source.html#l00051">51</a> of file <a class="el" href="_configuration_8h_source.html">Configuration.h</a>.</p>
 
 </div>
 </div>
