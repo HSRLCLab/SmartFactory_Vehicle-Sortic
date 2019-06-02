@@ -30,7 +30,7 @@
 // #include "MQTTCommunication.h"
 // #include "NavigationCtrl.h"
 
-#include "FSM/VehicleCtrl.h"
+#include "VehicleCtrl.h"
 
 enum class TestCase {
     RUN,
