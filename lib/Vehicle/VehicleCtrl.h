@@ -18,7 +18,7 @@
 #include <Arduino.h>
 
 // own files:
-// #include "CommunicationConfiguration.h"
+#include "Configuration.h"
 
 #include "HoistCtrl.h"
 #include "MQTTCommunication.h"
