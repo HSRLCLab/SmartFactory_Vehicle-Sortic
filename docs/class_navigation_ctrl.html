@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.15"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Smart Factory Fahrzeug: NavigationCtrl Class Reference</title>
+<title>SmartVehicle-Sortic: NavigationCtrl Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -29,8 +29,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Smart Factory Fahrzeug
+   <div id="projectname">SmartVehicle-Sortic
    </div>
+   <div id="projectbrief">SmartFactory</div>
   </td>
  </tr>
  </tbody>
@@ -301,13 +302,13 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a89bd9a0cafc75b679b10b67c7fadcc79"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_navigation_ctrl.html#a89bd9a0cafc75b679b10b67c7fadcc79">tranistonce</a> = true</td></tr>
 <tr class="memdesc:a89bd9a0cafc75b679b10b67c7fadcc79"><td class="mdescLeft">&#160;</td><td class="mdescRight">prevents an loop between transit and gateway  <a href="#a89bd9a0cafc75b679b10b67c7fadcc79">More...</a><br /></td></tr>
 <tr class="separator:a89bd9a0cafc75b679b10b67c7fadcc79"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6864554653efbb3f645bbaf14aaa53b1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_drive_ctrl.html#ae3e758374bbb5879814e961b5232d8da">DriveCtrl::Event</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_navigation_ctrl.html#a6864554653efbb3f645bbaf14aaa53b1">pLastGatewayTurn</a></td></tr>
+<tr class="memitem:a6864554653efbb3f645bbaf14aaa53b1"><td class="memItemLeft" align="right" valign="top">DriveCtrl::Event&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_navigation_ctrl.html#a6864554653efbb3f645bbaf14aaa53b1">pLastGatewayTurn</a></td></tr>
 <tr class="memdesc:a6864554653efbb3f645bbaf14aaa53b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variable which holds the first Turn in gateway.  <a href="#a6864554653efbb3f645bbaf14aaa53b1">More...</a><br /></td></tr>
 <tr class="separator:a6864554653efbb3f645bbaf14aaa53b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4e4012c47104f10fed2493b499f6f17"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14f">Event</a>(NavigationCtrl::*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_navigation_ctrl.html#af4e4012c47104f10fed2493b499f6f17">doActionFPtr</a> )(void) = nullptr</td></tr>
 <tr class="memdesc:af4e4012c47104f10fed2493b499f6f17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Functionpointer to call the current states do-function.  <a href="#af4e4012c47104f10fed2493b499f6f17">More...</a><br /></td></tr>
 <tr class="separator:af4e4012c47104f10fed2493b499f6f17"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91f7d7fcf6a2a84c84d66c8a3a8635cf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_drive_ctrl.html">DriveCtrl</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_navigation_ctrl.html#a91f7d7fcf6a2a84c84d66c8a3a8635cf">pDriveCtrl</a></td></tr>
+<tr class="memitem:a91f7d7fcf6a2a84c84d66c8a3a8635cf"><td class="memItemLeft" align="right" valign="top">DriveCtrl&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_navigation_ctrl.html#a91f7d7fcf6a2a84c84d66c8a3a8635cf">pDriveCtrl</a></td></tr>
 <tr class="memdesc:a91f7d7fcf6a2a84c84d66c8a3a8635cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Navigation Object.  <a href="#a91f7d7fcf6a2a84c84d66c8a3a8635cf">More...</a><br /></td></tr>
 <tr class="separator:a91f7d7fcf6a2a84c84d66c8a3a8635cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -645,7 +646,7 @@ Private Attributes</h2></td></tr>
 <p>executes the main action of the crossTransit state. </p>
 <p>drive forward three times and return <a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14fa86700ff4ed4c693c72667f95a756bbe5" title="Signal: Position reached.">Event::PosReached</a></p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14f" title="Enum holds all possible events.">NavigationCtrl::Event</a> - generated Event </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000016">Todo:</a></b></dt><dd>Probelm with Error possible? </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd>Probelm with Error possible? </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00484">484</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
@@ -739,14 +740,14 @@ Private Attributes</h2></td></tr>
 <img src="NavigationCtrlSubGateway.png" alt="NavigationCtrlSubGateway.png" width="100"/>
 </div>
 <p>0 Wait for Token <br />
-10 <a class="el" href="class_drive.html" title="Class Drive handels the Driving-System.">Drive</a> forward once <br />
+10 Drive forward once <br />
 20 turn left/right depending on target and current orientation or go straith (50) <br />
 30 drive forward n times depending on actual line and targetline <br />
 40 turn left/right depending on target and current orientation 50 drive forward twice. <br />
 if startsector = target.sector then return <a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14fad06f42dab8fc58022bb372634f581e87" title="Signal: PosEndPointReached.">Event::PosEndPointReached</a> else return <a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14fa380121a39580cfe31ce01bdf5f1a6147" title="Signal: PosTransitReached.">Event::PosTransitReached</a></p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14f" title="Enum holds all possible events.">NavigationCtrl::Event</a> - generated Event</dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000014">Todo:</a></b></dt><dd>refactoring so it only checks the neares sector not startsector </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000015">Todo:</a></b></dt><dd>Probelm with Error possible? </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>refactoring so it only checks the neares sector not startsector </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>Probelm with Error possible? </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00332">332</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
@@ -807,7 +808,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 
 <p>executes the main action of the toEndPoint state. </p>
 <p>drive forward once and return <a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14fad06f42dab8fc58022bb372634f581e87" title="Signal: PosEndPointReached.">Event::PosEndPointReached</a> </p><dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14f" title="Enum holds all possible events.">NavigationCtrl::Event</a> - generated Event </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000017">Todo:</a></b></dt><dd>Probelm with Error possible? </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Todo:</a></b></dt><dd>Probelm with Error possible? </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00521">521</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
@@ -840,11 +841,11 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
 <div class="image">
 <img src="NavigationCtrlSubtoGateway.png" alt="NavigationCtrlSubtoGateway.png" width="100"/>
 </div>
-<p>0 <a class="el" href="class_drive.html" title="Class Drive handels the Driving-System.">Drive</a> backwards <br />
+<p>0 Drive backwards <br />
 10 turn around <br />
 20 drive forward once adn return <a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14fa86700ff4ed4c693c72667f95a756bbe5" title="Signal: Position reached.">Event::PosReached</a></p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14f" title="Enum holds all possible events.">NavigationCtrl::Event</a> - generated Event </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000013">Todo:</a></b></dt><dd>Probelm with Error possible? </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>Probelm with Error possible? </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="_navigation_ctrl_8cpp_source.html#l00280">280</a> of file <a class="el" href="_navigation_ctrl_8cpp_source.html">NavigationCtrl.cpp</a>.</p>
 
@@ -1671,7 +1672,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_drive_ctrl.html">DriveCtrl</a> NavigationCtrl::pDriveCtrl</td>
+          <td class="memname">DriveCtrl NavigationCtrl::pDriveCtrl</td>
         </tr>
       </table>
   </td>
@@ -1697,7 +1698,7 @@ if startsector = target.sector then return <a class="el" href="class_navigation_
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_drive_ctrl.html#ae3e758374bbb5879814e961b5232d8da">DriveCtrl::Event</a> NavigationCtrl::pLastGatewayTurn</td>
+          <td class="memname">DriveCtrl::Event NavigationCtrl::pLastGatewayTurn</td>
         </tr>
       </table>
   </td>

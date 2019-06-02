@@ -23,17 +23,15 @@ for the JavaScript code in this file
 */
 var NAVTREE =
 [
-  [ "Smart Factory Fahrzeug", "index.html", [
-    [ "SmartFactoryVehicle", "md__v_1__git__smart_factory_vehicle__r_e_a_d_m_e.html", null ],
+  [ "SmartVehicle-Sortic", "index.html", [
+    [ "SmartFactoryVehicle", "md__v_1__git__smart_factory__vehicle-_sortic__r_e_a_d_m_e.html", null ],
     [ "Todo List", "todo.html", null ],
-    [ "Bug List", "bug.html", null ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
-      [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
-        [ "All", "functions.html", "functions_dup" ],
-        [ "Functions", "functions_func.html", "functions_func" ],
+        [ "All", "functions.html", null ],
+        [ "Functions", "functions_func.html", null ],
         [ "Variables", "functions_vars.html", null ],
         [ "Enumerations", "functions_enum.html", null ]
       ] ]
@@ -44,9 +42,7 @@ var NAVTREE =
         [ "All", "globals.html", null ],
         [ "Functions", "globals_func.html", null ],
         [ "Variables", "globals_vars.html", null ],
-        [ "Typedefs", "globals_type.html", null ],
         [ "Enumerations", "globals_enum.html", null ],
-        [ "Enumerator", "globals_eval.html", null ],
         [ "Macros", "globals_defs.html", null ]
       ] ]
     ] ]
@@ -55,10 +51,8 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_chassis_8cpp.html",
-"class_drive_ctrl.html#a965aedee0c1a17e87b49f290fb899785",
-"class_network.html#a59728fee5cb48783f2f6531d64602dee",
-"my_m_q_t_t_8h.html"
+"_configuration_8h.html",
+"main_8cpp.html#ac7909b7794d7c1d3bb44f2bd5caa96a9"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

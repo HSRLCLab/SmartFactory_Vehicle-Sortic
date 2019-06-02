@@ -1,7 +1,5 @@
 var _communication_configuration_8h =
 [
-    [ "myJSONStr", "structmy_j_s_o_n_str.html", "structmy_j_s_o_n_str" ],
-    [ "DEFAULT_HOSTNAME", "_communication_configuration_8h.html#acbd0b3def6b58577376d5c5edbc1f8d1", null ],
     [ "DEFAULT_MQTT_BROKER_IP1", "_communication_configuration_8h.html#a5d22797e1aecb523d51e001e4b18bfcd", null ],
     [ "DEFAULT_MQTT_BROKER_IP2", "_communication_configuration_8h.html#a3d7bfc12d81b39f60b4c466d73b0f9bd", null ],
     [ "DEFAULT_MQTT_BROKER_IP3", "_communication_configuration_8h.html#a5bef8a41df9bae6c18ba9a7cbe7334b1", null ],
@@ -15,6 +13,5 @@ var _communication_configuration_8h =
     [ "DEFAULT_WIFI_SSID", "_communication_configuration_8h.html#a7ea92631acc3bc41ae5eadc069323267", null ],
     [ "MAX_JSON_MESSAGES_SAVED", "_communication_configuration_8h.html#acf4afb55aa7d1288ad9dffc623360a8c", null ],
     [ "MAX_JSON_PARSE_SIZE", "_communication_configuration_8h.html#a268cecf8b27e3323864627d776dee31d", null ],
-    [ "MAX_MQTT_TOPIC_DEPTH", "_communication_configuration_8h.html#a8ef1dda67b152600d665bc83d81a7537", null ],
-    [ "DEFAUL_HOSTNAME_NUMBER", "_communication_configuration_8h.html#adc9d10db2d5538b7504c28c87d0ab345", null ]
+    [ "MAX_MQTT_TOPIC_DEPTH", "_communication_configuration_8h.html#a8ef1dda67b152600d665bc83d81a7537", null ]
 ];

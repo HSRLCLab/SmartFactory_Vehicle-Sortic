@@ -1,5 +1,6 @@
 var _configuration_8h =
 [
+    [ "DEFAULT_HOSTNAME", "_configuration_8h.html#acbd0b3def6b58577376d5c5edbc1f8d1", null ],
     [ "HOIST_POISITION_MAX", "_configuration_8h.html#a3e2724711632396b55305b088875e2d4", null ],
     [ "HOIST_POSITION_MIN", "_configuration_8h.html#a7491208d8508e67121506d6ae20f80e4", null ],
     [ "HOIST_SERVO_DELAY", "_configuration_8h.html#a470698486c2071308dfc9a0a099dc604", null ],
@@ -17,6 +18,7 @@ var _configuration_8h =
     [ "VISION_START_ANGLE", "_configuration_8h.html#a36d29bc6656692535c4aa9d9400733f8", null ],
     [ "VISION_TOLERANCE_LEFT", "_configuration_8h.html#a8702a13f891520136a3c0ff09ec04763", null ],
     [ "VISION_TOLERANCE_RIGHT", "_configuration_8h.html#abd2b703e1b9aed676cf4c9be50f4ac33", null ],
+    [ "DEFAUL_HOSTNAME_NUMBER", "_configuration_8h.html#adc9d10db2d5538b7504c28c87d0ab345", null ],
     [ "LEFT_MOTOR", "_configuration_8h.html#af5df0cfdfb3c479eba2cdbfec7c217ae", null ],
     [ "PID_KD", "_configuration_8h.html#a90feaa7374c5c362fc49293faeb362a8", null ],
     [ "PID_KI", "_configuration_8h.html#a32a866d02be32142f546db36880fea1a", null ],

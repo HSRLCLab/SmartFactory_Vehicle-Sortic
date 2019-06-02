@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['sonar_5fecho_5fpin',['SONAR_ECHO_PIN',['../_configuration_8h.html#a7c3963e2259c77e10dfc8ab16cd1196b',1,'Configuration.h']]],
-  ['sonar_5fmax_5fdistance',['SONAR_MAX_DISTANCE',['../_configuration_8h.html#afda0bb8844d5254739b5fdbd2f857160',1,'Configuration.h']]],
-  ['sonar_5fservo_5fpin',['SONAR_SERVO_PIN',['../_configuration_8h.html#af7a1b51233e242c28cecd5391465530f',1,'Configuration.h']]],
-  ['sonar_5ftrigger_5fpin',['SONAR_TRIGGER_PIN',['../_configuration_8h.html#a9a392498234e3844d614e1768cc15407',1,'Configuration.h']]]
+  ['vision_5fdelay_5ffactor',['VISION_DELAY_FACTOR',['../_configuration_8h.html#aab38604509f480441347f394d811a94a',1,'Configuration.h']]],
+  ['vision_5fservo_5fpin',['VISION_SERVO_PIN',['../_configuration_8h.html#ae44224f21b79253547e64f793aa2e40c',1,'Configuration.h']]],
+  ['vision_5fstart_5fangle',['VISION_START_ANGLE',['../_configuration_8h.html#a36d29bc6656692535c4aa9d9400733f8',1,'Configuration.h']]],
+  ['vision_5ftolerance_5fleft',['VISION_TOLERANCE_LEFT',['../_configuration_8h.html#a8702a13f891520136a3c0ff09ec04763',1,'Configuration.h']]],
+  ['vision_5ftolerance_5fright',['VISION_TOLERANCE_RIGHT',['../_configuration_8h.html#abd2b703e1b9aed676cf4c9be50f4ac33',1,'Configuration.h']]]
 ];

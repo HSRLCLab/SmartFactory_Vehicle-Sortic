@@ -31,7 +31,5 @@ var main_8cpp =
     [ "Test", "main_8cpp.html#a0605f4e402ba899e0bce75442e78e083", null ],
     [ "tmp_mess", "main_8cpp.html#a6f66244347eb1e657981aba2c8b92c70", null ],
     [ "vehicleHoist", "main_8cpp.html#a9f461ee2ad058278144a1012d50f1344", null ],
-    [ "vehicleSonar", "main_8cpp.html#a9041baaa75510e2ba176fa9e6665671a", null ],
-    [ "vehicleVision", "main_8cpp.html#a955a6f77ea4dcffc6e6702595070f2d6", null ],
     [ "vehictrl", "main_8cpp.html#a788e5a6502c8e82c055878ee7b7160e5", null ]
 ];

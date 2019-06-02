@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.15"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Smart Factory Fahrzeug: CommunicationConfiguration.h File Reference</title>
+<title>SmartVehicle-Sortic: CommunicationConfiguration.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -29,8 +29,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Smart Factory Fahrzeug
+   <div id="projectname">SmartVehicle-Sortic
    </div>
+   <div id="projectbrief">SmartFactory</div>
   </td>
  </tr>
  </tbody>
@@ -86,9 +87,7 @@ $(document).ready(function(){initNavTree('_communication_configuration_8h.html',
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#define-members">Macros</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
 <div class="title">CommunicationConfiguration.h File Reference</div>  </div>
 </div><!--header-->
@@ -99,11 +98,6 @@ $(document).ready(function(){initNavTree('_communication_configuration_8h.html',
 
 <p><a href="_communication_configuration_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmy_j_s_o_n_str.html">myJSONStr</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a7ea92631acc3bc41ae5eadc069323267"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_communication_configuration_8h.html#a7ea92631acc3bc41ae5eadc069323267">DEFAULT_WIFI_SSID</a>&#160;&#160;&#160;&quot;DigitalLab&quot;</td></tr>
@@ -132,8 +126,6 @@ Macros</h2></td></tr>
 <tr class="memitem:a01342056d524ed0b20f9e0ccc800d1db"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_communication_configuration_8h.html#a01342056d524ed0b20f9e0ccc800d1db">DEFAULT_MQTT_PORT</a>&#160;&#160;&#160;1883</td></tr>
 <tr class="memdesc:a01342056d524ed0b20f9e0ccc800d1db"><td class="mdescLeft">&#160;</td><td class="mdescRight">MQTT connection port.  <a href="#a01342056d524ed0b20f9e0ccc800d1db">More...</a><br /></td></tr>
 <tr class="separator:a01342056d524ed0b20f9e0ccc800d1db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acbd0b3def6b58577376d5c5edbc1f8d1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_communication_configuration_8h.html#acbd0b3def6b58577376d5c5edbc1f8d1">DEFAULT_HOSTNAME</a>&#160;&#160;&#160;(String(&quot;SV&quot;) + String(<a class="el" href="_communication_configuration_8h.html#adc9d10db2d5538b7504c28c87d0ab345">DEFAUL_HOSTNAME_NUMBER</a>))</td></tr>
-<tr class="separator:acbd0b3def6b58577376d5c5edbc1f8d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a268cecf8b27e3323864627d776dee31d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_communication_configuration_8h.html#a268cecf8b27e3323864627d776dee31d">MAX_JSON_PARSE_SIZE</a>&#160;&#160;&#160;300</td></tr>
 <tr class="memdesc:a268cecf8b27e3323864627d776dee31d"><td class="mdescLeft">&#160;</td><td class="mdescRight">max buffer size to parse JSON objects, size of the pool in bytes, can be calculated in <a href="https://arduinojson.org/v5/assistant/">https://arduinojson.org/v5/assistant/</a>  <a href="#a268cecf8b27e3323864627d776dee31d">More...</a><br /></td></tr>
 <tr class="separator:a268cecf8b27e3323864627d776dee31d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -143,11 +135,6 @@ Macros</h2></td></tr>
 <tr class="memitem:a8ef1dda67b152600d665bc83d81a7537"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_communication_configuration_8h.html#a8ef1dda67b152600d665bc83d81a7537">MAX_MQTT_TOPIC_DEPTH</a>&#160;&#160;&#160;5</td></tr>
 <tr class="memdesc:a8ef1dda67b152600d665bc83d81a7537"><td class="mdescLeft">&#160;</td><td class="mdescRight">how many topics can be in row, e.g. SmartBox/SB1/level are 3 topic levels  <a href="#a8ef1dda67b152600d665bc83d81a7537">More...</a><br /></td></tr>
 <tr class="separator:a8ef1dda67b152600d665bc83d81a7537"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:adc9d10db2d5538b7504c28c87d0ab345"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_communication_configuration_8h.html#adc9d10db2d5538b7504c28c87d0ab345">DEFAUL_HOSTNAME_NUMBER</a> = 1</td></tr>
-<tr class="separator:adc9d10db2d5538b7504c28c87d0ab345"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>file that contains the default network configuration </p>
@@ -163,22 +150,6 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition in file <a class="el" href="_communication_configuration_8h_source.html">CommunicationConfiguration.h</a>.</p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="acbd0b3def6b58577376d5c5edbc1f8d1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acbd0b3def6b58577376d5c5edbc1f8d1">&#9670;&nbsp;</a></span>DEFAULT_HOSTNAME</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define DEFAULT_HOSTNAME&#160;&#160;&#160;(String(&quot;SV&quot;) + String(<a class="el" href="_communication_configuration_8h.html#adc9d10db2d5538b7504c28c87d0ab345">DEFAUL_HOSTNAME_NUMBER</a>))</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_communication_configuration_8h_source.html#l00043">43</a> of file <a class="el" href="_communication_configuration_8h_source.html">CommunicationConfiguration.h</a>.</p>
-
-</div>
-</div>
 <a id="a5d22797e1aecb523d51e001e4b18bfcd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5d22797e1aecb523d51e001e4b18bfcd">&#9670;&nbsp;</a></span>DEFAULT_MQTT_BROKER_IP1</h2>
 
@@ -414,23 +385,6 @@ Variables</h2></td></tr>
 <p>how many topics can be in row, e.g. SmartBox/SB1/level are 3 topic levels </p>
 
 <p class="definition">Definition at line <a class="el" href="_communication_configuration_8h_source.html#l00052">52</a> of file <a class="el" href="_communication_configuration_8h_source.html">CommunicationConfiguration.h</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="adc9d10db2d5538b7504c28c87d0ab345"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adc9d10db2d5538b7504c28c87d0ab345">&#9670;&nbsp;</a></span>DEFAUL_HOSTNAME_NUMBER</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int DEFAUL_HOSTNAME_NUMBER = 1</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_communication_configuration_8h_source.html#l00042">42</a> of file <a class="el" href="_communication_configuration_8h_source.html">CommunicationConfiguration.h</a>.</p>
 
 </div>
 </div>

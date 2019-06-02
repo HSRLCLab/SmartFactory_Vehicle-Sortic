@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.15"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Smart Factory Fahrzeug: Todo List</title>
+<title>SmartVehicle-Sortic: Todo List</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -29,8 +29,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Smart Factory Fahrzeug
+   <div id="projectname">SmartVehicle-Sortic
    </div>
+   <div id="projectbrief">SmartFactory</div>
   </td>
  </tr>
  </tbody>
@@ -90,58 +91,22 @@ $(document).ready(function(){initNavTree('todo.html','');});
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><dl class="reflist">
-<dt>Member <a class="el" href="_communication_8h.html#ac3a129f66dc859e2b7279565f4e1de78">callback</a>  (char *topic, byte *payload, unsigned int length)</dt>
-<dd><p class="startdd"><a class="anchor" id="_todo000010"></a>String is inefficient -&gt; change to char array and handle pointer </p>
-<p class="enddd">Change global implementation  </p>
-</dd>
-<dt>File <a class="el" href="_communication_8h.html">Communication.h</a>  </dt>
-<dd><a class="anchor" id="_todo000011"></a>Update to official library standart arduino <a href="https://github.com/arduino/Arduino/wiki/Arduino-IDE-1.5:-Library-specification">https://github.com/arduino/Arduino/wiki/Arduino-IDE-1.5:-Library-specification</a> </dd>
-<dt>File <a class="el" href="_communication_configuration_8h.html">CommunicationConfiguration.h</a>  </dt>
-<dd><a class="anchor" id="_todo000001"></a>Switch Password to .ini file <br />
-<a href="https://community.platformio.org/t/how-to-specify-ota-upload-password-outside-platformio-ini/3588">https://community.platformio.org/t/how-to-specify-ota-upload-password-outside-platformio-ini/3588</a> <br />
-<a href="http://docs.platformio.org/en/latest/envvars.html#building">http://docs.platformio.org/en/latest/envvars.html#building</a>  </dd>
-<dt>Member <a class="el" href="class_drive.html#a157b8dd477abef4845b1da0e19190edb">Drive::turn</a>  (Direction direction, unsigned int speed)</dt>
-<dd><a class="anchor" id="_todo000002"></a>change direction if vehicle is moving forward or backward so the turndirectiomn still matches direction  </dd>
-<dt>File <a class="el" href="_drive_ctrl_8h.html">DriveCtrl.h</a>  </dt>
-<dd><a class="anchor" id="_todo000003"></a>solve linedetection with something like where was the line first detected and NOT with a (nonblocking) delay This would allow to change the speed and still detect all lines correctly  </dd>
-<dt>Member <a class="el" href="class_drive_ctrl.html#ae014c3028820938cf16f77a40f95b648">DriveCtrl::pController</a>  </dt>
-<dd><a class="anchor" id="_todo000004"></a>improve controller and make it adaptive to speedchanges  </dd>
-<dt>File <a class="el" href="_hoist_8h.html">Hoist.h</a>  </dt>
-<dd><p class="startdd"><a class="anchor" id="_todo000009"></a>Delet Default Constructor and don't include configuration.. </p>
-<p class="interdd">make private variable const where necessary </p>
-<p class="interdd">refactor private variable name -&gt; pHoistServo </p>
-<p class="enddd">add used servo-typ to documentation  </p>
-</dd>
-<dt>Member <a class="el" href="class_line_detector.html#ad63b0df911e5530605d86fe605dcfbb3">LineDetector::deviation</a>  ()</dt>
-<dd><p class="startdd"><a class="anchor" id="_todo000005"></a>use some Matrix Bit Magic</p>
-<p class="interdd"><a class="anchor" id="_todo000006"></a>line lost case </p>
-<p class="interdd"><a class="anchor" id="_todo000007"></a>line lost </p>
-<p class="enddd"><a class="anchor" id="_todo000008"></a>wired results  </p>
-</dd>
 <dt>File <a class="el" href="main_8cpp.html">main.cpp</a>  </dt>
-<dd><a class="anchor" id="_todo000024"></a>entkoppelung von configfiles  </dd>
+<dd><a class="anchor" id="_todo000008"></a>entkoppelung von configfiles  </dd>
 <dt>File <a class="el" href="_navigation_ctrl_8cpp.html">NavigationCtrl.cpp</a>  </dt>
-<dd><a class="anchor" id="_todo000012"></a>write a single function for positionupdate  </dd>
+<dd><a class="anchor" id="_todo000001"></a>write a single function for positionupdate  </dd>
 <dt>Member <a class="el" href="class_navigation_ctrl.html#a3c512dcf2651a923922d749056774f50">NavigationCtrl::doAction_crossTransit</a>  ()</dt>
-<dd><a class="anchor" id="_todo000016"></a>Probelm with Error possible?  </dd>
+<dd><a class="anchor" id="_todo000005"></a>Probelm with Error possible?  </dd>
 <dt>Member <a class="el" href="class_navigation_ctrl.html#a0ec7033363c4098de0c34e59e2152a93">NavigationCtrl::doAction_gateway</a>  ()</dt>
-<dd><p class="startdd"><a class="anchor" id="_todo000014"></a>refactoring so it only checks the neares sector not startsector </p>
-<p class="enddd"><a class="anchor" id="_todo000015"></a>Probelm with Error possible?  </p>
+<dd><p class="startdd"><a class="anchor" id="_todo000003"></a>refactoring so it only checks the neares sector not startsector </p>
+<p class="enddd"><a class="anchor" id="_todo000004"></a>Probelm with Error possible?  </p>
 </dd>
 <dt>Member <a class="el" href="class_navigation_ctrl.html#a3dee3f267e76e7bddd677c019fa70cc0">NavigationCtrl::doAction_toEndPoint</a>  ()</dt>
-<dd><a class="anchor" id="_todo000017"></a>Probelm with Error possible?  </dd>
+<dd><a class="anchor" id="_todo000006"></a>Probelm with Error possible?  </dd>
 <dt>Member <a class="el" href="class_navigation_ctrl.html#a0de537d8c34787eb48043fbc2e8cc2ac">NavigationCtrl::doAction_toGateway</a>  ()</dt>
-<dd><a class="anchor" id="_todo000013"></a>Probelm with Error possible?  </dd>
-<dt>Member <a class="el" href="class_sonar.html#a13956b1ab1e31262112232f8a7324f47">Sonar::calculateSonarFactor</a>  (<a class="el" href="struct_sonar_state.html">SonarState</a> *state)</dt>
-<dd><a class="anchor" id="_todo000019"></a>for what?? -&gt;motorControl  </dd>
-<dt>Member <a class="el" href="class_sonar.html#ae303a94ed2e2867f25e8fe37434799f7">Sonar::turnSonar</a>  (int directionError)</dt>
-<dd><a class="anchor" id="_todo000018"></a>smoother position change  </dd>
+<dd><a class="anchor" id="_todo000002"></a>Probelm with Error possible?  </dd>
 <dt>File <a class="el" href="_vehicle_ctrl_8h.html">VehicleCtrl.h</a>  </dt>
-<dd><a class="anchor" id="_todo000023"></a>Change pSorticPark[] array so its dynamic size  </dd>
-<dt>Member <a class="el" href="class_vision.html#a4161ac2256eb98ec6291e567bc4b8e60">Vision::loop</a>  (<a class="el" href="struct_vision_state.html">VisionState</a> *state)</dt>
-<dd><a class="anchor" id="_todo000020"></a>Fehler im sourcecode!?  </dd>
-<dt>Member <a class="el" href="class_vision.html#a8e8b8d28e5ca5ca652d810f0c926920a">Vision::turnVision</a>  (int angle)</dt>
-<dd><a class="anchor" id="_todo000021"></a>this is the same servo as in <a class="el" href="class_sonar.html">Sonar</a>.. but somehow with other parameter?</dd>
+<dd><a class="anchor" id="_todo000007"></a>Change pSorticPark[] array so its dynamic size </dd>
 </dl>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
