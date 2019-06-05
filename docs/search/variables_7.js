@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['lastsector',['lastSector',['../struct_navigation_ctrl_1_1_actual_pos.html#aed92a0c8a935f178097e70e79e1807e5',1,'NavigationCtrl::ActualPos']]],
-  ['laststatebevorerror',['lastStateBevorError',['../class_navigation_ctrl.html#abab5185ddb4042fe28287ffe5b5d1bd5',1,'NavigationCtrl::lastStateBevorError()'],['../class_vehicle_ctrl.html#a43068ebc2e75fb1d8d237f3a00b15941',1,'VehicleCtrl::lastStateBevorError()']]],
-  ['left_5fmotor',['LEFT_MOTOR',['../_configuration_8h.html#af5df0cfdfb3c479eba2cdbfec7c217ae',1,'Configuration.h']]],
-  ['line',['line',['../struct_navigation_ctrl_1_1_actual_pos.html#aec44ff3c7d65e68bbcb0d76913a368d3',1,'NavigationCtrl::ActualPos::line()'],['../struct_navigation_ctrl_1_1_target_pos.html#ae1c968984b579f562b3029b3a0bf6e95',1,'NavigationCtrl::TargetPos::line()']]]
+  ['height',['height',['../struct_block.html#af83cd7a2f0b1bb7b8d0d04783028551d',1,'Block']]],
+  ['hoistctrl',['hoistctrl',['../main_8cpp.html#acae097601ad7c54dd4777362d4308ada',1,'main.cpp']]],
+  ['hoistservo',['hoistServo',['../class_hoist.html#a3738c6a34deba80c7cc7fffd569e8ce2',1,'Hoist']]]
 ];

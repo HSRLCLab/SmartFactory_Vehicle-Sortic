@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['wifi_5fcs',['WIFI_CS',['../_configuration_8h.html#a43c6cb9adfb98518aedd567570762d04',1,'Configuration.h']]],
-  ['wifi_5fen',['WIFI_EN',['../_configuration_8h.html#a3b92a3f51248ea87df50e4f72fcc0808',1,'Configuration.h']]],
-  ['wifi_5firq',['WIFI_IRQ',['../_configuration_8h.html#a5ccb57f142b917c35a039682ef33149e',1,'Configuration.h']]],
-  ['wifi_5frst',['WIFI_RST',['../_configuration_8h.html#aba8ae0e7f3cb314b0359d2d93b962f5b',1,'Configuration.h']]]
+  ['json_5farray_5fsize',['JSON_ARRAY_SIZE',['../_array_ref_8hpp.html#aac02a77c9bffa9a3b305e4fe14a936cf',1,'ArrayRef.hpp']]],
+  ['json_5fobject_5fsize',['JSON_OBJECT_SIZE',['../_object_ref_8hpp.html#aa5b097409c5737886895b41e898d4729',1,'ObjectRef.hpp']]],
+  ['json_5fstring_5fsize',['JSON_STRING_SIZE',['../_string_slot_8hpp.html#a42c160146b8bd6d11f7a29e7192e0587',1,'StringSlot.hpp']]]
 ];

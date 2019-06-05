@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['navigationctrl',['NavigationCtrl',['../class_navigation_ctrl.html',1,'']]]
+  ['block',['Block',['../struct_block.html',1,'']]]
 ];

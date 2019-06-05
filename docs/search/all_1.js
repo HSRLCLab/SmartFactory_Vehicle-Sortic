@@ -1,12 +1,11 @@
 var searchData=
 [
-  ['cargo',['cargo',['../struct_vehicle_ctrl_1_1_vehicle.html#a13c00c434fc930164552e4bf54fddcdd',1,'VehicleCtrl::Vehicle']]],
-  ['checkforerror',['checkForError',['../class_vehicle_ctrl.html#adf4e42474a0811661615535f09befe53',1,'VehicleCtrl']]],
-  ['cleargui',['clearGui',['../class_vehicle_ctrl.html#a6497d425d1cba59a5587fe4e17f1902d',1,'VehicleCtrl']]],
-  ['comm',['comm',['../main_8cpp.html#ac7909b7794d7c1d3bb44f2bd5caa96a9',1,'main.cpp']]],
-  ['configuration_2eh',['Configuration.h',['../_configuration_8h.html',1,'']]],
-  ['crosstransit',['crossTransit',['../class_navigation_ctrl.html#a0101875c0699abe2daccdddff873c72dabf6551233d32bf07676ea9cb39415b8c',1,'NavigationCtrl']]],
-  ['currentevent',['currentEvent',['../class_navigation_ctrl.html#a43929cb28eee4b798d2e050601d19b41',1,'NavigationCtrl::currentEvent()'],['../class_vehicle_ctrl.html#a3e2131084463dfb9b2bccefc898bbcb9',1,'VehicleCtrl::currentEvent()']]],
-  ['currentmillis',['currentMillis',['../class_vehicle_ctrl.html#aa12295b31b62cf09aaac4c2924b3329c',1,'VehicleCtrl::currentMillis()'],['../main_8cpp.html#ae0cbaf532dc7817c544d33554786336b',1,'currentMillis():&#160;main.cpp']]],
-  ['currentstate',['currentState',['../class_navigation_ctrl.html#a4eef36856657895890ac58ff8d85e680',1,'NavigationCtrl::currentState()'],['../class_vehicle_ctrl.html#ab0e53852b3c4835347d61b07e2cdab7c',1,'VehicleCtrl::currentState()']]]
+  ['ack',['ack',['../struct_vehicle_ctrl_1_1_vehicle.html#a197226c639f75318593d54a8cd346c11',1,'VehicleCtrl::Vehicle::ack()'],['../structmy_j_s_o_n_str.html#a35f72407798562c604aa8ce4517979db',1,'myJSONStr::ack()']]],
+  ['actualline',['actualLine',['../struct_vehicle_ctrl_1_1_vehicle.html#a27575f68099aea3f3d2729fe21e12204',1,'VehicleCtrl::Vehicle']]],
+  ['actualpos',['ActualPos',['../struct_navigation_ctrl_1_1_actual_pos.html',1,'NavigationCtrl']]],
+  ['actualsector',['actualSector',['../struct_vehicle_ctrl_1_1_vehicle.html#aa1bad7cb1f13b0462b8804fd1ac9c643',1,'VehicleCtrl::Vehicle']]],
+  ['addr',['addr',['../class_link_i2_c.html#a152eacc94fe28603ba953792ae7bdc3f',1,'LinkI2C']]],
+  ['angle',['angle',['../struct_block.html#abfcbef5f0ab852d55f375ae4c3011555',1,'Block']]],
+  ['answerreceived',['AnswerReceived',['../class_vehicle_ctrl.html#a84cf7c16cb54c3d483b360b7bf47311bae3e095863e3b99e11e8c18efb3901da3',1,'VehicleCtrl']]],
+  ['attach',['attach',['../class_hoist.html#ac8343a7310690e3437ea28c4c2ca15f6',1,'Hoist']]]
 ];

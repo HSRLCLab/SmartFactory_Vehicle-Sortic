@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['vehiclectrl',['VehicleCtrl',['../class_vehicle_ctrl.html#ae69d79d4aa7b030d8552fe352bd548da',1,'VehicleCtrl']]]
+  ['navigationctrl',['NavigationCtrl',['../class_navigation_ctrl.html#a3d35af2285839d16ea4ee66137669a52',1,'NavigationCtrl']]],
+  ['network',['Network',['../class_network.html#a0dfd4ee86e18346c40a7ec13c66c679d',1,'Network']]]
 ];

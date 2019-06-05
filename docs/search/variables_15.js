@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['y',['y',['../struct_block.html#a86d0e413b7dd0346c3d0771f8dddba1c',1,'Block']]]
+  ['x',['X',['../struct_ec_point.html#ae9fec5db6cfb2593a2fe64cf98af3661',1,'EcPoint::X()'],['../struct_block.html#af05be11b22efaf44b3b0712420838cbb',1,'Block::x()']]]
 ];
