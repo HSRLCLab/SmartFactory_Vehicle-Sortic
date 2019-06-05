@@ -1,0 +1,6 @@
+<map id="Configuration.h" name="Configuration.h">
+<area shape="rect" id="node1" title="File that contains the configuratioindetails of the different modules." alt="" coords="65,5,173,32"/>
+<area shape="rect" id="node2" href="$_vehicle_ctrl_8h.html" title="The Vehicle Controll class contains the FSM for the Vehicle." alt="" coords="71,80,167,107"/>
+<area shape="rect" id="node3" href="$_vehicle_ctrl_8cpp.html" title="Implementation of the Vehicle Controll&#45;Class." alt="" coords="5,155,116,181"/>
+<area shape="rect" id="node4" href="$main_8cpp.html" title="Main programm to run the transport vehicle." alt="" coords="141,155,215,181"/>
+</map>

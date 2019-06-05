@@ -71,13 +71,14 @@ These sectors are also separate states and can easily be customized in [Navigati
 ## Software
 
 All functions and files are documented on the [GitHub-Page with Doxygen](https://lmazzole.github.io/SmartFactory_Vehicle-Sortic/).  
-The documentation includes also the [MQTTCommunication](<https://github.com/LMazzole/SmartFactory_MQTTCommunication>) and the [SmartFactory_Vehicle-Basis](https://github.com/LMazzole/SmartFactory_Vehicle-Basis)-Files.
+The documentation does **not** includes the [MQTTCommunication](<https://github.com/LMazzole/SmartFactory_MQTTCommunication>) and the [SmartFactory_Vehicle-Basis](https://github.com/LMazzole/SmartFactory_Vehicle-Basis)-Files.
+If you would like the complete documentation with this files included you need to build it yourself with the *Doxygen-complete* file.
 
 It's important to mention that all functions are non blocking and as short as possible so no other process starves. This way a degree of parallelism can be achieved.
 
 ### Dependency Graph
 
-[<img src="./docs/main_8cpp__incl.png"/>](https://lmazzole.github.io/SmartFactory_Vehicle-Sortic/main_8cpp.html)
+[<img src="./docs/images/main_8cpp__incl.png"/>](https://lmazzole.github.io/SmartFactory_Vehicle-Sortic/main_8cpp.html)
 
 Extern Libraries:  
 
@@ -86,7 +87,7 @@ Extern Libraries:
 
 ### Collaboration Diagram
 
-[<img src="./docs/class_vehicle_ctrl__coll__graph.png"/>](https://lmazzole.github.io/SmartFactory_Vehicle-Sortic/class_vehicle_ctrl.html)
+[<img src="./docs/images/class_vehicle_ctrl__coll__graph.png"/>](https://lmazzole.github.io/SmartFactory_Vehicle-Sortic/class_vehicle_ctrl.html)
 
 ### Important Functions and Files
 

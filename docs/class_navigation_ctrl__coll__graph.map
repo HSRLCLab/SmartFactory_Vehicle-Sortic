@@ -1,0 +1,5 @@
+<map id="NavigationCtrl" name="NavigationCtrl">
+<area shape="rect" id="node1" title="Contains the FSM for the Navigation." alt="" coords="135,95,237,121"/>
+<area shape="rect" id="node2" href="$struct_navigation_ctrl_1_1_actual_pos.html" title="Holds the actual information about the vehicleposition." alt="" coords="5,5,175,32"/>
+<area shape="rect" id="node3" href="$struct_navigation_ctrl_1_1_target_pos.html" title="Holds the information about the vehicle target." alt="" coords="199,5,367,32"/>
+</map>

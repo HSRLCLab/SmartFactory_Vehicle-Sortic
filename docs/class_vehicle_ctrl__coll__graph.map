@@ -1,0 +1,7 @@
+<map id="VehicleCtrl" name="VehicleCtrl">
+<area shape="rect" id="node1" title="The Vehicle Controll class contains the FSM for the complete Vehicle." alt="" coords="243,184,329,211"/>
+<area shape="rect" id="node2" href="$class_navigation_ctrl.html" title="Contains the FSM for the Navigation." alt="" coords="135,95,237,121"/>
+<area shape="rect" id="node3" href="$struct_navigation_ctrl_1_1_actual_pos.html" title="Holds the actual information about the vehicleposition." alt="" coords="5,5,175,32"/>
+<area shape="rect" id="node4" href="$struct_navigation_ctrl_1_1_target_pos.html" title="Holds the information about the vehicle target." alt="" coords="199,5,367,32"/>
+<area shape="rect" id="node5" href="$struct_vehicle_ctrl_1_1_vehicle.html" title="Holds all relevant infos for the vehicle." alt="" coords="261,95,397,121"/>
+</map>
