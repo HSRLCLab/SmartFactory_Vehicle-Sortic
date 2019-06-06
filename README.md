@@ -4,7 +4,7 @@ The [SmartFactory_Vehicle-Sortic](<https://github.com/LMazzole/SmartFactory_Vehi
 
 It's a Smart-Vehicle which can navigate on a known game-table and communicates this information wirelessly to its environment using the [SmartFactory_MQTTCommunication](https://github.com/LMazzole/SmartFactory_MQTTCommunication) and the [SmartFactory_Vehicle-Basis](<https://github.com/LMazzole/SmartFactory_Vehicle-Basis>) -component.
 
- Multiple nested  Finite State Machines (FSM) based on the pattern of the [ArdFSM](<https://github.com/LMazzole/ArdFSM>) are used to control the processes.
+ Multiple nested Finite State Machines (FSM) based on the pattern of the [ArdFSM](<https://github.com/LMazzole/ArdFSM>) are used to control the processes.
 
 <!-- add Pagebreak: <div style="page-break-after: always;"></div> -->
 
@@ -16,7 +16,7 @@ It's a Smart-Vehicle which can navigate on a known game-table and communicates t
 
 ## The SmartFactory Project - Sortic
 
-The implementation of the SmartFactory project  for Sortic looks like this:
+The implementation of the SmartFactory project for Sortic looks as follows:
 
 <img src="./docs/images/RepoOverview.png" height="300"/>
 
@@ -29,8 +29,8 @@ The associated  Repositorys are:
 
 ## Tools and Technologies
 
-The source-code is written in C++.
-To achieve this project, the following listed tools and technologies were used.
+The source code is written in C++.
+To achieve this project, the following tools and technologies were used.
 
 ### Doxygen
 
@@ -48,7 +48,7 @@ For a description of the MQTT-Technologie take a look at the [MQTTCommunication-
 # Documentation
 
 ## Hardware
-For a description of the used Hardware  take a look at the [Vehicle-Basis-ReadMe](https://github.com/LMazzole/SmartFactory_Vehicle-Basis).   
+For a description of the used Hardware take a look at the [Vehicle-Basis-ReadMe](https://github.com/LMazzole/SmartFactory_Vehicle-Basis).   
 
 
 ## Gametable 
@@ -72,9 +72,9 @@ These sectors are also separate states and can easily be customized in [Navigati
 
 All functions and files are documented on the [GitHub-Page with Doxygen](https://lmazzole.github.io/SmartFactory_Vehicle-Sortic/).  
 The documentation does **not** includes the [MQTTCommunication](<https://github.com/LMazzole/SmartFactory_MQTTCommunication>) and the [SmartFactory_Vehicle-Basis](https://github.com/LMazzole/SmartFactory_Vehicle-Basis)-Files.
-If you would like the complete documentation with this files included you need to build it yourself with the *Doxygen-complete* file.
+If you would like the complete documentation with these files included you need to build it yourself with the *Doxygen-complete* file.
 
-It's important to mention that all functions are non blocking and as short as possible so no other process starves. This way a degree of parallelism can be achieved.
+It's important to mention that all functions are non-blocking and as short as possible so no other process starves. This way a degree of parallelism can be achieved.
 
 ### Dependency Graph
 
@@ -113,13 +113,13 @@ More information about the communication process and the complete procedure is d
 
 #### Handshake with Box
 
-For an handshake with a box the topic *Vehicle/vehicle.id/handshake* is used. The Confirmation of the new position is send from the vehicle to the *Box/box.id/position*.
+For a handshake with a box the topic *Vehicle/vehicle.id/handshake* is used. The confirmation of the new position is send from the vehicle to the *Box/box.id/position*.
 
 <img src="./docs/images/Handshake-detailed.svg" height="650" />
 
 #### Transfer and Vehicle
 
-Before the vehicle can bring the box to its new destination, it has to find out where its load is needed and whether that space is available. For this it subscribes to the Topic Transfer/Handover and evaluates the received messages.
+Before the vehicle can bring the box to its new destination, it has to find out where its load is needed and whether that space is available. For this it subscribes to the topic Transfer/Handover and evaluates the received messages.
 
 <img src="./docs/images/TransferToSV-detailed.svg" height="550" />
 
@@ -128,13 +128,13 @@ Before the vehicle can bring the box to its new destination, it has to find out 
 
 #### I'd like to use this code in my project. What do I need to know?  
 
-> This Repository is specifically for Sortic. You can still use it, if you stick to the following rules:  
+> This Repository is designed specifically for Sortic. You can still use it, if you stick to the following rules:  
 >
-> * Use the same Handshake and Communication-Sequence for your carrier as documented in  [SmartFactory-Sortic](https://github.com/LMazzole/SmartFactory-Sortic) and [Communication](#communication).
+> * Use the same handshake and communication sequence for your carrier as documented in  [SmartFactory-Sortic](https://github.com/LMazzole/SmartFactory-Sortic) and [Communication](#communication).
 
 ### ToDo's
 #### Software
-All open ToDo's can be found in the Documentation on the [GitHub-Page](https://lmazzole.github.io/SmartFactory_Box-Sortic/todo.html)
+All open to do's can be found in the documentation on the [GitHub-Page](https://lmazzole.github.io/SmartFactory_Box-Sortic/todo.html)
 
 
 ## Contributors
