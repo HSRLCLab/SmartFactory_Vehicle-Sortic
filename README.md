@@ -14,11 +14,13 @@ It's a Smart-Vehicle which can navigate on a known game-table and communicates t
 
 [TOC]
 
+<div style="page-break-after: always;"></div>
+
 ## The SmartFactory Project - Sortic
 
 The implementation of the SmartFactory project for Sortic looks as follows:
 
-<img src="./docs/images/RepoOverview.png" height="300"/>
+<p align="center"><img src="./docs/images/RepoOverview.png" height="300"/></p>
 
 The associated  Repositorys are:  
   [SmartFactory-Sortic](https://github.com/LMazzole/SmartFactory-Sortic)  
@@ -45,6 +47,8 @@ The used  IDE is [VSCode](https://code.visualstudio.com/) with the [PlatformIO](
 
 For a description of the MQTT-Technologie take a look at the [MQTTCommunication-ReadMe](<https://github.com/LMazzole/SmartFactory_MQTTCommunication#mqtt>).   
 
+<div style="page-break-after: always;"></div>
+
 # Documentation
 
 ## Hardware
@@ -65,8 +69,10 @@ The Gametable consists of black lines on a white (light) background. It is compo
 * Parking
 
 These sectors are also separate states and can easily be customized in [NavigationCtrl](https://lmazzole.github.io/SmartFactory_Vehicle-Sortic/class_navigation_ctrl.html).
-<img src="./lib/Navigation/Gametable.png" height="500"/>
-<img src="./docs/images/GametableDimension.png" height="500"/>
+<p align="center"><img src="./lib/Navigation/Gametable.png" height="500"/></p>
+<p align="center"><img src="./docs/images/GametableDimension.png" height="500"/></p>
+
+<div style="page-break-after: always;"></div>
 
 ## Software
 
@@ -78,16 +84,29 @@ It's important to mention that all functions are non-blocking and as short as po
 
 ### Dependency Graph
 
-[<img src="./docs/images/main_8cpp__incl.png"/>](https://lmazzole.github.io/SmartFactory_Vehicle-Sortic/main_8cpp.html)
+<p align="center">
+    <a href=https://lmazzole.github.io/SmartFactory_Vehicle-Sortic/main_8cpp.html>
+        <img src="./docs/images/main_8cpp__incl.png" height="250" style="border:none;"/>
+    </a>
+    <p align="center"><small>Click on the image to open doxygen-documentation.</p>
+</p>
 
 Extern Libraries:  
 
 - [SmartFactory_MQTTCommunication](<https://github.com/LMazzole/SmartFactory_MQTTCommunication>)
 - [SmartFactory_Vehicle-Basis](https://github.com/LMazzole/SmartFactory_Vehicle-Basis)
 
+<div style="page-break-after: always;"></div>
+
 ### Collaboration Diagram
 
-[<img src="./docs/images/class_vehicle_ctrl__coll__graph.png"/>](https://lmazzole.github.io/SmartFactory_Vehicle-Sortic/class_vehicle_ctrl.html)
+<p align="center">
+    <a href=https://lmazzole.github.io/SmartFactory_Vehicle-Sortic/class_vehicle_ctrl.html>
+        <img src="./docs/images/class_vehicle_ctrl__coll__graph.png" height="400" style="border:none;"/>
+    </a>
+    <p align="center"><small>Click on the image to open doxygen-documentation.</p>
+</p>
+
 
 ### Important Functions and Files
 
@@ -101,28 +120,35 @@ In [Configuration.h](<https://lmazzole.github.io/SmartFactory_Vehicle-Sortic/_co
 * The Hostname number (DEFAUL_HOSTNAME_NUMBER)
 * The Hostname "SV"+ Hostnamenumber (DEFAULT_HOSTNAME)
 
+<div style="page-break-after: always;"></div>
+
 ### Communication 
 
 The SmartVehicle communicates via the [SmartFactory_MQTTCommunication](<https://github.com/LMazzole/SmartFactory_MQTTCommunication>) to an MQTT-Broker, who distributes the messages. The communication works by subscribing to various topics. The subscribed Topics change depending on action and position of the Vehicle. The Topic-Tree looks like this:
 
-<img src="./docs/images/MQTTTopics.png" height="600" />
+<p align="center"><img src="./docs/images/MQTTTopics.png" height="600" /></p>
 
 The Vehicle is constantly subscribed to the topics: *error, Vehicle/error, Vehicle/vehicle.id/error* and also always publishes its status to *Vehicle/vehicle.id/status*. 
 
 More information about the communication process and the complete procedure is documented in [SmartFactroy-Sortic-ReadMe](<https://github.com/LMazzole/SmartFactory-Sortic#smartfactory-sortic>). 
 
+<div style="page-break-after: always;"></div>
+
 #### Handshake with Box
 
 For a handshake with a box the topic *Vehicle/vehicle.id/handshake* is used. The confirmation of the new position is send from the vehicle to the *Box/box.id/position*.
 
-<img src="./docs/images/Handshake-detailed.svg" height="650" />
+<p align="center"><img src="./docs/images/Handshake-detailed.svg" height="650" /></p>
+
+<div style="page-break-after: always;"></div>
 
 #### Transfer and Vehicle
 
 Before the vehicle can bring the box to its new destination, it has to find out where its load is needed and whether that space is available. For this it subscribes to the topic Transfer/Handover and evaluates the received messages.
 
-<img src="./docs/images/TransferToSV-detailed.svg" height="550" />
+<p align="center"><img src="./docs/images/TransferToSV-detailed.svg" height="550" /></p>
 
+<div style="page-break-after: always;"></div>
 
 ## FAQ's
 
