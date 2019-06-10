@@ -94,8 +94,8 @@ $(document).ready(function(){initNavTree('md__v_1__git__smart_factory__vehicle-_
 <p>It's a Smart-Vehicle which can navigate on a known game-table and communicates this information wirelessly to its environment using the <a href="https://github.com/LMazzole/SmartFactory_MQTTCommunication">SmartFactory_MQTTCommunication</a> and the <a href="https://github.com/LMazzole/SmartFactory_Vehicle-Basis">SmartFactory_Vehicle-Basis</a> -component.</p>
 <p>Multiple nested Finite State Machines (FSM) based on the pattern of the <a href="https://github.com/LMazzole/ArdFSM">ArdFSM</a> are used to control the processes.</p>
 <h2>Table of Content</h2>
-<h2>The SmartFactory Project - Sortic</h2>
-<p>The implementation of the SmartFactory project for Sortic looks like this:</p>
+<div style="page-break-after: always;"></div><h2>The SmartFactory Project - Sortic</h2>
+<p>The implementation of the SmartFactory project for Sortic looks as follows:</p>
 <img src="./docs/images/RepoOverview.png" height="300" alt="" class="inline"/>
 <p>The associated Repositorys are:</p>
 <p><a href="https://github.com/LMazzole/SmartFactory-Sortic">SmartFactory-Sortic</a></p>
@@ -104,7 +104,7 @@ $(document).ready(function(){initNavTree('md__v_1__git__smart_factory__vehicle-_
 <p><a href="https://github.com/LMazzole/SmartFactory_Vehicle-Basis">SmartFactory_Vehicle-Basis</a></p>
 <p><a href="https://github.com/LMazzole/SmartFactory_MQTTCommunication">SmartFactory_MQTTCommunication</a></p>
 <h2>Tools and Technologies</h2>
-<p>The source-code is written in C++. To achieve this project, the following listed tools and technologies were used.</p>
+<p>The source code is written in C++. To achieve this project, the following tools and technologies were used.</p>
 <h3>Doxygen</h3>
 <p>Doxygen is used for the documentation of the source-code.</p>
 <p>An intorduction to <em>Doxygen</em> and how to install it can be found in the <a href="https://github.com/LMazzole/ArdFSM#documentation-with-doxygen">ArdFSM-Repo</a>.</p>
@@ -112,7 +112,7 @@ $(document).ready(function(){initNavTree('md__v_1__git__smart_factory__vehicle-_
 <p>The used IDE is <a href="https://code.visualstudio.com/">VSCode</a> with the <a href="https://platformio.org/platformio-ide">PlatformIO</a>-Extension.</p>
 <h3>MQTT</h3>
 <p>For a description of the MQTT-Technologie take a look at the <a href="https://github.com/LMazzole/SmartFactory_MQTTCommunication#mqtt">MQTTCommunication-ReadMe</a>.</p>
-<h1>Documentation</h1>
+<div style="page-break-after: always;"></div><h1>Documentation</h1>
 <h2>Hardware</h2>
 <p>For a description of the used Hardware take a look at the <a href="https://github.com/LMazzole/SmartFactory_Vehicle-Basis">Vehicle-Basis-ReadMe</a>.</p>
 <h2>Gametable</h2>
@@ -124,65 +124,115 @@ $(document).ready(function(){initNavTree('md__v_1__git__smart_factory__vehicle-_
 <li>Transit</li>
 <li>Parking</li>
 </ul>
-<p>These sectors are also separate states and can easily be customized in <a href="https://lmazzole.github.io/SmartFactory_Vehicle-Sortic/class_navigation_ctrl.html">NavigationCtrl</a>. <img src="./lib/Navigation/Gametable.png" height="500" alt="" class="inline"/>
- <img src="./docs/images/GametableDimension.png" height="500" alt="" class="inline"/>
-<h2>Software</h2>
+<p>These sectors are also separate states and can easily be customized in <a href="https://lmazzole.github.io/SmartFactory_Vehicle-Sortic/class_navigation_ctrl.html">NavigationCtrl</a>. </p>
+<img src="./lib/Navigation/Gametable.png" height="500" alt="" class="inline"/>
+<img src="./docs/images/GametableDimension.png" height="500" alt="" class="inline"/>
+<div style="page-break-after: always;"></div><h2>Software</h2>
 <p>All functions and files are documented on the <a href="https://lmazzole.github.io/SmartFactory_Vehicle-Sortic/">GitHub-Page with Doxygen</a>.</p>
-<p>The documentation includes also the <a href="https://github.com/LMazzole/SmartFactory_MQTTCommunication">MQTTCommunication</a> and the <a href="https://github.com/LMazzole/SmartFactory_Vehicle-Basis">SmartFactory_Vehicle-Basis</a>-Files.</p>
-<p>It's important to mention that all functions are non blocking and as short as possible so no other process starves. This way a degree of parallelism can be achieved.</p>
+<p>The documentation does <b>not</b> includes the <a href="https://github.com/LMazzole/SmartFactory_MQTTCommunication">MQTTCommunication</a> and the <a href="https://github.com/LMazzole/SmartFactory_Vehicle-Basis">SmartFactory_Vehicle-Basis</a>-Files. If you would like the complete documentation with these files included you need to build it yourself with the <em>Doxygen-complete</em> file.</p>
+<p>It's important to mention that all functions are non-blocking and as short as possible so no other process starves. This way a degree of parallelism can be achieved.</p>
 <h3>Dependency Graph</h3>
-<p><a href="https://lmazzole.github.io/SmartFactory_Vehicle-Sortic/main_8cpp.html"><img src="./docs/main_8cpp__incl.png" alt="" class="inline"/>
-</a></p>
-<p>Extern Libraries:</p>
-<ul>
+<p><a href="https://lmazzole.github.io/SmartFactory_Vehicle-Sortic/main_8cpp.html"><img src="./docs/images/main_8cpp__incl.png" height="250" style="border:none;" alt="" class="inline"/>
+ </a> </p>
+<p><small>Click on the image to open doxygen-documentation.</small></p>
+<p><small> </small></p>
+<p><small></small></p>
+<p><small>Extern Libraries:</small></p>
+<p><small></p><ul>
 <li><a href="https://github.com/LMazzole/SmartFactory_MQTTCommunication">SmartFactory_MQTTCommunication</a></li>
 <li><a href="https://github.com/LMazzole/SmartFactory_Vehicle-Basis">SmartFactory_Vehicle-Basis</a></li>
 </ul>
-<h3>Collaboration Diagram</h3>
-<p><a href="https://lmazzole.github.io/SmartFactory_Vehicle-Sortic/class_vehicle_ctrl.html"><img src="./docs/class_vehicle_ctrl__coll__graph.png" alt="" class="inline"/>
-</a></p>
-<h3>Important Functions and Files</h3>
-<h4><a class="el" href="_configuration_8h.html" title="File that contains the configuratioindetails of the different modules.">Configuration.h</a></h4>
-<p>In <a href="https://lmazzole.github.io/SmartFactory_Vehicle-Sortic/_configuration_8h.html">Configuration.h</a> are all important settings for the Vehicle defined:</p>
-<ul>
+<p></small></p>
+<p><small></p><div style="page-break-after: always;"></div><p></small></p>
+<p><small></p><h3>Collaboration Diagram</h3>
+<p></small></p>
+<p><small></small></p>
+<p><small></small></p>
+<p><small> <a href="https://lmazzole.github.io/SmartFactory_Vehicle-Sortic/class_vehicle_ctrl.html"><img src="./docs/images/class_vehicle_ctrl__coll__graph.png" height="400" style="border:none;" alt="" class="inline"/>
+ </a> </small></p>
+<p><small><small>Click on the image to open doxygen-documentation.</small></small></p>
+<p><small><small> </small></small></p>
+<p><small><small></small></small></p>
+<p><small><small></p><h3>Important Functions and Files</h3>
+<p></small></small></p>
+<p><small><small></small></small></p>
+<p><small><small></p><h4><a class="el" href="_configuration_8h.html" title="File that contains the configuratioindetails of the different modules.">Configuration.h</a></h4>
+<p></small></small></p>
+<p><small><small></small></small></p>
+<p><small><small>In <a href="https://lmazzole.github.io/SmartFactory_Vehicle-Sortic/_configuration_8h.html">Configuration.h</a> are all important settings for the Vehicle defined:</small></small></p>
+<p><small><small></p><ul>
 <li>Time between the MQTT Publishs (TIME_BETWEEN_PUBLISH)</li>
 <li>How long the SmartVehicle for Box-Acknolegemnt waits (TIMEOUT_VACKS)</li>
 <li>How many lines there are (SORTIC_MAX_LINE)</li>
 <li>The Hostname number (DEFAUL_HOSTNAME_NUMBER)</li>
 <li>The Hostname "SV"+ Hostnamenumber (DEFAULT_HOSTNAME)</li>
 </ul>
-<h3>Communication</h3>
-<p>The SmartVehicle communicates via the <a href="https://github.com/LMazzole/SmartFactory_MQTTCommunication">SmartFactory_MQTTCommunication</a> to an MQTT-Broker, who distributes the messages. The communication works by subscribing to various topics. The subscribed Topics change depending on action and position of the Vehicle. The Topic-Tree looks like this:</p>
-<img src="./docs/images/MQTTTopics.png" height="600" alt="" class="inline"/>
-<p>The Vehicle is constantly subscribed to the topics: <em>error, Vehicle/error, Vehicle/vehicle.id/error</em> and also always publishes its status to <em>Vehicle/vehicle.id/status</em>.</p>
-<p>More information about the communication process and the complete procedure is documented in <a href="https://github.com/LMazzole/SmartFactory-Sortic#smartfactory-sortic">SmartFactroy-Sortic-ReadMe</a>.</p>
-<h4>Handshake with Box</h4>
-<p>For an handshake with a box the topic <em>Vehicle/vehicle.id/handshake</em> is used. The Confirmation of the new position is send from the vehicle to the <em>Box/box.id/position</em>.</p>
-<object type="image/svg+xml" data="./docs/images/Handshake-detailed.svg" height="650"></object>
+<p></small></small></p>
+<p><small><small></p><div style="page-break-after: always;"></div><p></small></small></p>
+<p><small><small></p><h3>Communication</h3>
+<p></small></small></p>
+<p><small><small></small></small></p>
+<p><small><small>The SmartVehicle communicates via the <a href="https://github.com/LMazzole/SmartFactory_MQTTCommunication">SmartFactory_MQTTCommunication</a> to an MQTT-Broker, who distributes the messages. The communication works by subscribing to various topics. The subscribed Topics change depending on action and position of the Vehicle. The Topic-Tree looks like this:</small></small></p>
+<p><small><small></small></small></p>
+<p><small><small><img src="./docs/images/MQTTTopics.png" height="600" alt="" class="inline"/>
+</small></small></p>
+<p><small><small></small></small></p>
+<p><small><small>The Vehicle is constantly subscribed to the topics: <em>error, Vehicle/error, Vehicle/vehicle.id/error</em> and also always publishes its status to <em>Vehicle/vehicle.id/status</em>.</small></small></p>
+<p><small><small>More information about the communication process and the complete procedure is documented in <a href="https://github.com/LMazzole/SmartFactory-Sortic#smartfactory-sortic">SmartFactroy-Sortic-ReadMe</a>.</small></small></p>
+<p><small><small></p><div style="page-break-after: always;"></div><p></small></small></p>
+<p><small><small></p><h4>Handshake with Box</h4>
+<p></small></small></p>
+<p><small><small></small></small></p>
+<p><small><small>For a handshake with a box the topic <em>Vehicle/vehicle.id/handshake</em> is used. The confirmation of the new position is send from the vehicle to the <em>Box/box.id/position</em>.</small></small></p>
+<p><small><small></small></small></p>
+<p><small><small><object type="image/svg+xml" data="./docs/images/Handshake-detailed.svg" height="650"></object>
 />
-<h4>Transfer and Vehicle</h4>
-<p>Before the vehicle can bring the box to its new destination, it has to find out where its load is needed and whether that space is available. For this it subscribes to the Topic Transfer/Handover and evaluates the received messages.</p>
-<object type="image/svg+xml" data="./docs/images/TransferToSV-detailed.svg" height="550"></object>
+</small></small></p>
+<p><small><small></small></small></p>
+<p><small><small></p><div style="page-break-after: always;"></div><p></small></small></p>
+<p><small><small></p><h4>Transfer and Vehicle</h4>
+<p></small></small></p>
+<p><small><small></small></small></p>
+<p><small><small>Before the vehicle can bring the box to its new destination, it has to find out where its load is needed and whether that space is available. For this it subscribes to the topic Transfer/Handover and evaluates the received messages.</small></small></p>
+<p><small><small></small></small></p>
+<p><small><small><object type="image/svg+xml" data="./docs/images/TransferToSV-detailed.svg" height="550"></object>
 />
-<h2>FAQ's</h2>
-<h4>I'd like to use this code in my project. What do I need to know?</h4>
-<blockquote class="doxtable">
-<p>This Repository is specifically for Sortic. You can still use it, if you stick to the following rules:</p>
+</small></small></p>
+<p><small><small></small></small></p>
+<p><small><small></p><div style="page-break-after: always;"></div><p></small></small></p>
+<p><small><small></p><h2>FAQ's</h2>
+<p></small></small></p>
+<p><small><small></small></small></p>
+<p><small><small></p><h4>I'd like to use this code in my project. What do I need to know?</h4>
+<p></small></small></p>
+<p><small><small></small></small></p>
+<p><small><small></p><blockquote class="doxtable">
+<p>This Repository is designed specifically for Sortic. You can still use it, if you stick to the following rules:</p>
 <ul>
-<li>Use the same Handshake and Communication-Sequence for your carrier as documented in <a href="https://github.com/LMazzole/SmartFactory-Sortic">SmartFactory-Sortic</a> and <a href="#communication">Communication</a>. </li>
+<li>Use the same handshake and communication sequence for your carrier as documented in <a href="https://github.com/LMazzole/SmartFactory-Sortic">SmartFactory-Sortic</a> and <a href="#communication">Communication</a>. </li>
 </ul>
 </blockquote>
-<h3>ToDo's</h3>
-<h4>Software</h4>
-<p>All open ToDo's can be found in the Documentation on the <a href="https://lmazzole.github.io/SmartFactory_Box-Sortic/todo.html">GitHub-Page</a></p>
-<h2>Contributors</h2>
-<ul>
+<p></small></small></p>
+<p><small><small></p><h3>ToDo's</h3>
+<p></small></small></p>
+<p><small><small> </p><h4>Software</h4>
+<p></small></small></p>
+<p><small><small> All open to do's can be found in the documentation on the <a href="https://lmazzole.github.io/SmartFactory_Box-Sortic/todo.html">GitHub-Page</a></small></small></p>
+<p><small><small></p><h2>Contributors</h2>
+<p></small></small></p>
+<p><small><small></small></small></p>
+<p><small><small></p><ul>
 <li><a href="https://github.com/LMazzole">Luca Mazzoleni</a></li>
 </ul>
-<h2>Changelog</h2>
-<p>V 1.0 - Release BA FS19 - <a href="https://github.com/LMazzole">Luca Mazzoleni</a></p>
-<h2>License</h2>
-<p>[TODO] </p>
+<p></small></small></p>
+<p><small><small></p><h2>Changelog</h2>
+<p></small></small></p>
+<p><small><small></small></small></p>
+<p><small><small>V 1.0 - Release BA FS19 - <a href="https://github.com/LMazzole">Luca Mazzoleni</a></small></small></p>
+<p><small><small></p><h2>License</h2>
+<p></small></small></p>
+<p><small><small></small></small></p>
+<p><small><small>MIT License </small></small></p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->

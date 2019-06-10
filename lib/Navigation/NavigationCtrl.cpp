@@ -9,7 +9,8 @@
  * @date 2019-04-23
  * @copyright Copyright (c) 2019
  * 
- * @todo write a single function for positionupdate
+ * @todo Write a function for positionupdates and don't scatter it all over the states
+ * 
  */
 
 #include "NavigationCtrl.h"
@@ -146,7 +147,8 @@ void NavigationCtrl::process(Event e) {
     switch (currentState) {
         case State::endPoint:
             if (Event::MoveToTargetPosition == e) {
-                if ((pActual.sector == pTarget.sector) && (pActual.line == pTarget.line)) {  //Already in correct position?
+                if ((pActual.sector == pTarget.sector) && (pActual.line == pTarget.line)) {
+                    //Already in correct position?
                     DBSTATUSln("Navigation: Already in correct position");
                     break;
                 }
@@ -219,14 +221,14 @@ void NavigationCtrl::process(Event e) {
             }
             if (Event::Reset == e) {
                 exitAction_errorState();                   // Exit-action current state
-                pDriveCtrl.loop(DriveCtrl::Event::Reset);  //Pass Event to DriveCtrl
+                pDriveCtrl.loop(DriveCtrl::Event::Reset);  // Pass Event to DriveCtrl
                 entryAction_resetState();                  // Entry-actions next state
             }
             break;
         case State::resetState:
             if (Event::Resume == e) {
                 exitAction_resetState();                    // Exit-action current state
-                pDriveCtrl.loop(DriveCtrl::Event::Resume);  //Pass Event to DriveCtrl
+                pDriveCtrl.loop(DriveCtrl::Event::Resume);  // Pass Event to DriveCtrl
                 entryAction_endPoint();                     // Entry-actions next state
             }
             break;
@@ -296,7 +298,7 @@ NavigationCtrl::Event NavigationCtrl::doAction_toGateway() {
         case 20:  // drive forward once
             pDriveCtrl.loop(DriveCtrl::Event::FollowLineForward);
             if (pDriveCtrl.getcurrentState() == DriveCtrl::State::idle) {
-                pCurrentSubState = 0;  ///@todo Probelm with Error possible?
+                pCurrentSubState = 0;
                 return Event::PosReached;
             }
             break;
@@ -327,7 +329,7 @@ void NavigationCtrl::entryAction_gateway() {
 }
 
 /**
- * @todo refactoring so it only checks the neares sector not startsector
+ * @todo Refactoring so it only checks the neares sector and does not relay on startsector
  */
 NavigationCtrl::Event NavigationCtrl::doAction_gateway() {
     DBINFO2ln("Navigation State: gateway " + String(pCurrentSubState));
@@ -490,7 +492,7 @@ NavigationCtrl::Event NavigationCtrl::doAction_crossTransit() {
         pSubStateLoopInc += 1;
         if (pSubStateLoopInc >= 3) {
             pSubStateLoopInc = 0;  //reset back to zero
-            pCurrentSubState = 0;  ///@todo Probelm with Error possible?
+            pCurrentSubState = 0;
             return Event::PosReached;
         }
     }

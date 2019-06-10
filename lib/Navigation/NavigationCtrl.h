@@ -14,7 +14,6 @@
 #ifndef NAVIGATIONCTRL_H__
 #define NAVIGATIONCTRL_H__
 
-// #include "Configuration.h"
 #include "LogConfiguration.h"
 
 #include "DriveCtrl.h"
@@ -186,7 +185,7 @@ class NavigationCtrl {
     } pTarget;
 
     bool tranistonce = true;            ///< prevents an loop between transit and gateway
-    DriveCtrl::Event pLastGatewayTurn;  ///< Variable which holds the first Turn in gateway
+    DriveCtrl::Event pLastGatewayTurn;  ///< Variable which holds the last made turn in gateway
 
     /**
      * 
@@ -237,11 +236,11 @@ class NavigationCtrl {
     /**
      * @brief executes the main action of the toGateway state.
      * 
-     * @image html NavigationCtrlSubtoGateway.png width=100
+     * @image html NavigationCtrlSubtoGateway.png width=200
      * 
-     * 0 Drive backwards \n
-     * 10 turn around \n
-     * 20 drive forward once adn return Event::PosReached
+     * - 0 Drive backwards
+     * - 10 turn around
+     * - 20 drive forward once and return Event::PosReached
      * 
      * @return NavigationCtrl::Event - generated Event
      */
@@ -262,16 +261,18 @@ class NavigationCtrl {
     /**
      * @brief executes the main action of the gateway state.
      * 
-     * @image html NavigationCtrlSubGateway.png width=100
+     * @image html NavigationCtrlSubGateway.png width=300
      * 
-     * 0 Wait for Token \n
-     * 10 Drive forward once \n
-     * 20  turn left/right depending on target and current orientation or go straith (50) \n
-     * 30 drive forward n times depending on actual line and targetline \n
-     * 40 turn left/right depending on target and current orientation
-     * 50 drive forward twice. \n
-     * if startsector = target.sector then return Event::PosEndPointReached
-     * else return Event::PosTransitReached
+     * - 0 Wait for Token
+     * - 10 Drive forward once
+     * - 20  turn left/right depending on target and current orientation or go straight to (50)
+     * - 30 drive forward n times depending on actual line and targetline
+     * - 40 turn left/right depending on target and current orientation
+     * - 50 drive forward twice.
+     * - if startsector = target.sector
+     *      - return Event::PosEndPointReached
+     * - else
+     *      - return Event::PosTransitReached
      * 
      * @return NavigationCtrl::Event - generated Event
      */

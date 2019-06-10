@@ -310,7 +310,7 @@ Private Attributes</h2></td></tr>
 <img src="VehicleCtrl.png" alt="VehicleCtrl.png" width="1000"/>
 </div>
  
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00032">32</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00033">33</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a id="a84cf7c16cb54c3d483b360b7bf47311b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a84cf7c16cb54c3d483b360b7bf47311b">&#9670;&nbsp;</a></span>Event</h2>
@@ -352,7 +352,7 @@ Private Attributes</h2></td></tr>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00056">56</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00057">57</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -393,7 +393,7 @@ Private Attributes</h2></td></tr>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00106">106</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00107">107</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -429,106 +429,57 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="adf4e42474a0811661615535f09befe53"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adf4e42474a0811661615535f09befe53">&#9670;&nbsp;</a></span>checkForError()</h2>
+<a id="aac8490a66cb29d730cd8c7d5dbc47cc1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac8490a66cb29d730cd8c7d5dbc47cc1">&#9670;&nbsp;</a></span>loop() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool VehicleCtrl::checkForError </td>
+          <td class="memname">void VehicleCtrl::loop </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p>Check if a new message with a error is received. </p>
-<dl class="section return"><dt>Returns</dt><dd>true - error received </dd>
-<dd>
-false - no error received </dd></dl>
+<p>Calls the do-function of the active state and hence generates Events. </p>
 
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00979">979</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00031">31</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a6497d425d1cba59a5587fe4e17f1902d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6497d425d1cba59a5587fe4e17f1902d">&#9670;&nbsp;</a></span>clearGui()</h2>
+<a id="a7df3888d24a8dc78ec90c8485b806a03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7df3888d24a8dc78ec90c8485b806a03">&#9670;&nbsp;</a></span>loop() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void VehicleCtrl::clearGui </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>clear node Red gui </p>
-
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l01029">1029</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
-
-</div>
-</div>
-<a id="ae708a3a63e5eaf408bb65bfbb8bf206c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae708a3a63e5eaf408bb65bfbb8bf206c">&#9670;&nbsp;</a></span>decodeEvent()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">String VehicleCtrl::decodeEvent </td>
+          <td class="memname">void VehicleCtrl::loop </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_vehicle_ctrl.html#a84cf7c16cb54c3d483b360b7bf47311b">Event</a>&#160;</td>
-          <td class="paramname"><em>event</em></td><td>)</td>
+          <td class="paramname"><em>currentEvent</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p>Decodes the Event-Enum and returns a description. </p>
+<p>procceses the current Event and calls the do-function of the active state </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">event</td><td>- enum Event </td></tr>
+    <tr><td class="paramname">currentEvent</td><td>- Event </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>String - Event as String </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00917">917</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00036">36</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
 
 </div>
 </div>
-<a id="ad851512c7716832db9300d4b62c58f52"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad851512c7716832db9300d4b62c58f52">&#9670;&nbsp;</a></span>decodeState()</h2>
+<a id="a6e0bdf94eddd322110129b94b85a955b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e0bdf94eddd322110129b94b85a955b">&#9670;&nbsp;</a></span>process()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -537,10 +488,10 @@ false - no error received </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">String VehicleCtrl::decodeState </td>
+          <td class="memname">void VehicleCtrl::process </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_vehicle_ctrl.html#ab4034db99cf09b689e4d5a3964c0f2c0">State</a>&#160;</td>
-          <td class="paramname"><em>state</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_vehicle_ctrl.html#a84cf7c16cb54c3d483b360b7bf47311b">Event</a>&#160;</td>
+          <td class="paramname"><em>e</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -551,21 +502,20 @@ false - no error received </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>Decodes the State-Enum and returns a description. </p>
+<p>changes the state of the FSM based on the event </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">state</td><td>- enum State </td></tr>
+    <tr><td class="paramname">e</td><td>- Event </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>String - State as String </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00891">891</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00043">43</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a66c4fe46c87263b973ca713a4e3c138a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a66c4fe46c87263b973ca713a4e3c138a">&#9670;&nbsp;</a></span>doAction_errorState()</h2>
+<a id="a4df7060b506a8a967ad44a4285aafe55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4df7060b506a8a967ad44a4285aafe55">&#9670;&nbsp;</a></span>entryAction_waitForBox()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -574,7 +524,7 @@ false - no error received </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_vehicle_ctrl.html#a84cf7c16cb54c3d483b360b7bf47311b">VehicleCtrl::Event</a> VehicleCtrl::doAction_errorState </td>
+          <td class="memname">void VehicleCtrl::entryAction_waitForBox </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -587,11 +537,124 @@ false - no error received </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>main action of the errorState </p>
-<p>check for reset message</p>
-<dl class="section return"><dt>Returns</dt><dd>VehicleLevelCtrl::Event - generated Event </dd></dl>
+<p>entry action of the waitForBox </p>
+<ul>
+<li>publish current state and position</li>
+<li>clear old message from circular buffer</li>
+<li>publish "Vehicle/vehicle.id/handshake" {ack:"",req:""} to clear GUI-Entry</li>
+<li>subscribe to "Box/+/handshake"</li>
+<li>publish to target sector to clear GUI-Entry </li>
+</ul>
 
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00817">817</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00128">128</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ad9ce0133875c275a8cb748b551fb7f99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9ce0133875c275a8cb748b551fb7f99">&#9670;&nbsp;</a></span>doAction_waitForBox()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_vehicle_ctrl.html#a84cf7c16cb54c3d483b360b7bf47311b">VehicleCtrl::Event</a> VehicleCtrl::doAction_waitForBox </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>main action of the waitForBox </p>
+<ul>
+<li>check incomming message for error<ul>
+<li>return <a class="el" href="class_vehicle_ctrl.html#a84cf7c16cb54c3d483b360b7bf47311ba902b0d55fddef6f8d651fe1035b7d4bd" title="Error occured.">Event::Error</a></li>
+</ul>
+</li>
+<li>check if a Box requests the vehicle<ul>
+<li>update vehicle.req with box.id</li>
+<li>return <a class="el" href="class_vehicle_ctrl.html#a84cf7c16cb54c3d483b360b7bf47311bae3e095863e3b99e11e8c18efb3901da3" title="Answer received.">Event::AnswerReceived</a></li>
+</ul>
+</li>
+<li>publish all xx seconds "Vehicle/vehicle.id/availabel" {"sector": "actualSector", "line":number}</li>
+</ul>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_vehicle_ctrl.html#a84cf7c16cb54c3d483b360b7bf47311b" title="Enum holds all possible events.">VehicleCtrl::Event</a> - generated Event </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00149">149</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a3848101fa1fd06b859cfca5b30e33a1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3848101fa1fd06b859cfca5b30e33a1f">&#9670;&nbsp;</a></span>exitAction_waitForBox()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VehicleCtrl::exitAction_waitForBox </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>exit action of the waitForBox </p>
+<ul>
+<li>unsubscribe "Box/+/handshake"</li>
+<li>publish "Vehicle/vehicle.id/available", {"id":"vehicle.id","sector":""","line":""} to clear GUI-Entry </li>
+</ul>
+
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00175">175</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ac44831f9bf25bd651b7370fd6ff92afd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac44831f9bf25bd651b7370fd6ff92afd">&#9670;&nbsp;</a></span>entryAction_handshake()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VehicleCtrl::entryAction_handshake </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>entry action of the handshake </p>
+<ul>
+<li>publish current state and position</li>
+<li>subscribe to "Box/vehicle.req/handshake" </li>
+</ul>
+
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00182">182</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -619,6 +682,9 @@ false - no error received </dd></dl>
 </div><div class="memdoc">
 
 <p>main action of the handshake </p>
+<div class="image">
+<img src="VehicleCtrlHandshake.png" alt="VehicleCtrlHandshake.png" width="600"/>
+</div>
 <ul>
 <li>check incomming message for error<ul>
 <li>return <a class="el" href="class_vehicle_ctrl.html#a84cf7c16cb54c3d483b360b7bf47311ba902b0d55fddef6f8d651fe1035b7d4bd" title="Error occured.">Event::Error</a></li>
@@ -648,6 +714,73 @@ false - no error received </dd></dl>
 
 </div>
 </div>
+<a id="ad510040af14d5af547f12f438f6f23eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad510040af14d5af547f12f438f6f23eb">&#9670;&nbsp;</a></span>exitAction_handshake()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VehicleCtrl::exitAction_handshake </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>exit action of the handshake </p>
+<ul>
+<li>unsubscribe from "Box/vehicle.req/handshake" </li>
+</ul>
+
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00250">250</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a330bd446f43e8d4c8de3959a99cb172c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a330bd446f43e8d4c8de3959a99cb172c">&#9670;&nbsp;</a></span>entryAction_loadVehicle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VehicleCtrl::entryAction_loadVehicle </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>entry action of the loadVehicle </p>
+<ul>
+<li>publish current state and position</li>
+<li>publish empty targe pos to clear GUI-Entry</li>
+<li>update NavCtrls TargetPosition</li>
+<li>send <a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14fa88d265fa614db70884480a53410d0cd8" title="Ext: Start MoveToTargetPosition.">NavigationCtrl::Event::MoveToTargetPosition</a> </li>
+</ul>
+
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00256">256</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
+
+</div>
+</div>
 <a id="ad83c16c0ce0a75ba0ecd12081aba0e06"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad83c16c0ce0a75ba0ecd12081aba0e06">&#9670;&nbsp;</a></span>doAction_loadVehicle()</h2>
 
@@ -672,6 +805,9 @@ false - no error received </dd></dl>
 </div><div class="memdoc">
 
 <p>main action of the loadVehicle </p>
+<div class="image">
+<img src="VehicleCtrlLoad.png" alt="VehicleCtrlLoad.png" width="600"/>
+</div>
 <ul>
 <li>check incomming message for error<ul>
 <li>return <a class="el" href="class_vehicle_ctrl.html#a84cf7c16cb54c3d483b360b7bf47311ba902b0d55fddef6f8d651fe1035b7d4bd" title="Error occured.">Event::Error</a></li>
@@ -720,8 +856,8 @@ false - no error received </dd></dl>
 
 </div>
 </div>
-<a id="accc1e98d2a1343fa8138c2a88ee5aa50"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#accc1e98d2a1343fa8138c2a88ee5aa50">&#9670;&nbsp;</a></span>doAction_resetState()</h2>
+<a id="a32e41f1b480dfe4f993a71fb65e7d9f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32e41f1b480dfe4f993a71fb65e7d9f8">&#9670;&nbsp;</a></span>exitAction_loadVehicle()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -730,7 +866,7 @@ false - no error received </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_vehicle_ctrl.html#a84cf7c16cb54c3d483b360b7bf47311b">VehicleCtrl::Event</a> VehicleCtrl::doAction_resetState </td>
+          <td class="memname">void VehicleCtrl::exitAction_loadVehicle </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -743,11 +879,42 @@ false - no error received </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>main action of the resetState </p>
-<p>check for resume message</p>
-<dl class="section return"><dt>Returns</dt><dd>VehicleLevelCtrl::Event - generated Event </dd></dl>
+<p>exit action of the loadVehicle </p>
 
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00862">862</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00419">419</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a7e4a2658939ae326651c6e3b73eb2c44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e4a2658939ae326651c6e3b73eb2c44">&#9670;&nbsp;</a></span>entryAction_unloadVehicle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VehicleCtrl::entryAction_unloadVehicle </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>entry action of the unloadVehicle </p>
+<ul>
+<li>publish current state and position</li>
+<li>publish empty targe pos to clear GUI-Entry </li>
+</ul>
+
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00425">425</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -775,6 +942,9 @@ false - no error received </dd></dl>
 </div><div class="memdoc">
 
 <p>main action of the unloadVehicle </p>
+<div class="image">
+<img src="VehicleCtrlUnload.png" alt="VehicleCtrlUnload.png" width="600"/>
+</div>
 <ul>
 <li>check incomming message for error</li>
 <li>return <a class="el" href="class_vehicle_ctrl.html#a84cf7c16cb54c3d483b360b7bf47311ba902b0d55fddef6f8d651fe1035b7d4bd" title="Error occured.">Event::Error</a></li>
@@ -867,8 +1037,8 @@ false - no error received </dd></dl>
 
 </div>
 </div>
-<a id="ad9ce0133875c275a8cb748b551fb7f99"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad9ce0133875c275a8cb748b551fb7f99">&#9670;&nbsp;</a></span>doAction_waitForBox()</h2>
+<a id="a9eb769692504fa81ee3b4816d7bce08b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9eb769692504fa81ee3b4816d7bce08b">&#9670;&nbsp;</a></span>exitAction_unloadVehicle()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -877,7 +1047,7 @@ false - no error received </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_vehicle_ctrl.html#a84cf7c16cb54c3d483b360b7bf47311b">VehicleCtrl::Event</a> VehicleCtrl::doAction_waitForBox </td>
+          <td class="memname">void VehicleCtrl::exitAction_unloadVehicle </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -890,22 +1060,9 @@ false - no error received </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>main action of the waitForBox </p>
-<ul>
-<li>check incomming message for error<ul>
-<li>return <a class="el" href="class_vehicle_ctrl.html#a84cf7c16cb54c3d483b360b7bf47311ba902b0d55fddef6f8d651fe1035b7d4bd" title="Error occured.">Event::Error</a></li>
-</ul>
-</li>
-<li>check if a Box requests the vehicle<ul>
-<li>update vehicle.req with box.id</li>
-<li>return <a class="el" href="class_vehicle_ctrl.html#a84cf7c16cb54c3d483b360b7bf47311bae3e095863e3b99e11e8c18efb3901da3" title="Answer received.">Event::AnswerReceived</a></li>
-</ul>
-</li>
-<li>publish all xx seconds "Vehicle/vehicle.id/availabel" {"sector": "actualSector", "line":number}</li>
-</ul>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_vehicle_ctrl.html#a84cf7c16cb54c3d483b360b7bf47311b" title="Enum holds all possible events.">VehicleCtrl::Event</a> - generated Event </dd></dl>
+<p>exit action of the unloadVehicle </p>
 
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00149">149</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00801">801</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -939,8 +1096,8 @@ false - no error received </dd></dl>
 
 </div>
 </div>
-<a id="ac44831f9bf25bd651b7370fd6ff92afd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac44831f9bf25bd651b7370fd6ff92afd">&#9670;&nbsp;</a></span>entryAction_handshake()</h2>
+<a id="a66c4fe46c87263b973ca713a4e3c138a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66c4fe46c87263b973ca713a4e3c138a">&#9670;&nbsp;</a></span>doAction_errorState()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -949,7 +1106,7 @@ false - no error received </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void VehicleCtrl::entryAction_handshake </td>
+          <td class="memname"><a class="el" href="class_vehicle_ctrl.html#a84cf7c16cb54c3d483b360b7bf47311b">VehicleCtrl::Event</a> VehicleCtrl::doAction_errorState </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -962,146 +1119,11 @@ false - no error received </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>entry action of the handshake </p>
-<ul>
-<li>publish current state and position</li>
-<li>subscribe to "Box/vehicle.req/handshake" </li>
-</ul>
+<p>main action of the errorState </p>
+<p>check for reset message</p>
+<dl class="section return"><dt>Returns</dt><dd>VehicleLevelCtrl::Event - generated Event </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00182">182</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a330bd446f43e8d4c8de3959a99cb172c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a330bd446f43e8d4c8de3959a99cb172c">&#9670;&nbsp;</a></span>entryAction_loadVehicle()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void VehicleCtrl::entryAction_loadVehicle </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>entry action of the loadVehicle </p>
-<ul>
-<li>publish current state and position</li>
-<li>publish empty targe pos to clear GUI-Entry</li>
-<li>update NavCtrls TargetPosition</li>
-<li>send <a class="el" href="class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14fa88d265fa614db70884480a53410d0cd8" title="Ext: Start MoveToTargetPosition.">NavigationCtrl::Event::MoveToTargetPosition</a> </li>
-</ul>
-
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00256">256</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a9814283e31ca6f18f27f941e322dbeef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9814283e31ca6f18f27f941e322dbeef">&#9670;&nbsp;</a></span>entryAction_resetState()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void VehicleCtrl::entryAction_resetState </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>entry action of the resetState </p>
-
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00846">846</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a7e4a2658939ae326651c6e3b73eb2c44"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e4a2658939ae326651c6e3b73eb2c44">&#9670;&nbsp;</a></span>entryAction_unloadVehicle()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void VehicleCtrl::entryAction_unloadVehicle </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>entry action of the unloadVehicle </p>
-<ul>
-<li>publish current state and position</li>
-<li>publish empty targe pos to clear GUI-Entry </li>
-</ul>
-
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00425">425</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a4df7060b506a8a967ad44a4285aafe55"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4df7060b506a8a967ad44a4285aafe55">&#9670;&nbsp;</a></span>entryAction_waitForBox()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void VehicleCtrl::entryAction_waitForBox </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>entry action of the waitForBox </p>
-<ul>
-<li>publish current state and position</li>
-<li>clear old message from circular buffer</li>
-<li>publish "Vehicle/vehicle.id/handshake" {ack:"",req:""} to clear GUI-Entry</li>
-<li>subscribe to "Box/+/handshake"</li>
-<li>publish to target sector to clear GUI-Entry </li>
-</ul>
-
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00128">128</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00817">817</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1134,8 +1156,8 @@ false - no error received </dd></dl>
 
 </div>
 </div>
-<a id="ad510040af14d5af547f12f438f6f23eb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad510040af14d5af547f12f438f6f23eb">&#9670;&nbsp;</a></span>exitAction_handshake()</h2>
+<a id="a9814283e31ca6f18f27f941e322dbeef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9814283e31ca6f18f27f941e322dbeef">&#9670;&nbsp;</a></span>entryAction_resetState()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1144,7 +1166,7 @@ false - no error received </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void VehicleCtrl::exitAction_handshake </td>
+          <td class="memname">void VehicleCtrl::entryAction_resetState </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1157,17 +1179,14 @@ false - no error received </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>exit action of the handshake </p>
-<ul>
-<li>unsubscribe from "Box/vehicle.req/handshake" </li>
-</ul>
+<p>entry action of the resetState </p>
 
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00250">250</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00846">846</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a32e41f1b480dfe4f993a71fb65e7d9f8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a32e41f1b480dfe4f993a71fb65e7d9f8">&#9670;&nbsp;</a></span>exitAction_loadVehicle()</h2>
+<a id="accc1e98d2a1343fa8138c2a88ee5aa50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accc1e98d2a1343fa8138c2a88ee5aa50">&#9670;&nbsp;</a></span>doAction_resetState()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1176,7 +1195,7 @@ false - no error received </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void VehicleCtrl::exitAction_loadVehicle </td>
+          <td class="memname"><a class="el" href="class_vehicle_ctrl.html#a84cf7c16cb54c3d483b360b7bf47311b">VehicleCtrl::Event</a> VehicleCtrl::doAction_resetState </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1189,9 +1208,11 @@ false - no error received </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>exit action of the loadVehicle </p>
+<p>main action of the resetState </p>
+<p>check for resume message</p>
+<dl class="section return"><dt>Returns</dt><dd>VehicleLevelCtrl::Event - generated Event </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00419">419</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00862">862</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1224,8 +1245,8 @@ false - no error received </dd></dl>
 
 </div>
 </div>
-<a id="a9eb769692504fa81ee3b4816d7bce08b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9eb769692504fa81ee3b4816d7bce08b">&#9670;&nbsp;</a></span>exitAction_unloadVehicle()</h2>
+<a id="ad851512c7716832db9300d4b62c58f52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad851512c7716832db9300d4b62c58f52">&#9670;&nbsp;</a></span>decodeState()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1234,9 +1255,10 @@ false - no error received </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void VehicleCtrl::exitAction_unloadVehicle </td>
+          <td class="memname">String VehicleCtrl::decodeState </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_vehicle_ctrl.html#ab4034db99cf09b689e4d5a3964c0f2c0">State</a>&#160;</td>
+          <td class="paramname"><em>state</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1247,96 +1269,21 @@ false - no error received </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>exit action of the unloadVehicle </p>
-
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00801">801</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a3848101fa1fd06b859cfca5b30e33a1f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3848101fa1fd06b859cfca5b30e33a1f">&#9670;&nbsp;</a></span>exitAction_waitForBox()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void VehicleCtrl::exitAction_waitForBox </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>exit action of the waitForBox </p>
-<ul>
-<li>unsubscribe "Box/+/handshake"</li>
-<li>publish "Vehicle/vehicle.id/available", {"id":"vehicle.id","sector":""","line":""} to clear GUI-Entry </li>
-</ul>
-
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00175">175</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
-
-</div>
-</div>
-<a id="aac8490a66cb29d730cd8c7d5dbc47cc1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aac8490a66cb29d730cd8c7d5dbc47cc1">&#9670;&nbsp;</a></span>loop() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void VehicleCtrl::loop </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Calls the do-function of the active state and hence generates Events. </p>
-
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00031">31</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a7df3888d24a8dc78ec90c8485b806a03"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7df3888d24a8dc78ec90c8485b806a03">&#9670;&nbsp;</a></span>loop() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void VehicleCtrl::loop </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_vehicle_ctrl.html#a84cf7c16cb54c3d483b360b7bf47311b">Event</a>&#160;</td>
-          <td class="paramname"><em>currentEvent</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>procceses the current Event and calls the do-function of the active state </p>
+<p>Decodes the State-Enum and returns a description. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">currentEvent</td><td>- Event </td></tr>
+    <tr><td class="paramname">state</td><td>- enum State </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>String - State as String </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00036">36</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00891">891</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a6e0bdf94eddd322110129b94b85a955b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6e0bdf94eddd322110129b94b85a955b">&#9670;&nbsp;</a></span>process()</h2>
+<a id="ae708a3a63e5eaf408bb65bfbb8bf206c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae708a3a63e5eaf408bb65bfbb8bf206c">&#9670;&nbsp;</a></span>decodeEvent()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1345,10 +1292,10 @@ false - no error received </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void VehicleCtrl::process </td>
+          <td class="memname">String VehicleCtrl::decodeEvent </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_vehicle_ctrl.html#a84cf7c16cb54c3d483b360b7bf47311b">Event</a>&#160;</td>
-          <td class="paramname"><em>e</em></td><td>)</td>
+          <td class="paramname"><em>event</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1359,48 +1306,16 @@ false - no error received </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>changes the state of the FSM based on the event </p>
+<p>Decodes the Event-Enum and returns a description. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">e</td><td>- Event </td></tr>
+    <tr><td class="paramname">event</td><td>- enum Event </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>String - Event as String </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00043">43</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a8830c4f26a1bb93415310515d0d5a453"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8830c4f26a1bb93415310515d0d5a453">&#9670;&nbsp;</a></span>publishPosition()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void VehicleCtrl::publishPosition </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Update position and Publish actual position. </p>
-<ul>
-<li>update vehicle position</li>
-<li>publishMessage "Vehicle/vehicle.id/position" {"sector":vehicle.actualSector,"line":vehicle.actualLine"} </li>
-</ul>
-
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00997">997</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00917">917</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1444,6 +1359,39 @@ false - no error received </dd></dl>
 
 </div>
 </div>
+<a id="a8830c4f26a1bb93415310515d0d5a453"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8830c4f26a1bb93415310515d0d5a453">&#9670;&nbsp;</a></span>publishPosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VehicleCtrl::publishPosition </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update position and Publish actual position. </p>
+<ul>
+<li>update vehicle position</li>
+<li>publishMessage "Vehicle/vehicle.id/position" {"sector":vehicle.actualSector,"line":vehicle.actualLine"} </li>
+</ul>
+
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00997">997</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
+
+</div>
+</div>
 <a id="a97f6cc8f0cbd2904a782656e0e50f4d6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a97f6cc8f0cbd2904a782656e0e50f4d6">&#9670;&nbsp;</a></span>publishTargetPosition()</h2>
 
@@ -1476,9 +1424,84 @@ false - no error received </dd></dl>
 
 </div>
 </div>
+<a id="adf4e42474a0811661615535f09befe53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf4e42474a0811661615535f09befe53">&#9670;&nbsp;</a></span>checkForError()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool VehicleCtrl::checkForError </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if a new message with a error is received. </p>
+<dl class="section return"><dt>Returns</dt><dd>true - error received </dd>
+<dd>
+false - no error received </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l00979">979</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a6497d425d1cba59a5587fe4e17f1902d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6497d425d1cba59a5587fe4e17f1902d">&#9670;&nbsp;</a></span>clearGui()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VehicleCtrl::clearGui </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>clear node Red gui </p>
+
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8cpp_source.html#l01029">1029</a> of file <a class="el" href="_vehicle_ctrl_8cpp_source.html">VehicleCtrl.cpp</a>.</p>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a3e2131084463dfb9b2bccefc898bbcb9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3e2131084463dfb9b2bccefc898bbcb9">&#9670;&nbsp;</a></span>currentEvent</h2>
+<a id="a2e60411f999149686df424d78195f7ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e60411f999149686df424d78195f7ea">&#9670;&nbsp;</a></span>vehicle</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_vehicle_ctrl_1_1_vehicle.html">VehicleCtrl::Vehicle</a>  VehicleCtrl::vehicle</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a43068ebc2e75fb1d8d237f3a00b15941"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43068ebc2e75fb1d8d237f3a00b15941">&#9670;&nbsp;</a></span>lastStateBevorError</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1487,7 +1510,7 @@ false - no error received </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_vehicle_ctrl.html#a84cf7c16cb54c3d483b360b7bf47311b">Event</a> VehicleCtrl::currentEvent</td>
+          <td class="memname"><a class="el" href="class_vehicle_ctrl.html#ab4034db99cf09b689e4d5a3964c0f2c0">State</a> VehicleCtrl::lastStateBevorError</td>
         </tr>
       </table>
   </td>
@@ -1497,35 +1520,9 @@ false - no error received </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>holds the current event of the FSM </p>
+<p>holds the last state of the FSM so it's possible to resume after error </p>
 
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00116">116</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
-
-</div>
-</div>
-<a id="aa12295b31b62cf09aaac4c2924b3329c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa12295b31b62cf09aaac4c2924b3329c">&#9670;&nbsp;</a></span>currentMillis</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">unsigned long VehicleCtrl::currentMillis = 0</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>will store current time </p>
-
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00132">132</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00115">115</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1551,7 +1548,137 @@ false - no error received </dd></dl>
 
 <p>holds the current state of the FSM </p>
 
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00115">115</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00116">116</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
+
+</div>
+</div>
+<a id="a3e2131084463dfb9b2bccefc898bbcb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e2131084463dfb9b2bccefc898bbcb9">&#9670;&nbsp;</a></span>currentEvent</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_vehicle_ctrl.html#a84cf7c16cb54c3d483b360b7bf47311b">Event</a> VehicleCtrl::currentEvent</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>holds the current event of the FSM </p>
+
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00117">117</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
+
+</div>
+</div>
+<a id="aa64431ca5634241afad7ce1ff26e9a70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa64431ca5634241afad7ce1ff26e9a70">&#9670;&nbsp;</a></span>substate</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int VehicleCtrl::substate = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>actual Substate of FSM </p>
+
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00118">118</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
+
+</div>
+</div>
+<a id="a1607ab1d41699e44e3a80b730da0e636"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1607ab1d41699e44e3a80b730da0e636">&#9670;&nbsp;</a></span>pSorticPark</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int VehicleCtrl::pSorticPark[<a class="el" href="_configuration_8h.html#aa37d01e66cad434de466cd72b1d18726">SORTIC_MAX_LINE</a>] = {0}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sortic with 10 diffrent lines. </p>
+
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00119">119</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
+
+</div>
+</div>
+<a id="aef906b90757f6788d58003cd7b0d3586"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef906b90757f6788d58003cd7b0d3586">&#9670;&nbsp;</a></span>pTransferPark</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int VehicleCtrl::pTransferPark[<a class="el" href="_configuration_8h.html#aa37d01e66cad434de466cd72b1d18726">SORTIC_MAX_LINE</a>] = {1}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sortic with 10 diffrent lines. </p>
+
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00120">120</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
+
+</div>
+</div>
+<a id="a77e5ebe6bea80f0523a53d7d09ef62ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77e5ebe6bea80f0523a53d7d09ef62ae">&#9670;&nbsp;</a></span>pRandomDelayFactor</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int VehicleCtrl::pRandomDelayFactor = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>some sort of ALOHA stuff </p>
+
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00121">121</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1578,85 +1705,7 @@ false - no error received </dd></dl>
 <p>Functionpointer to call the current states do-function. </p>
 <p><a href="https://stackoverflow.com/questions/1485983/calling-c-class-methods-via-a-function-pointer">https://stackoverflow.com/questions/1485983/calling-c-class-methods-via-a-function-pointer</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00126">126</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
-
-</div>
-</div>
-<a id="a43068ebc2e75fb1d8d237f3a00b15941"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a43068ebc2e75fb1d8d237f3a00b15941">&#9670;&nbsp;</a></span>lastStateBevorError</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_vehicle_ctrl.html#ab4034db99cf09b689e4d5a3964c0f2c0">State</a> VehicleCtrl::lastStateBevorError</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>holds the last state of the FSM so it's possible to resume after error </p>
-
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00114">114</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
-
-</div>
-</div>
-<a id="a0da7672d6ee426af965d1d66c4834f20"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0da7672d6ee426af965d1d66c4834f20">&#9670;&nbsp;</a></span>pComm</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Communication VehicleCtrl::pComm = Communication(<a class="el" href="_configuration_8h.html#acbd0b3def6b58577376d5c5edbc1f8d1">DEFAULT_HOSTNAME</a>)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Communication object. </p>
-
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00129">129</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
-
-</div>
-</div>
-<a id="aecf4d7e32d481680d6acf953a9533aa7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aecf4d7e32d481680d6acf953a9533aa7">&#9670;&nbsp;</a></span>pHoistCtrl</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">HoistCtrl VehicleCtrl::pHoistCtrl</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Hoist Controll object. </p>
-
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00130">130</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00127">127</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1682,12 +1731,12 @@ false - no error received </dd></dl>
 
 <p>Navigation Controll object. </p>
 
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00128">128</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00129">129</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
 
 </div>
 </div>
-<a id="a77e5ebe6bea80f0523a53d7d09ef62ae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a77e5ebe6bea80f0523a53d7d09ef62ae">&#9670;&nbsp;</a></span>pRandomDelayFactor</h2>
+<a id="a0da7672d6ee426af965d1d66c4834f20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0da7672d6ee426af965d1d66c4834f20">&#9670;&nbsp;</a></span>pComm</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1696,7 +1745,7 @@ false - no error received </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned int VehicleCtrl::pRandomDelayFactor = 0</td>
+          <td class="memname">Communication VehicleCtrl::pComm = Communication(<a class="el" href="_configuration_8h.html#acbd0b3def6b58577376d5c5edbc1f8d1">DEFAULT_HOSTNAME</a>)</td>
         </tr>
       </table>
   </td>
@@ -1706,9 +1755,61 @@ false - no error received </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>some sort of ALOHA stuff </p>
+<p>Communication object. </p>
 
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00120">120</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00130">130</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
+
+</div>
+</div>
+<a id="aecf4d7e32d481680d6acf953a9533aa7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecf4d7e32d481680d6acf953a9533aa7">&#9670;&nbsp;</a></span>pHoistCtrl</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">HoistCtrl VehicleCtrl::pHoistCtrl</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Hoist Controll object. </p>
+
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00131">131</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
+
+</div>
+</div>
+<a id="aa12295b31b62cf09aaac4c2924b3329c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa12295b31b62cf09aaac4c2924b3329c">&#9670;&nbsp;</a></span>currentMillis</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long VehicleCtrl::currentMillis = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>will store current time </p>
+
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00133">133</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1734,59 +1835,7 @@ false - no error received </dd></dl>
 
 <p>will store last time published </p>
 
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00133">133</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
-
-</div>
-</div>
-<a id="ad30fd51119309051bc5614829092e1ea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad30fd51119309051bc5614829092e1ea">&#9670;&nbsp;</a></span>previousMillisPublish</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">unsigned long VehicleCtrl::previousMillisPublish = 0</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>will store last publish time </p>
-
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00135">135</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
-
-</div>
-</div>
-<a id="a660829eea07dfe280cf4d675c5ec21a5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a660829eea07dfe280cf4d675c5ec21a5">&#9670;&nbsp;</a></span>previousMillisPublishPos</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">unsigned long VehicleCtrl::previousMillisPublishPos = 0</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>will store last publish position time </p>
-
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00136">136</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00134">134</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
 
 </div>
 </div>
@@ -1812,12 +1861,12 @@ false - no error received </dd></dl>
 
 <p>will store last time token published </p>
 
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00134">134</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00135">135</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
 
 </div>
 </div>
-<a id="a1607ab1d41699e44e3a80b730da0e636"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1607ab1d41699e44e3a80b730da0e636">&#9670;&nbsp;</a></span>pSorticPark</h2>
+<a id="ad30fd51119309051bc5614829092e1ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad30fd51119309051bc5614829092e1ea">&#9670;&nbsp;</a></span>previousMillisPublish</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1826,7 +1875,7 @@ false - no error received </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int VehicleCtrl::pSorticPark[<a class="el" href="_configuration_8h.html#aa37d01e66cad434de466cd72b1d18726">SORTIC_MAX_LINE</a>] = {0}</td>
+          <td class="memname">unsigned long VehicleCtrl::previousMillisPublish = 0</td>
         </tr>
       </table>
   </td>
@@ -1836,14 +1885,14 @@ false - no error received </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>Sortic with 10 diffrent lines. </p>
+<p>will store last publish time </p>
 
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00118">118</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00136">136</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
 
 </div>
 </div>
-<a id="aef906b90757f6788d58003cd7b0d3586"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aef906b90757f6788d58003cd7b0d3586">&#9670;&nbsp;</a></span>pTransferPark</h2>
+<a id="a660829eea07dfe280cf4d675c5ec21a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a660829eea07dfe280cf4d675c5ec21a5">&#9670;&nbsp;</a></span>previousMillisPublishPos</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1852,7 +1901,7 @@ false - no error received </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int VehicleCtrl::pTransferPark[<a class="el" href="_configuration_8h.html#aa37d01e66cad434de466cd72b1d18726">SORTIC_MAX_LINE</a>] = {1}</td>
+          <td class="memname">unsigned long VehicleCtrl::previousMillisPublishPos = 0</td>
         </tr>
       </table>
   </td>
@@ -1862,49 +1911,9 @@ false - no error received </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>Sortic with 10 diffrent lines. </p>
+<p>will store last publish position time </p>
 
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00119">119</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
-
-</div>
-</div>
-<a id="aa64431ca5634241afad7ce1ff26e9a70"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa64431ca5634241afad7ce1ff26e9a70">&#9670;&nbsp;</a></span>substate</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int VehicleCtrl::substate = 0</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>actual Substate of FSM </p>
-
-<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00117">117</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
-
-</div>
-</div>
-<a id="a2e60411f999149686df424d78195f7ea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2e60411f999149686df424d78195f7ea">&#9670;&nbsp;</a></span>vehicle</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">struct <a class="el" href="struct_vehicle_ctrl_1_1_vehicle.html">VehicleCtrl::Vehicle</a>  VehicleCtrl::vehicle</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p class="definition">Definition at line <a class="el" href="_vehicle_ctrl_8h_source.html#l00137">137</a> of file <a class="el" href="_vehicle_ctrl_8h_source.html">VehicleCtrl.h</a>.</p>
 
 </div>
 </div>

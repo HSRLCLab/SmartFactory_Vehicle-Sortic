@@ -10,6 +10,7 @@
  * @copyright Copyright (c) 2019
  * 
  * @todo Change pSorticPark[] array so its dynamic size
+ * @todo Make a extra state after substate "checkposition" til "check if in pos" and use it in load and unload to minimize minimize code duplication
  */
 
 #ifndef BOXCTRL_H__
@@ -125,9 +126,9 @@ class VehicleCtrl {
      */
     Event (VehicleCtrl::*doActionFPtr)(void) = nullptr;
 
-    NavigationCtrl pNavCtrl;  ///< Navigation Controll object
-    Communication pComm = Communication(DEFAULT_HOSTNAME);      ///< Communication object
-    HoistCtrl pHoistCtrl;     ///< Hoist Controll object
+    NavigationCtrl pNavCtrl;                                ///< Navigation Controll object
+    Communication pComm = Communication(DEFAULT_HOSTNAME);  ///< Communication object
+    HoistCtrl pHoistCtrl;                                   ///< Hoist Controll object
 
     unsigned long currentMillis = 0;               ///< will store current time
     unsigned long previousMillis = 0;              ///< will store last time  published
@@ -184,6 +185,7 @@ class VehicleCtrl {
     /**
      * @brief main action of the handshake
      * 
+     * @image html VehicleCtrlHandshake.png width=600
      * - check incomming message for error
      *     - return Event::Error
      * 
@@ -222,6 +224,8 @@ class VehicleCtrl {
 
     /**
      * @brief main action of the loadVehicle
+     * 
+     * @image html VehicleCtrlLoad.png width=600
      * 
      * - check incomming message for error
      *     - return Event::Error
@@ -280,6 +284,8 @@ class VehicleCtrl {
 
     /**
      * @brief main action of the unloadVehicle
+     * 
+     * @image html VehicleCtrlUnload.png width=600
      * 
      * - check incomming message for error
      * - return Event::Error
