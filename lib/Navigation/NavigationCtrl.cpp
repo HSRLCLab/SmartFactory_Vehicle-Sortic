@@ -424,7 +424,7 @@ NavigationCtrl::Event NavigationCtrl::doAction_gateway() {
                 if (pSubStateLoopInc >= 2) {
                     pSubStateLoopInc = 0;  //reset back to zero
                     // pSubStateLoopInc+= 10;
-                    pCurrentSubState = 50;  ///@todo Probelm with Error possible?
+                    pCurrentSubState = 50;
                     pActual.token = false;  //release token
                     DBPOSln(String("pTarget.sector: ") + decodeSector(pTarget.sector) + String(" pActual.startSector: ") + decodeSector(pActual.startSector));
                     if (pTarget.sector != pActual.startSector && tranistonce) {
@@ -528,7 +528,7 @@ NavigationCtrl::Event NavigationCtrl::doAction_toEndPoint() {
         pSubStateLoopInc += 1;
         if (pSubStateLoopInc >= 1) {
             pSubStateLoopInc = 0;  //reset back to zero
-            pCurrentSubState = 0;  ///@todo Probelm with Error possible?
+            pCurrentSubState = 0;
             return Event::PosEndPointReached;
         }
     }

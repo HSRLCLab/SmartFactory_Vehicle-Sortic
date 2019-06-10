@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['navigationctrl',['NAVIGATIONCTRL',['../main_8cpp.html#a61fe0349d692eb6d4f5b94e35049b2e9a8468548e823b10d0716b51734300aeb5',1,'main.cpp']]],
-  ['network',['NETWORK',['../main_8cpp.html#a61fe0349d692eb6d4f5b94e35049b2e9a25835188a2355e9530d3a10fcbe4c65b',1,'main.cpp']]],
-  ['noanswerreceived',['NoAnswerReceived',['../class_vehicle_ctrl.html#a84cf7c16cb54c3d483b360b7bf47311bae0fba39626d7d5e7a6843b2e78b71f01',1,'VehicleCtrl']]],
-  ['noevent',['NoEvent',['../class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14fa9b8e7e8d81a268a2240a96b7962a0183',1,'NavigationCtrl::NoEvent()'],['../class_vehicle_ctrl.html#a84cf7c16cb54c3d483b360b7bf47311ba9b8e7e8d81a268a2240a96b7962a0183',1,'VehicleCtrl::NoEvent()']]]
+  ['parking',['Parking',['../class_navigation_ctrl.html#ae4db1addb6502e2bfd72fc1c2660ac94abaaacd7280e91aface947a1cc19d0f79',1,'NavigationCtrl']]],
+  ['posendpointreached',['PosEndPointReached',['../class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14fad06f42dab8fc58022bb372634f581e87',1,'NavigationCtrl']]],
+  ['posreached',['PosReached',['../class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14fa86700ff4ed4c693c72667f95a756bbe5',1,'NavigationCtrl::PosReached()'],['../class_vehicle_ctrl.html#a84cf7c16cb54c3d483b360b7bf47311ba86700ff4ed4c693c72667f95a756bbe5',1,'VehicleCtrl::PosReached()']]],
+  ['postransitreached',['PosTransitReached',['../class_navigation_ctrl.html#a08389788c6451604d2a4111f65f4b14fa380121a39580cfe31ce01bdf5f1a6147',1,'NavigationCtrl']]]
 ];

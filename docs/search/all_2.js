@@ -33,7 +33,5 @@ var searchData=
   ['doaction_5ftogateway',['doAction_toGateway',['../class_navigation_ctrl.html#a0de537d8c34787eb48043fbc2e8cc2ac',1,'NavigationCtrl']]],
   ['doaction_5funloadvehicle',['doAction_unloadVehicle',['../class_vehicle_ctrl.html#a6a7b271d5d9426a196cfb3829ee97b71',1,'VehicleCtrl']]],
   ['doaction_5fwaitforbox',['doAction_waitForBox',['../class_vehicle_ctrl.html#ad9ce0133875c275a8cb748b551fb7f99',1,'VehicleCtrl']]],
-  ['doactionfptr',['doActionFPtr',['../class_navigation_ctrl.html#af4e4012c47104f10fed2493b499f6f17',1,'NavigationCtrl::doActionFPtr()'],['../class_vehicle_ctrl.html#ace3f094f3e9b336de0f80baabe43584d',1,'VehicleCtrl::doActionFPtr()']]],
-  ['drive',['drive',['../main_8cpp.html#aa45afd7ad503319b9ff0d98bce031ce0',1,'drive():&#160;main.cpp'],['../main_8cpp.html#a61fe0349d692eb6d4f5b94e35049b2e9a2e391a7285515e3663a36f473cf6fe20',1,'DRIVE():&#160;main.cpp']]],
-  ['drivectrl',['DRIVECTRL',['../main_8cpp.html#a61fe0349d692eb6d4f5b94e35049b2e9a4607ee3934d1be5195a85541566d57c8',1,'DRIVECTRL():&#160;main.cpp'],['../main_8cpp.html#a8a11eb4e58fae15fb0f23f088ae890a8',1,'drivectrl():&#160;main.cpp']]]
+  ['doactionfptr',['doActionFPtr',['../class_navigation_ctrl.html#af4e4012c47104f10fed2493b499f6f17',1,'NavigationCtrl::doActionFPtr()'],['../class_vehicle_ctrl.html#ace3f094f3e9b336de0f80baabe43584d',1,'VehicleCtrl::doActionFPtr()']]]
 ];

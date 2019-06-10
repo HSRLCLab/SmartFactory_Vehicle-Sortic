@@ -25,7 +25,7 @@ VehicleCtrl::VehicleCtrl() : currentState(State::waitForBox), doActionFPtr(&Vehi
     delay(100);
     pNavCtrl.setActualPosition(vehicle.actualSector, vehicle.actualLine);
     publishPosition();
-    pRandomDelayFactor = random(3);
+    pRandomDelayFactor = random(3);  // to prevent loops in acquireing Gateway or Handoverpoint
 }
 
 void VehicleCtrl::loop() {

@@ -86,7 +86,7 @@ It's important to mention that all functions are non-blocking and as short as po
 
 <p align="center">
     <a href=https://lmazzole.github.io/SmartFactory_Vehicle-Sortic/main_8cpp.html>
-        <img src="./docs/images/main_8cpp__incl.png" height="250" style="border:none;"/>
+        <img src="./docs/images/main_8cpp__incl-compl.png" height="250" style="border:none;"/>
     </a>
     <p align="center"><small>Click on the image to open doxygen-documentation.</p>
 </p>
@@ -102,7 +102,7 @@ Extern Libraries:
 
 <p align="center">
     <a href=https://lmazzole.github.io/SmartFactory_Vehicle-Sortic/class_vehicle_ctrl.html>
-        <img src="./docs/images/class_vehicle_ctrl__coll__graph.png" height="400" style="border:none;"/>
+        <img src="./docs/images/class_vehicle_ctrl__coll__graph-compl.png" height="400" style="border:none;"/>
     </a>
     <p align="center"><small>Click on the image to open doxygen-documentation.</p>
 </p>

@@ -34,7 +34,7 @@ class VehicleCtrl {
     //=====PUBLIC====================================================================================
    public:
     /**
-    * @brief Holds all relevant infos for the vehicle
+    * @brief Holds all relevant infos for the Vehicle
     * 
     */
     struct Vehicle {
