@@ -11,6 +11,7 @@
  * 
  * @todo Change pSorticPark[] array so its dynamic size
  * @todo Make a extra state after substate "checkposition" til "check if in pos" and use it in load and unload to minimize minimize code duplication
+ * @todo Stop the vehicle if connection with mqtt-broker is lost.
  */
 
 #ifndef BOXCTRL_H__
@@ -454,6 +455,8 @@ class VehicleCtrl {
      * - publishMessage "Vehicle/vehicle.id/position" {"sector":vehicle.targetSector,"line":vehicle.targetLine"}
      */
     void publishTargetPosition();
+
+    void publishTargetPositionBlockLine();
 
     /**
      * @brief Check if a new message with a error is received

@@ -12,7 +12,6 @@ It's a Smart-Vehicle which can navigate on a known game-table and communicates t
 
 <!-- TOC Generated with https://magnetikonline.github.io/markdown-toc-generate/ -->
 
-- [Table of contents](#table-of-contents)
 - [The SmartFactory project - Sortic](#the-smartfactory-project---sortic)
 - [Tools and technologies](#tools-and-technologies)
 	- [Doxygen](#doxygen)
@@ -187,6 +186,8 @@ Before the vehicle can bring the box to its new destination, it has to find out 
 
 # ToDo's
 ## Software
+- [ ] Write a separate test-class
+
 All open ToDo's can be found in the documentation on the [GitHub-Page](https://lmazzole.github.io/SmartFactory_Box-Sortic/todo.html)
 
 

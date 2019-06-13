@@ -341,6 +341,7 @@ NavigationCtrl::Event NavigationCtrl::doAction_gateway() {
             DBINFO2ln("Sector: " + decodeSector(pActual.sector));
             if (pActual.token) {
                 //Update position
+                pActual.token = false; 
                 pActual.lastSector = pActual.sector;
                 if (pActual.lastSector == Sector::SorticWaitForGateway) {
                     pActual.sector = Sector::SorticGateway;

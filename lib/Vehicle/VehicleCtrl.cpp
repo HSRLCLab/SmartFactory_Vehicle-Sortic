@@ -20,12 +20,12 @@ VehicleCtrl::VehicleCtrl() : currentState(State::waitForBox), doActionFPtr(&Vehi
     pComm.subscribe("Vehicle/" + String(vehicle.id) + "/error");
     pComm.subscribe("Vehicle/error");
     pComm.subscribe("error");
-    pComm.subscribe("Box/+/handshake");
     publishState(currentState);
     delay(100);
     pNavCtrl.setActualPosition(vehicle.actualSector, vehicle.actualLine);
     publishPosition();
     pRandomDelayFactor = random(3);  // to prevent loops in acquireing Gateway or Handoverpoint
+    entryAction_waitForBox();
 }
 
 void VehicleCtrl::loop() {
@@ -259,7 +259,7 @@ void VehicleCtrl::entryAction_loadVehicle() {
     doActionFPtr = &VehicleCtrl::doAction_loadVehicle;
     publishState(currentState);  //Update Current State and Publish
     publishPosition();           //Update Current Position and Publish for GUI
-
+    pComm.clear();               //clear all old message
     previousMillis = millis();
     previousMillisPublish = previousMillis;
     currentMillis = previousMillis;
@@ -431,13 +431,7 @@ void VehicleCtrl::entryAction_unloadVehicle() {
     previousMillis = millis();
     previousMillisPublish = previousMillis;
     currentMillis = previousMillis;
-
-    //clear GUI-Entry TargetPosition
-    if (vehicle.targetSector == NavigationCtrl::Sector::TransferHandover) {
-        pComm.publishMessage("Transfer/Handover", "{\"id\":\"\",\"sector\":\"" + pNavCtrl.decodeSector(vehicle.targetSector) + "\",\"line\":" + String(vehicle.targetLine) + "}");
-    } else if (vehicle.targetSector == NavigationCtrl::Sector::SorticHandover) {
-        pComm.publishMessage("Sortic/Handover", "{\"id\":\"\",\"sector\":\"" + pNavCtrl.decodeSector(vehicle.targetSector) + "\",\"line\":" + String(vehicle.targetLine) + "}");
-    }
+    pComm.clear();  //clear all old message
 }
 
 VehicleCtrl::Event VehicleCtrl::doAction_unloadVehicle() {
@@ -451,8 +445,8 @@ VehicleCtrl::Event VehicleCtrl::doAction_unloadVehicle() {
 
     if ((currentMillis - previousMillisPublishPos) > TIME_BETWEEN_PUBLISH) {  //only publish all xx seconds
         previousMillisPublishPos = millis();
-        publishPosition();        //Update Current Position and Publish for GUI
-        publishTargetPosition();  //Publish TargetPosition so it will stay free
+        publishPosition();                 //Update Current Position and Publish for GUI
+        publishTargetPositionBlockLine();  //Publish TargetPosition so it will stay free
     }
 
     switch (substate) {
@@ -480,7 +474,7 @@ VehicleCtrl::Event VehicleCtrl::doAction_unloadVehicle() {
             DBINFO2ln("Substate 10: listen for matching cargo in Transfer and free place");
             currentMillis = millis();
             DBINFO2ln(String(currentMillis - previousMillis) + String(" < ") + String(TIME_BETWEEN_PUBLISH * (10 + pRandomDelayFactor * 2)));
-            if ((currentMillis - previousMillis) < (TIME_BETWEEN_PUBLISH * (10 + pRandomDelayFactor * 2))) {
+            if ((currentMillis - previousMillis) < (TIME_BETWEEN_PUBLISH * (5 + pRandomDelayFactor * 2))) {
                 //wait some time and add message to array
                 if (!pComm.isEmpty()) {
                     myJSONStr temp = pComm.pop();
@@ -490,7 +484,7 @@ VehicleCtrl::Event VehicleCtrl::doAction_unloadVehicle() {
                             pTransferPark[temp.line - 1] = 0;
                             DBINFO2ln(String("Line with same Cargo: ") + String(temp.line));
                             DBINFO2ln(String("pTransferPark[temp.line - 1]: ") + String(pTransferPark[temp.line - 1]));
-                        } else if ((pNavCtrl.decodeSector(temp.sector) == NavigationCtrl::Sector::TransferHandover)) {
+                        } else if ((pNavCtrl.decodeSector(temp.sector) == NavigationCtrl::Sector::TransferHandover) && (temp.id != vehicle.id)) {
                             // listen to occupied places
                             pTransferPark[temp.line - 1] = 1;
                             DBINFO2ln(String("Line occupied: ") + String(temp.line));
@@ -502,9 +496,9 @@ VehicleCtrl::Event VehicleCtrl::doAction_unloadVehicle() {
             } else {
                 //time reached - evaluate array afer timeout
                 DBINFO2ln("time reached");
-                for (int i = 0; i < SORTIC_MAX_LINE; i++) {
-                    Serial.println(pTransferPark[i]);
-                }
+                // for (int i = 0; i < SORTIC_MAX_LINE; i++) {
+                //     Serial.println(pTransferPark[i]);
+                // }
 
                 int line = 0;
                 for (int i = 0; i < SORTIC_MAX_LINE; i++) {
@@ -518,17 +512,12 @@ VehicleCtrl::Event VehicleCtrl::doAction_unloadVehicle() {
                 DBINFO2ln(line);
                 // delay(10000);
 
-                if (line != 0 && line < SORTIC_MAX_LINE + 1) {
+                if ((line > 0) && (line < SORTIC_MAX_LINE + 1)) {
                     // if line choice is valid update and publish targetsector
-                    if (vehicle.targetSector == NavigationCtrl::Sector::TransferHandover) {  //clear old targetpos in gui
-                        pComm.publishMessage("Transfer/Handover", "{\"id\":\"\",\"sector\":\"" + pNavCtrl.decodeSector(vehicle.targetSector) + "\",\"line\":" + String(vehicle.targetLine) + "}");
-                    } else if (vehicle.targetSector == NavigationCtrl::Sector::SorticHandover) {
-                        pComm.publishMessage("Sortic/Handover", "{\"id\":\"\",\"sector\":\"" + pNavCtrl.decodeSector(vehicle.targetSector) + "\",\"line\":" + String(vehicle.targetLine) + "}");
-                    }
 
                     vehicle.targetSector = NavigationCtrl::Sector::TransferHandover;
                     vehicle.targetLine = line;
-                    publishTargetPosition();
+                    publishTargetPositionBlockLine();
                     substate = 11;
                     previousMillis = millis();
                 } else {  //start again if no valid line is found
@@ -553,7 +542,7 @@ VehicleCtrl::Event VehicleCtrl::doAction_unloadVehicle() {
             }
 
             currentMillis = millis();
-            if ((currentMillis - previousMillis) > (TIME_BETWEEN_PUBLISH * (5))) {
+            if ((currentMillis - previousMillis) > (TIME_BETWEEN_PUBLISH * (8))) {
                 //if no message for some time
                 pComm.unsubscribe("Transfer/Handover");
                 substate = 50;
@@ -562,14 +551,14 @@ VehicleCtrl::Event VehicleCtrl::doAction_unloadVehicle() {
         case 20:  // listen for empty place in Sortic
             DBINFO2ln("Substate 20: listen for empty place in Sortic");
             currentMillis = millis();
-            DBINFO2ln(String(currentMillis - previousMillis) + String(" < ") + String(4 + pRandomDelayFactor * 2));
-            if ((currentMillis - previousMillis) < (TIME_BETWEEN_PUBLISH * (4 + pRandomDelayFactor * 2))) {  //wait some time and add message to array and evaluate afer timeout
+            DBINFO2ln(String(currentMillis - previousMillis) + String(" < ") + String(5 + pRandomDelayFactor * 2));
+            if ((currentMillis - previousMillis) < (TIME_BETWEEN_PUBLISH * (5 + pRandomDelayFactor * 2))) {  //wait some time and add message to array and evaluate afer timeout
                 if (!pComm.isEmpty()) {
                     myJSONStr temp = pComm.pop();
                     DBINFO2ln(String("Sector: ") + String(temp.sector) + String(" line: ") + String(temp.line));
                     DBINFO2ln("Sector: " + String(pNavCtrl.decodeSector(temp.sector) == NavigationCtrl::Sector::SorticHandover));
                     DBINFO2ln("Line: " + String("0 < ") + String(temp.line) + String(" < ") + String(SORTIC_MAX_LINE + 1));
-                    if ((pNavCtrl.decodeSector(temp.sector) == NavigationCtrl::Sector::SorticHandover) && (temp.line < SORTIC_MAX_LINE + 1) && (temp.line > 0)) {
+                    if ((pNavCtrl.decodeSector(temp.sector) == NavigationCtrl::Sector::SorticHandover) && (temp.line < SORTIC_MAX_LINE + 1) && (temp.line > 0) && (temp.id != vehicle.id)) {
                         pSorticPark[temp.line - 1] = 1;
                         DBINFO2ln(String("Line occupied: ") + String(temp.line));
                         DBINFO2ln(String("pSorticPark[temp.line - 1]: ") + String(pSorticPark[temp.line - 1]));
@@ -592,17 +581,10 @@ VehicleCtrl::Event VehicleCtrl::doAction_unloadVehicle() {
                 DBINFO2("Line: ");
                 DBINFO2ln(line);
 
-                if (line != 0 && line < SORTIC_MAX_LINE + 1) {
-                    // if line choice is valid update and publish targetsector
-                    if (vehicle.targetSector == NavigationCtrl::Sector::TransferHandover) {  //clear old targetpos in gui
-                        pComm.publishMessage("Transfer/Handover", "{\"id\":\"\",\"sector\":\"" + pNavCtrl.decodeSector(vehicle.targetSector) + "\",\"line\":" + String(vehicle.targetLine) + "}");
-                    } else if (vehicle.targetSector == NavigationCtrl::Sector::SorticHandover) {
-                        pComm.publishMessage("Sortic/Handover", "{\"id\":\"\",\"sector\":\"" + pNavCtrl.decodeSector(vehicle.targetSector) + "\",\"line\":" + String(vehicle.targetLine) + "}");
-                    }
-
+                if (line > 0 && line < SORTIC_MAX_LINE + 1) {
                     vehicle.targetSector = NavigationCtrl::Sector::SorticHandover;
                     vehicle.targetLine = line;
-                    publishTargetPosition();
+                    publishTargetPositionBlockLine();
                     substate = 21;
                     DBINFO2ln("Change Substate to 21");
                     previousMillis = millis();
@@ -628,7 +610,7 @@ VehicleCtrl::Event VehicleCtrl::doAction_unloadVehicle() {
             }
 
             currentMillis = millis();
-            if ((currentMillis - previousMillis) > (TIME_BETWEEN_PUBLISH * (5))) {
+            if ((currentMillis - previousMillis) > (TIME_BETWEEN_PUBLISH * (8))) {
                 //if no message for some time
                 pComm.unsubscribe("Sortic/Handover");
                 substate = 50;
@@ -1010,6 +992,15 @@ void VehicleCtrl::publishTargetPosition() {  //Publish TargetPosition so it will
         pComm.publishMessage("Transfer/Handover", "{\"id\":\"" + String(vehicle.id) + "\",\"sector\":\"" + pNavCtrl.decodeSector(vehicle.targetSector) + "\",\"line\":" + String(vehicle.targetLine) + "}");
     } else if (vehicle.targetSector == NavigationCtrl::Sector::SorticHandover) {
         pComm.publishMessage("Sortic/Handover", "{\"id\":\"" + String(vehicle.id) + "\",\"sector\":\"" + pNavCtrl.decodeSector(vehicle.targetSector) + "\",\"line\":" + String(vehicle.targetLine) + "}");
+    }
+}
+void VehicleCtrl::publishTargetPositionBlockLine() {  //Publish TargetPosition so it will stay free
+    if (vehicle.targetSector == NavigationCtrl::Sector::TransferHandover) {
+        pComm.publishMessage("Transfer/Handover", "{\"id\":\"" + String(vehicle.id) + "\",\"sector\":\"" + pNavCtrl.decodeSector(vehicle.targetSector) + "\",\"line\":" + String(vehicle.targetLine) + "}");
+        pComm.publishMessage("Sortic/Handover", "{\"id\":\"" + String(vehicle.id) + "\",\"sector\":\"" + pNavCtrl.decodeSector(NavigationCtrl::Sector::SorticHandover) + "\",\"line\":" + String(vehicle.targetLine) + "}");
+    } else if (vehicle.targetSector == NavigationCtrl::Sector::SorticHandover) {
+        pComm.publishMessage("Sortic/Handover", "{\"id\":\"" + String(vehicle.id) + "\",\"sector\":\"" + pNavCtrl.decodeSector(vehicle.targetSector) + "\",\"line\":" + String(vehicle.targetLine) + "}");
+        pComm.publishMessage("Transfer/Handover", "{\"id\":\"" + String(vehicle.id) + "\",\"sector\":\"" + pNavCtrl.decodeSector(NavigationCtrl::Sector::TransferHandover) + "\",\"line\":" + String(vehicle.targetLine) + "}");
     }
 }
 
