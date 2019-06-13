@@ -46,6 +46,7 @@ var class_vehicle_ctrl =
     [ "publishState", "class_vehicle_ctrl.html#ae884f825ca17d94842f0e5ff704c5f59", null ],
     [ "publishPosition", "class_vehicle_ctrl.html#a8830c4f26a1bb93415310515d0d5a453", null ],
     [ "publishTargetPosition", "class_vehicle_ctrl.html#a97f6cc8f0cbd2904a782656e0e50f4d6", null ],
+    [ "publishTargetPositionBlockLine", "class_vehicle_ctrl.html#a3b207e1a9237ea58b2f7122948d8b570", null ],
     [ "checkForError", "class_vehicle_ctrl.html#adf4e42474a0811661615535f09befe53", null ],
     [ "clearGui", "class_vehicle_ctrl.html#a6497d425d1cba59a5587fe4e17f1902d", null ],
     [ "vehicle", "class_vehicle_ctrl.html#a2e60411f999149686df424d78195f7ea", null ],
